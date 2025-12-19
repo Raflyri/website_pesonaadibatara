@@ -3,48 +3,46 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\UserModel; // Pastikan nanti buat UserModel, atau pakai Builder sementara
 
 class Auth extends BaseController
 {
-    public function index()
+    // UBAH NAMA DARI index() JADI login()
+    public function login()
     {
-        // Kalau sudah login, lempar langsung ke dashboard
+        // Kalau sudah login, lempar ke dashboard admin yang benar
         if (session()->get('isLoggedIn')) {
-            return redirect()->to('/dashboard');
+            return redirect()->to('/admin/dashboard'); 
         }
         return view('auth/login');
     }
 
     public function process()
     {
-        // 1. Ambil input
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
 
-        // 2. Cek User di Database
-        // Catatan: Sebaiknya pakai UserModel, tapi pakai Query Builder dulu biar cepat
         $db = \Config\Database::connect();
         $user = $db->table('users')->where('username', $username)->get()->getRowArray();
 
-        // 3. Verifikasi
         if ($user) {
-            // Cek Password Hash
+            // PENTING: Pastikan password di database sudah di-hash pakai password_hash()
+            // Kalau kamu manual insert 'admin123' di database tanpa hash,
+            // kode password_verify ini akan GAGAL.
+            
             if (password_verify($password, $user['password'])) {
-                // Set Session
                 $sessData = [
                     'id' => $user['id'],
                     'username' => $user['username'],
-                    'fullname' => $user['fullname'],
-                    'role' => $user['role'],
+                    'fullname' => $user['fullname'], // Sesuaikan dengan kolom DB (name/fullname?)
                     'isLoggedIn' => true
                 ];
                 session()->set($sessData);
-                return redirect()->to('/dashboard');
+                
+                // Redirect ke area Admin yang terlindungi
+                return redirect()->to('/admin/dashboard');
             }
         }
 
-        // Kalau gagal
         return redirect()->to('/login')->with('error', 'Username atau Password salah!');
     }
 

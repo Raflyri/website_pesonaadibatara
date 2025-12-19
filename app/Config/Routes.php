@@ -6,22 +6,25 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->get('/', 'Home::index');
-$routes->get('/login', 'Auth::index');
-$routes->post('/auth/process', 'Auth::process');
-$routes->get('/logout', 'Auth::logout');
 
-// Placeholder untuk Dashboard (nanti kita buat)
-$routes->get('/dashboard', function() {
-    return "<h1>Selamat Datang di Admin Panel!</h1> <a href='/logout'>Logout</a>";
-});
+$routes->get('layanan/(:segment)', 'Services::detail/$1');
 
-// GROUP ROUTES ADMIN
-$routes->group('admin', function($routes) {
-    // Dashboard (Placeholder)
-    $routes->get('dashboard', function() { echo "Halo Admin! <a href='/admin/news'>Kelola Berita</a>"; });
+// --- AUTHENTICATION ROUTES ---
+$routes->get('login', 'Auth::login');        // Ubah jadi login biar konsisten
+$routes->post('auth/process', 'Auth::process');
+$routes->get('logout', 'Auth::logout');
 
-    // Modul News
-    $routes->get('news', 'Admin\News::index');          // List Berita
-    $routes->get('news/create', 'Admin\News::create');  // Form Tambah
-    $routes->post('news/store', 'Admin\News::store');   // Proses Simpan
+// --- ADMIN GROUP (DILINDUNGI SATPAM/FILTER) ---
+// Semua yang ada di dalam sini WAJIB LOGIN
+$routes->group('admin', ['filter' => 'authGuard'], function($routes) {
+    
+    // [UPDATE] Arahkan Dashboard ke Controller, bukan closure lagi
+    $routes->get('dashboard', 'Admin\Dashboard::index');
+
+    // Modul News (Berita)
+    $routes->get('news', 'Admin\News::index');          
+    $routes->get('news/create', 'Admin\News::create');  
+    $routes->post('news/store', 'Admin\News::store');  
+    
+    $routes->get('services/(:segment)', 'Admin\Services::category/$1');
 });

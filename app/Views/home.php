@@ -42,12 +42,96 @@
     <div class="swiper-pagination"></div>
 </div>
 
+<section class="py-5" style="background-color: #f8f9fa;">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h6 class="text-primary fw-bold text-uppercase ls-2">Layanan Kami</h6>
+            <h2 class="fw-bold">4 Pilar Bisnis Utama</h2>
+            <p class="text-muted col-lg-6 mx-auto">Solusi terintegrasi untuk mendukung pertumbuhan bisnis Anda secara berkelanjutan.</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                <a href="/layanan/transportasi" class="card-service text-decoration-none h-100 d-block">
+                    <div class="card h-100 border-0 shadow-sm hover-top overflow-hidden">
+                        <div class="card-body p-4 text-center">
+                            <div class="icon-circle bg-blue-light mb-4 mx-auto">
+                                <i class="fas fa-car-side fa-2x text-primary"></i>
+                            </div>
+                            <h5 class="fw-bold text-dark mb-3">Transportasi</h5>
+                            <p class="text-muted small mb-0">Solusi armada lengkap mulai dari Luxury Car, EV, hingga logistik operasional.</p>
+                        </div>
+                        <div class="card-footer bg-white border-0 pb-4 text-center">
+                            <span class="text-primary fw-bold small">Lihat Detail <i class="fas fa-arrow-right ms-1"></i></span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+                <a href="/layanan/kesehatan" class="card-service text-decoration-none h-100 d-block">
+                    <div class="card h-100 border-0 shadow-sm hover-top overflow-hidden">
+                        <div class="card-body p-4 text-center">
+                            <div class="icon-circle bg-green-light mb-4 mx-auto">
+                                <i class="fas fa-heartbeat fa-2x text-success"></i>
+                            </div>
+                            <h5 class="fw-bold text-dark mb-3">Kesehatan</h5>
+                            <p class="text-muted small mb-0">Layanan medis terpadu melalui Batara Health Care, MCU, dan Apotek.</p>
+                        </div>
+                        <div class="card-footer bg-white border-0 pb-4 text-center">
+                            <span class="text-primary fw-bold small">Lihat Detail <i class="fas fa-arrow-right ms-1"></i></span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+                <a href="/layanan/jasa" class="card-service text-decoration-none h-100 d-block">
+                    <div class="card h-100 border-0 shadow-sm hover-top overflow-hidden">
+                        <div class="card-body p-4 text-center">
+                            <div class="icon-circle bg-orange-light mb-4 mx-auto">
+                                <i class="fas fa-concierge-bell fa-2x text-warning"></i>
+                            </div>
+                            <h5 class="fw-bold text-dark mb-3">Jasa</h5>
+                            <p class="text-muted small mb-0">Pembersihan Fasade gedung, Event Organizer, dan Pengadaan barang.</p>
+                        </div>
+                        <div class="card-footer bg-white border-0 pb-4 text-center">
+                            <span class="text-primary fw-bold small">Lihat Detail <i class="fas fa-arrow-right ms-1"></i></span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+                <a href="/layanan/investasi" class="card-service text-decoration-none h-100 d-block">
+                    <div class="card h-100 border-0 shadow-sm hover-top overflow-hidden">
+                        <div class="card-body p-4 text-center">
+                            <div class="icon-circle bg-purple-light mb-4 mx-auto">
+                                <i class="fas fa-chart-line fa-2x text-info"></i>
+                            </div>
+                            <h5 class="fw-bold text-dark mb-3">Investasi</h5>
+                            <p class="text-muted small mb-0">Pengembangan bisnis KSO, Food & Beverages, Laundry, dan Sport Center.</p>
+                        </div>
+                        <div class="card-footer bg-white border-0 pb-4 text-center">
+                            <span class="text-primary fw-bold small">Lihat Detail <i class="fas fa-arrow-right ms-1"></i></span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
 <section class="py-5 bg-white">
     <div class="container py-4">
         <div class="row align-items-center">
+
             <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
-                <div class="position-relative">
-                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1000&auto=format&fit=crop" alt="Team PAB" class="img-fluid rounded-4 shadow-lg position-relative z-2">
+                <div class="position-relative" style="height: 400px;"> <video id="whyUsVideo" class="img-fluid rounded-4 shadow-lg position-relative z-2 w-100 h-100" style="object-fit: cover;" muted loop playsinline poster="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1000">
+                        <source src="assets\video\logo-pab-animated.mp4" type="video/mp4">
+                        Browser Anda tidak mendukung tag video.
+                    </video>
+
                     <div class="position-absolute bg-primary rounded-4" style="width: 100%; height: 100%; top: 20px; left: -20px; z-index: 1; opacity: 0.1;"></div>
                 </div>
             </div>
@@ -80,7 +164,7 @@
                         <p class="text-muted mb-0">Seluruh tenaga kerja telah melalui proses seleksi ketat dan pelatihan berkala.</p>
                     </div>
                 </div>
-                
+
                 <a href="#" class="btn btn-pab-primary rounded-pill px-4 mt-2" data-aos="zoom-in">Pelajari Profil Kami</a>
             </div>
         </div>
@@ -100,7 +184,7 @@
         <div class="row">
             <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
                 <div class="card h-100 border-0 shadow-sm overflow-hidden group-hover">
-                   <div class="overflow-hidden position-relative" style="height: 220px;">
+                    <div class="overflow-hidden position-relative" style="height: 220px;">
                         <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=800" class="card-img-top w-100 h-100 object-fit-cover transition-transform" alt="News">
                         <div class="badge bg-primary position-absolute top-0 start-0 m-3 py-2 px-3">CORPORATE</div>
                     </div>
@@ -150,7 +234,7 @@
 </section>
 
 <section class="py-5 bg-white border-top" data-aos="fade-up">
-   <div class="container text-center py-4">
+    <div class="container text-center py-4">
         <h2 class="fw-bold mb-3">Siap Meningkatkan Efisiensi Operasional Anda?</h2>
         <p class="lead text-muted mb-4 col-lg-7 mx-auto">
             Diskusikan kebutuhan manajemen aset, transportasi, dan tenaga alih daya perusahaan Anda bersama konsultan ahli kami.
@@ -163,40 +247,63 @@
                 <i class="fab fa-whatsapp me-2"></i> WhatsApp
             </a>
         </div>
-        </div>
+    </div>
 </section>
 
 <?= $this->endSection(); ?>
 
 <?= $this->section('scripts'); ?>
+
 <script>
     // Inisialisasi Swiper dengan Fitur Lengkap
     var swiper = new Swiper(".mySwiper", {
         spaceBetween: 0,
         centeredSlides: true,
-        effect: "fade", 
-        speed: 1000, 
-        
+        effect: "fade",
+        speed: 1000,
+
         // REVISI 2: Autoplay 3 Detik
         autoplay: {
             delay: 3000, // 3000ms = 3 detik
             disableOnInteraction: false, // Tetap jalan walau user nge-swipe manual
         },
-        
+
         pagination: {
             el: ".swiper-pagination",
             clickable: true, // Titik bisa diklik
         },
-        
+
         navigation: {
             nextEl: ".swiper-button-next",
             prevEl: ".swiper-button-prev",
         },
-        
+
         // Fitur tambahan: Keyboard control
         keyboard: {
             enabled: true,
         },
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const videoElement = document.getElementById('whyUsVideo');
+
+        if (videoElement) {
+            // Kita pakai "Mata-mata" (Intersection Observer)
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    // Jika video terlihat di layar (min 30%)
+                    if (entry.isIntersecting) {
+                        videoElement.play(); // Putar Video
+                    } else {
+                        videoElement.pause(); // Stop Video (Hemat resource)
+                    }
+                });
+            }, {
+                threshold: 0.3
+            }); // 0.3 artinya video akan play saat 30% badannya terlihat
+
+            observer.observe(videoElement);
+        }
     });
 </script>
 

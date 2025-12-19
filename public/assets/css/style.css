@@ -291,3 +291,126 @@ body {
     border-radius: 0 0 25px 25px;
     padding: 0.5rem 1rem;
 }
+
+/* SERVICE CARDS */
+.hover-top {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-top:hover {
+    transform: translateY(-10px); /* Kartu naik ke atas saat di-hover */
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+}
+
+.icon-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+/* Warna-warni background icon */
+.bg-blue-light   { background-color: #e3f2fd; }
+.bg-green-light  { background-color: #e8f5e9; }
+.bg-orange-light { background-color: #fff3e0; }
+.bg-purple-light { background-color: #f3e5f5; }
+
+/* Saat hover kartu, icon ikut membesar dikit */
+.hover-top:hover .icon-circle {
+    transform: scale(1.1);
+}
+
+/* --- NAVBAR DROPDOWN STYLING --- */
+
+/* 1. Logic Hover (Hanya di Desktop > 992px) */
+@media (min-width: 992px) {
+    .nav-item.dropdown:hover .dropdown-menu {
+        display: block;
+        margin-top: 0; /* Supaya nempel dengan navbar */
+        animation: fadeIn 0.3s ease; /* Efek muncul halus */
+    }
+}
+
+/* 2. Styling Dropdown Box */
+.dropdown-menu {
+    min-width: 260px; /* Lebar minimum biar teks gak kepotong */
+    margin-top: 10px; /* Jarak dikit dari navbar (Mobile) */
+}
+
+/* 3. Styling Item Menu */
+.dropdown-item {
+    transition: all 0.2s;
+    color: var(--pab-dark);
+}
+
+.dropdown-item:hover {
+    background-color: var(--pab-gray); /* Background abu muda saat hover */
+    transform: translateX(5px); /* Efek geser kanan dikit */
+}
+
+.dropdown-item:active {
+    background-color: var(--pab-blue-light);
+    color: white;
+}
+
+/* 4. Icon Kecil di dalam Menu */
+.icon-small {
+    width: 35px;
+    height: 35px;
+    border-radius: 8px; /* Kotak rounded */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+/* Helper Colors (Sama seperti di Homepage) */
+.bg-blue-light   { background-color: #e3f2fd; }
+.bg-green-light  { background-color: #e8f5e9; }
+.bg-orange-light { background-color: #fff3e0; }
+.bg-purple-light { background-color: #f3e5f5; }
+
+/* --- FOOTER MODERN STYLES --- */
+
+/* Link di Footer */
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.7); /* Putih agak transparan */
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.footer-links a:hover {
+    color: var(--pab-white);
+    padding-left: 5px; /* Efek geser kanan dikit saat hover */
+}
+
+/* Social Media Icons (Bulat) */
+.social-icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    text-decoration: none !important;
+}
+
+.social-icon:hover {
+    background-color: var(--pab-blue-primary) !important; /* Jadi biru saat hover */
+    color: white !important;
+    transform: translateY(-3px); /* Naik dikit */
+}
+
+/* Spacing Text */
+.ls-1 {
+    letter-spacing: 1px;
+}

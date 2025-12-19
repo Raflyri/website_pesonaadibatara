@@ -33,7 +33,64 @@
                         <ul class="navbar-nav align-items-center gap-3 fw-medium">
                             <li class="nav-item"><a class="nav-link active" href="/">Beranda</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">Tentang Kami</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Layanan</a></li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-expanded="false">
+                                    Layanan
+                                </a>
+                                <ul class="dropdown-menu border-0 shadow-lg rounded-4 p-3 animate__animated animate__fadeIn" aria-labelledby="navbarDropdown">
+                                    <li>
+                                        <a class="dropdown-item py-2 rounded-3 d-flex align-items-center" href="/layanan/transportasi">
+                                            <div class="icon-small bg-blue-light me-3 text-primary"><i class="fas fa-car-side"></i></div>
+                                            <div>
+                                                <span class="fw-bold d-block">Transportasi</span>
+                                                <small class="text-muted" style="font-size: 0.7rem;">Luxury Car & Operasional</small>
+                                            </div>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <hr class="dropdown-divider my-1">
+                                    </li>
+
+                                    <li>
+                                        <a class="dropdown-item py-2 rounded-3 d-flex align-items-center" href="/layanan/kesehatan">
+                                            <div class="icon-small bg-green-light me-3 text-success"><i class="fas fa-heartbeat"></i></div>
+                                            <div>
+                                                <span class="fw-bold d-block">Kesehatan</span>
+                                                <small class="text-muted" style="font-size: 0.7rem;">Batara Health Care</small>
+                                            </div>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <hr class="dropdown-divider my-1">
+                                    </li>
+
+                                    <li>
+                                        <a class="dropdown-item py-2 rounded-3 d-flex align-items-center" href="/layanan/jasa">
+                                            <div class="icon-small bg-orange-light me-3 text-warning"><i class="fas fa-concierge-bell"></i></div>
+                                            <div>
+                                                <span class="fw-bold d-block">Jasa</span>
+                                                <small class="text-muted" style="font-size: 0.7rem;">Fasade & EO</small>
+                                            </div>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <hr class="dropdown-divider my-1">
+                                    </li>
+
+                                    <li>
+                                        <a class="dropdown-item py-2 rounded-3 d-flex align-items-center" href="/layanan/investasi">
+                                            <div class="icon-small bg-purple-light me-3 text-info"><i class="fas fa-chart-line"></i></div>
+                                            <div>
+                                                <span class="fw-bold d-block">Investasi</span>
+                                                <small class="text-muted" style="font-size: 0.7rem;">KSO & F&B</small>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
                             <li class="nav-item"><a class="nav-link" href="#">Kontak</a></li>
                         </ul>
                     </div>
@@ -58,15 +115,85 @@
         <?= $this->renderSection('content'); ?>
     </main>
 
-    <footer class="bg-dark text-white py-4 mt-5">
-        <div class="container text-center">
-            <small>&copy; <?= date('Y'); ?> PT. Pesona Adi Batara - Member of YKP BTN</small>
+    <footer class="bg-dark text-white pt-5 pb-3 mt-5 border-top border-primary border-5">
+        <div class="container">
+            <div class="row g-4 justify-content-between">
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="mb-4">
+                        <img src="<?= base_url('assets/img/logo-pab.png'); ?>" alt="Logo PAB" height="50" class="bg-white rounded p-2 mb-3">
+                        <h5 class="fw-bold text-white">PT. PESONA ADI BATARA</h5>
+                        <p class="text-white-50 small mb-4">
+                            Memberikan nilai tambah bagi perusahaan dan stakeholder melalui layanan terintegrasi yang profesional dan terpercaya.
+                        </p>
+
+                        <div class="d-flex gap-3">
+                            <a href="#" class="social-icon bg-white text-dark"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-icon bg-white text-dark"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-icon bg-white text-dark"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-icon bg-white text-dark"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <h6 class="text-primary fw-bold text-uppercase mb-3 ls-1">Layanan Kami</h6>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="/layanan/transportasi"><i class="fas fa-angle-right me-2 text-primary"></i>Transportasi</a></li>
+                        <li><a href="/layanan/kesehatan"><i class="fas fa-angle-right me-2 text-primary"></i>Kesehatan</a></li>
+                        <li><a href="/layanan/jasa"><i class="fas fa-angle-right me-2 text-primary"></i>Jasa & EO</a></li>
+                        <li><a href="/layanan/investasi"><i class="fas fa-angle-right me-2 text-primary"></i>Investasi</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <h6 class="text-primary fw-bold text-uppercase mb-3 ls-1">Perusahaan</h6>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="/about"><i class="fas fa-angle-right me-2 text-primary"></i>Tentang Kami</a></li>
+                        <li><a href="/news"><i class="fas fa-angle-right me-2 text-primary"></i>Berita & Artikel</a></li>
+                        <li><a href="/career"><i class="fas fa-angle-right me-2 text-primary"></i>Karir</a></li>
+                        <li><a href="/contact"><i class="fas fa-angle-right me-2 text-primary"></i>Hubungi Kami</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="text-primary fw-bold text-uppercase mb-3 ls-1">Kantor Pusat</h6>
+                    <ul class="list-unstyled text-white-50 small">
+                        <li class="mb-3 d-flex">
+                            <i class="fas fa-map-marker-alt text-primary mt-1 me-3"></i>
+                            <span>
+                                The Archies Sudirman (D/H T Plaza),<br>
+                                Tower B, Ruko B No.B4.<br>
+                                Jl. Penjernihan I No.1 Kav.1,<br>
+                                Jakarta Pusat 10210
+                            </span>
+                        </li>
+                        <li class="mb-3 d-flex">
+                            <i class="fas fa-phone-alt text-primary mt-1 me-3"></i>
+                            <span>021-39705142</span>
+                        </li>
+                        <li class="mb-3 d-flex">
+                            <i class="fas fa-envelope text-primary mt-1 me-3"></i>
+                            <span>administrasi_div@pesonaadibatara.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <hr class="border-secondary my-4 opacity-25">
+
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    <small class="text-white-50">&copy; <?= date('Y'); ?> <strong>PT. Pesona Adi Batara</strong>. All Rights Reserved.</small>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <span class="text-white-50 small me-2">Member of:</span>
+                    <span class="fw-bold text-white border border-light px-2 py-1 rounded">YKP BTN</span>
+                </div>
+            </div>
         </div>
     </footer>
 
-
-
-    <?= $this->renderSection('scripts'); ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -108,6 +235,8 @@
             mirror: true, // true = Elemen akan animasi 'keluar' saat di-scroll melewatinya
         });
     </script>
+
+    <?= $this->renderSection('scripts'); ?>
 
 </body>
 
