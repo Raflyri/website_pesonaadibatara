@@ -15,8 +15,9 @@ class App extends BaseConfig
      * WITH a trailing slash:
      *
      * E.g., http://example.com/
+     * public string $baseURL = 'https://staging.web.pesonaadibatara.com/public/';
      */
-    public string $baseURL = 'https://staging.web.pesonaadibatara.com/public/';
+    public string $baseURL = 'http://localhost:8080/';
 
     /**
      * Allowed Hostnames in the Site URL other than the hostname in the baseURL.
@@ -39,8 +40,9 @@ class App extends BaseConfig
      * Typically, this will be your `index.php` file, unless you've renamed it to
      * something else. If you have configured your web server to remove this file
      * from your site URIs, set this variable to an empty string.
+     * public string $indexPage = 'index.php';
      */
-    public string $indexPage = 'index.php';
+    public string $indexPage = '';
 
     /**
      * --------------------------------------------------------------------------

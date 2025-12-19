@@ -1,0 +1,293 @@
+/* public/assets/css/style.css */
+:root {
+    /* Brand Colors PT Pesona Adi Batara */
+    --pab-blue-primary: #135ef9; /* Biru Tua */
+    --pab-blue-light:   #3f83fe; /* Biru Muda */
+    --pab-red-accent:   #fd0102; /* Merah */
+    
+    /* Neutral Colors */
+    --pab-white:        #ffffff;
+    --pab-dark:         #1e293b;
+    --pab-gray:         #f1f5f9;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--pab-gray);
+    color: var(--pab-dark);
+}
+
+/* --- Navbar Floating Style (Ala BTN) --- */
+
+/* Wrapper luar untuk mengatur posisi melayang */
+.header-floating-wrapper {
+    z-index: 1030; /* Pastikan di atas slider */
+    transition: all 0.3s ease;
+}
+
+/* Kotak Kapsul Putih */
+.navbar-rounded-box {
+    background-color: rgba(255, 255, 255, 0.95); /* Putih transparan */
+    backdrop-filter: blur(10px); /* Efek blur modern */
+    border-radius: 50px; /* Sudut membulat (Kapsul) */
+    padding: 0.5rem 1rem; 
+    border: 1px solid rgba(0,0,0,0.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Bayangan halus */
+}
+
+/* Link Navigasi (Teks Gelap karena background putih) */
+.navbar-rounded-box .nav-link {
+    color: var(--pab-dark) !important;
+    font-weight: 500;
+    margin-left: 5px;
+    padding: 0.5rem 1rem !important;
+    border-radius: 20px;
+    transition: all 0.3s;
+}
+
+/* Efek saat mouse sorot menu */
+.navbar-rounded-box .nav-link:hover,
+.navbar-rounded-box .nav-link.active {
+    color: var(--pab-blue-primary) !important; /* Jadi Biru PAB */
+    background-color: rgba(19, 94, 249, 0.05); /* Background biru pudar */
+    transform: translateY(0);
+}
+
+/* --- Logo Adjustment --- */
+.navbar-brand img {
+    height: 40px; /* Tinggi fix header BTN */
+    width: auto;
+    transition: transform 0.3s;
+}
+
+.navbar-brand:hover img {
+    transform: scale(1.05);
+}
+
+/* --- Buttons --- */
+.btn-pab-primary {
+    background-color: var(--pab-blue-primary);
+    color: white;
+    border: none; /* Hilangkan border default */
+}
+
+/* Khusus tombol login bulat di header */
+.btn-pab-primary.rounded-pill {
+    font-weight: 600;
+}
+
+.btn-pab-primary:hover {
+    background-color: var(--pab-blue-light);
+    color: white;
+}
+
+.btn-pab-cta {
+    background-color: var(--pab-red-accent);
+    color: white;
+    font-weight: bold;
+    border-radius: 50px;
+    padding: 8px 25px;
+}
+
+.btn-pab-cta:hover {
+    background-color: #d00000;
+    color: white;
+}
+
+/* --- [UPDATE] Hero Slider Styles (Full Screen Fix) --- */
+.hero-slider {
+    width: 100%;
+    height: 100vh !important; /* REVISI: Full Layar 1 Halaman */
+    position: relative;
+    margin-top: 0 !important; /* Paksa nempel atas */
+}
+
+.swiper-slide {
+    background-color: #000;
+    overflow: hidden;
+}
+
+/* Background Image dengan Zoom Effect */
+.slide-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transform: scale(1);
+    transition: transform 5s ease;
+}
+
+.swiper-slide-active .slide-bg {
+    transform: scale(1.1);
+}
+
+/* Gradient Overlay BTN Style */
+.overlay-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg, 
+        rgba(19, 94, 249, 0.9) 0%, 
+        rgba(19, 94, 249, 0.6) 50%, 
+        rgba(0, 0, 0, 0.2) 100% 
+    );
+    z-index: 1;
+}
+
+.container {
+    position: relative;
+    z-index: 2;
+}
+
+/* --- [BARU] Navigation & Pagination Fixes --- */
+
+/* Memperbaiki Tombol Next/Prev yang tidak bisa diklik */
+.swiper-button-next,
+.swiper-button-prev {
+    color: var(--pab-white) !important;
+    z-index: 50 !important; /* Lapisan paling atas supaya bisa diklik */
+    width: 50px;
+    height: 50px;
+    background-color: rgba(255, 255, 255, 0.1); /* Sedikit background */
+    border-radius: 50%;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s;
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    background-color: var(--pab-blue-primary);
+    transform: scale(1.1);
+}
+
+/* Pagination Auto-Hide */
+.swiper-pagination {
+    opacity: 0; /* Default: Tersembunyi */
+    transition: opacity 0.4s ease, bottom 0.3s ease;
+    z-index: 50 !important;
+    bottom: 20px !important;
+}
+
+/* Muncul HANYA saat mouse masuk ke area slider */
+.hero-slider:hover .swiper-pagination {
+    opacity: 1;
+    bottom: 40px !important;
+}
+
+/* Styling Titik Pagination */
+.swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    background: white;
+    opacity: 0.5;
+    margin: 0 6px !important;
+    transition: all 0.3s;
+}
+
+.swiper-pagination-bullet-active {
+    background: var(--pab-red-accent);
+    opacity: 1;
+    width: 30px; /* Titik aktif memanjang */
+    border-radius: 10px;
+}
+
+/* --- News Card Hover Effects --- */
+.group-hover:hover .card-img-top {
+    transform: scale(1.1);
+}
+
+.transition-transform {
+    transition: transform 0.5s ease;
+}
+
+.object-fit-cover {
+    object-fit: cover;
+}
+
+.grayscale-hover {
+    transition: all 0.3s;
+}
+.grayscale-hover:hover {
+    opacity: 1 !important;
+}
+
+/* Transisi halus untuk semua perubahan */
+.transition-all, .navbar-rounded-box {
+    transition: all 0.4s ease-in-out;
+}
+
+/* Saat Sticky Active (Scroll Down) */
+.sticky-active {
+    margin-top: 0 !important;
+}
+
+.sticky-active .navbar-rounded-box {
+    border-radius: 0 0 20px 20px;
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* --- ANIMASI HEADER & LOGO --- */
+
+/* 1. Logo Animation */
+.navbar-brand .logo-transition {
+    height: 60px; /* Default: Besar */
+    width: auto;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Saat Sticky Aktif: Logo Mengecil */
+.sticky-active .navbar-brand .logo-transition {
+    height: 40px; /* Sticky: Kecil */
+}
+
+/* 2. Button Morphing Animation */
+.header-actions .btn-morph {
+    transition: all 0.4s ease;
+    padding: 8px 20px;
+    overflow: hidden;
+}
+
+.header-actions .btn-morph .btn-text {
+    max-width: 150px;
+    opacity: 1;
+    transition: all 0.4s ease;
+    white-space: nowrap;
+}
+
+/* SAAT STICKY AKTIF: Tombol jadi Bulat (Icon Only) */
+.sticky-active .header-actions .btn-morph {
+    padding: 8px 12px !important;
+    border-radius: 50% !important;
+    width: 42px; /* Lebar fix */
+    height: 42px; /* Tinggi fix */
+    justify-content: center;
+}
+
+.sticky-active .header-actions .btn-morph i {
+    font-size: 1.1rem;
+}
+
+.sticky-active .header-actions .btn-morph .btn-text {
+    max-width: 0;
+    opacity: 0;
+    margin-left: 0 !important;
+}
+
+/* Penyesuaian Sticky Wrapper */
+.sticky-active .navbar-rounded-box {
+    border-radius: 0 0 25px 25px;
+    padding: 0.5rem 1rem;
+}
