@@ -29,8 +29,24 @@
                 <i class="fas fa-th-large"></i> Dashboard
             </a>
 
+            <a href="/admin/home-editor" class="nav-link <?= (current_url(true)->getSegment(2) == 'home-editor') ? 'active' : ''; ?>">
+                <i class="fas fa-home"></i> Kelola Beranda
+            </a>
+
+            <a href="/admin/about-editor" class="nav-link <?= (current_url(true)->getSegment(2) == 'about-editor') ? 'active' : ''; ?>">
+                <i class="fas fa-building"></i> Tentang Kami
+            </a>
+
             <a href="/admin/news" class="nav-link <?= (current_url(true)->getSegment(2) == 'news') ? 'active' : ''; ?>">
                 <i class="fas fa-newspaper"></i> Kelola Berita
+            </a>
+
+            <a href="/admin/team" class="nav-link <?= (current_url(true)->getSegment(2) == 'team') ? 'active' : ''; ?>">
+                <i class="fas fa-users"></i> Direksi & Tim
+            </a>
+
+            <a href="/admin/contact-editor" class="nav-link <?= (current_url(true)->getSegment(2) == 'contact-editor') ? 'active' : ''; ?>">
+                <i class="fas fa-envelope-open-text"></i> Kontak & Pesan
             </a>
 
             <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#menuLayanan" role="button" aria-expanded="false" aria-controls="menuLayanan">
@@ -60,7 +76,7 @@
             </div>
 
 
-            <a href="#" class="nav-link">
+            <a href="/admin/banner" class="nav-link <?= (current_url(true)->getSegment(2) == 'banner') ? 'active' : ''; ?>">
                 <i class="fas fa-images"></i> Banner Slider
             </a>
 

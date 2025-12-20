@@ -34,7 +34,8 @@ class Filters extends BaseFilters
         'forcehttps'    => ForceHTTPS::class,
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
-        'authGuard' => \App\Filters\AuthGuard::class,
+        'authGuard'     => \App\Filters\AuthGuard::class,
+        'language'      => \App\Filters\Language::class,
     ];
 
     /**
@@ -76,6 +77,7 @@ class Filters extends BaseFilters
             // 'honeypot',
             // 'csrf',
             // 'invalidchars',
+            'language', // <-- Tambahkan baris ini
         ],
         'after' => [
             // 'honeypot',

@@ -14,15 +14,21 @@ class Home extends BaseController
         $serviceModel = new ServiceModel();
         $bannerModel  = new BannerModel();
         $settingModel = new SiteSettingModel();
+        
+        // [BARU] Panggil Database Langsung untuk Page Section (Video & Teks)
+        $db = \Config\Database::connect();
+        $whyChooseUs = $db->table('page_sections')->where('section_key', 'home_why_choose_us')->get()->getRowArray();
 
         // 2. Siapkan Data untuk dikirim ke View
         $data = [
             'title'    => 'Home | PT. Pesona Adi Batara',
-            // Ambil data dari database
             'services' => $serviceModel->getActiveServices(),
             'banners'  => $bannerModel->getActiveBanners(),
             
-            // Ambil settingan spesifik
+            // [BARU] Masukkan data section ke sini agar bisa dibaca di View
+            'why_choose_us' => $whyChooseUs, 
+            
+            // Settingan Footer
             'phone'    => $settingModel->getVal('company_phone'),
             'address'  => $settingModel->getVal('company_address'),
             'email'    => $settingModel->getVal('company_email'),

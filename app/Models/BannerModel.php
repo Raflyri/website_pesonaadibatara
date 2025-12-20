@@ -8,11 +8,17 @@ class BannerModel extends Model
 {
     protected $table            = 'banners';
     protected $primaryKey       = 'id';
-    protected $allowedFields    = ['title', 'subtitle', 'image', 'button_text', 'button_link', 'urutan', 'is_active'];
+    protected $allowedFields    = [
+        'title', 'title_en', 
+        'subtitle', 'subtitle_en', 
+        'image', 
+        'button_text', 'button_text_en', 'button_link', 
+        'urutan', 'is_active'
+    ];
 
+    // Fungsi khusus untuk mengambil banner yang AKTIF saja di Halaman Depan
     public function getActiveBanners()
     {
-        // Ambil yang aktif, lalu urutkan sesuai keinginan klien
         return $this->where('is_active', 1)
                     ->orderBy('urutan', 'ASC')
                     ->findAll();

@@ -414,3 +414,215 @@ body {
 .ls-1 {
     letter-spacing: 1px;
 }
+
+/* --- LANGUAGE SWITCHER FIX --- */
+
+.lang-switcher {
+    transition: all 0.3s ease;
+    opacity: 1;
+    visibility: visible;
+    width: auto; /* Biarkan lebar otomatis */
+    /* PENTING: Jangan pakai overflow: hidden di sini supaya dropdown bisa muncul */
+}
+
+/* Saat Header Sticky (Scroll Down), Bahasa Hilang */
+.sticky-active .lang-switcher {
+    opacity: 0;
+    visibility: hidden;
+    width: 0; 
+    overflow: hidden; /* Baru kita kunci saat dia harus hilang */
+    margin: 0 !important; 
+    padding: 0 !important;
+    position: absolute; /* Pastikan dia keluar dari layout biar gak makan tempat */
+}
+
+/* Styling Dropdown Item */
+.lang-switcher .dropdown-item:hover {
+    background-color: var(--pab-gray);
+    transform: translateX(3px);
+    transition: all 0.2s;
+}
+
+/* Hilangkan panah bawaan bootstrap */
+.lang-switcher .dropdown-toggle::after {
+    display: none; 
+}
+
+/* Styling Dropdown Item */
+.lang-switcher .dropdown-item:hover {
+    background-color: var(--pab-gray);
+    transform: translateX(3px);
+    transition: all 0.2s;
+}
+
+.lang-switcher .dropdown-toggle::after {
+    display: none; /* Hilangkan panah bawaan bootstrap yg jelek */
+}
+
+/* --- CONTACT POPUP HOVER EFFECT --- */
+
+.contact-hover-wrapper {
+    padding-bottom: 0; /* Area aman */
+}
+
+/* Kotak Popup-nya */
+.contact-popup-menu {
+    position: absolute;
+    top: 120%; /* Muncul sedikit di bawah tombol */
+    right: 0;
+    width: 220px;
+    background: rgba(255, 255, 255, 0.6); /* Transparan (Glass Effect) */
+    backdrop-filter: blur(15px); /* Efek Blur Kaca yang Mewah */
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    padding: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    
+    /* Animasi Awal (Tersembunyi) */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    z-index: 1000;
+}
+
+/* Saat Wrapper di-Hover, Popup Muncul */
+.contact-hover-wrapper:hover .contact-popup-menu {
+    opacity: 1;
+    visibility: visible;
+    top: 110%; /* Naik sedikit ke posisi ideal */
+    transform: translateY(0);
+}
+
+/* Efek Tombol di dalam Popup */
+.hover-scale {
+    transition: transform 0.2s;
+    background: rgba(255, 255, 255, 0.8) !important; /* Putih agak transparan */
+}
+
+.hover-scale:hover {
+    transform: scale(1.05); /* Membesar dikit pas dipilih */
+    background: #fff !important;
+}
+
+/* Panah kecil di background popup (biar seolah nyambung) */
+.contact-popup-menu::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    right: 30px;
+    width: 15px;
+    height: 15px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(15px);
+    transform: rotate(45deg);
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-left: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* --- ORGANIZATIONAL CHART TREE --- */
+
+.org-tree-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.org-tree ul {
+    padding-top: 20px; 
+    position: relative;
+    transition: all 0.5s;
+    display: flex;
+    justify-content: center;
+    padding-left: 0 !important;
+}
+
+.org-tree li {
+    float: left; text-align: center;
+    list-style-type: none;
+    position: relative;
+    padding: 20px 10px 0 10px;
+    transition: all 0.5s;
+}
+
+/* Garis Konektor (Vertical & Horizontal) */
+.org-tree li::before, .org-tree li::after {
+    content: '';
+    position: absolute; top: 0; right: 50%;
+    border-top: 2px solid #ccc;
+    width: 50%; height: 20px;
+}
+.org-tree li::after {
+    right: auto; left: 50%;
+    border-left: 2px solid #ccc;
+}
+.org-tree li:only-child::after, .org-tree li:only-child::before {
+    display: none;
+}
+.org-tree li:only-child { padding-top: 0; }
+.org-tree li:first-child::before, .org-tree li:last-child::after {
+    border: 0 none;
+}
+.org-tree li:last-child::before{
+    border-right: 2px solid #ccc;
+    border-radius: 0 5px 0 0;
+}
+.org-tree li:first-child::after{
+    border-radius: 5px 0 0 0;
+}
+.org-tree ul ul::before{
+    content: '';
+    position: absolute; top: 0; left: 50%;
+    border-left: 2px solid #ccc;
+    width: 0; height: 20px;
+}
+
+/* Kartu Member */
+.member-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    padding: 15px;
+    border-radius: 12px;
+    width: 180px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    display: inline-block;
+    transition: all 0.3s;
+    position: relative;
+    z-index: 2;
+}
+
+.member-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(19, 94, 249, 0.15);
+    border-color: var(--pab-blue-primary);
+}
+
+.member-card .img-box img {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #f8f9fa;
+    margin-bottom: 10px;
+}
+
+.member-card h5 {
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-bottom: 2px;
+    color: #1e293b;
+}
+
+.member-card span {
+    font-size: 0.7rem;
+    color: var(--pab-blue-primary);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* Kartu lebih kecil untuk level bawah (Manager/Staff) */
+.small-card {
+    width: 150px;
+    padding: 10px;
+}
+.small-card .img-box img { width: 45px; height: 45px; }

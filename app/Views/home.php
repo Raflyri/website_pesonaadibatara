@@ -6,7 +6,8 @@
     <div class="swiper-wrapper">
         <?php foreach ($banners as $banner): ?>
             <div class="swiper-slide">
-                <div class="slide-bg" style="background-image: url('<?= $banner['image']; ?>');"></div>
+                
+                <div class="slide-bg" style="background-image: url('<?= base_url('uploads/banners/' . $banner['image']); ?>');"></div>
 
                 <div class="overlay-gradient"></div>
 
@@ -127,19 +128,52 @@
         <div class="row align-items-center">
 
             <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
-                <div class="position-relative" style="height: 400px;"> <video id="whyUsVideo" class="img-fluid rounded-4 shadow-lg position-relative z-2 w-100 h-100" style="object-fit: cover;" muted loop playsinline poster="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1000">
-                        <source src="assets\video\logo-pab-animated.mp4" type="video/mp4">
-                        Browser Anda tidak mendukung tag video.
-                    </video>
+                <div class="position-relative" style="height: 400px;">
+                    
+                    <?php 
+                        $mediaUrl = $why_choose_us['media_url'] ?? '';
+                        $isImage = false;
+                        
+                        if(!empty($mediaUrl)) {
+                            $ext = pathinfo($mediaUrl, PATHINFO_EXTENSION);
+                            $isImage = in_array(strtolower($ext), ['jpg', 'jpeg', 'png', 'webp']);
+                        }
 
+                        // Tentukan Source Path
+                        if(strpos($mediaUrl, 'http') !== false) {
+                            $src = $mediaUrl;
+                        } else {
+                            // Default fallback jika kosong
+                            $src = !empty($mediaUrl) ? base_url('uploads/home/' . $mediaUrl) : 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1000';
+                            // Kalau kosong banget, anggap image dummy
+                            if(empty($mediaUrl)) $isImage = true; 
+                        }
+                    ?>
+
+                    <?php if ($isImage): ?>
+                        <img src="<?= $src; ?>" class="img-fluid rounded-4 shadow-lg position-relative z-2 w-100 h-100" style="object-fit: cover;" alt="Why Choose Us">
+                    
+                    <?php else: ?>
+                        <video id="whyUsVideo" class="img-fluid rounded-4 shadow-lg position-relative z-2 w-100 h-100" style="object-fit: cover;" muted loop playsinline poster="">
+                            <source src="<?= $src; ?>" type="video/mp4">
+                            Browser Anda tidak mendukung tag video.
+                        </video>
+                    <?php endif; ?>
+                    
                     <div class="position-absolute bg-primary rounded-4" style="width: 100%; height: 100%; top: 20px; left: -20px; z-index: 1; opacity: 0.1;"></div>
                 </div>
             </div>
 
             <div class="col-lg-6 ps-lg-5" data-aos="fade-left">
                 <h6 class="text-primary fw-bold text-uppercase mb-2">Kenapa Memilih Kami?</h6>
-                <h2 class="fw-bold mb-4">Mitra Strategis Pendukung Operasional Bisnis Anda</h2>
-                <p class="text-muted mb-4">PT. Pesona Adi Batara hadir dengan standar layanan prima yang terintegrasi, memastikan operasional bisnis Anda berjalan tanpa hambatan dengan efisiensi tinggi.</p>
+
+                <h2 class="fw-bold mb-4">
+                    <?= !empty($why_choose_us['title_id']) ? $why_choose_us['title_id'] : 'Mitra Strategis Pendukung Operasional Bisnis Anda'; ?>
+                </h2>
+
+                <p class="text-muted mb-4">
+                    <?= !empty($why_choose_us['content_id']) ? $why_choose_us['content_id'] : 'PT. Pesona Adi Batara hadir dengan standar layanan prima...'; ?>
+                </p>
 
                 <div class="d-flex mb-4" data-aos="fade-up" data-aos-delay="100">
                     <div class="flex-shrink-0">
@@ -149,23 +183,10 @@
                     </div>
                     <div class="ms-3">
                         <h5 class="fw-bold">Jaminan Kualitas Layanan</h5>
-                        <p class="text-muted mb-0">Standar operasional prosedur (SOP) ketat yang mengacu pada standar perbankan nasional.</p>
+                        <p class="text-muted mb-0">Standar operasional prosedur (SOP) ketat.</p>
                     </div>
                 </div>
-
-                <div class="d-flex mb-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="flex-shrink-0">
-                        <div class="bg-light text-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
-                            <i class="fas fa-user-tie fa-lg"></i>
-                        </div>
-                    </div>
-                    <div class="ms-3">
-                        <h5 class="fw-bold">SDM Profesional & Terlatih</h5>
-                        <p class="text-muted mb-0">Seluruh tenaga kerja telah melalui proses seleksi ketat dan pelatihan berkala.</p>
-                    </div>
-                </div>
-
-                <a href="#" class="btn btn-pab-primary rounded-pill px-4 mt-2" data-aos="zoom-in">Pelajari Profil Kami</a>
+                <a href="/about" class="btn btn-pab-primary rounded-pill px-4 mt-2">Pelajari Profil Kami</a>
             </div>
         </div>
     </div>
