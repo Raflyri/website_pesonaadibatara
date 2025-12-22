@@ -194,62 +194,124 @@
 
 <section class="py-5 bg-light">
     <div class="container">
-        <div class="d-flex justify-content-between align-items-end mb-5" data-aos="fade-up">
-            <div>
-                <h2 class="fw-bold text-dark">Berita & Artikel</h2>
-                <p class="text-muted mb-0">Informasi terbaru seputar kegiatan perusahaan</p>
-            </div>
-            <a href="#" class="btn btn-outline-primary rounded-pill px-4 d-none d-md-block">Lihat Semua <i class="fas fa-arrow-right ms-2"></i></a>
+        
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="fw-bold text-dark">Wawasan & Informasi</h2>
+            <p class="text-muted mb-4">Kabar terbaru seputar korporasi dan artikel edukatif untuk Anda.</p>
+
+            <ul class="nav nav-pills justify-content-center d-inline-flex bg-white rounded-pill p-1 shadow-sm" id="newsTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active rounded-pill px-4" id="pills-news-tab" data-bs-toggle="pill" data-bs-target="#pills-news" type="button" role="tab" aria-controls="pills-news" aria-selected="true">
+                        <i class="far fa-newspaper me-2"></i> Berita Korporat
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link rounded-pill px-4" id="pills-article-tab" data-bs-toggle="pill" data-bs-target="#pills-article" type="button" role="tab" aria-controls="pills-article" aria-selected="false">
+                        <i class="fas fa-pen-nib me-2"></i> Artikel & Tips
+                    </button>
+                </li>
+            </ul>
         </div>
 
-        <div class="row">
-            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
-                <div class="card h-100 border-0 shadow-sm overflow-hidden group-hover">
-                    <div class="overflow-hidden position-relative" style="height: 220px;">
-                        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=800" class="card-img-top w-100 h-100 object-fit-cover transition-transform" alt="News">
-                        <div class="badge bg-primary position-absolute top-0 start-0 m-3 py-2 px-3">CORPORATE</div>
-                    </div>
-                    <div class="card-body p-4">
-                        <div class="mb-2 text-muted small"><i class="far fa-calendar-alt me-2"></i> 19 Des 2025</div>
-                        <h5 class="card-title fw-bold mb-3">
-                            <a href="#" class="text-dark text-decoration-none stretched-link">Peningkatan Kualitas Armada Operasional Tahun 2025</a>
-                        </h5>
-                        <p class="card-text text-muted small">Dalam rangka mendukung operasional klien, PAB meremajakan 50 unit kendaraan baru...</p>
-                    </div>
+        <div class="tab-content" id="newsTabContent">
+            
+            <div class="tab-pane fade show active" id="pills-news" role="tabpanel" aria-labelledby="pills-news-tab">
+                <div class="row g-4">
+                    <?php if (!empty($latest_news)) : ?>
+                        <?php foreach ($latest_news as $news) : ?>
+                            <div class="col-md-4" data-aos="fade-up">
+                                <div class="card h-100 border-0 shadow-sm overflow-hidden group-hover">
+                                    <div class="overflow-hidden position-relative" style="height: 220px;">
+                                        <?php 
+                                            $thumb = !empty($news['thumbnail']) ? '/uploads/news/'.$news['thumbnail'] : 'https://source.unsplash.com/random/800x600?business';
+                                        ?>
+                                        <img src="<?= $thumb; ?>" class="card-img-top w-100 h-100 object-fit-cover transition-transform" alt="<?= esc($news['title']); ?>">
+                                        <div class="badge bg-primary position-absolute top-0 start-0 m-3 py-2 px-3">NEWS</div>
+                                    </div>
+                                    <div class="card-body p-4">
+                                        <div class="mb-2 text-muted small">
+                                            <i class="far fa-calendar-alt me-2"></i> <?= date('d M Y', strtotime($news['created_at'])); ?>
+                                        </div>
+                                        <h5 class="card-title fw-bold mb-3">
+                                            <a href="/news/<?= $news['slug']; ?>" class="text-dark text-decoration-none stretched-link">
+                                                <?= esc($news['title']); ?>
+                                            </a>
+                                        </h5>
+                                        <p class="card-text text-muted small">
+                                            <?= substr(strip_tags($news['content']), 0, 100); ?>...
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                        
+                        <div class="col-12 text-center mt-4">
+                            <a href="/news/category/berita" class="btn btn-outline-primary rounded-pill px-4">
+                                Lihat Berita Lainnya <i class="fas fa-arrow-right ms-2"></i>
+                            </a>
+                        </div>
+
+                    <?php else : ?>
+                        <div class="col-12 text-center py-5">
+                            <div class="bg-white rounded-4 p-5 shadow-sm d-inline-block">
+                                <img src="https://cdn-icons-png.flaticon.com/512/7486/7486754.png" width="80" class="mb-3 opacity-50" alt="Empty">
+                                <h5 class="fw-bold text-muted">Belum ada berita terbaru</h5>
+                                <p class="text-muted small mb-0">Tim kami sedang menyusun informasi menarik untuk Anda.</p>
+                            </div>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
 
-            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
-                <div class="card h-100 border-0 shadow-sm overflow-hidden group-hover">
-                    <div class="overflow-hidden position-relative" style="height: 220px;">
-                        <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800" class="card-img-top w-100 h-100 object-fit-cover transition-transform" alt="News">
-                        <div class="badge bg-success position-absolute top-0 start-0 m-3 py-2 px-3">TRAINING</div>
-                    </div>
-                    <div class="card-body p-4">
-                        <div class="mb-2 text-muted small"><i class="far fa-calendar-alt me-2"></i> 15 Des 2025</div>
-                        <h5 class="card-title fw-bold mb-3">
-                            <a href="#" class="text-dark text-decoration-none stretched-link">Pelatihan Safety Driving untuk Driver Korporat</a>
-                        </h5>
-                        <p class="card-text text-muted small">Kegiatan rutin tahunan untuk memastikan standar keamanan berkendara bagi seluruh driver...</p>
-                    </div>
+            <div class="tab-pane fade" id="pills-article" role="tabpanel" aria-labelledby="pills-article-tab">
+                <div class="row g-4">
+                    <?php if (!empty($latest_articles)) : ?>
+                        <?php foreach ($latest_articles as $article) : ?>
+                            <div class="col-md-4" data-aos="fade-up">
+                                <div class="card h-100 border-0 shadow-sm overflow-hidden group-hover">
+                                    <div class="overflow-hidden position-relative" style="height: 220px;">
+                                        <?php 
+                                            $thumb = !empty($article['thumbnail']) ? '/uploads/news/'.$article['thumbnail'] : 'https://source.unsplash.com/random/800x600?learning';
+                                        ?>
+                                        <img src="<?= $thumb; ?>" class="card-img-top w-100 h-100 object-fit-cover transition-transform" alt="<?= esc($article['title']); ?>">
+                                        <div class="badge bg-success position-absolute top-0 start-0 m-3 py-2 px-3">ARTIKEL</div>
+                                    </div>
+                                    <div class="card-body p-4">
+                                        <div class="mb-2 text-muted small">
+                                            <i class="far fa-user me-2"></i> <?= esc($article['author']); ?> &bull; 
+                                            <?= date('d M Y', strtotime($article['created_at'])); ?>
+                                        </div>
+                                        <h5 class="card-title fw-bold mb-3">
+                                            <a href="/news/<?= $article['slug']; ?>" class="text-dark text-decoration-none stretched-link">
+                                                <?= esc($article['title']); ?>
+                                            </a>
+                                        </h5>
+                                        <p class="card-text text-muted small">
+                                            <?= substr(strip_tags($article['content']), 0, 100); ?>...
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+
+                        <div class="col-12 text-center mt-4">
+                            <a href="/news/category/artikel" class="btn btn-outline-success rounded-pill px-4">
+                                Baca Artikel Lainnya <i class="fas fa-arrow-right ms-2"></i>
+                            </a>
+                        </div>
+
+                    <?php else : ?>
+                        <div class="col-12 text-center py-5">
+                            <div class="bg-white rounded-4 p-5 shadow-sm d-inline-block">
+                                <img src="https://cdn-icons-png.flaticon.com/512/6195/6195678.png" width="80" class="mb-3 opacity-50" alt="Empty">
+                                <h5 class="fw-bold text-muted">Belum ada artikel edukasi</h5>
+                                <p class="text-muted small mb-0">Nantikan tips dan wawasan menarik segera!</p>
+                            </div>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
 
-            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
-                <div class="card h-100 border-0 shadow-sm overflow-hidden group-hover">
-                    <div class="overflow-hidden position-relative" style="height: 220px;">
-                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800" class="card-img-top w-100 h-100 object-fit-cover transition-transform" alt="News">
-                        <div class="badge bg-info position-absolute top-0 start-0 m-3 py-2 px-3 text-white">FACILITY</div>
-                    </div>
-                    <div class="card-body p-4">
-                        <div class="mb-2 text-muted small"><i class="far fa-calendar-alt me-2"></i> 10 Des 2025</div>
-                        <h5 class="card-title fw-bold mb-3">
-                            <a href="#" class="text-dark text-decoration-none stretched-link">Implementasi Sistem Kebersihan Baru di Gedung Pusat</a>
-                        </h5>
-                        <p class="card-text text-muted small">Penerapan teknologi cleaning service terbaru untuk efisiensi dan kebersihan maksimal...</p>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </section>

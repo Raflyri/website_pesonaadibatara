@@ -10,22 +10,79 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <link rel="stylesheet" href="<?= base_url('assets/css/admin.css'); ?>">
+
+    <style>
+        /* Sedikit style tambahan agar dropdown di sidebar rapi */
+        .dropdown-toggle::after {
+            vertical-align: middle;
+        }
+
+        .sidebar-menu .nav-link {
+            display: block;
+            padding: 10px 15px;
+            color: #333;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            transition: 0.3s;
+        }
+
+        .sidebar-menu .nav-link:hover {
+            background: #e9ecef;
+        }
+
+        .sidebar-menu .nav-link.active {
+            background: #0d6efd;
+            color: white;
+        }
+
+        .sidebar-menu .nav-link.active i {
+            color: white;
+        }
+
+        .sidebar-menu i {
+            width: 25px;
+            text-align: center;
+            margin-right: 5px;
+        }
+    </style>
 </head>
 
 <body>
 
-    <div class="sidebar">
-        <div class="sidebar-header">
-            <div class="d-flex align-items-center gap-2">
-                <img src="<?= base_url('assets/img/logo-pab.png'); ?>" alt="Logo" height="30">
-                <span class="fw-bold text-dark">PAB ADMIN</span>
+    <div class="sidebar d-flex flex-column p-3 bg-white shadow-sm" style="width: 280px; height: 100vh; position: fixed; overflow-y: auto;">
+
+        <div class="sidebar-header border-bottom pb-3 mb-3">
+            <div class="d-flex align-items-center mb-3">
+                <img src="<?= base_url('assets/img/logo-pab.png'); ?>" alt="Logo" height="50" class="me-2">
+                <!--span class="fw-bold fs-5 text-dark">PAB Dashboard</span-->
+            </div>
+
+
+            <div class="dropdown">
+                <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle text-dark p-2 rounded hover-bg-light" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <?php $avatar = session()->get('avatar') ? '/uploads/avatars/' . session()->get('avatar') : 'https://ui-avatars.com/api/?name=' . urlencode(session()->get('name')) . '&background=random'; ?>
+                    <img src="<?= $avatar; ?>" alt="mdo" width="32" height="32" class="rounded-circle me-2 object-fit-cover">
+
+                    <div class="small">
+                        <strong class="d-block"><?= esc(session()->get('name')); ?></strong>
+                        <span class="text-muted" style="font-size: 0.75rem;"><?= ucfirst(session()->get('role')); ?></span>
+                    </div>
+                </a>
+                <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser1">
+                    <li><a class="dropdown-item" href="/admin/profile"><i class="fas fa-user-circle me-2"></i> Profil Saya</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item text-danger" href="/logout"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
+                </ul>
             </div>
         </div>
 
         <div class="sidebar-menu">
-            <small class="text-uppercase text-muted fw-bold ms-3" style="font-size: 0.75rem;">Main Menu</small>
+            <small class="text-uppercase text-muted fw-bold mb-2 d-block" style="font-size: 0.75rem;">Main Menu</small>
 
-            <a href="/admin/dashboard" class="nav-link <?= (current_url(true)->getSegment(2) == 'dashboard') ? 'active' : ''; ?> mt-2">
+            <a href="/admin/dashboard" class="nav-link <?= (current_url(true)->getSegment(2) == 'dashboard') ? 'active' : ''; ?>">
                 <i class="fas fa-th-large"></i> Dashboard
             </a>
 
@@ -49,52 +106,50 @@
                 <i class="fas fa-envelope-open-text"></i> Kontak & Pesan
             </a>
 
-            <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#menuLayanan" role="button" aria-expanded="false" aria-controls="menuLayanan">
+            <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#menuLayanan" role="button" aria-expanded="<?= (current_url(true)->getSegment(2) == 'services') ? 'true' : 'false'; ?>">
                 <span><i class="fas fa-concierge-bell"></i> Layanan Bisnis</span>
-                <i class="fas fa-chevron-down small transition-icon"></i>
+                <i class="fas fa-chevron-down small" style="font-size: 0.7rem;"></i>
             </a>
-
             <div class="collapse <?= (current_url(true)->getSegment(2) == 'services') ? 'show' : ''; ?>" id="menuLayanan">
-                <div class="ms-4 border-start border-2 ps-2 mt-1">
-
-                    <a href="/admin/services/transportasi" class="nav-link py-1 small <?= (current_url(true)->getSegment(3) == 'transportasi') ? 'text-primary fw-bold' : ''; ?>">
-                        Transportasi
-                    </a>
-
-                    <a href="/admin/services/kesehatan" class="nav-link py-1 small <?= (current_url(true)->getSegment(3) == 'kesehatan') ? 'text-primary fw-bold' : ''; ?>">
-                        Kesehatan (Health Care)
-                    </a>
-
-                    <a href="/admin/services/jasa" class="nav-link py-1 small <?= (current_url(true)->getSegment(3) == 'jasa') ? 'text-primary fw-bold' : ''; ?>">
-                        Jasa & Pengadaan
-                    </a>
-
-                    <a href="/admin/services/investasi" class="nav-link py-1 small <?= (current_url(true)->getSegment(3) == 'investasi') ? 'text-primary fw-bold' : ''; ?>">
-                        Investasi & Usaha Lain
-                    </a>
+                <div class="ms-3 border-start ps-2 my-1">
+                    <a href="/admin/services/transportasi" class="nav-link py-1 small <?= (current_url(true)->getSegment(3) == 'transportasi') ? 'text-primary fw-bold bg-light' : ''; ?>">Transportasi</a>
+                    <a href="/admin/services/kesehatan" class="nav-link py-1 small <?= (current_url(true)->getSegment(3) == 'kesehatan') ? 'text-primary fw-bold bg-light' : ''; ?>">Kesehatan</a>
+                    <a href="/admin/services/jasa" class="nav-link py-1 small <?= (current_url(true)->getSegment(3) == 'jasa') ? 'text-primary fw-bold bg-light' : ''; ?>">Jasa & Pengadaan</a>
+                    <a href="/admin/services/investasi" class="nav-link py-1 small <?= (current_url(true)->getSegment(3) == 'investasi') ? 'text-primary fw-bold bg-light' : ''; ?>">Investasi</a>
                 </div>
             </div>
-
 
             <a href="/admin/banner" class="nav-link <?= (current_url(true)->getSegment(2) == 'banner') ? 'active' : ''; ?>">
                 <i class="fas fa-images"></i> Banner Slider
             </a>
 
-            <small class="text-uppercase text-muted fw-bold ms-3 mt-4 d-block" style="font-size: 0.75rem;">System</small>
-            <a href="#" class="nav-link">
-                <i class="fas fa-users-cog"></i> Administrator
-            </a>
-            <a href="/logout" class="nav-link text-danger mt-3">
+            <hr class="my-3">
+
+            <small class="text-uppercase text-muted fw-bold mb-2 d-block" style="font-size: 0.75rem;">System</small>
+
+            <?php if (session()->get('role') == 'superadmin'): ?>
+                <a href="/admin/users" class="nav-link <?= (current_url(true)->getSegment(2) == 'users') ? 'active' : ''; ?>">
+                    <i class="fas fa-users-cog"></i> Administrator
+                </a>
+                <a href="/admin/backup-db" class="nav-link text-warning">
+                    <i class="fas fa-database"></i> Backup Database
+                </a>
+            <?php endif; ?>
+
+            <a href="/logout" class="nav-link text-danger mt-1">
                 <i class="fas fa-sign-out-alt"></i> Logout
             </a>
         </div>
     </div>
 
-    <div class="main-content">
-        <?= $this->renderSection('content'); ?>
+    <div class="main-content d-flex flex-column" style="margin-left: 280px; padding: 20px; min-height: 100vh;">
 
-        <footer class="mt-5 text-muted small">
-            &copy; <?= date('Y'); ?> PT. Pesona Adi Batara CMS System v1.0
+        <div class="flex-grow-1">
+            <?= $this->renderSection('content'); ?>
+        </div>
+
+        <footer class="mt-5 pt-4 border-top text-muted small text-center">
+            &copy; 2025 PT. Pesona Adi Batara CMS System v1.0
         </footer>
     </div>
 

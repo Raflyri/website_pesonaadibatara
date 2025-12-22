@@ -190,10 +190,18 @@
                         </p>
 
                         <div class="d-flex gap-3">
-                            <a href="#" class="social-icon bg-white text-dark"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="social-icon bg-white text-dark"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" class="social-icon bg-white text-dark"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#" class="social-icon bg-white text-dark"><i class="fab fa-youtube"></i></a>
+                            <?php
+                            $db = \Config\Database::connect();
+                            $ig = $db->table('site_settings')->where('setting_key', 'sosmed_instagram')->get()->getRow()->setting_value ?? '#';
+                            $fb = $db->table('site_settings')->where('setting_key', 'sosmed_facebook')->get()->getRow()->setting_value ?? '#';
+                            $li = $db->table('site_settings')->where('setting_key', 'sosmed_linkedin')->get()->getRow()->setting_value ?? '#';
+                            $yt = $db->table('site_settings')->where('setting_key', 'sosmed_youtube')->get()->getRow()->setting_value ?? '#';
+                            ?>
+
+                            <a href="<?= $ig; ?>" target="_blank" class="text-white me-3"><i class="fab fa-instagram fa-lg"></i></a>
+                            <a href="<?= $fb; ?>" target="_blank" class="text-white me-3"><i class="fab fa-facebook fa-lg"></i></a>
+                            <a href="<?= $li; ?>" target="_blank" class="text-white me-3"><i class="fab fa-linkedin fa-lg"></i></a>
+                            <a href="<?= $yt; ?>" target="_blank" class="text-white"><i class="fab fa-youtube fa-lg"></i></a>
                         </div>
                     </div>
                 </div>

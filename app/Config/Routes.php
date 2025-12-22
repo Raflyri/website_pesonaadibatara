@@ -14,7 +14,7 @@ $routes->get('login', 'Auth::login');        // Ubah jadi login biar konsisten
 $routes->post('auth/process', 'Auth::process');
 $routes->get('logout', 'Auth::logout');
 $routes->get('about', 'About::index');
- // PUBLIK
+// PUBLIK
 $routes->get('contact', 'Contact::index');
 $routes->post('contact/send', 'Contact::send');
 
@@ -33,12 +33,12 @@ $routes->group('admin', ['filter' => 'authGuard'], function ($routes) {
     $routes->get('services/(:segment)', 'Admin\Services::category/$1');
 
     // Modul Home Editor
-    $routes->get('home-editor', 'Admin\HomeEditor::e');
+    $routes->get('home-editor', 'Admin\HomeEditor::index');       // Menampilkan Halaman
+    $routes->post('home-editor/update', 'Admin\HomeEditor::update'); // Proses Simpan
     $routes->post('banner/save', 'Admin\Banner::save');
     $routes->post('banner/save/(:num)', 'Admin\Banner::save/$1'); // Untuk Update
     $routes->get('banner/edit/(:num)', 'Admin\Banner::edit/$1');
     $routes->get('banner/delete/(:num)', 'Admin\Bannerindex');
-    $routes->post('home-editor/update', 'Admin\HomeEditor::update');
 
     // MODULE BANNER
     $routes->get('banner', 'Admin\Banner::index');
@@ -59,4 +59,16 @@ $routes->group('admin', ['filter' => 'authGuard'], function ($routes) {
     $routes->get('contact-editor', 'Admin\ContactEditor::index');
     $routes->post('contact-editor/update', 'Admin\ContactEditor::updateContent');
     $routes->get('contact-editor/delete/(:num)', 'Admin\ContactEditor::deleteMessage/$1');
+
+    // --- ADMIN MANAGEMENT (CRUD) ---
+    $routes->get('users', 'Admin\UserEditor::index');
+    $routes->get('users/create', 'Admin\UserEditor::create');
+    $routes->post('users/save', 'Admin\UserEditor::save');
+    $routes->get('users/edit/(:num)', 'Admin\UserEditor::edit/$1');
+    $routes->post('users/update/(:num)', 'Admin\UserEditor::update/$1');
+    $routes->get('users/delete/(:num)', 'Admin\UserEditor::delete/$1');
+
+    // --- PROFILE ---
+    $routes->get('profile', 'Admin\UserEditor::profile');
+    $routes->post('profile/update', 'Admin\UserEditor::updateProfile');
 });

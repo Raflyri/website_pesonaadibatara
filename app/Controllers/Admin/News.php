@@ -3,52 +3,77 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use App\Models\NewsModel; // Panggil Model yang baru dibuat
 
 class News extends BaseController
 {
-    // Kita pakai Query Builder biar cepat (Nanti bisa upgrade ke Model)
-    protected $db;
+    protected $newsModel;
 
     public function __construct()
     {
-        $this->db = \Config\Database::connect();
+        $this->newsModel = new NewsModel();
     }
 
+    // 1. LIST BERITA & ARTIKEL
     public function index()
     {
         $data = [
-            'title' => 'Kelola Berita',
-            'news_list' => $this->db->table('news')->orderBy('id', 'DESC')->get()->getResultArray()
+            'title' => 'Kelola Berita & Artikel',
+            // Ambil data urut terbaru & paginate
+            'news'  => $this->newsModel->orderBy('created_at', 'DESC')->findAll(),
         ];
         return view('admin/news/index', $data);
     }
 
+    // 2. FORM TAMBAH
     public function create()
     {
-        $data = [
-            'title' => 'Tulis Berita Baru'
-        ];
-        return view('admin/news/form', $data);
+        $data = ['title' => 'Tulis Baru'];
+        // Pastikan file view ini ada di app/Views/admin/news/create.php
+        return view('admin/news/create', $data);
     }
 
-    public function store()
+    // 3. PROSES SIMPAN
+    public function save()
     {
-        // 1. Ambil Data dari Form
-        $data = [
-            'title_id'       => $this->request->getPost('title_id'),
-            'title_en'       => $this->request->getPost('title_en'), // Ini nanti hasil auto translate
-            'slug'           => url_title($this->request->getPost('title_id'), '-', true),
-            'content_id'     => $this->request->getPost('content_id'),
-            'content_en'     => $this->request->getPost('content_en'),
-            'category'       => $this->request->getPost('category'),
-            'date_published' => date('Y-m-d'),
-            'image'          => 'https://source.unsplash.com/random/800x600?business', // Placeholder dulu
-            'is_active'      => 1
-        ];
+        // Validasi Input
+        if (!$this->validate([
+            'title'     => 'required',
+            'category'  => 'required',
+            // Validasi gambar: Maks 2MB, format gambar
+            'thumbnail' => 'is_image[thumbnail]|mime_in[thumbnail,image/jpg,image/jpeg,image/png]|max_size[thumbnail,2048]',
+        ])) {
+            return redirect()->back()->withInput()->with('error', 'Pastikan data terisi benar & gambar max 2MB.');
+        }
 
-        // 2. Simpan ke Database
-        $this->db->table('news')->insert($data);
+        // Proses Upload Gambar
+        $fileThumb = $this->request->getFile('thumbnail');
+        if ($fileThumb && $fileThumb->isValid() && !$fileThumb->hasMoved()) {
+            $imageName = $fileThumb->getRandomName();
+            $fileThumb->move('uploads/news', $imageName); // Simpan ke folder public/uploads/news
+        } else {
+            $imageName = null; // Atau set default.jpg jika mau
+        }
 
-        return redirect()->to('/admin/news')->with('success', 'Berita berhasil ditayangkan!');
+        // Simpan ke Database via Model
+        $this->newsModel->save([
+            'title'     => $this->request->getPost('title'),
+            'slug'      => url_title($this->request->getPost('title'), '-', true),
+            'category'  => $this->request->getPost('category'),
+            'content'   => $this->request->getPost('content'),
+            'thumbnail' => $imageName,
+            'author'    => $this->request->getPost('author'),
+            'views'     => 0,
+            'status'    => 'published' // Default langsung tayang
+        ]);
+
+        return redirect()->to('/admin/news')->with('success', 'Postingan berhasil diterbitkan!');
+    }
+    
+    // (Opsional) Tambahkan method delete($id) dan edit($id) nanti
+    public function delete($id)
+    {
+        $this->newsModel->delete($id);
+        return redirect()->to('/admin/news')->with('success', 'Data dihapus.');
     }
 }
