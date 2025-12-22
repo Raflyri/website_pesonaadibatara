@@ -31,23 +31,25 @@
                 </thead>
                 <tbody>
                     <?php if (!empty($news) && is_array($news)) : ?>
-                        <?php $i = 1; foreach ($news as $item) : ?>
+                        <?php $i = 1;
+                        foreach ($news as $item) : ?>
                             <tr>
                                 <td class="text-center fw-bold text-muted"><?= $i++; ?></td>
                                 <td>
-                                    <?php if($item['thumbnail']): ?>
-                                        <img src="/uploads/news/<?= $item['thumbnail']; ?>" class="rounded-3 object-fit-cover shadow-sm" width="80" height="60" alt="Thumb">
+                                    <?php if (!empty($item['image'])): ?>
+                                        <img src="/uploads/news/<?= $item['image']; ?>" class="rounded-3 object-fit-cover shadow-sm" width="80" height="60" alt="Thumb">
                                     <?php else: ?>
                                         <div class="bg-light rounded-3 d-flex align-items-center justify-content-center text-muted small" style="width: 80px; height: 60px;">No Image</div>
                                     <?php endif; ?>
                                 </td>
                                 <td>
-                                    <div class="fw-bold text-dark mb-1"><?= esc($item['title']); ?></div>
+                                    <div class="fw-bold text-dark mb-1"><?= esc($item['title_id']); ?></div>
+
                                     <small class="text-muted"><i class="fas fa-eye me-1"></i> <?= $item['views'] ?? 0; ?>x dilihat</small>
                                 </td>
                                 <td>
                                     <span class="badge bg-light text-dark border">
-                                        <i class="fas fa-user-circle me-1"></i> <?= esc($item['author']); ?>
+                                        <i class="fas fa-user-circle me-1"></i> Admin
                                     </span>
                                 </td>
                                 <td class="text-muted small">
@@ -84,8 +86,8 @@
                 </tbody>
             </table>
         </div>
-        
-        <?php if(isset($pager)): ?>
+
+        <?php if (isset($pager)): ?>
             <div class="mt-4">
                 <?= $pager->links('default', 'bootstrap_pagination') ?>
             </div>

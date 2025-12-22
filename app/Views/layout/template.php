@@ -126,7 +126,7 @@
                                         <?php endif; ?>
                                     </a>
                                 </li>
-                                <li>
+                                <!--li>
                                     <a class="dropdown-item rounded-3 d-flex align-items-center gap-2 py-2" href="<?= current_url(); ?>?lang=en">
                                         <img src="https://flagcdn.com/w20/gb.png" alt="EN" style="width: 20px;">
                                         <span class="small fw-bold">English</span>
@@ -134,7 +134,7 @@
                                             <i class="fas fa-check text-primary ms-auto small"></i>
                                         <?php endif; ?>
                                     </a>
-                                </li>
+                                </li-->
                             </ul>
                         </div>
 

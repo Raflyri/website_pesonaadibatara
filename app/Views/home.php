@@ -6,7 +6,7 @@
     <div class="swiper-wrapper">
         <?php foreach ($banners as $banner): ?>
             <div class="swiper-slide">
-                
+
                 <div class="slide-bg" style="background-image: url('<?= base_url('uploads/banners/' . $banner['image']); ?>');"></div>
 
                 <div class="overlay-gradient"></div>
@@ -129,37 +129,37 @@
 
             <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
                 <div class="position-relative" style="height: 400px;">
-                    
-                    <?php 
-                        $mediaUrl = $why_choose_us['media_url'] ?? '';
-                        $isImage = false;
-                        
-                        if(!empty($mediaUrl)) {
-                            $ext = pathinfo($mediaUrl, PATHINFO_EXTENSION);
-                            $isImage = in_array(strtolower($ext), ['jpg', 'jpeg', 'png', 'webp']);
-                        }
 
-                        // Tentukan Source Path
-                        if(strpos($mediaUrl, 'http') !== false) {
-                            $src = $mediaUrl;
-                        } else {
-                            // Default fallback jika kosong
-                            $src = !empty($mediaUrl) ? base_url('uploads/home/' . $mediaUrl) : 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1000';
-                            // Kalau kosong banget, anggap image dummy
-                            if(empty($mediaUrl)) $isImage = true; 
-                        }
+                    <?php
+                    $mediaUrl = $why_choose_us['media_url'] ?? '';
+                    $isImage = false;
+
+                    if (!empty($mediaUrl)) {
+                        $ext = pathinfo($mediaUrl, PATHINFO_EXTENSION);
+                        $isImage = in_array(strtolower($ext), ['jpg', 'jpeg', 'png', 'webp']);
+                    }
+
+                    // Tentukan Source Path
+                    if (strpos($mediaUrl, 'http') !== false) {
+                        $src = $mediaUrl;
+                    } else {
+                        // Default fallback jika kosong
+                        $src = !empty($mediaUrl) ? base_url('uploads/home/' . $mediaUrl) : 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1000';
+                        // Kalau kosong banget, anggap image dummy
+                        if (empty($mediaUrl)) $isImage = true;
+                    }
                     ?>
 
                     <?php if ($isImage): ?>
                         <img src="<?= $src; ?>" class="img-fluid rounded-4 shadow-lg position-relative z-2 w-100 h-100" style="object-fit: cover;" alt="Why Choose Us">
-                    
+
                     <?php else: ?>
                         <video id="whyUsVideo" class="img-fluid rounded-4 shadow-lg position-relative z-2 w-100 h-100" style="object-fit: cover;" muted loop playsinline poster="">
                             <source src="<?= $src; ?>" type="video/mp4">
                             Browser Anda tidak mendukung tag video.
                         </video>
                     <?php endif; ?>
-                    
+
                     <div class="position-absolute bg-primary rounded-4" style="width: 100%; height: 100%; top: 20px; left: -20px; z-index: 1; opacity: 0.1;"></div>
                 </div>
             </div>
@@ -194,7 +194,7 @@
 
 <section class="py-5 bg-light">
     <div class="container">
-        
+
         <div class="text-center mb-5" data-aos="fade-up">
             <h2 class="fw-bold text-dark">Wawasan & Informasi</h2>
             <p class="text-muted mb-4">Kabar terbaru seputar korporasi dan artikel edukatif untuk Anda.</p>
@@ -214,7 +214,7 @@
         </div>
 
         <div class="tab-content" id="newsTabContent">
-            
+
             <div class="tab-pane fade show active" id="pills-news" role="tabpanel" aria-labelledby="pills-news-tab">
                 <div class="row g-4">
                     <?php if (!empty($latest_news)) : ?>
@@ -222,10 +222,11 @@
                             <div class="col-md-4" data-aos="fade-up">
                                 <div class="card h-100 border-0 shadow-sm overflow-hidden group-hover">
                                     <div class="overflow-hidden position-relative" style="height: 220px;">
-                                        <?php 
-                                            $thumb = !empty($news['thumbnail']) ? '/uploads/news/'.$news['thumbnail'] : 'https://source.unsplash.com/random/800x600?business';
+                                        <?php
+                                        // FIX 1: Ganti 'thumbnail' jadi 'image'
+                                        $thumb = !empty($news['image']) ? '/uploads/news/' . $news['image'] : 'https://source.unsplash.com/random/800x600?business';
                                         ?>
-                                        <img src="<?= $thumb; ?>" class="card-img-top w-100 h-100 object-fit-cover transition-transform" alt="<?= esc($news['title']); ?>">
+                                        <img src="<?= $thumb; ?>" class="card-img-top w-100 h-100 object-fit-cover transition-transform" alt="<?= esc($news['title_id']); ?>">
                                         <div class="badge bg-primary position-absolute top-0 start-0 m-3 py-2 px-3">NEWS</div>
                                     </div>
                                     <div class="card-body p-4">
@@ -234,17 +235,17 @@
                                         </div>
                                         <h5 class="card-title fw-bold mb-3">
                                             <a href="/news/<?= $news['slug']; ?>" class="text-dark text-decoration-none stretched-link">
-                                                <?= esc($news['title']); ?>
+                                                <?= esc($news['title_id']); ?>
                                             </a>
                                         </h5>
                                         <p class="card-text text-muted small">
-                                            <?= substr(strip_tags($news['content']), 0, 100); ?>...
+                                            <?= substr(strip_tags($news['content_id']), 0, 100); ?>...
                                         </p>
                                     </div>
                                 </div>
                             </div>
                         <?php endforeach; ?>
-                        
+
                         <div class="col-12 text-center mt-4">
                             <a href="/news/category/berita" class="btn btn-outline-primary rounded-pill px-4">
                                 Lihat Berita Lainnya <i class="fas fa-arrow-right ms-2"></i>
@@ -270,24 +271,25 @@
                             <div class="col-md-4" data-aos="fade-up">
                                 <div class="card h-100 border-0 shadow-sm overflow-hidden group-hover">
                                     <div class="overflow-hidden position-relative" style="height: 220px;">
-                                        <?php 
-                                            $thumb = !empty($article['thumbnail']) ? '/uploads/news/'.$article['thumbnail'] : 'https://source.unsplash.com/random/800x600?learning';
+                                        <?php
+                                        // FIX 1: image
+                                        $thumb = !empty($article['image']) ? '/uploads/news/' . $article['image'] : 'https://source.unsplash.com/random/800x600?learning';
                                         ?>
-                                        <img src="<?= $thumb; ?>" class="card-img-top w-100 h-100 object-fit-cover transition-transform" alt="<?= esc($article['title']); ?>">
+                                        <img src="<?= $thumb; ?>" class="card-img-top w-100 h-100 object-fit-cover transition-transform" alt="<?= esc($article['title_id']); ?>">
                                         <div class="badge bg-success position-absolute top-0 start-0 m-3 py-2 px-3">ARTIKEL</div>
                                     </div>
                                     <div class="card-body p-4">
                                         <div class="mb-2 text-muted small">
-                                            <i class="far fa-user me-2"></i> <?= esc($article['author']); ?> &bull; 
+                                            <i class="far fa-user me-2"></i> Admin PAB &bull;
                                             <?= date('d M Y', strtotime($article['created_at'])); ?>
                                         </div>
                                         <h5 class="card-title fw-bold mb-3">
                                             <a href="/news/<?= $article['slug']; ?>" class="text-dark text-decoration-none stretched-link">
-                                                <?= esc($article['title']); ?>
+                                                <?= esc($article['title_id']); ?>
                                             </a>
                                         </h5>
                                         <p class="card-text text-muted small">
-                                            <?= substr(strip_tags($article['content']), 0, 100); ?>...
+                                            <?= substr(strip_tags($article['content_id']), 0, 100); ?>...
                                         </p>
                                     </div>
                                 </div>

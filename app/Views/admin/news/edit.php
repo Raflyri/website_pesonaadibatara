@@ -3,7 +3,7 @@
 <?= $this->section('content'); ?>
 
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h3 class="fw-bold text-dark">Tulis Postingan Baru</h3>
+    <h3 class="fw-bold text-dark">Edit Postingan</h3>
     <a href="/admin/news" class="btn btn-outline-secondary rounded-pill px-4">
         <i class="fas fa-arrow-left me-2"></i> Kembali
     </a>
@@ -12,51 +12,52 @@
 <div class="card border-0 shadow-lg rounded-4">
     <div class="card-body p-5">
 
-        <form action="/admin/news/save" method="post" enctype="multipart/form-data">
+        <form action="/admin/news/update/<?= $news['id']; ?>" method="post" enctype="multipart/form-data">
             <?= csrf_field(); ?>
 
             <div class="row">
                 <div class="col-lg-8">
                     <div class="mb-4">
                         <label class="fw-bold form-label">Judul Postingan</label>
-                        <input type="text" name="title" class="form-control form-control-lg bg-light border-0" placeholder="Masukkan judul menarik..." required autofocus>
+                        <input type="text" name="title" class="form-control form-control-lg bg-light border-0" value="<?= esc($news['title_id']); ?>" required>
                     </div>
 
                     <div class="mb-4">
                         <label class="fw-bold form-label">Isi Konten</label>
-                        <textarea name="content" class="summernote" required></textarea>
+                        <textarea name="content" class="summernote" required><?= $news['content_id']; ?></textarea>
                     </div>
                 </div>
 
                 <div class="col-lg-4">
-
                     <div class="mb-4">
                         <label class="fw-bold form-label">Kategori</label>
                         <select name="category" class="form-select bg-light border-0 py-3" required>
-                            <option value="berita">📰 Berita (News)</option>
-                            <option value="artikel">📝 Artikel (Blog/Edukasi)</option>
+                            <option value="berita" <?= ($news['category'] == 'berita') ? 'selected' : ''; ?>>📰 Berita (News)</option>
+                            <option value="artikel" <?= ($news['category'] == 'artikel') ? 'selected' : ''; ?>>📝 Artikel (Blog/Edukasi)</option>
                         </select>
-                        <small class="text-muted">Tentukan jenis postingan ini.</small>
                     </div>
 
                     <div class="mb-4">
                         <label class="fw-bold form-label">Thumbnail Image</label>
+
+                        <?php if ($news['image']): ?>
+                            <div class="mb-2">
+                                <img src="/uploads/news/<?= $news['image']; ?>" class="img-fluid rounded shadow-sm" style="max-height: 150px;">
+                                <div class="small text-muted mt-1">Gambar saat ini</div>
+                            </div>
+                        <?php endif; ?>
+
                         <div class="bg-light rounded-3 p-4 text-center border border-dashed mb-2">
-                            <i class="fas fa-image fa-3x text-muted mb-3"></i>
+                            <i class="fas fa-image fa-2x text-muted mb-3"></i>
                             <input type="file" name="thumbnail" class="form-control" accept="image/*">
                         </div>
-                        <small class="text-muted d-block text-center">Format: JPG/PNG. Max 2MB.</small>
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="fw-bold form-label">Penulis</label>
-                        <input type="text" name="author" class="form-control bg-light border-0 py-3" value="Admin PAB" required>
+                        <small class="text-muted d-block text-center">Biarkan kosong jika tidak ingin mengganti gambar.</small>
                     </div>
 
                     <hr>
 
                     <button type="submit" class="btn btn-primary w-100 rounded-pill py-3 fw-bold shadow">
-                        <i class="fas fa-paper-plane me-2"></i> Publikasikan
+                        <i class="fas fa-save me-2"></i> Simpan Perubahan
                     </button>
                 </div>
             </div>
