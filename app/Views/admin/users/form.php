@@ -13,7 +13,7 @@
             
             <div class="mb-3">
                 <label class="fw-bold form-label">Nama Lengkap</label>
-                <input type="text" name="name" class="form-control" value="<?= isset($user) ? $user['name'] : ''; ?>" required>
+                <input type="text" name="name" class="form-control" value="<?= isset($user) ? $user['fullname'] : ''; ?>" required>
             </div>
 
             <div class="mb-3">

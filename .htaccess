@@ -12,5 +12,5 @@ Require all denied
 </Files>
 
 <IfModule mod_alias.c>
-RedirectMatch 301 ^/$ https://staging.web.pesonaadibatara.com/public
+RedirectMatch 301 ^/$ http://localhost:8080/
 </IfModule>

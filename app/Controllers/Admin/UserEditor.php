@@ -45,7 +45,7 @@ class UserEditor extends BaseController
         if (!$this->validate([
             'name'     => 'required',
             'email'    => 'required|valid_email|is_unique[users.email]',
-            'password' => 'required|min_length(6)',
+            'password' => 'required|min_length[6]',
             'role'     => 'required'
         ])) {
             return redirect()->back()->withInput()->with('error', 'Cek kembali data Anda. Email harus unik & Password min 6 karakter.');

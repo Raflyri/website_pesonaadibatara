@@ -38,7 +38,7 @@
                                     <?php endif; ?>
                                 </div>
                                 <div>
-                                    <div class="fw-bold text-dark"><?= esc($u['name']); ?></div>
+                                    <div class="fw-bold text-dark"><?= esc($u['fullname']); ?></div>
                                     <div class="small text-muted"><?= esc($u['email']); ?></div>
                                 </div>
                             </div>

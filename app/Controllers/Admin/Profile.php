@@ -82,7 +82,7 @@ class Profile extends BaseController
         // 1. Validasi Password
         if (!$this->validate([
             'old_password'     => 'required',
-            'new_password'     => 'required|min_length(6)',
+            'new_password'     => 'required|min_length[6]',
             'confirm_password' => 'matches[new_password]'
         ])) {
             return redirect()->back()->with('error_password', 'Password baru tidak cocok atau kurang dari 6 karakter.');
