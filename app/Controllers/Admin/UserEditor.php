@@ -161,7 +161,7 @@ class UserEditor extends BaseController
         $this->userModel->save($dataUpdate);
         
         // Update session nama
-        session()->set('name', $dataUpdate['name']);
+        session()->set('name', $dataUpdate['fullname']);
 
         return redirect()->to('/admin/profile')->with('success', 'Profil berhasil diperbarui!');
     }

@@ -28,11 +28,11 @@
                 <?php foreach ($teams as $team) : ?>
                 <tr>
                     <td class="ps-4">
-                        <?php $img = $team['image'] ? base_url('uploads/teams/' . $team['image']) : 'https://ui-avatars.com/api/?name='.$team['name']; ?>
+                        <?php $img = $team['image'] ? base_url('uploads/teams/' . $team['image']) : 'https://ui-avatars.com/api/?name='.$team['fullname']; ?>
                         <img src="<?= $img; ?>" class="rounded-circle shadow-sm" width="50" height="50" style="object-fit: cover;">
                     </td>
                     <td>
-                        <div class="fw-bold"><?= $team['name']; ?></div>
+                        <div class="fw-bold"><?= $team['fullname']; ?></div>
                         <div class="small text-muted"><?= $team['position_id']; ?></div>
                     </td>
                     <td><span class="badge bg-light text-dark border"><?= $team['urutan']; ?></span></td>

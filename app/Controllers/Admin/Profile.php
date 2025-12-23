@@ -67,7 +67,7 @@ class Profile extends BaseController
         $this->db->table('users')->where('id', $userId)->update($dataUpdate);
 
         // Update Session juga biar nama di pojok kanan atas berubah realtime
-        session()->set('admin_name', $dataUpdate['name']);
+        session()->set('admin_name', $dataUpdate['fullname']);
         if(isset($dataUpdate['avatar'])) {
             session()->set('admin_avatar', $dataUpdate['avatar']);
         }
