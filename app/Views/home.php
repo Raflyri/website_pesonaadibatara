@@ -192,6 +192,39 @@
     </div>
 </section>
 
+<section class="py-4 bg-white border-bottom">
+    <div class="container">
+        <div class="text-center mb-4" data-aos="fade-up">
+            <h6 class="text-primary fw-bold text-uppercase ls-2">Klien & Partner</h6>
+            <h4 class="fw-bold">Dipercaya Oleh Perusahaan Terkemuka</h4>
+        </div>
+
+        <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-4 justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="100">
+            <?php if(!empty($partners)): ?>
+                <?php foreach($partners as $p): ?>
+                    <div class="col">
+                        <div class="partner-box p-3">
+                            <?php if(!empty($p['partner_url'])): ?>
+                                <a href="<?= $p['partner_url']; ?>" target="_blank" title="<?= $p['partner_name']; ?>">
+                                    <img src="<?= base_url('uploads/partners/' . $p['partner_logo']); ?>" 
+                                         class="img-fluid partner-logo" 
+                                         alt="<?= $p['partner_name']; ?>">
+                                </a>
+                            <?php else: ?>
+                                <img src="<?= base_url('uploads/partners/' . $p['partner_logo']); ?>" 
+                                     class="img-fluid partner-logo" 
+                                     alt="<?= $p['partner_name']; ?>">
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <div class="col text-center text-muted small">Belum ada partner yang ditambahkan.</div>
+            <?php endif; ?>
+        </div>
+    </div>
+</section>
+
 <section class="py-5 bg-light">
     <div class="container">
 

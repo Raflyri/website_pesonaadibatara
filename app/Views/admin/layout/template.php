@@ -110,6 +110,10 @@
                 <i class="fas fa-building"></i> Tentang Kami
             </a>
 
+            <a href="/admin/partners" class="nav-link <?= (url_is('admin/partners*')) ? 'active' : ''; ?>">
+                <i class="fas fa-handshake"></i>Partner & Klien
+            </a>
+
             <a href="/admin/news" class="nav-link <?= (current_url(true)->getSegment(2) == 'news') ? 'active' : ''; ?>">
                 <i class="fas fa-newspaper"></i> Kelola Berita
             </a>

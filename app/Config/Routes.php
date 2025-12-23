@@ -87,4 +87,12 @@ $routes->group('admin', ['filter' => 'authGuard'], function ($routes) {
     
     // 10. BACKUP DB
     $routes->get('backup-db', 'Admin\Backup::index');
+
+    // 11. MODUL PARTNERS (KLIEN)
+    $routes->get('partners', 'Admin\Partners::index');
+    $routes->get('partners/create', 'Admin\Partners::create');
+    $routes->post('partners/save', 'Admin\Partners::save');
+    $routes->post('partners/save/(:num)', 'Admin\Partners::save/$1'); // Untuk update
+    $routes->get('partners/edit/(:num)', 'Admin\Partners::edit/$1');
+    $routes->get('partners/delete/(:num)', 'Admin\Partners::delete/$1');
 });
