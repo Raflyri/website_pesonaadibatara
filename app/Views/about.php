@@ -101,7 +101,7 @@
                         echo "<li>";
 
                         // Gambar Kotak Member
-                        $foto = $item['image'] ? base_url('uploads/teams/' . $item['image']) : 'https://ui-avatars.com/api/?name=' . urlencode($item['fullname']);
+                        $foto = $item['image'] ? base_url('uploads/teams/' . $item['image']) : 'https://ui-avatars.com/api/?name=' . urlencode($item['name']);
 
                         // Cek Level untuk styling (Level 1 & 2 besar, sisanya kecil)
                         $cardClass = ($item['level'] > 2) ? 'member-card small-card' : 'member-card';
@@ -110,7 +110,7 @@
                         <div class="' . $cardClass . '">
                             <div class="img-box"><img src="' . $foto . '"></div>
                             <div class="info-box">
-                                <h5>' . $item['fullname'] . '</h5>
+                                <h5>' . $item['name'] . '</h5>
                                 <span>' . $item['position_id'] . '</span>
                             </div>
                         </div>';
