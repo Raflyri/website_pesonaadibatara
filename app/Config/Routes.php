@@ -95,4 +95,7 @@ $routes->group('admin', ['filter' => 'authGuard'], function ($routes) {
     $routes->post('partners/save/(:num)', 'Admin\Partners::save/$1'); // Untuk update
     $routes->get('partners/edit/(:num)', 'Admin\Partners::edit/$1');
     $routes->get('partners/delete/(:num)', 'Admin\Partners::delete/$1');
+
+    // --- TAMBAHKAN BARIS INI (API ROUTE) ---
+    $routes->get('api/visitor-count', 'Admin\Dashboard::get_visitor_count');
 });

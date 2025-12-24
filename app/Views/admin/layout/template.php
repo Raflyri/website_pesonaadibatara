@@ -12,19 +12,27 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/admin.css'); ?>">
 
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
-    
+
     <style>
         /* Fix Summernote Style */
-        .note-editor .dropdown-toggle::after { all: unset; }
-        .note-editor .note-dropdown-menu { box-sizing: content-box; }
-        .note-editor .note-modal-footer { box-sizing: content-box; }
+        .note-editor .dropdown-toggle::after {
+            all: unset;
+        }
+
+        .note-editor .note-dropdown-menu {
+            box-sizing: content-box;
+        }
+
+        .note-editor .note-modal-footer {
+            box-sizing: content-box;
+        }
     </style>
 </head>
 
 <body>
 
     <div class="sidebar d-flex flex-column shadow-sm">
-        
+
         <div class="sidebar-header d-flex align-items-center justify-content-center py-3 border-bottom">
             <img src="<?= base_url('assets/img/logo-pab.png'); ?>" alt="Logo" height="40">
         </div>
@@ -105,14 +113,10 @@
             </a>
         </div>
     </div>
-
     <nav class="topbar shadow-sm">
-        <button class="btn btn-ghost" id="sidebarToggle">
-            <i class="fas fa-bars fa-lg text-muted"></i>
-        </button>
 
-        <div class="d-flex align-items-center gap-3">
-            
+        <div class="d-flex align-items-center gap-3 ms-auto">
+
             <button class="btn btn-ghost rounded-circle" id="darkModeToggle" title="Ganti Tema">
                 <i class="fas fa-moon text-muted"></i>
             </button>
@@ -128,15 +132,16 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end text-small shadow" aria-labelledby="dropdownUser1">
                     <li><a class="dropdown-item" href="/admin/profile"><i class="fas fa-user-circle me-2"></i> Profil Saya</a></li>
-                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
                     <li><a class="dropdown-item text-danger" href="/logout"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
                 </ul>
             </div>
         </div>
     </nav>
-
     <div class="main-content d-flex flex-column">
-        
+
         <div class="flex-grow-1">
             <?= $this->renderSection('content'); ?>
         </div>
@@ -169,23 +174,10 @@
             });
         });
 
-        // --- LOGIC UI (Sidebar & Dark Mode) ---
-        const sidebarToggle = document.getElementById('sidebarToggle');
         const body = document.body;
         const darkModeToggle = document.getElementById('darkModeToggle');
         const icon = darkModeToggle.querySelector('i');
 
-        // 1. Sidebar Toggle
-        if (localStorage.getItem('sb|sidebar-toggle') === 'true') {
-            body.classList.add('sb-collapsed');
-        }
-        sidebarToggle.addEventListener('click', event => {
-            event.preventDefault();
-            body.classList.toggle('sb-collapsed');
-            localStorage.setItem('sb|sidebar-toggle', body.classList.contains('sb-collapsed'));
-        });
-
-        // 2. Dark Mode Toggle
         if (localStorage.getItem('theme') === 'dark') {
             document.documentElement.setAttribute('data-theme', 'dark');
             icon.classList.remove('fa-moon');

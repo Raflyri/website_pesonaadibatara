@@ -36,6 +36,7 @@ class Filters extends BaseFilters
         'performance'   => PerformanceMetrics::class,
         'authGuard'     => \App\Filters\AuthGuard::class,
         'language'      => \App\Filters\Language::class,
+        'visitorTrack'  => \App\Filters\VisitorTrack::class,
     ];
 
     /**
@@ -77,7 +78,8 @@ class Filters extends BaseFilters
             // 'honeypot',
             // 'csrf',
             // 'invalidchars',
-            'language', // <-- Tambahkan baris ini
+            'language',
+            'visitorTrack',
         ],
         'after' => [
             // 'honeypot',

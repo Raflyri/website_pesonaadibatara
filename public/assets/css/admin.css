@@ -4,28 +4,32 @@
 :root {
     /* Dimensi Layout */
     --sidebar-width: 280px;
-    --sidebar-collapsed-width: 80px;
+    --sidebar-collapsed-width: 80px; /* Lebar saat diam (ikon doang) */
     --topbar-height: 70px;
 
     /* Warna Utama (Default: Light Mode) */
     --primary-color: #0d6efd;
-    --bg-body: #f3f4f6;       /* Abu-abu muda banget buat background */
-    --bg-card: #ffffff;       /* Putih buat kotak konten */
-    --text-main: #1f2937;     /* Hitam soft buat teks utama */
-    --text-muted: #6b7280;    /* Abu-abu buat teks sekunder */
-    --border-color: #e5e7eb;  /* Garis pinggir halus */
-    --hover-bg: #eff6ff;      /* Biru muda banget pas di-hover */
+    --bg-body: #f3f4f6;       
+    --bg-card: #ffffff;       
+    --text-main: #1f2937;     
+    --text-muted: #6b7280;    
+    --border-color: #e5e7eb;  
+    --hover-bg: #eff6ff;      
+    --input-bg: #ffffff;      
+    --stripe-color: #f2f2f2;  
 }
 
-/* Konfigurasi Dark Mode */
+/* KONFIGURASI DARK MODE */
 [data-theme="dark"] {
-    --primary-color: #3b82f6;
-    --bg-body: #111827;       /* Hitam pekat */
-    --bg-card: #1f2937;       /* Abu-abu gelap buat kartu */
-    --text-main: #f9fafb;     /* Putih */
-    --text-muted: #9ca3af;    /* Abu-abu terang */
-    --border-color: #374151;  /* Garis gelap */
-    --hover-bg: #374151;      /* Abu-abu pas hover di dark mode */
+    --primary-color: #60a5fa; 
+    --bg-body: #111827;       
+    --bg-card: #1f2937;       
+    --text-main: #f9fafb;     
+    --text-muted: #d1d5db;    
+    --border-color: #374151;  
+    --hover-bg: #374151;      
+    --input-bg: #111827;      
+    --stripe-color: #2d3748;  
 }
 
 /* Reset Dasar */
@@ -40,83 +44,115 @@ body {
 a { text-decoration: none; }
 
 /* =========================================
-   2. SIDEBAR NAVIGATION
+   2. SIDEBAR AUTO-HOVER LOGIC (INTI PERUBAHAN)
    ========================================= */
 .sidebar {
-    width: var(--sidebar-width);
+    width: var(--sidebar-collapsed-width); /* Default: Kecil (80px) */
     height: 100vh;
     position: fixed;
     top: 0;
     left: 0;
     background: var(--bg-card);
     border-right: 1px solid var(--border-color);
-    z-index: 1000;
-    transition: all 0.3s ease;
+    z-index: 1050; /* Pastikan di atas konten lain */
+    
+    /* Animasi Halus */
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    overflow-x: hidden; /* Sembunyikan teks yang kepotong */
     overflow-y: auto;
-    overflow-x: hidden;
+    scrollbar-width: none; /* Sembunyikan scrollbar biar rapi */
+}
+.sidebar::-webkit-scrollbar { display: none; }
+
+/* SAAT MOUSE HOVER: Sidebar Melebar */
+.sidebar:hover {
+    width: var(--sidebar-width); /* Jadi Lebar (280px) */
+    box-shadow: 5px 0 25px rgba(0,0,0,0.1); /* Efek bayangan timbul */
 }
 
+/* --- LOGIKA TEXT & JUDUL --- */
+/* Default (Diam): Sembunyikan Teks */
+.sidebar .sidebar-text,
+.sidebar .section-title,
+.sidebar .dropdown-toggle::after,
+.sidebar small {
+    display: none;
+    opacity: 0;
+}
+
+/* Hover (Disentuh): Munculkan Teks */
+.sidebar:hover .sidebar-text,
+.sidebar:hover .dropdown-toggle::after,
+.sidebar:hover small {
+    display: inline-block;
+    animation: fadeIn 0.4s forwards; /* Efek muncul pelan */
+}
+
+.sidebar:hover .section-title {
+    display: block;
+    animation: fadeIn 0.4s forwards;
+    padding-left: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* --- LOGIKA TOMBOL MENU (NAV LINK) --- */
+/* Default: Ikon di Tengah */
+.sidebar .nav-link {
+    justify-content: center;
+    padding: 15px 0;
+    color: var(--text-muted);
+    border-radius: 8px;
+    margin-bottom: 5px;
+    transition: all 0.2s;
+}
+.sidebar .nav-link i {
+    margin-right: 0;
+    font-size: 1.4rem; /* Ikon agak besar */
+}
+
+/* Hover: Ikon Geser ke Kiri + Teks Muncul */
+.sidebar:hover .nav-link {
+    justify-content: flex-start;
+    padding: 0.8rem 1rem;
+}
+.sidebar:hover .nav-link i {
+    margin-right: 12px;
+    font-size: 1.1rem; /* Ikon mengecil dikit biar proporsional */
+}
+
+/* Hover Effect Warna */
+.sidebar .nav-link:hover, .sidebar .nav-link.active {
+    background-color: var(--hover-bg);
+    color: var(--primary-color);
+}
+.sidebar .nav-link.active {
+    background-color: rgba(13, 110, 253, 0.1);
+}
+
+/* Header Sidebar (Logo) */
 .sidebar-header {
-    height: var(--topbar-height); /* Samakan tinggi dengan topbar */
+    height: var(--topbar-height);
     display: flex;
     align-items: center;
     justify-content: center;
     border-bottom: 1px solid var(--border-color);
-    padding: 0 1rem;
-}
-
-.sidebar-menu {
-    padding: 1.5rem 1rem;
-}
-
-/* Judul Section (Main Menu, System) */
-.section-title {
-    color: var(--text-muted);
-    font-size: 0.75rem;
-    letter-spacing: 1px;
-    margin-bottom: 0.8rem;
-    padding-left: 0.5rem;
-}
-
-/* Tombol Menu */
-.sidebar-menu .nav-link {
-    color: var(--text-muted);
-    padding: 0.8rem 1rem;
-    border-radius: 8px;
-    margin-bottom: 5px;
-    font-weight: 500;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-}
-
-.sidebar-menu .nav-link i {
-    width: 25px;
-    font-size: 1.1rem;
-    text-align: center;
-    margin-right: 10px;
-    transition: margin 0.3s;
-}
-
-/* Efek Hover & Active */
-.sidebar-menu .nav-link:hover {
-    background-color: var(--hover-bg);
-    color: var(--primary-color);
-}
-
-.sidebar-menu .nav-link.active {
-    background-color: rgba(13, 110, 253, 0.1); /* Biru transparan */
-    color: var(--primary-color);
-}
-
-.sidebar-menu .nav-link.text-danger:hover {
-    background-color: rgba(220, 53, 69, 0.1);
-    color: #dc3545;
+    padding: 0; /* Padding 0 biar logo pas di tengah saat kecil */
+    white-space: nowrap;
 }
 
 /* =========================================
-   3. TOPBAR & MAIN CONTENT
+   3. CONTENT LAYOUT (FIXED TO 80px)
    ========================================= */
+/* Konten utama & Topbar selalu "mengalah" selebar 80px 
+   Jadi saat sidebar melebar, dia akan menimpa konten (Overlay),
+   bukan mendorongnya. Ini lebih enak di mata (tidak goyang). */
+
 .topbar {
     height: var(--topbar-height);
     background: var(--bg-card);
@@ -124,28 +160,45 @@ a { text-decoration: none; }
     position: fixed;
     top: 0;
     right: 0;
-    left: var(--sidebar-width);
+    left: var(--sidebar-collapsed-width); /* Fixed 80px */
+    width: calc(100% - var(--sidebar-collapsed-width));
     z-index: 999;
     padding: 0 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    transition: all 0.3s ease;
+    transition: none; /* Matikan animasi layout shift */
 }
 
 .main-content {
-    margin-left: var(--sidebar-width);
+    margin-left: var(--sidebar-collapsed-width); /* Fixed 80px */
     padding: 2rem;
     padding-top: calc(var(--topbar-height) + 2rem);
     min-height: 100vh;
-    transition: all 0.3s ease;
+    transition: none;
 }
 
 /* =========================================
-   4. COMPONENTS (Card, Table, Icons)
+   4. FORCE COLORS (Dark Mode Fixes dari sebelumnya)
    ========================================= */
+[data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3, 
+[data-theme="dark"] h4, [data-theme="dark"] h5, [data-theme="dark"] h6,
+[data-theme="dark"] .text-dark, [data-theme="dark"] .card-body {
+    color: #f3f4f6 !important;
+}
+[data-theme="dark"] .text-muted, [data-theme="dark"] .small, [data-theme="dark"] small {
+    color: #d1d5db !important;
+}
+[data-theme="dark"] .bg-white {
+    background-color: var(--bg-card) !important;
+    color: var(--text-main) !important;
+}
+[data-theme="dark"] .table { color: var(--text-main); border-color: var(--border-color); }
+[data-theme="dark"] .table-striped > tbody > tr:nth-of-type(odd) > * {
+    background-color: var(--stripe-color); color: var(--text-main);
+}
 
-/* Kartu Statistik & Konten */
+/* Kartu & Icon Box */
 .card, .stat-card {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
@@ -154,21 +207,14 @@ a { text-decoration: none; }
     transition: transform 0.2s, box-shadow 0.2s;
     color: var(--text-main);
 }
-
 .stat-card:hover {
-    transform: translateY(-3px);
+    transform: translateY(-5px);
     box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+    border-color: var(--primary-color);
 }
-
-/* Icon Box Warna-warni */
 .icon-box {
-    width: 48px;
-    height: 48px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.4rem;
+    width: 48px; height: 48px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; font-size: 1.4rem;
 }
 .bg-blue-soft { background: #eff6ff; color: #135ef9; }
 .bg-green-soft { background: #f0fdf4; color: #22c55e; }
@@ -177,86 +223,8 @@ a { text-decoration: none; }
 .bg-red-soft { background: #fef2f2; color: #ef4444; }
 .bg-dark-soft { background: #f3f4f6; color: #374151; }
 
-/* Tabel */
-.table {
-    color: var(--text-main);
-    border-color: var(--border-color);
-}
-.table thead th {
-    background-color: var(--hover-bg); /* Header tabel ngikut tema */
-    color: var(--text-muted);
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.75rem;
-    letter-spacing: 0.5px;
-    border-bottom: 2px solid var(--border-color);
-}
-.table td {
-    border-bottom: 1px solid var(--border-color);
-    vertical-align: middle;
-}
-.table-hover tbody tr:hover {
-    background-color: var(--hover-bg); /* Hover baris tabel */
-}
-
-/* Dropdown User di Topbar */
-.dropdown-menu {
-    background-color: var(--bg-card);
-    border-color: var(--border-color);
-}
-.dropdown-item {
-    color: var(--text-main);
-}
-.dropdown-item:hover {
-    background-color: var(--hover-bg);
-}
-
-/* =========================================
-   5. COLLAPSED MODE (Sidebar Kecil)
-   ========================================= */
-body.sb-collapsed .sidebar {
-    width: var(--sidebar-collapsed-width);
-}
-
-/* Sembunyikan teks saat dicollapse */
-body.sb-collapsed .sidebar .sidebar-text, 
-body.sb-collapsed .sidebar .section-title,
-body.sb-collapsed .sidebar .dropdown-toggle::after, 
-body.sb-collapsed .sidebar .collapse-icon {
-    display: none !important;
-}
-
-body.sb-collapsed .sidebar .sidebar-header {
-    padding: 0;
-}
-
-body.sb-collapsed .sidebar .nav-link {
-    justify-content: center;
-    padding: 15px 0;
-}
-
-body.sb-collapsed .sidebar .nav-link i {
-    margin-right: 0;
-    font-size: 1.3rem;
-}
-
-/* Sesuaikan konten utama & topbar */
-body.sb-collapsed .main-content {
-    margin-left: var(--sidebar-collapsed-width);
-}
-body.sb-collapsed .topbar {
-    left: var(--sidebar-collapsed-width);
-}
-
-/* Tombol Ghost (Transparan) */
 .btn-ghost {
-    background: transparent;
-    border: none;
-    color: var(--text-muted);
-    padding: 8px;
-    transition: 0.2s;
+    background: transparent; border: none; color: var(--text-muted);
+    padding: 8px; transition: 0.2s;
 }
-.btn-ghost:hover {
-    background-color: var(--hover-bg);
-    color: var(--primary-color);
-}
+.btn-ghost:hover { background-color: var(--hover-bg); color: var(--primary-color); }
