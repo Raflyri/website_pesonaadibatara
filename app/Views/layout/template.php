@@ -256,10 +256,10 @@
                 <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
                     <small class="text-white-50">&copy; <?= date('Y'); ?> <strong>PT. Pesona Adi Batara</strong>. All Rights Reserved.</small>
                 </div>
-                <div class="col-md-6 text-center text-md-end">
+                <!--div class="col-md-6 text-center text-md-end">
                     <span class="text-white-50 small me-2">Member of:</span>
                     <span class="fw-bold text-white border border-light px-2 py-1 rounded">YKP BTN</span>
-                </div>
+                </div-->
             </div>
         </div>
     </footer>
