@@ -18,7 +18,7 @@ class App extends BaseConfig
      * public string $baseURL = 'https://staging.web.pesonaadibatara.com/public/';
      * public string $baseURL = 'http://localhost:8080/';
      */
-    public string $baseURL = 'https://staging.web.pesonaadibatara.com/';
+    public string $baseURL = 'https://pesonaadibatara.com/';
 
     /**
      * Allowed Hostnames in the Site URL other than the hostname in the baseURL.
