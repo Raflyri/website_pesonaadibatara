@@ -9,12 +9,15 @@ class ServiceModel extends Model
     protected $table            = 'services';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
-    protected $returnType       = 'array'; // Bisa 'object' kalau suka ->title
-    protected $allowedFields    = ['slug', 'title', 'icon', 'short_description', 'content', 'image', 'is_active'];
+    protected $returnType       = 'array';
+    protected $useTimestamps    = true; // Aktifkan timestamps otomatis
+    
+    // Tambahkan 'category' ke sini
+    protected $allowedFields    = ['category', 'slug', 'title', 'icon', 'short_description', 'content', 'image', 'is_active'];
 
-    // Fitur: Ambil hanya layanan yang aktif untuk ditampilkan di depan
-    public function getActiveServices()
+    // Fitur: Ambil layanan aktif berdasarkan kategori
+    public function getServicesByCategory($category)
     {
-        return $this->where('is_active', 1)->findAll();
+        return $this->where(['is_active' => 1, 'category' => $category])->findAll();
     }
 }

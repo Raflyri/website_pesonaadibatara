@@ -2,40 +2,43 @@
 
 namespace App\Controllers;
 
+use App\Models\ServiceModel;
+use App\Models\ServicePageModel; // Load Model Page
+
 class Services extends BaseController
 {
-    // Halaman Detail per Kategori (Misal: /layanan/transportasi)
     public function detail($category)
     {
-        $validCategories = [
-            'transportasi' => 'Bisnis Transportasi',
-            'kesehatan'    => 'Bisnis Kesehatan',
-            'jasa'         => 'Bisnis Jasa',
-            'investasi'    => 'Bisnis Investasi'
-        ];
+        $serviceModel = new ServiceModel();
+        $pageModel    = new ServicePageModel();
 
-        if (!array_key_exists($category, $validCategories)) {
+        // 1. Cek Kategori Valid (Manual array atau cek DB)
+        $validCategories = ['transportasi', 'kesehatan', 'jasa', 'investasi'];
+        if (!in_array($category, $validCategories)) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
 
-        // Ambil data sub-layanan dari database (Nanti kamu isi tabel services)
-        // Contoh Query: $items = $this->db->table('services')->where('category', $category)->get()->getResultArray();
-        
-        // Data Dummy Sementara sesuai PDF
-        $dummyItems = [];
-        if($category == 'transportasi') {
-            $dummyItems = [
-                ['title' => 'Luxury Car', 'desc' => 'Layanan sewa kendaraan mewah untuk VVIP.'],
-                ['title' => 'Electric Vehicle', 'desc' => 'Armada ramah lingkungan berbasis listrik.'],
-                ['title' => 'Operasional', 'desc' => 'Kendaraan operasional harian perusahaan.'],
+        // 2. Ambil Data Header Page
+        $pageData = $pageModel->find($category);
+
+        // Fallback jika data page belum diisi admin
+        if (!$pageData) {
+            $pageData = [
+                'page_title' => ucfirst($category),
+                'page_description' => 'Solusi terbaik untuk kebutuhan bisnis Anda.',
+                'hero_image' => null
             ];
-        } 
-        // ... dst bisa kamu lengkapi nanti
+        }
+
+        // 3. Ambil List Items
+        $items = $serviceModel->where(['category' => $category, 'is_active' => 1])->findAll();
 
         $data = [
-            'title' => $validCategories[$category],
-            'category' => $category,
-            'items' => $dummyItems 
+            'title'    => $pageData['page_title'],
+            'desc'     => $pageData['page_description'],
+            'hero_img' => $pageData['hero_image'],
+            'items'    => $items,
+            'category' => $category
         ];
 
         return view('services/detail', $data);

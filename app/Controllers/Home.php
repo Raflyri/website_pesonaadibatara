@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Models\ServiceModel;
 use App\Models\BannerModel;
 use App\Models\SiteSettingModel;
-use App\Models\NewsModel; // <--- 1. TAMBAHKAN INI
+use App\Models\NewsModel;
 
 class Home extends BaseController
 {
@@ -22,7 +22,8 @@ class Home extends BaseController
 
         $data = [
             'title'    => 'Home | PT. Pesona Adi Batara',
-            'services' => $serviceModel->getActiveServices(),
+            //'services' => $serviceModel->getActiveServices(),
+            'services' => $serviceModel->where('is_active', 1)->findAll(),
             'banners'  => $bannerModel->getActiveBanners(),
             'why_choose_us' => $whyChooseUs,
             'latest_news' => $newsModel->where('category', 'berita')

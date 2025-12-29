@@ -20,7 +20,9 @@ class NewsModel extends Model
         'category', 
         'date_published', 
         'is_active',
-        'created_at', 'updated_at'
+        'views',
+        'created_at', 
+        'updated_at'
     ];
 
     protected $useTimestamps = true;

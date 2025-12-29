@@ -7,25 +7,22 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 
-// DETAIL LAYANAN (PUBLIC)
 $routes->get('layanan/(:segment)', 'Services::detail/$1');
 
-// DETAIL BERITA (PUBLIC) - [Baru Ditambahkan]
 $routes->get('news/(:segment)', 'News::detail/$1');
-$routes->get('news/category/(:segment)', 'News::category/$1'); 
+$routes->get('news/category/(:segment)', 'News::category/$1');
 
-// --- AUTHENTICATION ROUTES ---
 $routes->get('login', 'Auth::login');
 $routes->post('auth/process', 'Auth::process');
 $routes->get('logout', 'Auth::logout');
 
-// HALAMAN STATIS
 $routes->get('about', 'About::index');
 $routes->get('contact', 'Contact::index');
 $routes->post('contact/send', 'Contact::send');
 
-// --- ADMIN GROUP (DILINDUNGI SATPAM/FILTER) ---
-// Semua yang ada di dalam sini WAJIB LOGIN
+$routes->get('career', 'Career::index'); 
+$routes->get('news', 'News::index');   
+
 $routes->group('admin', ['filter' => 'authGuard'], function ($routes) {
 
     // DASHBOARD
@@ -34,15 +31,23 @@ $routes->group('admin', ['filter' => 'authGuard'], function ($routes) {
     // 1. MODUL BERITA (NEWS) - SUDAH DIPERBAIKI KE 'SAVE'
     $routes->get('news', 'Admin\News::index');
     $routes->get('news/create', 'Admin\News::create');
-    $routes->post('news/save', 'Admin\News::save');           // <-- PENTING: Pakai 'save', bukan 'store'
+    $routes->post('news/save', 'Admin\News::save');
     $routes->get('news/edit/(:num)', 'Admin\News::edit/$1');
     $routes->post('news/update/(:num)', 'Admin\News::update/$1');
     $routes->delete('news/(:num)', 'Admin\News::delete/$1');
     $routes->get('news/delete/(:num)', 'Admin\News::delete/$1');
 
     // 2. MODUL LAYANAN (SERVICES)
-    $routes->get('services/(:segment)', 'Admin\Services::category/$1');
-    // (Nanti tambahkan create/save services di sini jika sudah dibuat)
+    // 2. MODUL LAYANAN (SERVICES)
+    $routes->get('services/(:segment)', 'Admin\Services::index/$1');
+    $routes->post('services/update-page/(:segment)', 'Admin\Services::updatePage/$1'); // <--- BARU (Untuk Header)
+
+    // CRUD ITEM
+    $routes->get('services/(:segment)/create', 'Admin\Services::create/$1');
+    $routes->post('services/save', 'Admin\Services::save');
+    $routes->get('services/edit/(:num)', 'Admin\Services::edit/$1');
+    $routes->post('services/update/(:num)', 'Admin\Services::update/$1');
+    $routes->get('services/delete/(:num)', 'Admin\Services::delete/$1');
 
     // 3. MODUL HOME EDITOR
     $routes->get('home-editor', 'Admin\HomeEditor::index');
@@ -84,7 +89,7 @@ $routes->group('admin', ['filter' => 'authGuard'], function ($routes) {
     // 9. PROFILE SAYA
     $routes->get('profile', 'Admin\UserEditor::profile');
     $routes->post('profile/update', 'Admin\UserEditor::updateProfile');
-    
+
     // 10. BACKUP DB
     $routes->get('backup-db', 'Admin\Backup::index');
 

@@ -13,54 +13,67 @@ class News extends BaseController
         $this->newsModel = new NewsModel();
     }
 
-    // 1. HALAMAN DETAIL BERITA & ARTIKEL
+    // 1. HALAMAN UTAMA BLOG / LIST BERITA
+    public function index()
+    {
+        $keyword = $this->request->getGet('keyword');
+        
+        // Base Query
+        $newsQuery = $this->newsModel->where('is_active', 1);
+
+        // Fitur Pencarian (Opsional, jika user ketik ?keyword=abc)
+        if ($keyword) {
+            $newsQuery->groupStart()
+                ->like('title_id', $keyword)
+                ->orLike('content_id', $keyword)
+            ->groupEnd();
+        }
+
+        $data = [
+            'title' => 'Berita & Artikel Terbaru',
+            // Menampilkan 6 berita per halaman + Pagination otomatis
+            'news_list' => $newsQuery->orderBy('created_at', 'DESC')->paginate(6, 'news'),
+            'pager'     => $this->newsModel->pager,
+            'keyword'   => $keyword
+        ];
+
+        return view('news/index', $data);
+    }
+
+    // 2. DETAIL BERITA (Sudah ada di routes sebelumnya)
     public function detail($slug)
     {
-        // 1. Cari berita yang sedang dibuka
-        $news = $this->newsModel->where('slug', $slug)
-            ->where('is_active', 1)
-            ->first();
+        $news = $this->newsModel->where('slug', $slug)->first();
 
         if (!$news) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
 
-        // 2. Siapkan Data
+        // Tambah counter views
+        $this->newsModel->update($news['id'], ['views' => $news['views'] + 1]);
+
         $data = [
             'title' => $news['title_id'],
             'news'  => $news,
-
-            // [BARU] Ambil Berita Terkait (Kategori: Berita, Kecuali ID ini)
-            'related_news' => $this->newsModel->where('category', 'berita')
-                ->where('id !=', $news['id']) // Exclude current
-                ->where('is_active', 1)
-                ->orderBy('created_at', 'DESC')
-                ->findAll(3),
-
-            // [BARU] Ambil Artikel Terkait (Kategori: Artikel, Kecuali ID ini)
-            'related_articles' => $this->newsModel->where('category', 'artikel')
-                ->where('id !=', $news['id']) // Exclude current
-                ->where('is_active', 1)
-                ->orderBy('created_at', 'DESC')
-                ->findAll(3),
+            'recent_news' => $this->newsModel->where('is_active', 1)
+                                            ->orderBy('created_at', 'DESC')
+                                            ->findAll(3)
         ];
 
         return view('news/detail', $data);
     }
 
-    // 2. HALAMAN KATEGORI (Opsional: Jika tombol "Lihat Semua" diklik)
-    public function category($type)
+    // 3. KATEGORI (Opsional)
+    public function category($cat)
     {
         $data = [
-            'title' => 'Kategori: ' . ucfirst($type),
-            'news_list' => $this->newsModel->where('category', $type)
-                ->where('is_active', 1)
-                ->orderBy('created_at', 'DESC')
-                ->paginate(6), // 6 item per halaman
+            'title' => 'Kategori: ' . ucfirst($cat),
+            'news_list' => $this->newsModel->where(['is_active' => 1, 'category' => $cat])
+                                          ->orderBy('created_at', 'DESC')
+                                          ->paginate(6, 'news'),
             'pager' => $this->newsModel->pager,
-            'category' => $type
+            'keyword' => null
         ];
-
-        return view('news/category', $data);
+        return view('news/index', $data);
     }
 }
