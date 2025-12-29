@@ -19,7 +19,7 @@
                 <div class="col-md-8">
                     <div class="mb-3">
                         <label class="form-label fw-bold">Nama Lengkap</label>
-                        <input type="text" name="name" class="form-control" value="<?= old('name', $team['fullname'] ?? ''); ?>" required>
+                        <input type="text" name="name" class="form-control" value="<?= old('name', $team['name'] ?? ''); ?>" required>
                     </div>
 
                     <div class="row">
@@ -53,7 +53,7 @@
                             <?php foreach ($parents as $p): ?>
                                 <option value="<?= $p['id']; ?>"
                                     <?= (isset($team) && $team['parent_id'] == $p['id']) ? 'selected' : ''; ?>>
-                                    <?= $p['fullname']; ?> - (<?= $p['position_id']; ?>)
+                                    <?= $p['name']; ?> - (<?= $p['position_id']; ?>)
                                 </option>
                             <?php endforeach; ?>
                         </select>
