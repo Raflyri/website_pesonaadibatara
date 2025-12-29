@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/pesy3778/public_html/pesonaadibatara.com
+    - /bin/cp -R * $DEPLOYPATH
