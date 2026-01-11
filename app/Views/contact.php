@@ -2,11 +2,37 @@
 
 <?= $this->section('content'); ?>
 
-<section class="py-5 bg-primary text-white position-relative overflow-hidden">
-    <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(135deg, rgba(0,0,0,0.8), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1423666639041-f140481eb936?auto=format&fit=crop&w=1200') center/cover;"></div>
-    <div class="container position-relative z-2 py-5 text-center">
-        <h1 class="display-4 fw-bold animate__animated animate__fadeInDown"><?= $intro['title_id']; ?></h1>
-        <p class="lead animate__animated animate__fadeInUp col-lg-8 mx-auto"><?= $intro['content_id']; ?></p>
+<section class="position-relative text-white text-center overflow-hidden" style="padding-top: 160px; padding-bottom: 100px;">
+    
+    <div class="position-absolute top-0 start-0 w-100 h-100" 
+         style="background-image: url('https://images.unsplash.com/photo-1423666639041-f140481eb936?auto=format&fit=crop&w=1200'); 
+                background-size: cover; 
+                background-position: center; 
+                z-index: 1;">
+    </div>
+
+    <div class="position-absolute top-0 start-0 w-100 h-100" 
+         style="background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,50,100,0.9)); 
+                z-index: 2;">
+    </div>
+
+    <div class="container position-relative" style="z-index: 3;">
+        <span class="badge rounded-pill bg-danger text-white mb-3 px-3 py-2 animate__animated animate__fadeInDown">
+            <i class="fas fa-headset me-2"></i>LAYANAN PELANGGAN
+        </span>
+
+        <h1 class="display-4 fw-bold mb-3 animate__animated animate__fadeInDown animate__delay-1s">
+            <?= $intro['title_id'] ?? 'Hubungi Kami'; ?>
+        </h1>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <p class="lead opacity-75 mb-4 animate__animated animate__fadeInUp animate__delay-1s">
+                    <?= $intro['content_id'] ?? 'Kami siap mendengar kebutuhan transportasi Anda. Segera hubungi kami untuk penawaran terbaik.'; ?>
+                </p>
+            </div>
+        </div>
+
     </div>
 </section>
 

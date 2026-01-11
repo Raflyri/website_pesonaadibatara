@@ -2,11 +2,40 @@
 
 <?= $this->section('content'); ?>
 
-<section class="py-5 bg-primary text-white position-relative overflow-hidden">
-    <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200') center/cover;"></div>
-    <div class="container position-relative z-2 py-5 text-center">
-        <h1 class="display-4 fw-bold animate__animated animate__fadeInDown">Tentang Kami</h1>
-        <p class="lead animate__animated animate__fadeInUp">Mengenal lebih dekat PT. Pesona Adi Batara</p>
+<section class="position-relative text-white text-center overflow-hidden" style="padding-top: 160px; padding-bottom: 100px;">
+
+    <div class="position-absolute top-0 start-0 w-100 h-100"
+        style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200'); 
+                background-size: cover; 
+                background-position: center; 
+                z-index: 1;">
+    </div>
+
+    <div class="position-absolute top-0 start-0 w-100 h-100"
+        style="background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,50,100,0.9)); 
+                z-index: 2;">
+    </div>
+
+    <div class="container position-relative" style="z-index: 3;">
+        <span class="badge rounded-pill bg-info text-dark mb-3 px-3 py-2 animate__animated animate__fadeInDown">
+            <i class="fas fa-building me-2"></i>PROFIL PERUSAHAAN
+        </span>
+
+        <h1 class="display-4 fw-bold mb-3 animate__animated animate__fadeInDown animate__delay-1s">
+            Tentang Kami
+        </h1>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <p class="lead opacity-75 mb-4 animate__animated animate__fadeInUp animate__delay-1s">
+                    Mengenal lebih dekat PT. Pesona Adi Batara sebagai mitra transportasi terpercaya.
+                </p>
+            </div>
+        </div>
+
+        <div class="animate__animated animate__fadeInUp animate__delay-2s mt-2">
+            <i class="fas fa-chevron-down fa-2x opacity-50"></i>
+        </div>
     </div>
 </section>
 

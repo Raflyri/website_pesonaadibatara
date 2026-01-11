@@ -2,7 +2,7 @@
 
 <?= $this->section('content'); ?>
 
-<section class="py-5 bg-dark position-relative overflow-hidden">
+<section class="pb-5 bg-dark position-relative overflow-hidden" style="padding-top: 120px;">
     <div class="position-absolute top-0 start-0 w-100 h-100" style="background: url('https://source.unsplash.com/1600x900/?business,office') center/cover; opacity: 0.3;"></div>
 
     <div class="container position-relative z-2 text-white text-center py-5">
