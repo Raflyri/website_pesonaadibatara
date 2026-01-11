@@ -103,4 +103,9 @@ $routes->group('admin', ['filter' => 'authGuard'], function ($routes) {
 
     // --- TAMBAHKAN BARIS INI (API ROUTE) ---
     $routes->get('api/visitor-count', 'Admin\Dashboard::get_visitor_count');
+
+    // Route Media Library
+    $routes->get('media', 'Admin\Media::index');
+    $routes->post('media/upload', 'Admin\Media::upload');
+    $routes->post('media/delete', 'Admin\Media::delete');
 });
