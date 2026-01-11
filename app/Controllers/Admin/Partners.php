@@ -86,14 +86,15 @@ class Partners extends BaseController
             $fileLogo->move('uploads/partners', $newName);
 
             // C. Resize Image (Service CI4) - Biar ringan
-            try {
+            /*try {
                 $imageService = \Config\Services::image();
                 $imageService->withFile('uploads/partners/' . $newName)
                              ->resize(300, 150, true, 'width') // Max lebar 300px, tinggi menyesuaikan
                              ->save('uploads/partners/' . $newName);
             } catch (\Exception $e) {
                 // Jika resize gagal, biarkan file asli (silent fail)
-            }
+            }*/
+            //--------------------------------------------------------
 
             $data['partner_logo'] = $newName;
         }
