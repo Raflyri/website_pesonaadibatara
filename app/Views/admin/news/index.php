@@ -2,7 +2,7 @@
 
 <?= $this->section('content'); ?>
 
-<div class="d-flex justify-content-between align-items-center mb-4">
+<div class="d-flex justify-content-between align-items-center mb-4 mt-5 pt-3">
     <h3 class="fw-bold text-dark">Kelola Berita & Artikel</h3>
     <a href="/admin/news/create" class="btn btn-primary rounded-pill px-4 shadow-sm">
         <i class="fas fa-plus me-2"></i> Tulis Berita Baru
