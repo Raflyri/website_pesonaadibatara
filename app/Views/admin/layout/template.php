@@ -95,6 +95,11 @@
                 <i class="fas fa-images"></i> <span class="sidebar-text">Banner Slider</span>
             </a>
 
+            <a class="nav-link" href="/admin/media">
+                <div class="sb-nav-link-icon"><i class="fas fa-images"></i></div>
+                Pustaka Media
+            </a>
+
             <hr class="my-3">
 
             <small class="text-uppercase text-muted fw-bold mb-2 d-block section-title" style="font-size: 0.75rem;">System</small>
