@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="id">
+<html lang="<?= service('request')->getLocale(); ?>">
 
 <head>
     <meta charset="utf-8">
@@ -33,11 +33,15 @@
                         <ul class="navbar-nav align-items-center gap-3 fw-medium">
 
                             <li class="nav-item">
-                                <a class="nav-link <?= (uri_string() == '' || uri_string() == '/') ? 'active' : ''; ?>" href="/">Beranda</a>
+                                <!--<a class="nav-link <?= (uri_string() == '' || uri_string() == '/') ? 'active' : ''; ?>" href="/">Beranda</a>-->
+                                <a class="nav-link" href="<?= base_url('/') ?>"><?= lang('Layout.navbar.home') ?></a>
+
+
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link <?= (uri_string() == 'about') ? 'active' : ''; ?>" href="/about">Tentang Kami</a>
+                                <!--<a class="nav-link <?= (uri_string() == 'about') ? 'active' : ''; ?>" href="/about">Tentang Kami</a>-->
+                                <a class="nav-link" href="<?= base_url('about') ?>"><?= lang('Layout.navbar.about') ?></a>
                             </li>
 
                             <li class="nav-item dropdown">
@@ -126,7 +130,7 @@
                                         <?php endif; ?>
                                     </a>
                                 </li>
-                                <!--li>
+                                <li>
                                     <a class="dropdown-item rounded-3 d-flex align-items-center gap-2 py-2" href="<?= current_url(); ?>?lang=en">
                                         <img src="https://flagcdn.com/w20/gb.png" alt="EN" style="width: 20px;">
                                         <span class="small fw-bold">English</span>
@@ -134,7 +138,7 @@
                                             <i class="fas fa-check text-primary ms-auto small"></i>
                                         <?php endif; ?>
                                     </a>
-                                </li-->
+                                </li>
                             </ul>
                         </div>
 

@@ -38,6 +38,12 @@ abstract class BaseController extends Controller
 
         // Caution: Do not edit this line.
         parent::initController($request, $response, $logger);
+        
+        $session = \Config\Services::session();
+        $locale = $session->get('lang');
+        if ($locale) {
+            $request->setLocale($locale);
+        }
 
         // Preload any models, libraries, etc, here.
         // $this->session = service('session');

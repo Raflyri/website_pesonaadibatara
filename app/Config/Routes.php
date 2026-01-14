@@ -5,6 +5,8 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
+$routes->get('lang/(:segment)', 'Language::index/$1');
+
 $routes->get('/', 'Home::index');
 
 $routes->get('layanan/(:segment)', 'Services::detail/$1');

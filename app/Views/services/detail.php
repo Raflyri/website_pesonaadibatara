@@ -11,6 +11,14 @@
     </div>
 </section>
 
+<section>
+    <div class="container">
+        <div class="ms-3 text-center py-5">
+            <h4><?= $desc; ?></h4>
+        </div>
+    </div>
+</section>
+
 <section class="py-5 bg-white">
     <div class="container">
         <div class="row">

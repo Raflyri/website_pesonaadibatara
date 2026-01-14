@@ -650,3 +650,18 @@ body {
     opacity: 1; 
     transform: scale(1.1); 
 }
+
+/* FIX: Dropdown Item Active State */
+.dropdown-item.active, 
+.dropdown-item:active {
+    color: var(--pab-blue-primary) !important; /* Pakai warna biru utama */
+    background-color: transparent !important;    /* Hapus background biru bawaan */
+    font-weight: 600;                            /* Opsional: Tebalkan biar beda */
+}
+
+/* Pastikan saat di-hover juga aman (biasanya abu-abu muda) */
+.dropdown-item:hover, 
+.dropdown-item:focus {
+    color: var(--pab-blue-primary);
+    background-color: var(--pab-gray);
+}
