@@ -5,7 +5,7 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('lang/(:segment)', 'Language::index/$1');
+$routes->get('language/(:segment)', 'Language::index/$1');
 
 $routes->get('/', 'Home::index');
 

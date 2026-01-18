@@ -10,13 +10,18 @@ class Language extends BaseController
     {
         $session = session();
         
-        // Validasi bahasa yang dipilih
+        // 1. Validasi Input (Security Best Practice)
         $validLocales = ['id', 'en'];
-        if(in_array($locale, $validLocales)){
+        if (in_array($locale, $validLocales)) {
+            // 2. Set Session
             $session->set('lang', $locale);
+            
+            // 3. Set Locale CodeIgniter secara realtime agar efeknya instan
+            $this->request->setLocale($locale);
         }
         
-        // Kembali ke halaman sebelumnya
-        return redirect()->back();
+        // 4. Redirect Logic (Agar user tidak terjebak di halaman kosong)
+        // Coba kembali ke halaman sebelumnya (referrer)
+        return redirect()->back(); 
     }
 }
