@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\ServiceModel;
-use App\Models\ServicePageModel; // Load Model Page
+use App\Models\ServicePageModel;
 
 class Services extends BaseController
 {

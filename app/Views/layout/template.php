@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="id">
+<html lang="<?= service('request')->getLocale(); ?>">
 
 <head>
     <meta charset="utf-8">
@@ -29,27 +29,30 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                    <div class="collapse navbar-collapse justify-content-center" id="navbarMain">
                         <ul class="navbar-nav align-items-center gap-3 fw-medium">
 
                             <li class="nav-item">
-                                <a class="nav-link <?= (uri_string() == '' || uri_string() == '/') ? 'active' : ''; ?>" href="/">Beranda</a>
+                                <!--<a class="nav-link <?= (uri_string() == '' || uri_string() == '/') ? 'active' : ''; ?>" href="/">Beranda</a>-->
+                                <a class="nav-link" href="<?= base_url('/'); ?>"><?= lang('Layout.navbar.home'); ?></a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link <?= (uri_string() == 'about') ? 'active' : ''; ?>" href="/about">Tentang Kami</a>
+                                <!--<a class="nav-link <?= (uri_string() == 'about') ? 'active' : ''; ?>" href="/about">Tentang Kami</a>-->
+                                <a class="nav-link" href="<?= base_url('about'); ?>"><?= lang('Layout.navbar.about'); ?></a>
                             </li>
 
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle <?= (strpos(uri_string(), 'layanan') === 0) ? 'active' : ''; ?>" href="#" id="navbarDropdown" role="button" aria-expanded="false">
+                                <!--<a class="nav-link dropdown-toggle <?= (strpos(uri_string(), 'layanan') === 0) ? 'active' : ''; ?>" href="#" id="navbarDropdown" role="button" aria-expanded="false">
                                     Layanan
-                                </a>
+                                </a>-->
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-expanded="false"><?= lang('Layout.navbar.services'); ?></a>
                                 <ul class="dropdown-menu border-0 shadow-lg rounded-4 p-3 animate__animated animate__fadeIn" aria-labelledby="navbarDropdown">
                                     <li>
                                         <a class="dropdown-item py-2 rounded-3 d-flex align-items-center <?= (uri_string() == 'layanan/transportasi') ? 'active bg-light' : ''; ?>" href="/layanan/transportasi">
                                             <div class="icon-small bg-blue-light me-3 text-primary"><i class="fas fa-car-side"></i></div>
                                             <div>
-                                                <span class="fw-bold d-block">Transportasi</span>
+                                                <span class="fw-bold d-block"><?= lang('Layout.navbar.transportation'); ?></span>
                                                 <small class="text-muted" style="font-size: 0.7rem;">Luxury Car & Operasional</small>
                                             </div>
                                         </a>
@@ -100,14 +103,14 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link <?= (uri_string() == 'contact') ? 'active' : ''; ?>" href="/contact">Kontak</a>
+                                <a class="nav-link <?= (uri_string() == 'contact') ? 'active' : ''; ?>" href="/contact"><?= lang('Layout.navbar.contact'); ?></a>
                             </li>
                         </ul>
                     </div>
 
                     <div class="d-none d-lg-flex align-items-center ms-auto gap-3 btn-login-wrapper">
 
-                        <div class="dropdown lang-switcher">
+                        <!--<div class="dropdown lang-switcher">
                             <button class="btn btn-light rounded-pill px-3 d-flex align-items-center gap-2 border shadow-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static">
 
                                 <?php $currentLang = session()->get('lang') ?? 'id'; ?>
@@ -126,7 +129,7 @@
                                         <?php endif; ?>
                                     </a>
                                 </li>
-                                <!--li>
+                                <li>
                                     <a class="dropdown-item rounded-3 d-flex align-items-center gap-2 py-2" href="<?= current_url(); ?>?lang=en">
                                         <img src="https://flagcdn.com/w20/gb.png" alt="EN" style="width: 20px;">
                                         <span class="small fw-bold">English</span>
@@ -134,14 +137,58 @@
                                             <i class="fas fa-check text-primary ms-auto small"></i>
                                         <?php endif; ?>
                                     </a>
-                                </li-->
+                                </li>
                             </ul>
+                        </div>-->
+
+                        <div class="d-none d-lg-flex align-items-center ms-auto gap-3 btn-login-wrapper">
+
+                            <div class="dropdown lang-switcher">
+                                <button class="btn btn-light rounded-pill px-3 d-flex align-items-center gap-2 border shadow-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static">
+
+                                    <?php
+                                    // Ambil locale yang sedang aktif dari sistem
+                                    $currentLang = service('request')->getLocale();
+                                    ?>
+
+                                    <img src="https://flagcdn.com/w20/<?= ($currentLang == 'en') ? 'gb' : 'id'; ?>.png" alt="Lang" style="width: 20px;">
+                                    <span class="small fw-bold text-uppercase"><?= $currentLang; ?></span>
+                                    <i class="fas fa-chevron-down small text-muted ms-1"></i>
+                                </button>
+
+                                <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg rounded-4 p-2 mt-2 animate__animated animate__fadeIn">
+                                    <li>
+                                        <a class="dropdown-item rounded-3 d-flex align-items-center gap-2 py-2" href="<?= base_url('language/id'); ?>">
+                                            <img src="https://flagcdn.com/w20/id.png" alt="ID" style="width: 20px;">
+                                            <div class="d-flex flex-column">
+                                                <span class="small fw-bold">Indonesia</span>
+                                            </div>
+                                            <?php if ($currentLang == 'id'): ?>
+                                                <i class="fas fa-check text-primary ms-auto small"></i>
+                                            <?php endif; ?>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a class="dropdown-item rounded-3 d-flex align-items-center gap-2 py-2" href="<?= base_url('language/en'); ?>">
+                                            <img src="https://flagcdn.com/w20/gb.png" alt="EN" style="width: 20px;">
+                                            <div class="d-flex flex-column">
+                                                <span class="small fw-bold">English</span>
+                                            </div>
+                                            <?php if ($currentLang == 'en'): ?>
+                                                <i class="fas fa-check text-primary ms-auto small"></i>
+                                            <?php endif; ?>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
                         </div>
 
                         <div class="position-relative contact-hover-wrapper">
 
                             <button class="btn btn-pab-primary rounded-pill px-4 shadow-sm position-relative z-2">
-                                Hubungi Kami <i class="fas fa-angle-down ms-2 small"></i>
+                                <?= lang('Layout.navbar.contact_us'); ?><i class="fas fa-angle-down ms-2 small"></i>
                             </button>
 
                             <div class="contact-popup-menu">
@@ -186,7 +233,7 @@
                         <img src="<?= base_url('assets/img/logo-pab.png'); ?>" alt="Logo PAB" height="50" class="bg-white rounded p-2 mb-3">
                         <h5 class="fw-bold text-white">PT. PESONA ADI BATARA</h5>
                         <p class="text-white-50 small mb-4">
-                            Memberikan nilai tambah bagi perusahaan dan stakeholder melalui layanan terintegrasi yang profesional dan terpercaya.
+                            <?= lang('Layout.footer.footer_info'); ?>
                         </p>
 
                         <div class="d-flex gap-3">
@@ -207,27 +254,27 @@
                 </div>
 
                 <div class="col-lg-2 col-md-6">
-                    <h6 class="text-primary fw-bold text-uppercase mb-3 ls-1">Layanan Kami</h6>
+                    <h6 class="text-primary fw-bold text-uppercase mb-3 ls-1"><?= lang('Layout.footer.footer_sec_services'); ?></h6>
                     <ul class="list-unstyled footer-links">
-                        <li><a href="/layanan/transportasi"><i class="fas fa-angle-right me-2 text-primary"></i>Transportasi</a></li>
-                        <li><a href="/layanan/kesehatan"><i class="fas fa-angle-right me-2 text-primary"></i>Kesehatan</a></li>
-                        <li><a href="/layanan/jasa"><i class="fas fa-angle-right me-2 text-primary"></i>Jasa & EO</a></li>
-                        <li><a href="/layanan/investasi"><i class="fas fa-angle-right me-2 text-primary"></i>Investasi</a></li>
+                        <li><a href="/layanan/transportasi"><i class="fas fa-angle-right me-2 text-primary"></i><?= lang('Layout.footer.service_transport'); ?></a></li>
+                        <li><a href="/layanan/kesehatan"><i class="fas fa-angle-right me-2 text-primary"></i><?= lang('Layout.footer.service_health'); ?></a></li>
+                        <li><a href="/layanan/jasa"><i class="fas fa-angle-right me-2 text-primary"></i><?= lang('Layout.footer.service_eo'); ?></a></li>
+                        <li><a href="/layanan/investasi"><i class="fas fa-angle-right me-2 text-primary"></i><?= lang('Layout.footer.service_investment'); ?></a></li>
                     </ul>
                 </div>
 
                 <div class="col-lg-2 col-md-6">
-                    <h6 class="text-primary fw-bold text-uppercase mb-3 ls-1">Perusahaan</h6>
+                    <h6 class="text-primary fw-bold text-uppercase mb-3 ls-1"><?= lang('Layout.footer.footer_sec_company'); ?></h6>
                     <ul class="list-unstyled footer-links">
-                        <li><a href="/about"><i class="fas fa-angle-right me-2 text-primary"></i>Tentang Kami</a></li>
-                        <li><a href="/news"><i class="fas fa-angle-right me-2 text-primary"></i>Berita & Artikel</a></li>
-                        <li><a href="/career"><i class="fas fa-angle-right me-2 text-primary"></i>Karir</a></li>
-                        <li><a href="/contact"><i class="fas fa-angle-right me-2 text-primary"></i>Hubungi Kami</a></li>
+                        <li><a href="/about"><i class="fas fa-angle-right me-2 text-primary"></i><?= lang('Layout.footer.link_about'); ?></a></li>
+                        <li><a href="/news"><i class="fas fa-angle-right me-2 text-primary"></i><?= lang('Layout.footer.link_news_article'); ?></a></li>
+                        <li><a href="/career"><i class="fas fa-angle-right me-2 text-primary"></i><?= lang('Layout.footer.link_career'); ?></a></li>
+                        <li><a href="/contact"><i class="fas fa-angle-right me-2 text-primary"></i><?= lang('Layout.footer.link_contact'); ?></a></li>
                     </ul>
                 </div>
 
                 <div class="col-lg-3 col-md-6">
-                    <h6 class="text-primary fw-bold text-uppercase mb-3 ls-1">Kantor Pusat</h6>
+                    <h6 class="text-primary fw-bold text-uppercase mb-3 ls-1"><?= lang('Layout.footer.footer_office'); ?></h6>
                     <ul class="list-unstyled text-white-50 small">
                         <li class="mb-3 d-flex">
                             <i class="fas fa-map-marker-alt text-primary mt-1 me-3"></i>
