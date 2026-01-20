@@ -13,26 +13,26 @@ class News extends BaseController
         $this->newsModel = new NewsModel();
     }
 
-    // 1. HALAMAN UTAMA BLOG / LIST BERITA
     public function index()
     {
         $keyword = $this->request->getGet('keyword');
-        
-        // Base Query
-        $newsQuery = $this->newsModel->where('is_active', 1);
 
-        // Fitur Pencarian (Opsional, jika user ketik ?keyword=abc)
+        $newsQuery = $this->newsModel
+            ->where('is_active', 1)
+            ->where('date_published <=', date('Y-m-d'));
+
         if ($keyword) {
             $newsQuery->groupStart()
                 ->like('title_id', $keyword)
                 ->orLike('content_id', $keyword)
-            ->groupEnd();
+                ->groupEnd();
         }
 
         $data = [
-            'title' => 'Berita & Artikel Terbaru',
-            // Menampilkan 6 berita per halaman + Pagination otomatis
-            'news_list' => $newsQuery->orderBy('created_at', 'DESC')->paginate(6, 'news'),
+            'title' => 'Berita & Artikel Terbaru - PT. Pesona Adi Batara',
+            'meta_desc' => 'Dapatkan informasi terbaru seputar layanan logistik, transportasi, dan wawasan korporasi dari PT. Pesona Adi Batara.',
+            'meta_image' => base_url('assets/img/logo-pab.png'),
+            'news_list' => $newsQuery->orderBy('date_published', 'DESC')->paginate(6, 'news'),
             'pager'     => $this->newsModel->pager,
             'keyword'   => $keyword
         ];
@@ -40,7 +40,6 @@ class News extends BaseController
         return view('news/index', $data);
     }
 
-    // 2. DETAIL BERITA (Sudah ada di routes sebelumnya)
     public function detail($slug)
     {
         $news = $this->newsModel->where('slug', $slug)->first();
@@ -49,28 +48,40 @@ class News extends BaseController
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
 
-        // Tambah counter views
         $this->newsModel->update($news['id'], ['views' => $news['views'] + 1]);
 
+        $cleanContent = strip_tags($news['content_id']);
+        $metaDescription = substr($cleanContent, 0, 160) . '...';
+
+        $imagePath = !empty($news['image'])
+            ? base_url('uploads/news/' . $news['image'])
+            : base_url('assets/img/logo-pab.png');
+
         $data = [
-            'title' => $news['title_id'],
+            'title'         => $news['title_id'],
+            'meta_desc'     => $metaDescription,
+            'meta_image'    => $imagePath,
+            'meta_keywords' => 'logistik, ' . $news['category'] . ', ' . $news['title_id'],
+
             'news'  => $news,
             'recent_news' => $this->newsModel->where('is_active', 1)
-                                            ->orderBy('created_at', 'DESC')
-                                            ->findAll(3)
+                ->orderBy('date_published', 'DESC')
+                ->findAll(3)
         ];
 
         return view('news/detail', $data);
     }
 
-    // 3. KATEGORI (Opsional)
     public function category($cat)
     {
         $data = [
             'title' => 'Kategori: ' . ucfirst($cat),
+            'meta_desc' => 'Kumpulan berita dan artikel untuk kategori ' . ucfirst($cat) . ' di PT. Pesona Adi Batara.',
+            'meta_image' => base_url('assets/img/logo-pab.png'),
             'news_list' => $this->newsModel->where(['is_active' => 1, 'category' => $cat])
-                                          ->orderBy('created_at', 'DESC')
-                                          ->paginate(6, 'news'),
+                ->where('date_published <=', date('Y-m-d'))
+                ->orderBy('date_published', 'DESC')
+                ->paginate(6, 'news'),
             'pager' => $this->newsModel->pager,
             'keyword' => null
         ];

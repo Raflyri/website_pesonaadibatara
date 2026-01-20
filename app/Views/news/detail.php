@@ -12,7 +12,7 @@ $cover = !empty($news['image']) ? '/uploads/news/' . $news['image'] : 'https://s
         <h1 class="text-white fw-bold display-5 shadow-sm"><?= esc($news['title_id']); ?></h1>
         <div class="text-white-50 mt-3">
             <i class="far fa-user me-2"></i> Admin PAB &nbsp;&bull;&nbsp;
-            <i class="far fa-calendar-alt me-2"></i> <?= date('d F Y', strtotime($news['created_at'])); ?>
+            <i class="far fa-calendar-alt me-2"></i> <?= date('d F Y', strtotime($news['date_published'])); ?>
         </div>
     </div>
 </div>
@@ -95,7 +95,7 @@ $cover = !empty($news['image']) ? '/uploads/news/' . $news['image'] : 'https://s
                                         <div class="badge bg-primary position-absolute top-0 start-0 m-3 py-1 px-2 small">NEWS</div>
                                     </div>
                                     <div class="card-body">
-                                        <div class="small text-muted mb-2"><i class="far fa-calendar-alt me-1"></i> <?= date('d M Y', strtotime($item['created_at'])); ?></div>
+                                        <div class="small text-muted mb-2"><i class="far fa-calendar-alt me-1"></i> <?= date('d M Y', strtotime($item['date_published'])); ?></div>
                                         <h6 class="fw-bold mb-0">
                                             <a href="/news/<?= $item['slug']; ?>" class="text-dark text-decoration-none stretched-link">
                                                 <?= esc($item['title_id']); ?>
@@ -126,7 +126,7 @@ $cover = !empty($news['image']) ? '/uploads/news/' . $news['image'] : 'https://s
                                         <div class="badge bg-success position-absolute top-0 start-0 m-3 py-1 px-2 small">ARTIKEL</div>
                                     </div>
                                     <div class="card-body">
-                                        <div class="small text-muted mb-2"><i class="far fa-user me-1"></i> Admin PAB &bull; <?= date('d M Y', strtotime($item['created_at'])); ?></div>
+                                        <div class="small text-muted mb-2"><i class="far fa-user me-1"></i> Admin PAB &bull; <?= date('d M Y', strtotime($item['date_published'])); ?></div>
                                         <h6 class="fw-bold mb-0">
                                             <a href="/news/<?= $item['slug']; ?>" class="text-dark text-decoration-none stretched-link">
                                                 <?= esc($item['title_id']); ?>

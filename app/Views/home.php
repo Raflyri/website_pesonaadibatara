@@ -273,7 +273,6 @@
                     <?php if (!empty($latest_news)) : ?>
                         <?php foreach ($latest_news as $news) : ?>
                             <?php
-                            // Logika Bahasa untuk Judul & Konten Berita
                             $newsTitle = ($currentLang == 'en' && !empty($news['title_en'])) ? $news['title_en'] : $news['title_id'];
                             $newsContent = ($currentLang == 'en' && !empty($news['content_en'])) ? $news['content_en'] : $news['content_id'];
                             ?>
@@ -281,7 +280,6 @@
                                 <div class="card h-100 border-0 shadow-sm overflow-hidden group-hover">
                                     <div class="overflow-hidden position-relative" style="height: 220px;">
                                         <?php
-                                        // FIX 1: Ganti 'thumbnail' jadi 'image'
                                         $thumb = !empty($news['image']) ? '/uploads/news/' . $news['image'] : 'https://source.unsplash.com/random/800x600?business';
                                         ?>
                                         <img src="<?= $thumb; ?>" class="card-img-top w-100 h-100 object-fit-cover transition-transform" alt="<?= esc($newsTitle); ?>">
@@ -289,7 +287,7 @@
                                     </div>
                                     <div class="card-body p-4">
                                         <div class="mb-2 text-muted small">
-                                            <i class="far fa-calendar-alt me-2"></i> <?= date('d M Y', strtotime($news['created_at'])); ?>
+                                            <i class="far fa-calendar-alt me-2"></i> <?= date('d M Y', strtotime($news['date_published'])); ?>
                                         </div>
                                         <h5 class="card-title fw-bold mb-3">
                                             <a href="/news/<?= $news['slug']; ?>" class="text-dark text-decoration-none stretched-link">
@@ -344,7 +342,7 @@
                                     <div class="card-body p-4">
                                         <div class="mb-2 text-muted small">
                                             <i class="far fa-user me-2"></i> Admin PAB &bull;
-                                            <?= date('d M Y', strtotime($article['created_at'])); ?>
+                                            <?= date('d M Y', strtotime($article['date_published'])); ?>
                                         </div>
                                         <h5 class="card-title fw-bold mb-3">
                                             <a href="/news/<?= $article['slug']; ?>" class="text-dark text-decoration-none stretched-link">

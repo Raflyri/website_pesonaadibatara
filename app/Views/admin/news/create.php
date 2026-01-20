@@ -53,6 +53,15 @@
                         <input type="text" name="author" class="form-control bg-light border-0 py-3" value="Admin PAB" required>
                     </div>
 
+                    <div class="mb-4">
+                        <label class="fw-bold">Tanggal Tayang (Posting Date)</label>
+                        <input type="date" name="date_published" class="form-control w-25"
+                            value="<?= isset($news) ? $news['date_published'] : date('Y-m-d'); ?>">
+                        <small class="text-muted">
+                            *Jika tanggal diset lebih dari hari ini, berita tidak akan muncul sampai tanggal tersebut tiba.
+                        </small>
+                    </div>
+
                     <hr>
 
                     <button type="submit" class="btn btn-primary w-100 rounded-pill py-3 fw-bold shadow">

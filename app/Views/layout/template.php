@@ -4,7 +4,19 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title><?= $title ?? 'PT. Pesona Adi Batara'; ?></title>
+    
+    <meta name="description" content="<?= $meta_desc ?? 'Solusi logistik dan transportasi terpercaya di Indonesia.'; ?>">
+    
+    <meta name="keywords" content="<?= $meta_keywords ?? 'logistik, transportasi, ev, eo, outsourcing'; ?>">
+    
+    <meta name="author" content="PT. Pesona Adi Batara">
+
+    <meta property="og:title" content="<?= $title ?? 'PT. Pesona Adi Batara'; ?>">
+    <meta property="og:description" content="<?= $meta_desc ?? 'Solusi logistik dan transportasi terpercaya.'; ?>">
+    <meta property="og:image" content="<?= $meta_image ?? base_url('assets/img/logo-pab.png'); ?>">
+    <meta property="og:url" content="<?= current_url(); ?>">
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">

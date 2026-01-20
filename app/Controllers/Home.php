@@ -11,10 +11,12 @@ class Home extends BaseController
 {
     public function index()
     {
+        $this->cachePage(3600);
+
         $serviceModel = new ServiceModel();
         $bannerModel  = new BannerModel();
         $settingModel = new SiteSettingModel();
-        $newsModel    = new NewsModel(); // <--- 2. INSTANSIASI MODEL
+        $newsModel    = new NewsModel();
         $partnersModel = new \App\Models\PartnersModel();
 
         $db = \Config\Database::connect();
@@ -22,15 +24,16 @@ class Home extends BaseController
 
         $data = [
             'title'    => 'Home | PT. Pesona Adi Batara',
-            //'services' => $serviceModel->getActiveServices(),
             'services' => $serviceModel->where('is_active', 1)->findAll(),
             'banners'  => $bannerModel->getActiveBanners(),
             'why_choose_us' => $whyChooseUs,
             'latest_news' => $newsModel->where('category', 'berita')
-                ->orderBy('created_at', 'DESC')
+                ->where('date_published <=', date('Y-m-d'))
+                ->orderBy('date_published', 'DESC')
                 ->findAll(3),
             'latest_articles' => $newsModel->where('category', 'artikel')
-                ->orderBy('created_at', 'DESC')
+                ->where('date_published <=', date('Y-m-d'))
+                ->orderBy('date_published', 'DESC')
                 ->findAll(3),
             'phone'    => $settingModel->getVal('company_phone'),
             'address'  => $settingModel->getVal('company_address'),
