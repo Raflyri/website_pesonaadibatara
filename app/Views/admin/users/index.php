@@ -3,7 +3,7 @@
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h3 class="fw-bold text-dark">Manajemen Administrator</h3>
-    <a href="/admin/users/create" class="btn btn-primary rounded-pill px-4 shadow-sm">
+    <a href="/panel-pab/users/create" class="btn btn-primary rounded-pill px-4 shadow-sm">
         <i class="fas fa-user-plus me-2"></i> Tambah User
     </a>
 </div>
@@ -61,9 +61,9 @@
                             <?= $u['last_login'] ? date('d M Y H:i', strtotime($u['last_login'])) : '-'; ?>
                         </td>
                         <td class="text-end">
-                            <a href="/admin/users/edit/<?= $u['id']; ?>" class="btn btn-sm btn-light text-primary"><i class="fas fa-edit"></i></a>
+                            <a href="/panel-pab/users/edit/<?= $u['id']; ?>" class="btn btn-sm btn-light text-primary"><i class="fas fa-edit"></i></a>
                             <?php if(session()->get('id') != $u['id']): ?>
-                                <a href="/admin/users/delete/<?= $u['id']; ?>" class="btn btn-sm btn-light text-danger" onclick="return confirm('Hapus user ini?')"><i class="fas fa-trash"></i></a>
+                                <a href="/panel-pab/users/delete/<?= $u['id']; ?>" class="btn btn-sm btn-light text-danger" onclick="return confirm('Hapus user ini?')"><i class="fas fa-trash"></i></a>
                             <?php endif; ?>
                         </td>
                     </tr>

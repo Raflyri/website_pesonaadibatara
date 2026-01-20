@@ -19,7 +19,7 @@
     </div>
     <div class="card-body p-4">
         
-        <form action="/admin/home-editor/update" method="post" enctype="multipart/form-data">
+        <form action="/panel-pab/home-editor/update" method="post" enctype="multipart/form-data">
             <?= csrf_field(); ?>
 
             <div class="row">

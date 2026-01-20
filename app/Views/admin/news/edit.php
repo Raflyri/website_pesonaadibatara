@@ -4,7 +4,7 @@
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h3 class="fw-bold text-dark">Edit Postingan</h3>
-    <a href="/admin/news" class="btn btn-outline-secondary rounded-pill px-4">
+    <a href="/panel-pab/news" class="btn btn-outline-secondary rounded-pill px-4">
         <i class="fas fa-arrow-left me-2"></i> Kembali
     </a>
 </div>
@@ -12,7 +12,7 @@
 <div class="card border-0 shadow-lg rounded-4">
     <div class="card-body p-5">
 
-        <form action="/admin/news/update/<?= $news['id']; ?>" method="post" enctype="multipart/form-data">
+        <form action="/panel-pab/news/update/<?= $news['id']; ?>" method="post" enctype="multipart/form-data">
             <?= csrf_field(); ?>
 
             <div class="row">

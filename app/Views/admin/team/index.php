@@ -4,7 +4,7 @@
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h3 class="fw-bold text-dark">Kelola Direksi</h3>
-    <a href="/admin/team/create" class="btn btn-primary rounded-pill px-4 shadow-sm">
+    <a href="/panel-pab/team/create" class="btn btn-primary rounded-pill px-4 shadow-sm">
         <i class="fas fa-plus me-2"></i> Tambah Personil
     </a>
 </div>
@@ -37,8 +37,8 @@
                     </td>
                     <td><span class="badge bg-light text-dark border"><?= $team['urutan']; ?></span></td>
                     <td class="text-end pe-4">
-                        <a href="/admin/team/edit/<?= $team['id']; ?>" class="btn btn-sm btn-outline-primary me-1"><i class="fas fa-edit"></i></a>
-                        <a href="/admin/team/delete/<?= $team['id']; ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Hapus data ini?');"><i class="fas fa-trash"></i></a>
+                        <a href="/panel-pab/team/edit/<?= $team['id']; ?>" class="btn btn-sm btn-outline-primary me-1"><i class="fas fa-edit"></i></a>
+                        <a href="/panel-pab/team/delete/<?= $team['id']; ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Hapus data ini?');"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
                 <?php endforeach; ?>

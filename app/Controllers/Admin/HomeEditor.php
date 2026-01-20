@@ -89,6 +89,6 @@ class HomeEditor extends BaseController
             $builder->insert($data);
         }
 
-        return redirect()->to('/admin/home-editor')->with('success', 'Konten Beranda berhasil diperbarui!');
+        return redirect()->to('/panel-pab/home-editor')->with('success', 'Konten Beranda berhasil diperbarui!');
     }
 }

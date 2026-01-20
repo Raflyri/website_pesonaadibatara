@@ -2,7 +2,7 @@
 
 <?= $this->section('content'); ?>
 <div class="mb-4">
-    <a href="/admin/partners" class="text-decoration-none text-muted"><i class="fas fa-arrow-left me-2"></i> Kembali</a>
+    <a href="/panel-pab/partners" class="text-decoration-none text-muted"><i class="fas fa-arrow-left me-2"></i> Kembali</a>
     <h3 class="fw-bold mt-2"><?= $title; ?></h3>
 </div>
 
@@ -22,10 +22,10 @@
                 <?php endif ?>
 
                 <?php
-                $actionUrl = isset($partner) ? '/admin/partners/save/' . $partner['id'] : '/admin/partners/save';
+                $actionUrl = isset($partner) ? '/panel-pab/partners/save/' . $partner['id'] : '/panel-pab/partners/save';
                 ?>
                 <form action="<?= $actionUrl; ?>" method="post" enctype="multipart/form-data">
-                    <!--form action="/admin/partners/save/<?= isset($partner) ? $partner['id'] : ''; ?>" method="post" enctype="multipart/form-data"-->
+                    <!--form action="/panel-pab/partners/save/<?= isset($partner) ? $partner['id'] : ''; ?>" method="post" enctype="multipart/form-data"-->
                     <?= csrf_field(); ?>
 
                     <div class="mb-3">

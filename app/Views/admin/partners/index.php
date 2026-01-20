@@ -3,7 +3,7 @@
 <?= $this->section('content'); ?>
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h3 class="fw-bold text-dark"><?= $title; ?></h3>
-    <a href="/admin/partners/create" class="btn btn-primary">
+    <a href="/panel-pab/partners/create" class="btn btn-primary">
         <i class="fas fa-plus me-2"></i> Tambah Partner
     </a>
 </div>
@@ -56,10 +56,10 @@
                                 <?php endif; ?>
                             </td>
                             <td class="text-end">
-                                <a href="/admin/partners/edit/<?= $p['id']; ?>" class="btn btn-sm btn-outline-warning me-1">
+                                <a href="/panel-pab/partners/edit/<?= $p['id']; ?>" class="btn btn-sm btn-outline-warning me-1">
                                     <i class="fas fa-pencil-alt"></i>
                                 </a>
-                                <a href="/admin/partners/delete/<?= $p['id']; ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Yakin hapus partner ini?');">
+                                <a href="/panel-pab/partners/delete/<?= $p['id']; ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Yakin hapus partner ini?');">
                                     <i class="fas fa-trash"></i>
                                 </a>
                             </td>

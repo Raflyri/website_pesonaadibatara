@@ -65,7 +65,7 @@ class News extends BaseController
             'views'          => 0
         ]);
 
-        return redirect()->to('/admin/news')->with('success', 'Berita berhasil ditayangkan!');
+        return redirect()->to('/panel-pab/news')->with('success', 'Berita berhasil ditayangkan!');
     }
 
     public function delete($id)
@@ -73,7 +73,7 @@ class News extends BaseController
         // Cari data dulu (opsional, untuk cek apakah ada)
         $data = $this->newsModel->find($id);
         if (!$data) {
-            return redirect()->to('/admin/news')->with('error', 'Data tidak ditemukan.');
+            return redirect()->to('/panel-pab/news')->with('error', 'Data tidak ditemukan.');
         }
 
         // Proses Hapus
@@ -84,7 +84,7 @@ class News extends BaseController
             unlink('uploads/news/' . $data['image']);
         }
 
-        return redirect()->to('/admin/news')->with('success', 'Berita berhasil dihapus.');
+        return redirect()->to('/panel-pab/news')->with('success', 'Berita berhasil dihapus.');
     }
 
     public function edit($id)
@@ -92,7 +92,7 @@ class News extends BaseController
         $news = $this->newsModel->find($id);
         
         if (!$news) {
-            return redirect()->to('/admin/news')->with('error', 'Data tidak ditemukan.');
+            return redirect()->to('/panel-pab/news')->with('error', 'Data tidak ditemukan.');
         }
 
         $data = [
@@ -109,7 +109,7 @@ class News extends BaseController
     {
         $newsLama = $this->newsModel->find($id);
         if (!$newsLama) {
-            return redirect()->to('/admin/news')->with('error', 'Data hilang.');
+            return redirect()->to('/panel-pab/news')->with('error', 'Data hilang.');
         }
         if (!$this->validate([
             'title'     => 'required',
@@ -144,6 +144,6 @@ class News extends BaseController
             'date_published' => $this->request->getPost('date_published'),
         ]);
 
-        return redirect()->to('/admin/news')->with('success', 'Data berhasil diperbarui!');
+        return redirect()->to('/panel-pab/news')->with('success', 'Data berhasil diperbarui!');
     }
 }

@@ -4,7 +4,7 @@
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h3 class="fw-bold text-dark">Kelola Banner Slider</h3>
-    <a href="/admin/banner/create" class="btn btn-primary rounded-pill px-4 shadow-sm">
+    <a href="/panel-pab/banner/create" class="btn btn-primary rounded-pill px-4 shadow-sm">
         <i class="fas fa-plus me-2"></i> Tambah Banner
     </a>
 </div>
@@ -49,8 +49,8 @@
                             <?php endif; ?>
                         </td>
                         <td class="text-end pe-4">
-                            <a href="/admin/banner/edit/<?= $banner['id']; ?>" class="btn btn-sm btn-outline-primary me-1"><i class="fas fa-edit"></i></a>
-                            <a href="/admin/banner/delete/<?= $banner['id']; ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Yakin hapus banner ini?');"><i class="fas fa-trash"></i></a>
+                            <a href="/panel-pab/banner/edit/<?= $banner['id']; ?>" class="btn btn-sm btn-outline-primary me-1"><i class="fas fa-edit"></i></a>
+                            <a href="/panel-pab/banner/delete/<?= $banner['id']; ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Yakin hapus banner ini?');"><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
                     <?php endforeach; ?>

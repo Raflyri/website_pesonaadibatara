@@ -63,6 +63,6 @@ class ContactEditor extends BaseController
             $this->db->table('site_settings')->where('setting_key', $key)->update(['setting_value' => $val]);
         }
 
-        return redirect()->to('/admin/contact-editor')->with('success', 'Informasi Kontak & Sosmed diperbarui!');
+        return redirect()->to('/panel-pab/contact-editor')->with('success', 'Informasi Kontak & Sosmed diperbarui!');
     }
 }

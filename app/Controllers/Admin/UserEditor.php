@@ -20,7 +20,7 @@ class UserEditor extends BaseController
     {
         // Cek Role: Hanya Super Admin yang boleh masuk sini
         if (session()->get('role') !== 'superadmin') {
-            return redirect()->to('/admin/dashboard')->with('error', 'Akses ditolak! Anda bukan Super Admin.');
+            return redirect()->to('/panel-pab/dashboard')->with('error', 'Akses ditolak! Anda bukan Super Admin.');
         }
 
         $data = [
@@ -60,7 +60,7 @@ class UserEditor extends BaseController
             'is_active' => $this->request->getPost('is_active') ? 1 : 0
         ]);
 
-        return redirect()->to('/admin/users')->with('success', 'User berhasil ditambahkan.');
+        return redirect()->to('/panel-pab/users')->with('success', 'User berhasil ditambahkan.');
     }
 
     public function edit($id)
@@ -93,7 +93,7 @@ class UserEditor extends BaseController
         }
 
         $this->userModel->save($dataUpdate);
-        return redirect()->to('/admin/users')->with('success', 'Data user diperbarui.');
+        return redirect()->to('/panel-pab/users')->with('success', 'Data user diperbarui.');
     }
 
     public function delete($id)
@@ -106,7 +106,7 @@ class UserEditor extends BaseController
         }
 
         $this->userModel->delete($id);
-        return redirect()->to('/admin/users')->with('success', 'User dihapus.');
+        return redirect()->to('/panel-pab/users')->with('success', 'User dihapus.');
     }
 
 
@@ -163,6 +163,6 @@ class UserEditor extends BaseController
         // Update session nama
         session()->set('name', $dataUpdate['fullname']);
 
-        return redirect()->to('/admin/profile')->with('success', 'Profil berhasil diperbarui!');
+        return redirect()->to('/panel-pab/profile')->with('success', 'Profil berhasil diperbarui!');
     }
 }

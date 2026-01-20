@@ -136,7 +136,7 @@ class Media extends BaseController
         $newName = $file->getRandomName(); 
         $file->move(FCPATH . 'uploads', $newName);
 
-        return redirect()->to('/admin/media')->with('success', 'File berhasil diupload ke folder Uploads!');
+        return redirect()->to('/panel-pab/media')->with('success', 'File berhasil diupload ke folder Uploads!');
     }
 
     public function delete()
@@ -146,23 +146,23 @@ class Media extends BaseController
         
         // SECURITY CHECK: Cegah Directory Traversal (../)
         if (strpos($relativePath, '..') !== false) {
-            return redirect()->to('/admin/media')->with('error', 'Invalid path.');
+            return redirect()->to('/panel-pab/media')->with('error', 'Invalid path.');
         }
 
         // SECURITY CHECK: Pastikan hanya menghapus file di folder 'uploads'
         // Jika Rafly ingin bisa hapus aset juga, hapus blok if ini.
         if (strpos($relativePath, 'uploads/') !== 0) {
-            return redirect()->to('/admin/media')->with('error', 'File sistem/aset tidak boleh dihapus demi keamanan layout.');
+            return redirect()->to('/panel-pab/media')->with('error', 'File sistem/aset tidak boleh dihapus demi keamanan layout.');
         }
 
         $fullPath = FCPATH . $relativePath;
 
         if (is_file($fullPath)) {
             unlink($fullPath);
-            return redirect()->to('/admin/media')->with('success', 'File berhasil dihapus.');
+            return redirect()->to('/panel-pab/media')->with('success', 'File berhasil dihapus.');
         }
 
-        return redirect()->to('/admin/media')->with('error', 'File tidak ditemukan.');
+        return redirect()->to('/panel-pab/media')->with('error', 'File tidak ditemukan.');
     }
 
     // Helper kecil untuk format ukuran

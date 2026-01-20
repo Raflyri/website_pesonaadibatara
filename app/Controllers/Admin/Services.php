@@ -80,7 +80,7 @@ class Services extends BaseController
             'hero_image'       => $imageName
         ]);
 
-        return redirect()->to('/admin/services/' . $category)->with('success', 'Header halaman berhasil diperbarui!');
+        return redirect()->to('/panel-pab/services/' . $category)->with('success', 'Header halaman berhasil diperbarui!');
     }
 
     // --- PROSES 2: CRUD ITEM LAYANAN (Sama seperti sebelumnya, sedikit penyesuaian) ---
@@ -113,7 +113,7 @@ class Services extends BaseController
             'is_active'         => 1
         ]);
 
-        return redirect()->to('/admin/services/' . $category)->with('success', 'Item layanan berhasil ditambahkan.');
+        return redirect()->to('/panel-pab/services/' . $category)->with('success', 'Item layanan berhasil ditambahkan.');
     }
 
     public function edit($id)
@@ -152,7 +152,7 @@ class Services extends BaseController
             'image'             => $imageName
         ]);
 
-        return redirect()->to('/admin/services/' . $category)->with('success', 'Item berhasil diupdate.');
+        return redirect()->to('/panel-pab/services/' . $category)->with('success', 'Item berhasil diupdate.');
     }
 
     public function delete($id)
@@ -160,7 +160,7 @@ class Services extends BaseController
         $data = $this->serviceModel->find($id);
         if($data) {
             $this->serviceModel->delete($id);
-            return redirect()->to('/admin/services/' . $data['category'])->with('success', 'Item dihapus.');
+            return redirect()->to('/panel-pab/services/' . $data['category'])->with('success', 'Item dihapus.');
         }
         return redirect()->back();
     }

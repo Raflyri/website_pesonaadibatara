@@ -11,7 +11,6 @@ class Home extends BaseController
 {
     public function index()
     {
-        $this->cachePage(3600);
 
         $serviceModel = new ServiceModel();
         $bannerModel  = new BannerModel();

@@ -53,11 +53,20 @@
                     <?= nl2br($history['content_id']); ?>
                 </div>
 
-                <div class="mt-4 p-3 bg-light rounded border-start border-4 border-primary">
-                    <p class="mb-0 small fw-bold text-dark">
-                        <i class="fas fa-certificate me-2 text-primary"></i>
-                        Disahkan Kemenkumham: C2-4.195 HT.01.01 TH 97
-                    </p>
+                <div class="mt-4">
+                    <?php if (!empty($compro_file) && file_exists('uploads/doc/' . $compro_file)) : ?>
+                        <a href="<?= base_url('uploads/doc/' . $compro_file); ?>" target="_blank" class="btn btn-primary shadow-sm py-2 px-4 rounded-pill">
+                            <i class="fas fa-file-pdf me-2"></i> Download Company Profile
+                        </a>
+                    <?php else : ?>
+                        <button class="btn btn-secondary py-2 px-4 rounded-pill disabled" disabled>
+                            <i class="fas fa-file-pdf me-2"></i> Company Profile (Belum Tersedia)
+                        </button>
+                    <?php endif; ?>
+
+                    <div class="mt-2 text-muted small">
+                        <i class="fas fa-info-circle me-1"></i> Format PDF
+                    </div>
                 </div>
             </div>
         </div>

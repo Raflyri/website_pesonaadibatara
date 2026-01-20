@@ -8,8 +8,8 @@ class Services extends BaseController
 {
     public function index()
     {
-        // Kalau user buka /admin/services langsung, lempar ke dashboard atau list umum
-        return redirect()->to('/admin/dashboard');
+        // Kalau user buka /panel-pab/services langsung, lempar ke dashboard atau list umum
+        return redirect()->to('/panel-pab/dashboard');
     }
 
     // Fungsi Dinamis untuk menangani 4 kategori sekaligus

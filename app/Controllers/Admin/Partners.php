@@ -106,13 +106,13 @@ class Partners extends BaseController
             $this->partnersModel->insert($data);
         }
 
-        return redirect()->to('/admin/partners')->with('success', 'Data Partner berhasil disimpan.');
+        return redirect()->to('/panel-pab/partners')->with('success', 'Data Partner berhasil disimpan.');
     }
 
     public function edit($id)
     {
         $partner = $this->partnersModel->find($id);
-        if (!$partner) return redirect()->to('/admin/partners');
+        if (!$partner) return redirect()->to('/panel-pab/partners');
 
         $data = [
             'title'   => 'Edit Partner',
@@ -124,7 +124,7 @@ class Partners extends BaseController
     public function delete($id)
     {
         $partner = $this->partnersModel->find($id);
-        if (!$partner) return redirect()->to('/admin/partners');
+        if (!$partner) return redirect()->to('/panel-pab/partners');
 
         // Hapus file fisik
         if ($partner['partner_logo'] && file_exists('uploads/partners/' . $partner['partner_logo'])) {
@@ -132,6 +132,6 @@ class Partners extends BaseController
         }
 
         $this->partnersModel->delete($id);
-        return redirect()->to('/admin/partners')->with('success', 'Partner dihapus.');
+        return redirect()->to('/panel-pab/partners')->with('success', 'Partner dihapus.');
     }
 }

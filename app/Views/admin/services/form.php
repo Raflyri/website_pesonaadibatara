@@ -4,7 +4,7 @@
 <div class="container-fluid p-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="h4 mb-0 text-gray-800"><?= $title; ?></h2>
-        <a href="/admin/services/<?= $category; ?>" class="btn btn-secondary btn-sm">
+        <a href="/panel-pab/services/<?= $category; ?>" class="btn btn-secondary btn-sm">
             <i class="fas fa-arrow-left me-1"></i> Kembali
         </a>
     </div>
@@ -12,7 +12,7 @@
     <div class="card shadow border-0">
         <div class="card-body">
             <?php 
-                $urlAction = isset($service) ? '/admin/services/update/' . $service['id'] : '/admin/services/save'; 
+                $urlAction = isset($service) ? '/panel-pab/services/update/' . $service['id'] : '/panel-pab/services/save'; 
             ?>
             <form action="<?= $urlAction; ?>" method="post" enctype="multipart/form-data">
                 <?= csrf_field(); ?>

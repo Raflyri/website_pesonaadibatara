@@ -55,7 +55,7 @@
                                     <td style="width: 20%;" class="fw-bold text-primary"><?= $msg['subject']; ?></td>
                                     <td><?= nl2br(esc((string) $msg['message'])); ?></td>
                                     <td class="text-end">
-                                        <a href="/admin/contact-editor/delete/<?= $msg['id']; ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Hapus pesan ini?')"><i class="fas fa-trash"></i></a>
+                                        <a href="/panel-pab/contact-editor/delete/<?= $msg['id']; ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Hapus pesan ini?')"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -70,7 +70,7 @@
             </div>
 
             <div class="tab-pane fade" id="setting">
-                <form action="/admin/contact-editor/update" method="post">
+                <form action="/panel-pab/contact-editor/update" method="post">
                     <?= csrf_field(); ?>
 
                     <div class="row">
@@ -105,7 +105,7 @@
             </div>
 
             <div class="tab-pane fade" id="sosmed">
-                <form action="/admin/contact-editor/update" method="post">
+                <form action="/panel-pab/contact-editor/update" method="post">
                     <?= csrf_field(); ?>
                     <input type="hidden" name="title_id" value="<?= $intro['title_id']; ?>">
 

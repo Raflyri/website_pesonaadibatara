@@ -4,7 +4,7 @@
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h3 class="fw-bold text-dark"><?= $title; ?></h3>
-    <a href="/admin/banner" class="btn btn-outline-secondary rounded-pill px-4">
+    <a href="/panel-pab/banner" class="btn btn-outline-secondary rounded-pill px-4">
         <i class="fas fa-arrow-left me-2"></i> Kembali
     </a>
 </div>
@@ -12,7 +12,7 @@
 <div class="card border-0 shadow-sm rounded-4">
     <div class="card-body p-4">
         
-        <?php $action = isset($banner) ? '/admin/banner/save/' . $banner['id'] : '/admin/banner/save'; ?>
+        <?php $action = isset($banner) ? '/panel-pab/banner/save/' . $banner['id'] : '/panel-pab/banner/save'; ?>
         
         <form action="<?= $action; ?>" method="post" enctype="multipart/form-data">
             <?= csrf_field(); ?>

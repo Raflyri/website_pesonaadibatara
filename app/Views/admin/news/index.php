@@ -4,7 +4,7 @@
 
 <div class="d-flex justify-content-between align-items-center mb-4 mt-5 pt-3">
     <h3 class="fw-bold text-dark">Kelola Berita & Artikel</h3>
-    <a href="/admin/news/create" class="btn btn-primary rounded-pill px-4 shadow-sm">
+    <a href="/panel-pab/news/create" class="btn btn-primary rounded-pill px-4 shadow-sm">
         <i class="fas fa-plus me-2"></i> Tulis Berita Baru
     </a>
 </div>
@@ -64,10 +64,10 @@
                                         <a href="/news/<?= $item['slug']; ?>" target="_blank" class="btn btn-sm btn-light text-secondary" title="Lihat di Web">
                                             <i class="fas fa-external-link-alt"></i>
                                         </a>
-                                        <a href="/admin/news/edit/<?= $item['id']; ?>" class="btn btn-sm btn-light text-primary" title="Edit">
+                                        <a href="/panel-pab/news/edit/<?= $item['id']; ?>" class="btn btn-sm btn-light text-primary" title="Edit">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <form action="/admin/news/<?= $item['id']; ?>" method="post" class="d-inline" onsubmit="return confirm('Yakin hapus berita ini?');">
+                                        <form action="/panel-pab/news/<?= $item['id']; ?>" method="post" class="d-inline" onsubmit="return confirm('Yakin hapus berita ini?');">
                                             <?= csrf_field(); ?>
                                             <input type="hidden" name="_method" value="DELETE">
                                             <button type="submit" class="btn btn-sm btn-light text-danger" title="Hapus">
