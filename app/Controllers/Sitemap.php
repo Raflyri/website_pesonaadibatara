@@ -9,11 +9,12 @@ class Sitemap extends BaseController
     public function index()
     {
         $newsModel = new NewsModel();
-        
+
         // 1. Ambil semua berita yang aktif
         $news = $newsModel->where('is_active', 1)
-                          ->orderBy('created_at', 'DESC')
-                          ->findAll();
+            ->where('date_published <=', date('Y-m-d'))
+            ->orderBy('date_published', 'DESC')
+            ->findAll();
 
         // 2. Definisi Halaman Statis (Manual)
         // Masukkan URL halaman utama yang tidak berubah-ubah
@@ -47,10 +48,10 @@ class Sitemap extends BaseController
             $xml .= '<url>';
             // Pastikan route 'news/slug' sesuai dengan Routes.php
             $xml .= '<loc>' . base_url('news/' . $item['slug']) . '</loc>';
-            
+
             // Gunakan tanggal update berita jika ada, atau tanggal buat
-            $date = $item['updated_at'] ? date('c', strtotime($item['updated_at'])) : date('c', strtotime($item['created_at']));
-            
+            $date = $item['updated_at'] ? date('c', strtotime($item['updated_at'])) : date('c', strtotime($item['date_published']));
+
             $xml .= '<lastmod>' . $date . '</lastmod>';
             $xml .= '<changefreq>weekly</changefreq>';
             $xml .= '<priority>0.9</priority>'; // Berita biasanya prioritas tinggi

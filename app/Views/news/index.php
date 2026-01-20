@@ -48,7 +48,7 @@
 
                             <div class="card-body p-4 d-flex flex-column">
                                 <div class="text-muted small mb-2">
-                                    <i class="far fa-calendar-alt me-1"></i> <?= date('d M Y', strtotime($item['created_at'])); ?>
+                                    <i class="far fa-calendar-alt me-1"></i> <?= date('d M Y', strtotime($item['date_published'])); ?>
                                     <span class="mx-2">&bull;</span>
                                     <i class="far fa-eye me-1"></i> <?= $item['views']; ?> dilihat
                                 </div>

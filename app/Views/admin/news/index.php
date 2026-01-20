@@ -25,7 +25,8 @@
                         <th width="15%">Thumbnail</th>
                         <th width="35%">Judul Berita</th>
                         <th width="15%">Penulis</th>
-                        <th width="15%">Tanggal</th>
+                        <th width="15%">Tanggal Pembuatan</th>
+                        <th width="15%">Tanggal Posting</th>
                         <th width="15%" class="text-end">Aksi</th>
                     </tr>
                 </thead>
@@ -54,6 +55,9 @@
                                 </td>
                                 <td class="text-muted small">
                                     <i class="far fa-calendar-alt me-1"></i> <?= date('d M Y', strtotime($item['created_at'])); ?>
+                                </td>
+                                <td class="text-muted small">
+                                    <i class="far fa-calendar-alt me-1"></i> <?= date('d M Y', strtotime($item['date_published'])); ?>
                                 </td>
                                 <td class="text-end">
                                     <div class="btn-group">
