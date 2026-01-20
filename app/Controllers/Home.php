@@ -11,10 +11,15 @@ class Home extends BaseController
 {
     public function index()
     {
+        // 1. AKTIFKAN CACHING DI SINI
+        // Halaman ini akan disimpan di cache selama 1 jam (3600 detik).
+        // User berikutnya tidak akan membebani database selama cache masih valid.
+        $this->cachePage(3600);
+        
         $serviceModel = new ServiceModel();
         $bannerModel  = new BannerModel();
         $settingModel = new SiteSettingModel();
-        $newsModel    = new NewsModel(); // <--- 2. INSTANSIASI MODEL
+        $newsModel    = new NewsModel();
         $partnersModel = new \App\Models\PartnersModel();
 
         $db = \Config\Database::connect();
