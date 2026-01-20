@@ -34,13 +34,13 @@
         <div class="card shadow-lg border-0">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="mb-0"><i class="fas fa-newspaper me-2"></i> Tulis Berita Baru</h5>
-                <a href="/admin/news" class="btn btn-sm btn-light text-primary fw-bold">Kembali</a>
+                <a href="/panel-pab/news" class="btn btn-sm btn-light text-primary fw-bold">Kembali</a>
             </div>
             <div class="card-body p-4">
 
                 <?php
                 // Logic dinamis: Jika Edit pakai Update+ID, Jika Baru pakai Save
-                $url = isset($news) ? '/admin/news/update/' . $news['id'] : '/admin/news/save';
+                $url = isset($news) ? '/panel-pab/news/update/' . $news['id'] : '/panel-pab/news/save';
                 ?>
                 <form action="<?= $url; ?>" method="post" enctype="multipart/form-data">
                     <?= csrf_field(); ?>

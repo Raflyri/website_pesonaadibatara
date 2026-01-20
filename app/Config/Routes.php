@@ -27,7 +27,7 @@ $routes->post('contact/send', 'Contact::send');
 $routes->get('career', 'Career::index'); 
 $routes->get('news', 'News::index');   
 
-$routes->group('admin', ['filter' => 'authGuard'], function ($routes) {
+$routes->group('panel-pab', ['filter' => 'authGuard'], function ($routes) {
 
     $routes->get('dashboard', 'Admin\Dashboard::index');
 

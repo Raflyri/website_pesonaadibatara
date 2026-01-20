@@ -25,7 +25,7 @@
 
     <div class="card mb-4 shadow-sm border-0 bg-light">
         <div class="card-body">
-            <form action="/admin/media/upload" method="post" enctype="multipart/form-data" class="row g-3 align-items-center">
+            <form action="/panel-pab/media/upload" method="post" enctype="multipart/form-data" class="row g-3 align-items-center">
                 <?= csrf_field(); ?>
                 <div class="col-auto">
                     <label for="file_upload" class="col-form-label fw-bold text-primary">
@@ -89,7 +89,7 @@
                             </button>
                             
                             <?php if($f['is_deletable']): ?>
-                                <form action="/admin/media/delete" method="post" onsubmit="return confirm('Yakin hapus file ini?');">
+                                <form action="/panel-pab/media/delete" method="post" onsubmit="return confirm('Yakin hapus file ini?');">
                                     <?= csrf_field(); ?>
                                     <input type="hidden" name="relative_path" value="<?= $f['relative_path']; ?>">
                                     <button type="submit" class="btn btn-sm btn-outline-danger w-100">

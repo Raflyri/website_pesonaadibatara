@@ -84,13 +84,13 @@ class Team extends BaseController
             $this->teamModel->insert($data);
         }
 
-        return redirect()->to('/admin/team')->with('success', 'Data Direksi berhasil disimpan.');
+        return redirect()->to('/panel-pab/team')->with('success', 'Data Direksi berhasil disimpan.');
     }
 
     public function edit($id)
     {
         $team = $this->teamModel->find($id);
-        if (!$team) return redirect()->to('/admin/team');
+        if (!$team) return redirect()->to('/panel-pab/team');
 
         $data = [
             'title' => 'Edit Direksi',
@@ -108,6 +108,6 @@ class Team extends BaseController
             unlink('uploads/teams/' . $team['image']);
         }
         $this->teamModel->delete($id);
-        return redirect()->to('/admin/team')->with('success', 'Data berhasil dihapus.');
+        return redirect()->to('/panel-pab/team')->with('success', 'Data berhasil dihapus.');
     }
 }

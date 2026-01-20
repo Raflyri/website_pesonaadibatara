@@ -8,9 +8,9 @@
     <div class="alert alert-success"><?= session()->getFlashdata('success'); ?></div>
 <?php endif; ?>
 
-<form action="/admin/about-editor/update" method="post" enctype="multipart/form-data">
+<form action="/panel-pab/about-editor/update" method="post" enctype="multipart/form-data">
     <?= csrf_field(); ?>
-    
+
     <div class="card border-0 shadow-sm rounded-4">
         <div class="card-header bg-white pt-3 px-4 border-bottom-0">
             <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
@@ -20,15 +20,18 @@
                 <li class="nav-item" role="presentation">
                     <button class="nav-link fw-bold" id="vision-tab" data-bs-toggle="tab" data-bs-target="#vision" type="button">Visi & Misi</button>
                 </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link fw-bold" id="com-pro-tab" data-bs-toggle="tab" data-bs-target="#com-pro" type="button">Company Profile</button>
+                </li>
             </ul>
         </div>
-        
+
         <div class="card-body p-4">
             <div class="tab-content" id="myTabContent">
-                
+
                 <div class="tab-pane fade show active" id="history" role="tabpanel">
                     <h5 class="text-primary fw-bold mb-3">Sejarah Perusahaan</h5>
-                    
+
                     <div class="row">
                         <div class="col-md-8">
                             <div class="mb-3">
@@ -43,12 +46,13 @@
                         <div class="col-md-4">
                             <div class="mb-3">
                                 <label class="form-label fw-bold">Foto Ilustrasi</label>
-                                <?php if($history['media_url']): ?>
-                                    <img src="<?= base_url('uploads/about/'.$history['media_url']); ?>" class="img-fluid rounded mb-2">
+                                <?php if ($history['media_url']): ?>
+                                    <img src="<?= base_url('uploads/about/' . $history['media_url']); ?>" class="img-fluid rounded mb-2">
                                 <?php endif; ?>
                                 <input type="file" name="history_image" class="form-control">
                             </div>
                         </div>
+
                     </div>
                 </div>
 
@@ -68,11 +72,33 @@
                     </div>
                 </div>
 
+                <div class="tab-pane fade" id="com-pro" role="tabpanel">
+                    <h5 class="text-primary fw-bold mb-3">Upload Company Profile</h5>
+
+                    <div class="row">
+                        <div class="mb-4 p-3 border rounded bg-light">
+                            <label class="form-label fw-bold">Upload Company Profile (PDF)</label>
+                            <input type="file" name="compro_file" class="form-control" accept="application/pdf">
+                            <div class="form-text text-muted">
+                                *Format PDF. Upload baru akan otomatis menghapus file lama.
+                            </div>
+
+                            <?php
+                            if (!empty($compro_file)) : ?>
+                                <div class="mt-2 text-success small">
+                                    <i class="fas fa-check-circle"></i> File terpasang: <strong><?= $compro_file; ?></strong>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="card-footer bg-white border-0 text-end pb-4 pe-4">
-            <button type="submit" class="btn btn-primary rounded-pill px-5 shadow">Simpan Perubahan</button>
-        </div>
+    </div>
+
+
+    <div class="card-footer border-0 text-end pb-4 pe-4">
+        <button type="submit" class="btn btn-primary rounded-pill px-5 shadow">Simpan Perubahan</button>
     </div>
 </form>
 

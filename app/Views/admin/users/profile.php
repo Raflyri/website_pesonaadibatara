@@ -27,7 +27,7 @@
     <div class="col-md-8">
         <div class="card border-0 shadow-sm rounded-4">
             <div class="card-body p-5">
-                <form action="/admin/profile/update" method="post" enctype="multipart/form-data">
+                <form action="/panel-pab/profile/update" method="post" enctype="multipart/form-data">
                     <?= csrf_field(); ?>
                     
                     <div class="mb-3">

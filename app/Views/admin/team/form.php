@@ -4,13 +4,13 @@
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h3 class="fw-bold text-dark"><?= $title; ?></h3>
-    <a href="/admin/team" class="btn btn-outline-secondary rounded-pill px-4">Kembali</a>
+    <a href="/panel-pab/team" class="btn btn-outline-secondary rounded-pill px-4">Kembali</a>
 </div>
 
 <div class="card border-0 shadow-sm rounded-4">
     <div class="card-body p-4">
 
-        <?php $action = isset($team) ? '/admin/team/save/' . $team['id'] : '/admin/team/save'; ?>
+        <?php $action = isset($team) ? '/panel-pab/team/save/' . $team['id'] : '/panel-pab/team/save'; ?>
 
         <form action="<?= $action; ?>" method="post" enctype="multipart/form-data">
             <?= csrf_field(); ?>

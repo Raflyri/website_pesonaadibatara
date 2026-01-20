@@ -6,7 +6,7 @@
 <div class="card border-0 shadow-sm rounded-4 col-lg-8">
     <div class="card-body p-5">
         <?php 
-            $url = isset($user) ? '/admin/users/update/' . $user['id'] : '/admin/users/save';
+            $url = isset($user) ? '/panel-pab/users/update/' . $user['id'] : '/panel-pab/users/save';
         ?>
         <form action="<?= $url; ?>" method="post">
             <?= csrf_field(); ?>
@@ -45,7 +45,7 @@
 
             <hr class="my-4">
             <button type="submit" class="btn btn-primary rounded-pill px-5">Simpan Data</button>
-            <a href="/admin/users" class="btn btn-light rounded-pill px-4">Batal</a>
+            <a href="/panel-pab/users" class="btn btn-light rounded-pill px-4">Batal</a>
         </form>
     </div>
 </div>

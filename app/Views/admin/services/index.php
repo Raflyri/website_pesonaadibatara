@@ -25,7 +25,7 @@
             <h6 class="m-0 fw-bold text-primary"><i class="fas fa-heading me-2"></i> Pengaturan Header & Judul Utama</h6>
         </div>
         <div class="card-body">
-            <form action="/admin/services/update-page/<?= $category; ?>" method="post" enctype="multipart/form-data">
+            <form action="/panel-pab/services/update-page/<?= $category; ?>" method="post" enctype="multipart/form-data">
                 <?= csrf_field(); ?>
                 <div class="row">
                     <div class="col-md-8">
@@ -64,7 +64,7 @@
     <div class="card shadow border-0">
         <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
             <h6 class="m-0 fw-bold text-success"><i class="fas fa-th-list me-2"></i> Daftar Item Layanan (Cards)</h6>
-            <a href="/admin/services/<?= $category; ?>/create" class="btn btn-success btn-sm rounded-pill px-3">
+            <a href="/panel-pab/services/<?= $category; ?>/create" class="btn btn-success btn-sm rounded-pill px-3">
                 <i class="fas fa-plus me-1"></i> Tambah Item Baru
             </a>
         </div>
@@ -102,8 +102,8 @@
                                     <td class="fw-bold"><?= $item['title']; ?></td>
                                     <td class="small text-muted"><?= substr($item['short_description'], 0, 60); ?>...</td>
                                     <td class="text-end pe-4">
-                                        <a href="/admin/services/edit/<?= $item['id']; ?>" class="btn btn-sm btn-warning me-1"><i class="fas fa-edit"></i></a>
-                                        <a href="/admin/services/delete/<?= $item['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Hapus item ini?')"><i class="fas fa-trash"></i></a>
+                                        <a href="/panel-pab/services/edit/<?= $item['id']; ?>" class="btn btn-sm btn-warning me-1"><i class="fas fa-edit"></i></a>
+                                        <a href="/panel-pab/services/delete/<?= $item['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Hapus item ini?')"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

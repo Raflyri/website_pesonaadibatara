@@ -87,13 +87,13 @@ class Banner extends BaseController
             $this->bannerModel->insert($data);
         }
 
-        return redirect()->to('/admin/banner')->with('success', 'Data Banner berhasil disimpan.');
+        return redirect()->to('/panel-pab/banner')->with('success', 'Data Banner berhasil disimpan.');
     }
 
     public function edit($id)
     {
         $banner = $this->bannerModel->find($id);
-        if (!$banner) return redirect()->to('/admin/banner');
+        if (!$banner) return redirect()->to('/panel-pab/banner');
 
         $data = [
             'title' => 'Edit Banner',
@@ -109,6 +109,6 @@ class Banner extends BaseController
             unlink('uploads/banners/' . $banner['image']);
         }
         $this->bannerModel->delete($id);
-        return redirect()->to('/admin/banner')->with('success', 'Banner berhasil dihapus.');
+        return redirect()->to('/panel-pab/banner')->with('success', 'Banner berhasil dihapus.');
     }
 }

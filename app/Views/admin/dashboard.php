@@ -8,7 +8,7 @@
         <p class="text-muted mb-0">Selamat datang kembali, <span class="text-primary fw-bold"><?= $user_name; ?></span>!</p>
     </div>
     <div>
-        <a href="/admin/news/create" class="btn btn-primary rounded-pill px-4 shadow-sm">
+        <a href="/panel-pab/news/create" class="btn btn-primary rounded-pill px-4 shadow-sm">
             <i class="fas fa-plus me-2"></i> Tulis Berita Baru
         </a>
     </div>
@@ -264,7 +264,7 @@
 
     function fetchVisitorCount() {
         // Panggil endpoint API yang kita buat di Controller
-        fetch('/admin/api/visitor-count')
+        fetch('/panel-pab/api/visitor-count')
             .then(response => response.json())
             .then(data => {
                 const element = document.getElementById('visitorCount');
