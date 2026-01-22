@@ -21,13 +21,13 @@ class Partners extends BaseController
             // Urutkan berdasarkan display_order biar sesuai keinginan user
             'partners' => $this->partnersModel->orderBy('display_order', 'ASC')->findAll()
         ];
-        return view('admin/partners/index', $data);
+        return view('panel-pab/partners/index', $data);
     }
 
     public function create()
     {
         $data = ['title' => 'Tambah Partner Baru'];
-        return view('admin/partners/form', $data);
+        return view('panel-pab/partners/form', $data);
     }
 
     public function save($id = null)
@@ -118,7 +118,7 @@ class Partners extends BaseController
             'title'   => 'Edit Partner',
             'partner' => $partner
         ];
-        return view('admin/partners/form', $data);
+        return view('panel-pab/partners/form', $data);
     }
 
     public function delete($id)

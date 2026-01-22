@@ -34,7 +34,7 @@ class HomeEditor extends BaseController
             'section' => $section
         ];
 
-        return view('admin/home/index', $data);
+        return view('panel-pab/home/index', $data);
     }
 
     public function update()

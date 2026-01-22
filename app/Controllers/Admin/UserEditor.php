@@ -27,14 +27,14 @@ class UserEditor extends BaseController
             'title' => 'Kelola Administrator',
             'users' => $this->userModel->findAll()
         ];
-        return view('admin/users/index', $data);
+        return view('panel-pab/users/index', $data);
     }
 
     public function create()
     {
         if (session()->get('role') !== 'superadmin') return redirect()->back();
         
-        return view('admin/users/form', ['title' => 'Tambah Admin Baru']);
+        return view('panel-pab/users/form', ['title' => 'Tambah Admin Baru']);
     }
 
     public function save()
@@ -71,7 +71,7 @@ class UserEditor extends BaseController
             'title' => 'Edit Administrator',
             'user'  => $this->userModel->find($id)
         ];
-        return view('admin/users/form', $data);
+        return view('panel-pab/users/form', $data);
     }
 
     public function update($id)
@@ -119,7 +119,7 @@ class UserEditor extends BaseController
             'title' => 'Profil Saya',
             'user'  => $this->userModel->find($myId)
         ];
-        return view('admin/users/profile', $data);
+        return view('panel-pab/users/profile', $data);
     }
 
     public function updateProfile()

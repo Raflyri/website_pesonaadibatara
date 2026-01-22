@@ -26,7 +26,7 @@ class Profile extends BaseController
             'user'  => $user
         ];
 
-        return view('admin/profile/index', $data);
+        return view('panel-pab/profile/index', $data);
     }
 
     public function update()

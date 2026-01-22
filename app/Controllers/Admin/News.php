@@ -13,21 +13,20 @@ class News extends BaseController
     {
         $this->newsModel = new NewsModel();
     }
-
-    // 1. LIST BERITA & ARTIKEL
+    
     public function index()
     {
         $data = [
             'title' => 'Kelola Berita & Artikel',
             'news'  => $this->newsModel->orderBy('date_published', 'DESC')->findAll(),
         ];
-        return view('admin/news/index', $data);
+        return view('panel-pab/news/index', $data);
     }
 
     public function create()
     {
         $data = ['title' => 'Tulis Baru'];
-        return view('admin/news/create', $data);
+        return view('panel-pab/news/create', $data);
     }
 
     public function save()
@@ -101,7 +100,7 @@ class News extends BaseController
         ];
         
         // Kita gunakan view yang berbeda biar rapi
-        return view('admin/news/edit', $data);
+        return view('panel-pab/news/edit', $data);
     }
 
     // 2. PROSES UPDATE PERUBAHAN

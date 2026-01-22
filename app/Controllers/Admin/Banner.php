@@ -20,13 +20,13 @@ class Banner extends BaseController
             'title' => 'Kelola Banner Slider',
             'banners' => $this->bannerModel->orderBy('urutan', 'ASC')->findAll()
         ];
-        return view('admin/banner/index', $data);
+        return view('panel-pab/banner/index', $data);
     }
 
     public function create()
     {
         $data = ['title' => 'Tambah Banner Baru'];
-        return view('admin/banner/form', $data);
+        return view('panel-pab/banner/form', $data);
     }
 
     public function save($id = null)
@@ -99,7 +99,7 @@ class Banner extends BaseController
             'title' => 'Edit Banner',
             'banner' => $banner
         ];
-        return view('admin/banner/form', $data);
+        return view('panel-pab/banner/form', $data);
     }
 
     public function delete($id)

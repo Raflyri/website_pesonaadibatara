@@ -99,7 +99,7 @@ class Dashboard extends BaseController
             'user_name' => session()->get('name') ?? 'Admin'
         ];
 
-        return view('admin/dashboard', $data);
+        return view('panel-pab/dashboard', $data);
     }
 
     public function get_visitor_count()

@@ -20,7 +20,7 @@ class Team extends BaseController
             'title' => 'Kelola Direksi & Tim',
             'teams' => $this->teamModel->orderBy('urutan', 'ASC')->findAll()
         ];
-        return view('admin/team/index', $data);
+        return view('panel-pab/team/index', $data);
     }
 
     public function create()
@@ -30,7 +30,7 @@ class Team extends BaseController
             // Kirim data karyawan lain untuk jadi pilihan atasan
             'parents' => $this->teamModel->orderBy('name', 'ASC')->findAll() 
         ];
-        return view('admin/team/form', $data);
+        return view('panel-pab/team/form', $data);
     }
 
     public function save($id = null)
@@ -98,7 +98,7 @@ class Team extends BaseController
             // Kirim data karyawan lain (kecuali dirinya sendiri biar ga error loop)
             'parents' => $this->teamModel->where('id !=', $id)->orderBy('name', 'ASC')->findAll()
         ];
-        return view('admin/team/form', $data);
+        return view('panel-pab/team/form', $data);
     }
 
     public function delete($id)

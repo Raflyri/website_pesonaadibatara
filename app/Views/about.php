@@ -53,19 +53,31 @@
                     <?= nl2br($history['content_id']); ?>
                 </div>
 
+                <?php
+                $downloadUrl = '#';
+                $labelButton = 'Download Company Profile';
+                $isDisabled  = false;
+
+                if (!empty($compro_link)) {
+                    $downloadUrl = $compro_link;
+                } elseif (!empty($compro_file) && file_exists('uploads/doc/' . $compro_file)) {
+                    $downloadUrl = base_url('uploads/doc/' . $compro_file);
+                } else {
+                    $isDisabled = true;
+                    $labelButton = 'Company Profile (Belum Tersedia)';
+                }
+                ?>
+
                 <div class="mt-4">
-                    <?php if (!empty($compro_file) && file_exists('uploads/doc/' . $compro_file)) : ?>
-                        <a href="<?= base_url('uploads/doc/' . $compro_file); ?>" target="_blank" class="btn btn-primary shadow-sm py-2 px-4 rounded-pill">
-                            <i class="fas fa-file-pdf me-2"></i> Download Company Profile
-                        </a>
-                    <?php else : ?>
-                        <button class="btn btn-secondary py-2 px-4 rounded-pill disabled" disabled>
-                            <i class="fas fa-file-pdf me-2"></i> Company Profile (Belum Tersedia)
-                        </button>
-                    <?php endif; ?>
+                    <a href="<?= $downloadUrl; ?>"
+                        target="_blank"
+                        class="btn btn-primary shadow-sm py-2 px-4 rounded-pill <?= $isDisabled ? 'disabled' : ''; ?>">
+                        <i class="fas fa-file-pdf me-2"></i> <?= $labelButton; ?>
+                    </a>
 
                     <div class="mt-2 text-muted small">
                         <i class="fas fa-info-circle me-1"></i> Format PDF
+                        <?php if (!empty($compro_link)) : ?> (Via Google Drive) <?php endif; ?>
                     </div>
                 </div>
             </div>
