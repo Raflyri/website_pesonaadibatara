@@ -8,24 +8,18 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    
     <link rel="stylesheet" href="<?= base_url('assets/css/admin.css'); ?>">
 
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 
+    <?= $this->renderSection('styles'); ?>
+
     <style>
-        /* Fix Summernote Style */
-        .note-editor .dropdown-toggle::after {
-            all: unset;
-        }
-
-        .note-editor .note-dropdown-menu {
-            box-sizing: content-box;
-        }
-
-        .note-editor .note-modal-footer {
-            box-sizing: content-box;
-        }
+        /* Fix Summernote Style ... (biarkan yang lama) */
+        .note-editor .dropdown-toggle::after { all: unset; }
+        .note-editor .note-dropdown-menu { box-sizing: content-box; }
+        .note-editor .note-modal-footer { box-sizing: content-box; }
     </style>
 </head>
 
