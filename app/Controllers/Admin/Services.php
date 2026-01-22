@@ -43,7 +43,7 @@ class Services extends BaseController
             'services' => $services
         ];
 
-        return view('admin/services/index', $data);
+        return view('panel-pab/services/index', $data);
     }
 
     // --- PROSES 1: UPDATE HEADER HALAMAN ---
@@ -88,7 +88,7 @@ class Services extends BaseController
     public function create($category)
     {
         $data = ['title' => 'Tambah Item Layanan', 'category' => $category];
-        return view('admin/services/form', $data);
+        return view('panel-pab/services/form', $data);
     }
 
     public function save()
@@ -126,7 +126,7 @@ class Services extends BaseController
             'category' => $service['category'],
             'service'  => $service
         ];
-        return view('admin/services/form', $data);
+        return view('panel-pab/services/form', $data);
     }
 
     public function update($id)

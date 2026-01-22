@@ -108,7 +108,7 @@ class Media extends BaseController
             'files' => $files 
         ];
 
-        return view('admin/media/index', $data);
+        return view('panel-pab/media/index', $data);
     }
 
     public function upload()

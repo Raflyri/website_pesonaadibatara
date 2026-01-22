@@ -47,7 +47,7 @@ class ContactEditor extends BaseController
             'messages' => $messages ?? []
         ];
 
-        return view('admin/contact/index', $data);
+        return view('panel-pab/contact/index', $data);
     }
 
     public function updateContent()

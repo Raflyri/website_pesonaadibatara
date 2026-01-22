@@ -6,7 +6,6 @@ use App\Controllers\BaseController;
 
 class Auth extends BaseController
 {
-    // UBAH NAMA DARI index() JADI login()
     public function login()
     {
         if (session()->get('isLoggedIn')) {
