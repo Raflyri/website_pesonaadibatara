@@ -11,9 +11,9 @@ class ServiceModel extends Model
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useTimestamps    = true; // Aktifkan timestamps otomatis
-    
+
     // Tambahkan 'category' ke sini
-    protected $allowedFields    = ['category', 'slug', 'title', 'icon', 'short_description', 'content', 'image', 'is_active'];
+    protected $allowedFields    = ['category', 'slug', 'title', 'icon', 'short_description', 'content', 'image', 'gallery', 'is_active'];
 
     // Fitur: Ambil layanan aktif berdasarkan kategori
     public function getServicesByCategory($category)

@@ -76,21 +76,41 @@ if (!empty($hero_img) && file_exists('uploads/services/' . $hero_img)) {
     <div class="container">
         <div class="row">
             <?php if (!empty($items)): ?>
+
                 <?php foreach ($items as $item): ?>
                     <div class="col-md-6 mb-4">
                         <div class="d-flex align-items-start p-4 border rounded-3 shadow-sm h-100 bg-white hover-shadow transition-all">
+
                             <div class="flex-shrink-0">
+                                <div class="rounded-3 bg-light text-primary d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                                    <i class="<?= !empty($item['icon']) ? $item['icon'] : 'fas fa-check-circle'; ?> fa-2x"></i>
+                                </div>
+                            </div>
+
+                            <div class="ms-3 w-100">
+                                <h4 class="fw-bold text-dark h5 mb-2"><?= $item['title']; ?></h4>
+                                <p class="text-muted mb-3 small"><?= $item['short_description']; ?></p>
+
                                 <?php if (!empty($item['image'])): ?>
-                                    <img src="/uploads/services/<?= $item['image']; ?>" class="rounded-3" style="width: 60px; height: 60px; object-fit: cover;">
-                                <?php else: ?>
-                                    <div class="rounded-3 bg-light text-primary d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
-                                        <i class="<?= !empty($item['icon']) ? $item['icon'] : 'fas fa-check-circle'; ?> fa-2x"></i>
+                                    <div class="mt-3 mb-2">
+                                        <img src="/uploads/services/<?= $item['image']; ?>" class="img-fluid rounded-3 w-100 shadow-sm" style="object-fit: cover; max-height: 250px;">
                                     </div>
                                 <?php endif; ?>
-                            </div>
-                            <div class="ms-3">
-                                <h4 class="fw-bold text-dark h5 mb-2"><?= $item['title']; ?></h4>
-                                <p class="text-muted mb-0 small"><?= $item['short_description']; ?></p>
+
+                                <?php
+                                $gallery = json_decode($item['gallery'] ?? '[]', true);
+                                if (!empty($gallery) && is_array($gallery)):
+                                ?>
+                                    <div class="row g-2 mt-2">
+                                        <?php foreach ($gallery as $gImg): ?>
+                                            <div class="col-4"> <a href="/uploads/services/<?= $gImg; ?>" target="_blank">
+                                                    <img src="/uploads/services/<?= $gImg; ?>" class="img-fluid rounded border" style="height: 60px; object-fit: cover; width: 100%;">
+                                                </a>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    </div>
+                                <?php endif; ?>
+
                             </div>
                         </div>
                     </div>
