@@ -4,23 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $title ?? 'Admin Panel'; ?> | PAB CMS</title>
+    <title><?= $title ?? 'Admin Panel'; ?> | PAB Dashboard Panel</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <link rel="stylesheet" href="<?= base_url('assets/css/admin.css'); ?>">
+
+    <link rel="stylesheet" href="<?= base_url('assets/css/admin_sidebar.css'); ?>">
+
+    <link rel="stylesheet" href="<?= base_url('assets/css/admin_topbar.css'); ?>">
+
+    <link rel="stylesheet" href="<?= base_url('assets/css/admin_footer.css'); ?>">
+
+    <link rel="stylesheet" href="<?= base_url('assets/css/admin_layout.css'); ?>">
 
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 
-    <?= $this->renderSection('styles'); ?>
-
-    <style>
-        /* Fix Summernote Style ... (biarkan yang lama) */
-        .note-editor .dropdown-toggle::after { all: unset; }
-        .note-editor .note-dropdown-menu { box-sizing: content-box; }
-        .note-editor .note-modal-footer { box-sizing: content-box; }
-    </style>
+    <?= $this->renderSection('styles'); ?>\
 </head>
 
 <body>
@@ -102,9 +103,9 @@
                 <a href="/panel-pab/users" class="nav-link <?= (current_url(true)->getSegment(2) == 'users') ? 'active' : ''; ?>" title="Administrator">
                     <i class="fas fa-users-cog"></i> <span class="sidebar-text">Administrator</span>
                 </a>
-                <a href="/panel-pab/backup-db" class="nav-link text-warning" title="Backup Database">
+                <!--a href="/panel-pab/backup-db" class="nav-link text-warning" title="Backup Database">
                     <i class="fas fa-database"></i> <span class="sidebar-text">Backup Database</span>
-                </a>
+                </a-->
             <?php endif; ?>
 
             <a href="/logout" class="nav-link text-danger mt-1" title="Logout">
@@ -112,42 +113,17 @@
             </a>
         </div>
     </div>
-    <nav class="topbar shadow-sm">
 
-        <div class="d-flex align-items-center gap-3 ms-auto">
+    <?= $this->include('panel-pab/layout/topbar'); ?>
 
-            <button class="btn btn-ghost rounded-circle" id="darkModeToggle" title="Ganti Tema">
-                <i class="fas fa-moon text-muted"></i>
-            </button>
+    <div class="main-content">
 
-            <div class="dropdown">
-                <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle text-dark p-2 rounded hover-bg-light" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                    <div class="text-end me-2 d-none d-md-block">
-                        <strong class="d-block small"><?= esc(session()->get('name')); ?></strong>
-                        <span class="text-muted small" style="font-size: 0.7rem;"><?= ucfirst(session()->get('role')); ?></span>
-                    </div>
-                    <?php $avatar = session()->get('avatar') ? '/uploads/avatars/' . session()->get('avatar') : 'https://ui-avatars.com/api/?name=' . urlencode(session()->get('name')) . '&background=random'; ?>
-                    <img src="<?= $avatar; ?>" alt="user" width="35" height="35" class="rounded-circle border object-fit-cover">
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end text-small shadow" aria-labelledby="dropdownUser1">
-                    <li><a class="dropdown-item" href="/panel-pab/profile"><i class="fas fa-user-circle me-2"></i> Profil Saya</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item text-danger" href="/logout"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <div class="main-content d-flex flex-column">
-
-        <div class="flex-grow-1">
+        <div class="content-wrapper">
             <?= $this->renderSection('content'); ?>
         </div>
 
-        <footer class="mt-5 pt-4 border-top text-muted small text-center">
-            &copy; 2025 PT. Pesona Adi Batara CMS System v2.0
-        </footer>
+        <?= $this->include('panel-pab/layout/footer'); ?>
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -182,6 +158,7 @@
             icon.classList.remove('fa-moon');
             icon.classList.add('fa-sun');
         }
+
         darkModeToggle.addEventListener('click', () => {
             if (document.documentElement.getAttribute('data-theme') === 'dark') {
                 document.documentElement.setAttribute('data-theme', 'light');
@@ -195,7 +172,21 @@
                 icon.classList.add('fa-sun');
             }
         });
+
+        // Script Jam Realtime
+        function updateClock() {
+            const now = new Date();
+            const timeOptions = {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false
+            };
+            document.getElementById('realtimeClock').innerText = now.toLocaleTimeString('id-ID', timeOptions) + ' WIB';
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
     </script>
+
     <?= $this->renderSection('scripts'); ?>
 </body>
 
