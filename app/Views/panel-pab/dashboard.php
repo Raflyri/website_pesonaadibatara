@@ -1,29 +1,13 @@
 <?= $this->extend('panel-pab/layout/template'); ?>
 
 <?= $this->section('styles'); ?>
-    <link rel="stylesheet" href="<?= base_url('assets/css/dashboard.css'); ?>">
+<link rel="stylesheet" href="<?= base_url('assets/css/admin_dashboard.css'); ?>">
 <?= $this->endSection(); ?>
 
 <?= $this->section('content'); ?>
 
-<div class="dashboard-hero animate__animated animate__fadeIn">
-    <div class="hero-content d-flex justify-content-between align-items-center flex-wrap gap-3">
-        <div>
-            <span class="badge bg-white text-primary bg-opacity-10 border border-white border-opacity-25 mb-2 px-3 py-2 rounded-pill">
-                <i class="fas fa-building me-2"></i> Corporate Dashboard
-            </span>
-            <h2 class="fw-bold mb-1">Halo, <?= $user_name; ?>! 👋</h2>
-            <p class="mb-0 opacity-75">Selamat datang di panel kontrol terintegrasi PT. Pesona Adi Batara.</p>
-        </div>
-        <div class="text-end d-none d-md-block">
-            <h5 class="m-0 fw-bold" id="realtimeClock">...</h5>
-            <small class="opacity-75"><i class="fas fa-calendar-alt me-1"></i> <?= date('d F Y'); ?></small>
-        </div>
-    </div>
-</div>
+<div class="row g-4 pb-4">
 
-<div class="row g-4 mb-5">
-    
     <div class="col-md-3">
         <div class="stat-card-modern stat-border-primary">
             <div class="d-flex justify-content-between align-items-start">
@@ -98,9 +82,9 @@
 </div>
 
 <div class="row g-4">
-    
+
     <div class="col-lg-8">
-        
+
         <div class="row g-3 mb-4">
             <div class="col-md-4">
                 <a href="/panel-pab/news/create" class="btn-quick shadow-sm">
@@ -128,7 +112,7 @@
             </div>
             <div class="card-body p-4">
                 <div class="timeline-activity">
-                    
+
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
                         <p class="fw-bold mb-1 text-dark">Update Berita Corporate</p>
@@ -214,15 +198,6 @@
 </div>
 
 <script>
-    // Script Jam Realtime
-    function updateClock() {
-        const now = new Date();
-        const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: false };
-        document.getElementById('realtimeClock').innerText = now.toLocaleTimeString('id-ID', timeOptions) + ' WIB';
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
-
     // Script Update Visitor Realtime
     function fetchVisitorCount() {
         fetch('/panel-pab/api/visitor-count')

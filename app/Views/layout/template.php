@@ -25,8 +25,26 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="<?= base_url('assets/css/style.css'); ?>">
-    <link rel="shortcut icon" href="<?= base_url('assets/img/favicon.png'); ?>" type="image/x-icon">
+    <link rel="stylesheet" href="<?= base_url('assets/css/header.css'); ?>">
 
+    <?= $this->renderSection('styles'); ?>
+
+    <?php
+    $settingModel = new \App\Models\SiteSettingModel();
+    $fontName = $settingModel->getVal('company_tagline_font');
+    ?>
+
+    <?php if (!empty($fontName)): ?>
+        <?php
+        // Ubah spasi jadi plus (cth: "Open Sans" -> "Open+Sans")
+        $fontUrlVal = str_replace(' ', '+', $fontName);
+        ?>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=<?= $fontUrlVal; ?>:wght@400;600;700&display=swap" rel="stylesheet">
+    <?php endif; ?>
+
+    <link rel="shortcut icon" href="<?= base_url('assets/img/favicon.png'); ?>" type="image/x-icon">
 
 </head>
 
@@ -35,8 +53,27 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-rounded-box shadow-sm transition-all">
                 <div class="container-fluid px-4">
-                    <a class="navbar-brand" href="/">
-                        <img src="<?= base_url('assets/img/logo-pab.png'); ?>" alt="Logo PAB" class="logo-transition">
+                    <a class="navbar-brand d-flex flex-column justify-content-center align-items-center p-0" href="/">
+
+                        <?php
+                        $settingModel = new \App\Models\SiteSettingModel();
+                        $tagline      = $settingModel->getVal('company_tagline');
+                        $fontName     = $settingModel->getVal('company_tagline_font');
+                        $iconName     = $settingModel->getVal('company_icon');
+
+                        // Default icon
+                        $logoSrc = !empty($iconName) ? base_url('assets/img/' . $iconName) : base_url('assets/img/logo-pab.png');
+                        ?>
+
+                        <img src="<?= $logoSrc; ?>" alt="Logo Perusahaan" class="logo-transition">
+
+                        <?php if ($tagline): ?>
+                            <span class="company-tagline mt-1"
+                                style="<?= !empty($fontName) ? "font-family: '$fontName', sans-serif;" : '' ?>">
+                                <?= $tagline; ?>
+                            </span>
+                        <?php endif; ?>
+
                     </a>
 
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">

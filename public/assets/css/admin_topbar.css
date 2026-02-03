@@ -1,0 +1,28 @@
+.topbar {
+    height: var(--topbar-height);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    
+    /* FIX POSISI: Gunakan fixed dengan jangkar Left & Right */
+    position: fixed !important; 
+    top: 0;
+    right: 0;
+    left: var(--sidebar-width); /* Mulai tepat setelah sidebar */
+    width: auto !important;     /* Biarkan browser menghitung lebarnya */
+    
+    z-index: 1030;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    transition: left 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Animasi saat sidebar collapse */
+}
+
+/* Penyesuaian Dark Mode */
+[data-theme="dark"] .topbar {
+    background: rgba(31, 41, 55, 0.85);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+[data-theme="dark"] .topbar .text-dark { color: var(--text-main) !important; }

@@ -1,0 +1,164 @@
+/* =========================================
+   MODERN HORIZONTAL TABS (About Editor)
+   ========================================= */
+
+/* 1. Custom Nav Tabs Styling */
+.custom-tabs-container {
+    background: transparent;
+    border-bottom: 2px solid rgba(0,0,0,0.05);
+    padding: 0 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.custom-nav-tabs .nav-item {
+    margin-right: 0.5rem;
+}
+
+.custom-nav-tabs .nav-link {
+    border: none;
+    border-radius: 50px; /* Bentuk Kapsul/Pill */
+    padding: 0.6rem 1.2rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    background: transparent;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.custom-nav-tabs .nav-link:hover {
+    color: var(--primary-color);
+    background: var(--hover-bg);
+}
+
+.custom-nav-tabs .nav-link.active {
+    background: var(--primary-color);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
+    font-weight: 600;
+    transform: translateY(-2px);
+}
+
+/* Icon di dalam Tab */
+.custom-nav-tabs .nav-link i {
+    font-size: 1rem;
+}
+
+/* 2. Content Card Styling */
+.settings-content-card {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03); /* Bayangan Halus */
+    background: #fff;
+    overflow: hidden;
+    min-height: 400px; /* Agar tinggi konsisten */
+}
+
+/* 3. Upload Zone (Hero Logo Section) */
+.hero-logo-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 16px;
+    padding: 2.5rem;
+    text-align: center;
+    border: 1px solid rgba(0,0,0,0.03);
+    position: relative;
+    /* height: 100%; Hapus height 100% agar fleksibel di mobile */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-circle-wrapper {
+    width: 140px;
+    height: 140px;
+    background: #fff;
+    border-radius: 50%;
+    padding: 10px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    margin-bottom: 1.5rem;
+    position: relative;
+    transition: transform 0.3s;
+}
+
+.logo-circle-wrapper:hover {
+    transform: scale(1.05);
+}
+
+.logo-circle-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+}
+
+/* Tombol Upload Melayang */
+.btn-upload-float {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: #fff;
+    border: 3px solid #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(13, 110, 253, 0.3);
+    transition: all 0.2s;
+}
+
+.btn-upload-float:hover {
+    background: #0b5ed7;
+    transform: rotate(15deg);
+}
+
+/* Badge Notifikasi Sukses */
+.upload-success-badge {
+    animation: fadeInUp 0.4s ease;
+    background: #d1e7dd;
+    color: #0f5132;
+    border: 1px solid #badbcc;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 1rem;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 4. Form Styling */
+.form-section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 1.5rem;
+    border-left: 4px solid var(--primary-color);
+    padding-left: 10px;
+}
+
+.input-modern {
+    border: 1px solid var(--border-color);
+    background: var(--bg-body);
+    padding: 12px 15px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+}
+
+.input-modern:focus {
+    background: #fff;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.1);
+    outline: none;
+}

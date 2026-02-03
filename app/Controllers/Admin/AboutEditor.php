@@ -23,6 +23,10 @@ class AboutEditor extends BaseController
         $mission = $this->db->table('page_sections')->where('section_key', 'about_mission')->get()->getRowArray();
         $linkSetting = $this->db->table('site_settings')->where('setting_key', 'company_profile_link')->get()->getRowArray();
         $fileSetting = $this->db->table('site_settings')->where('setting_key', 'company_profile')->get()->getRowArray();
+        $tagline = $this->settingModel->getVal('company_tagline');
+        $taglineFont = $this->settingModel->getVal('company_tagline_font');
+        $companyIcon = $this->settingModel->getVal('company_icon');
+        $companyName = $this->settingModel->getVal('company_name');
 
         $data = [
             'title'   => 'Kelola Halaman Tentang Kami',
@@ -30,7 +34,11 @@ class AboutEditor extends BaseController
             'vision'  => $vision,
             'mission' => $mission,
             'compro_link' => $linkSetting['setting_value'] ?? '',
-            'compro_file' => $fileSetting['setting_value'] ?? ''
+            'compro_file' => $fileSetting['setting_value'] ?? '',
+            'company_tagline' => $tagline,
+            'company_tagline_font' => $taglineFont,
+            'company_icon' => $companyIcon,
+            'company_name'    => $companyName
         ];
 
         return view('panel-pab/about/index', $data);
@@ -41,7 +49,7 @@ class AboutEditor extends BaseController
         // 1. Validasi Input
         $validationRules = [
             'compro_file' => [
-                'rules' => 'max_size[compro_file,5120]|ext_in[compro_file,pdf]', 
+                'rules' => 'max_size[compro_file,5120]|ext_in[compro_file,pdf]',
                 'errors' => [
                     'max_size' => 'File terlalu besar (>5MB). Mohon upload ke Google Drive dan masukkan Link-nya di kolom Opsi 2.',
                     'ext_in'   => 'Format file harus PDF.'
@@ -83,17 +91,14 @@ class AboutEditor extends BaseController
         ];
         $this->db->table('page_sections')->where('section_key', 'about_mission')->update($missionData);
 
-        // ---------------------------------------------------------
-        // 4. Update Link Company Profile (INI YANG KAKAK CARI)
-        // ---------------------------------------------------------
+        // 4. Update Link Company Profile 
         $linkInput = $this->request->getPost('compro_link');
-        
-        // Ambil data lama untuk dapatkan ID-nya
+
         $oldLink = $this->settingModel->where('setting_key', 'company_profile_link')->first();
 
         $dataLink = [
             'setting_key'   => 'company_profile_link',
-            'setting_value' => $linkInput // ✅ SUDAH DIPERBAIKI (sebelumnya 'value')
+            'setting_value' => $linkInput
         ];
 
         if ($oldLink) {
@@ -102,17 +107,15 @@ class AboutEditor extends BaseController
         $this->settingModel->save($dataLink);
 
 
-        // ---------------------------------------------------------
         // 5. Update File PDF Company Profile
-        // ---------------------------------------------------------
         $fileCompro = $this->request->getFile('compro_file');
 
         if ($fileCompro && $fileCompro->isValid() && !$fileCompro->hasMoved()) {
 
             $oldSetting = $this->settingModel->where('setting_key', 'company_profile')->first();
-            
+
             // Perbaiki pengambilan value lama (gunakan setting_value)
-            $oldFilename = $oldSetting['setting_value'] ?? null; 
+            $oldFilename = $oldSetting['setting_value'] ?? null;
 
             // Hapus file lama jika ada
             if ($oldFilename && file_exists('uploads/doc/' . $oldFilename)) {
@@ -125,7 +128,7 @@ class AboutEditor extends BaseController
 
             $dataFile = [
                 'setting_key'   => 'company_profile',
-                'setting_value' => $newName // ✅ SUDAH DIPERBAIKI (konsisten pakai setting_value)
+                'setting_value' => $newName
             ];
 
             if ($oldSetting) {
@@ -133,6 +136,72 @@ class AboutEditor extends BaseController
             }
             $this->settingModel->save($dataFile);
         }
+
+        //6. Update Tagline Perusahaan
+        $taglineInput = $this->request->getPost('company_tagline');
+        if ($taglineInput !== null) {
+            $oldTagline = $this->settingModel->where('setting_key', 'company_tagline')->first();
+            $dataTagline = [
+                'setting_key'   => 'company_tagline',
+                'setting_value' => $taglineInput
+            ];
+
+            if ($oldTagline) {
+                $dataTagline['id'] = $oldTagline['id'];
+            }
+            $this->settingModel->save($dataTagline);
+        }
+
+        //7. Update Font Tagline
+        $fontInput = $this->request->getPost('company_tagline_font');
+        if ($fontInput !== null) {
+            $oldFont = $this->settingModel->where('setting_key', 'company_tagline_font')->first();
+            $dataFont = [
+                'setting_key'   => 'company_tagline_font',
+                'setting_value' => $fontInput
+            ];
+
+            if ($oldFont) {
+                $dataFont['id'] = $oldFont['id'];
+            }
+            $this->settingModel->save($dataFont);
+        }
+
+        // 8. Handle Upload Company Icon (Logo)
+        $fileIcon = $this->request->getFile('company_icon');
+
+        // Cek validasi file
+        if ($fileIcon && $fileIcon->isValid() && !$fileIcon->hasMoved()) {
+
+            $mime = $fileIcon->getMimeType();
+            // Pastikan yang diupload adalah gambar
+            if (strpos($mime, 'image') !== false) {
+
+                // 1. Upload File
+                $newIconName = $fileIcon->getRandomName();
+
+                // Pindahkan ke folder public/assets/img/
+                // Pastikan path ini benar sesuai struktur folder public kakak
+                $fileIcon->move('assets/img', $newIconName);
+
+                // 2. Siapkan Data Array untuk Database
+                $oldIcon = $this->settingModel->where('setting_key', 'company_icon')->first();
+
+                $dataIcon = [
+                    'setting_key'   => 'company_icon',
+                    'setting_value' => $newIconName
+                ];
+
+                // Jika sudah ada data lama, tambahkan ID agar menjadi UPDATE (bukan Insert baru)
+                if ($oldIcon) {
+                    $dataIcon['id'] = $oldIcon['id'];
+                }
+
+                // 3. Simpan (Parameter harus Array)
+                $this->settingModel->save($dataIcon);
+            }
+        }
+
 
         return redirect()->to('/panel-pab/about-editor')->with('success', 'Konten Tentang Kami berhasil diperbarui!');
     }

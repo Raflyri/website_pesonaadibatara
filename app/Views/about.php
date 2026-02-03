@@ -1,5 +1,9 @@
 <?= $this->extend('layout/template'); ?>
 
+<?= $this->section('styles'); ?>
+<link rel="stylesheet" href="<?= base_url('assets/css/about.css'); ?>">
+<?= $this->endSection(); ?>
+
 <?= $this->section('content'); ?>
 
 <section class="position-relative text-white text-center overflow-hidden" style="padding-top: 160px; padding-bottom: 100px;">
@@ -132,11 +136,14 @@
     </div>
 </section>
 
-<section class="py-5 bg-white">
+<section class="py-5 org-section">
     <div class="container py-4">
         <div class="text-center mb-5" data-aos="fade-up">
-            <h6 class="text-primary fw-bold text-uppercase">Organisasi</h6>
-            <h2 class="fw-bold">Struktur Dewan Direksi</h2>
+            <span class="org-section-badge">
+                <i class="fas fa-sitemap me-2"></i>Organisasi
+            </span>
+            <h2 class="org-section-title mt-3">Struktur Dewan Direksi</h2>
+            <div class="org-section-divider mx-auto"></div>
         </div>
 
         <div class="org-tree-wrapper overflow-auto pb-5" data-aos="zoom-in">
@@ -153,8 +160,8 @@
                         // Gambar Kotak Member
                         $foto = $item['image'] ? base_url('uploads/teams/' . $item['image']) : 'https://ui-avatars.com/api/?name=' . urlencode($item['name']);
 
-                        // Cek Level untuk styling (Level 1 & 2 besar, sisanya kecil)
-                        $cardClass = ($item['level'] > 2) ? 'member-card small-card' : 'member-card';
+                        // Cek Level untuk styling (Semua level menggunakan style yang sama)
+                        $cardClass = 'member-card';
 
                         echo '
                         <div class="' . $cardClass . '">

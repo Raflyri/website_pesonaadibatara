@@ -1,0 +1,143 @@
+/* =========================================
+   MODERN SIDEBAR STYLES (Hype Design)
+   ========================================= */
+
+/* 1. Container Sidebar Utama */
+.sidebar {
+    width: var(--sidebar-width);
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.9); /* Sedikit transparan */
+    backdrop-filter: blur(10px); /* Efek kaca (Glassmorphism) */
+    border-right: 1px solid rgba(0,0,0,0.05);
+    position: fixed;
+    top: 0; left: 0;
+    z-index: 1040;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    overflow-y: auto;
+    scrollbar-width: thin; /* Firefox */
+}
+
+/* Scrollbar cantik */
+.sidebar::-webkit-scrollbar { width: 5px; }
+.sidebar::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+
+/* 2. Header Logo */
+.sidebar-header {
+    height: var(--topbar-height);
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+.sidebar-header img {
+    transition: transform 0.3s;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+}
+.sidebar-header img:hover { transform: scale(1.05); }
+
+/* 3. Menu Label (Section Title) */
+.sidebar-menu .section-title {
+    font-size: 0.7rem;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    margin: 1.5rem 0 0.5rem 1rem;
+    opacity: 0.8;
+}
+
+/* 4. Nav Link Base Style */
+.sidebar-menu .nav-link {
+    color: var(--text-main);
+    padding: 0.85rem 1.2rem;
+    margin-bottom: 0.35rem;
+    border-radius: 12px; /* Membuat sudut tumpul (modern) */
+    font-weight: 500;
+    font-size: 0.92rem;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Icon Style */
+.sidebar-menu .nav-link i {
+    width: 24px;
+    margin-right: 12px;
+    text-align: center;
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+    color: var(--text-muted);
+}
+
+/* 5. Hover Effect (Soft) */
+.sidebar-menu .nav-link:hover {
+    background-color: var(--hover-bg);
+    color: var(--primary-color);
+    transform: translateX(3px); /* Efek geser sedikit */
+}
+.sidebar-menu .nav-link:hover i {
+    color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+/* 6. ACTIVE STATE (The Hype Part!) */
+/* Gaya "Floating Pill" dengan Gradient & Glow */
+.sidebar-menu .nav-link.active {
+    background: linear-gradient(135deg, var(--primary-color), #3f83fe);
+    color: #ffffff !important;
+    box-shadow: 0 4px 15px rgba(13, 110, 253, 0.35); /* Soft Shadow warna biru */
+    font-weight: 600;
+}
+
+.sidebar-menu .nav-link.active i {
+    color: #ffffff !important;
+}
+
+/* Sub-menu (Dropdown) styling */
+.sidebar-menu .collapse {
+    background: rgba(0,0,0,0.02);
+    border-radius: 12px;
+    margin-top: 5px;
+    padding: 5px;
+}
+.sidebar-menu .collapse .nav-link {
+    font-size: 0.85rem;
+    padding-left: 3rem !important; /* Indentasi submenu */
+    background: transparent !important;
+    box-shadow: none !important;
+    color: var(--text-muted) !important;
+}
+.sidebar-menu .collapse .nav-link:hover {
+    color: var(--primary-color) !important;
+    background: rgba(13, 110, 253, 0.05) !important;
+}
+.sidebar-menu .collapse .nav-link.text-primary.fw-bold {
+    color: var(--primary-color) !important;
+    background: rgba(13, 110, 253, 0.1) !important;
+}
+
+/* 7. DARK MODE ADJUSTMENT */
+[data-theme="dark"] .sidebar {
+    background: var(--bg-card); /* Warna card dark mode */
+    border-right: 1px solid var(--border-color);
+}
+[data-theme="dark"] .sidebar-menu .nav-link {
+    color: var(--text-muted);
+}
+[data-theme="dark"] .sidebar-menu .nav-link:hover {
+    background-color: rgba(255,255,255,0.05);
+    color: #fff;
+}
+/* Active state di dark mode tetap menyala (pop) */
+[data-theme="dark"] .sidebar-menu .nav-link.active {
+    background: linear-gradient(135deg, var(--primary-color), #2563eb);
+    color: #fff !important;
+    box-shadow: 0 4px 20px rgba(96, 165, 250, 0.4);
+}
+
+@media (max-width: 991.98px) {
+    .sidebar { left: -100%; }
+    .topbar { left: 0 !important; width: 100% !important; } /* Topbar jadi full di mobile */
+    .main-content { left: 0 !important; }
+}

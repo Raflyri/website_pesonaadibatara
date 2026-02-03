@@ -1,0 +1,57 @@
+/* =========================================
+   CORE LAYOUT SYSTEM (FIXED FOOTER VERSION)
+   ========================================= */
+
+/* 1. Kunci Scroll Window Utama */
+html, body {
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* 2. Main Content Wrapper (Container Utama) */
+.main-content {
+    position: absolute;
+    top: 70px;   /* Tinggi Topbar */
+    right: 0;
+    bottom: 0;   /* Mentok ke bawah layar */
+    left: 280px; /* Lebar Sidebar */
+    
+    /* PENTING: Matikan scroll di container utama */
+    overflow: hidden; 
+    
+    /* Flexbox untuk menyusun Konten (atas) dan Footer (bawah) */
+    display: flex;
+    flex-direction: column;
+    
+    padding: 0;
+    transition: left 0.4s ease;
+    background-color: var(--bg-body); /* Pastikan warna background konsisten */
+}
+
+/* 3. Content Area (AREA YANG BISA DI-SCROLL) */
+.content-wrapper {
+    /* Flex 1 = Ambil semua sisa ruang vertikal yang ada */
+    flex: 1; 
+    
+    /* Scroll dipindah ke sini! */
+    overflow-y: auto; 
+    overflow-x: hidden;
+    
+    padding: 2rem; /* Jarak konten */
+    
+    /* Opsional: Scrollbar halus */
+    scrollbar-width: thin;
+}
+
+/* Percantik Scrollbar di Area Tengah */
+.content-wrapper::-webkit-scrollbar { width: 6px; }
+.content-wrapper::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+.content-wrapper::-webkit-scrollbar-track { background: transparent; }
+
+/* 4. Responsive Fix (Mobile) */
+@media (max-width: 991.98px) {
+    .main-content {
+        left: 0;
+        width: 100%;
+    }
+}
