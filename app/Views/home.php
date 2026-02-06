@@ -389,7 +389,7 @@
             <a href="#" class="btn btn-pab-primary btn-lg rounded-pill px-5 shadow-sm">
                <?= lang('Home.cta.btn_contact_us'); ?>
             </a>
-            <a href="https://wa.me/6281234567890" target="_blank" class="btn btn-success btn-lg rounded-pill px-4 shadow-sm">
+            <a href="https://wa.me/<?= $whatsapp; ?>" target="_blank" class="btn btn-success btn-lg rounded-pill px-4 shadow-sm">
                 <i class="fab fa-whatsapp me-2"></i> <?= lang('Home.cta.btn_whatsapp'); ?>
             </a>
         </div>

@@ -12,7 +12,7 @@
             <div class="col-md-6">
                 <form action="/news" method="get">
                     <div class="input-group">
-                        <input type="text" class="form-control rounded-start-pill ps-4 py-2" name="keyword" placeholder="Cari artikel..." value="<?= $keyword ?? ''; ?>">
+                        <input type="text" class="form-control rounded-start-pill ps-4 py-2" name="keyword" placeholder="<?= lang('Frontend.global.search'); ?>" value="<?= $keyword ?? ''; ?>">
                         <button class="btn btn-warning rounded-end-pill px-4 fw-bold" type="submit">Cari</button>
                     </div>
                 </form>
@@ -64,7 +64,7 @@
                                 </p>
 
                                 <a href="/news/<?= $item['slug']; ?>" class="btn btn-outline-primary btn-sm rounded-pill mt-3 w-100">
-                                    Baca Selengkapnya <i class="fas fa-arrow-right ms-1"></i>
+                                    <?= lang('Frontend.global.read_more'); ?> <i class="fas fa-arrow-right ms-1"></i>
                                 </a>
                             </div>
                         </div>
@@ -74,7 +74,7 @@
                 <div class="col-12 text-center py-5">
                     <div class="bg-white p-5 rounded-4 shadow-sm d-inline-block">
                         <i class="far fa-folder-open fa-3x text-muted mb-3"></i>
-                        <h4 class="text-muted">Tidak ada artikel ditemukan.</h4>
+                        <h4 class="text-muted"><?= lang('Frontend.global.empty_data'); ?></h4>
                         <a href="/news" class="btn btn-sm btn-secondary mt-2">Reset Pencarian</a>
                     </div>
                 </div>

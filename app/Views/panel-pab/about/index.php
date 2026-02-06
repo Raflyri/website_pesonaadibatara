@@ -121,16 +121,80 @@
                                     </div>
                                 </div>
 
-                                <div class="mb-2">
-                                    <label class="form-label fw-bold text-muted small text-uppercase">Font Tagline (Google Fonts)</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text bg-white border-end-0 border py-2"><i class="fas fa-font text-muted"></i></span>
-                                        <input type="text" class="form-control input-modern border-start-0 ps-0" name="company_tagline_font"
-                                            value="<?= $company_tagline_font ?? ''; ?>"
-                                            placeholder="Contoh: Poppins, Montserrat">
-                                    </div>
-                                    <div class="form-text small mt-2">
-                                        <i class="fas fa-info-circle me-1"></i> Nama font harus sesuai dengan <a href="https://fonts.google.com/" target="_blank" class="text-decoration-none fw-bold">Google Fonts</a>.
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold text-muted small text-uppercase">Pengaturan Font Tagline</label>
+
+                                    <div class="row g-3">
+                                        <!-- Font Family -->
+                                        <div class="col-md-12">
+                                            <label class="small text-muted mb-1">Jenis Font (Google Fonts)</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text bg-white"><i class="fas fa-font"></i></span>
+                                                <select class="form-select input-modern" name="company_tagline_font">
+                                                    <option value="" <?= empty($company_tagline_font) ? 'selected' : ''; ?>>-- Pilih Font --</option>
+                                                    <?php
+                                                    $fonts = [
+                                                        'Roboto',
+                                                        'Open Sans',
+                                                        'Lato',
+                                                        'Montserrat',
+                                                        'Poppins',
+                                                        'Oswald',
+                                                        'Source Sans Pro',
+                                                        'Slabo 27px',
+                                                        'Raleway',
+                                                        'PT Sans',
+                                                        'Merriweather',
+                                                        'Nunito',
+                                                        'Playfair Display',
+                                                        'Rubik',
+                                                        'Lora',
+                                                        'Fira Sans',
+                                                        'Work Sans',
+                                                        'Quicksand',
+                                                        'Karla',
+                                                        'Syne',
+                                                        'Inter',
+                                                        'Ubuntu',
+                                                        'Mulish',
+                                                        'Dancing Script',
+                                                        'Pacifico',
+                                                        'Shadows Into Light',
+                                                        'Indie Flower',
+                                                        'Amatic SC',
+                                                        'Caveat',
+                                                        'Comfortaa',
+                                                        'Edu SA Hand',
+                                                    ];
+                                                    sort($fonts);
+                                                    foreach ($fonts as $f):
+                                                    ?>
+                                                        <option value="<?= $f; ?>" <?= ($company_tagline_font == $f) ? 'selected' : ''; ?>><?= $f; ?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <!-- Font Size -->
+                                        <div class="col-md-6">
+                                            <label class="small text-muted mb-1">Ukuran Font (px)</label>
+                                            <div class="input-group">
+                                                <input type="number" class="form-control input-modern" name="company_tagline_size"
+                                                    value="<?= $company_tagline_size ?? '36'; ?>" min="12" max="100">
+                                                <span class="input-group-text bg-light">px</span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Font Color -->
+                                        <div class="col-md-6">
+                                            <label class="small text-muted mb-1">Warna Font</label>
+                                            <div class="d-flex align-items-center border rounded p-1 input-modern bg-white">
+                                                <input type="color" class="form-control form-control-color border-0 p-0 m-1"
+                                                    id="fontColorPicker" name="company_tagline_color"
+                                                    value="<?= $company_tagline_color ?? '#ffffff'; ?>" title="Pilih Warna">
+                                                <label for="fontColorPicker" class="small ms-2 text-muted user-select-none">Pilih Warna</label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -141,10 +205,10 @@
                 <div class="tab-pane fade" id="history" role="tabpanel">
                     <div class="p-2">
                         <h5 class="form-section-title">Cerita Perjalanan Bisnis</h5>
-                        
+
                         <div class="mb-3">
                             <label class="form-label fw-bold text-muted small">Judul Bagian</label>
-                            <input type="text" class="form-control input-modern" name="history_title_id" 
+                            <input type="text" class="form-control input-modern" name="history_title_id"
                                 value="<?= $history['title_id'] ?? 'Sejarah Perusahaan'; ?>">
                         </div>
 
@@ -152,11 +216,11 @@
                             <label class="form-label fw-bold text-muted small">Isi Konten</label>
                             <textarea class="form-control summernote" name="history_content_id"><?= $history['content_id'] ?? ''; ?></textarea>
                         </div>
-                        
+
                         <div class="mb-3">
                             <label class="form-label fw-bold text-muted small">Gambar Sejarah (Opsional)</label>
                             <input type="file" class="form-control input-modern" name="history_image" accept="image/*">
-                            <?php if(!empty($history['media_url'])): ?>
+                            <?php if (!empty($history['media_url'])): ?>
                                 <small class="text-success"><i class="fas fa-check"></i> Gambar saat ini: <?= $history['media_url'] ?></small>
                             <?php endif; ?>
                         </div>

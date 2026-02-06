@@ -52,7 +52,7 @@ $cover = !empty($news['image']) ? '/uploads/news/' . $news['image'] : 'https://s
                 </div>
 
                 <div class="text-center">
-                    <a href="/" class="btn btn-light rounded-pill px-4"><i class="fas fa-arrow-left me-2"></i> Kembali ke Beranda</a>
+                    <a href="/" class="btn btn-light rounded-pill px-4"><i class="fas fa-arrow-left me-2"></i> <?= lang('Frontend.global.back_to_home'); ?></a>
                 </div>
             </div>
 
@@ -70,12 +70,12 @@ $cover = !empty($news['image']) ? '/uploads/news/' . $news['image'] : 'https://s
             <ul class="nav nav-pills justify-content-center d-inline-flex bg-white rounded-pill p-1 shadow-sm mt-3" id="relatedTab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active rounded-pill px-4" id="rel-news-tab" data-bs-toggle="pill" data-bs-target="#rel-news" type="button" role="tab">
-                        <i class="far fa-newspaper me-2"></i> Berita Lainnya
+                        <i class="far fa-newspaper me-2"></i> <?= lang('Frontend.global.more_news'); ?>
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link rounded-pill px-4" id="rel-article-tab" data-bs-toggle="pill" data-bs-target="#rel-article" type="button" role="tab">
-                        <i class="fas fa-pen-nib me-2"></i> Artikel Terkait
+                        <i class="fas fa-pen-nib me-2"></i> <?= lang('Frontend.global.more_articles'); ?>
                     </button>
                 </li>
             </ul>
