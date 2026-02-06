@@ -366,6 +366,75 @@ body {
   letter-spacing: 1px;
 }
 
+/* Footer tagline badge (logo + tagline) */
+.footer-tagline-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: radial-gradient(circle at top left, #ffffff, #f3f4ff);
+  box-shadow:
+    0 10px 25px rgba(15, 23, 42, 0.35),
+    0 0 0 1px rgba(148, 163, 184, 0.4);
+  position: relative;
+  overflow: hidden;
+  animation: footerTaglineFloat 4s ease-in-out infinite;
+}
+
+.footer-tagline-badge::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.1)
+  );
+  transform: translateX(-120%);
+  animation: footerTaglineShine 5s ease-in-out infinite;
+}
+
+.footer-tagline-logo {
+  height: 55px;
+  width: auto;
+  flex-shrink: 0;
+  filter: drop-shadow(0 4px 8px rgba(15, 23, 42, 0.35));
+}
+
+.footer-tagline-text {
+  position: relative;
+  z-index: 1;
+  color: #0f172a;
+  font-weight: 600;
+  font-size: 1.02rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+@keyframes footerTaglineFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes footerTaglineShine {
+  0% {
+    transform: translateX(-120%);
+  }
+  60% {
+    transform: translateX(120%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
+}
+
 /* --- CONTACT POPUP HOVER EFFECT --- */
 
 .contact-hover-wrapper {

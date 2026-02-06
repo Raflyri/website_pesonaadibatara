@@ -91,6 +91,7 @@ class ContentSecurityPolicy extends BaseConfig
     public array $imageSrc = [
         'self',
         'flagcdn.com',
+        'images.unsplash.com',
         'data:', // Penting! Mengizinkan gambar format base64
     ];
 
@@ -164,7 +165,12 @@ class ContentSecurityPolicy extends BaseConfig
      *
      * @var list<string>|string|null
      */
-    public $frameSrc;
+    public $frameSrc = [
+        'self',
+        'google.com',
+        'www.google.com',
+        'maps.google.com',
+    ];
 
     /**
      * Restricts the origins allowed to deliver video and audio.

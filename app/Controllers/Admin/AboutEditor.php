@@ -25,6 +25,8 @@ class AboutEditor extends BaseController
         $fileSetting = $this->db->table('site_settings')->where('setting_key', 'company_profile')->get()->getRowArray();
         $tagline = $this->settingModel->getVal('company_tagline');
         $taglineFont = $this->settingModel->getVal('company_tagline_font');
+        $taglineSize = $this->settingModel->getVal('company_tagline_size');
+        $taglineColor = $this->settingModel->getVal('company_tagline_color');
         $companyIcon = $this->settingModel->getVal('company_icon');
         $companyName = $this->settingModel->getVal('company_name');
 
@@ -37,6 +39,8 @@ class AboutEditor extends BaseController
             'compro_file' => $fileSetting['setting_value'] ?? '',
             'company_tagline' => $tagline,
             'company_tagline_font' => $taglineFont,
+            'company_tagline_size' => $taglineSize,
+            'company_tagline_color' => $taglineColor,
             'company_icon' => $companyIcon,
             'company_name'    => $companyName
         ];
@@ -165,6 +169,30 @@ class AboutEditor extends BaseController
                 $dataFont['id'] = $oldFont['id'];
             }
             $this->settingModel->save($dataFont);
+        }
+
+        // Update Font Size
+        $fontSizeInput = $this->request->getPost('company_tagline_size');
+        if ($fontSizeInput !== null) {
+            $oldSize = $this->settingModel->where('setting_key', 'company_tagline_size')->first();
+            $dataSize = [
+                'setting_key'   => 'company_tagline_size',
+                'setting_value' => $fontSizeInput
+            ];
+            if ($oldSize) $dataSize['id'] = $oldSize['id'];
+            $this->settingModel->save($dataSize);
+        }
+
+        // Update Font Color
+        $fontColorInput = $this->request->getPost('company_tagline_color');
+        if ($fontColorInput !== null) {
+            $oldColor = $this->settingModel->where('setting_key', 'company_tagline_color')->first();
+            $dataColor = [
+                'setting_key'   => 'company_tagline_color',
+                'setting_value' => $fontColorInput
+            ];
+            if ($oldColor) $dataColor['id'] = $oldColor['id'];
+            $this->settingModel->save($dataColor);
         }
 
         // 8. Handle Upload Company Icon (Logo)

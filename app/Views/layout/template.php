@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="<?= base_url('assets/css/style.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/header.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/components/company-tagline.css'); ?>">
 
     <?= $this->renderSection('styles'); ?>
 
@@ -160,38 +161,6 @@
                     </div>
 
                     <div class="d-none d-lg-flex align-items-center ms-auto gap-3 btn-login-wrapper">
-
-                        <!--<div class="dropdown lang-switcher">
-                            <button class="btn btn-light rounded-pill px-3 d-flex align-items-center gap-2 border shadow-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static">
-
-                                <?php $currentLang = session()->get('lang') ?? 'id'; ?>
-                                <img src="https://flagcdn.com/w20/<?= ($currentLang == 'en') ? 'gb' : 'id'; ?>.png" alt="Lang" style="width: 20px;">
-                                <span class="small fw-bold text-uppercase"><?= $currentLang; ?></span>
-                                <i class="fas fa-chevron-down small text-muted ms-1"></i>
-                            </button>
-
-                            <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg rounded-4 p-2 mt-2 animate__animated animate__fadeIn">
-                                <li>
-                                    <a class="dropdown-item rounded-3 d-flex align-items-center gap-2 py-2" href="<?= current_url(); ?>?lang=id">
-                                        <img src="https://flagcdn.com/w20/id.png" alt="ID" style="width: 20px;">
-                                        <span class="small fw-bold">Indonesia</span>
-                                        <?php if ($currentLang == 'id'): ?>
-                                            <i class="fas fa-check text-primary ms-auto small"></i>
-                                        <?php endif; ?>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item rounded-3 d-flex align-items-center gap-2 py-2" href="<?= current_url(); ?>?lang=en">
-                                        <img src="https://flagcdn.com/w20/gb.png" alt="EN" style="width: 20px;">
-                                        <span class="small fw-bold">English</span>
-                                        <?php if ($currentLang == 'en'): ?>
-                                            <i class="fas fa-check text-primary ms-auto small"></i>
-                                        <?php endif; ?>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>-->
-
                         <div class="d-none d-lg-flex align-items-center ms-auto gap-3 btn-login-wrapper">
 
                             <div class="dropdown lang-switcher">
@@ -252,7 +221,7 @@
                                         <span class="ms-3 fw-bold text-dark small">Telepon Kami</span>
                                     </a>
 
-                                    <a href="https://wa.me/62812345678" target="_blank" class="btn btn-light rounded-pill d-flex align-items-center p-2 pe-3 border-0 shadow-sm hover-scale">
+                                    <a href="https://wa.me/<?= $whatsapp; ?>" target="_blank" class="btn btn-light rounded-pill d-flex align-items-center p-2 pe-3 border-0 shadow-sm hover-scale">
                                         <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;">
                                             <i class="fab fa-whatsapp"></i>
                                         </div>
@@ -275,14 +244,32 @@
         <?= $this->renderSection('content'); ?>
     </main>
 
-    <footer class="bg-dark text-white pt-5 pb-3 mt-5 border-top border-primary border-5">
+    <div class="company-tagline-section">
+        <div class="container">
+            <?php
+            $settingModel = new \App\Models\SiteSettingModel();
+            $footerTaglineMain = $settingModel->getVal('company_tagline');
+            $footerFontMain = $settingModel->getVal('company_tagline_font');
+            $footerSizeMain = $settingModel->getVal('company_tagline_size') ?? '36';
+            $footerColorMain = $settingModel->getVal('company_tagline_color') ?? '#ffffff';
+            ?>
+            <?php if ($footerTaglineMain): ?>
+                <h2 class="company-tagline-text" style="<?= $footerFontMain ? "font-family: '$footerFontMain', sans-serif;" : ''; ?> font-size: <?= $footerSizeMain; ?>px; color: <?= $footerColorMain; ?>;">
+                    <?= $footerTaglineMain; ?>
+                </h2>
+            <?php endif; ?>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white pt-5 pb-3 mt-0 border-top border-primary border-5">
         <div class="container">
             <div class="row g-4 justify-content-between">
 
                 <div class="col-lg-4 col-md-6">
                     <div class="mb-4">
-                        <img src="<?= base_url('assets/img/logo-pab.png'); ?>" alt="Logo PAB" height="50" class="bg-white rounded p-2 mb-3">
+                        <img src="<?= base_url('assets/img/logo-pab.png'); ?>" alt="Logo PAB" height="85" class="bg-white rounded p-2 mb-3">
                         <h5 class="fw-bold text-white">PT. PESONA ADI BATARA</h5>
+
                         <p class="text-white-50 small mb-4">
                             <?= lang('Layout.footer.footer_info'); ?>
                         </p>
@@ -347,6 +334,8 @@
                     </ul>
                 </div>
             </div>
+
+
 
             <hr class="border-secondary my-4 opacity-25">
 

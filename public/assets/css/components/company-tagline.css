@@ -1,0 +1,31 @@
+/* Company Tagline Section */
+.company-tagline-section {
+  position: relative;
+  padding: 3rem 0; /* Memberi jarak atas bawah yang cukup */
+  margin-top: 3rem; /* Memisahkan dari section content di atasnya */
+  margin-bottom: -3rem; /* Opsional: Mengurangi gap ke footer jika footer punya top padding */
+  text-align: center;
+  background: transparent;
+  z-index: 10; /* Memastikan di atas elemen lain jika ada overlap */
+}
+
+.company-tagline-text {
+  font-size: 2.5rem; /* Ukuran besar sesuai display-6 */
+  font-weight: 700;
+  color: #ffffff; /* Warna putih */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Drop shadow agar teks lebih terbaca */
+  line-height: 1.2;
+  padding: 1rem;
+  display: inline-block;
+}
+
+/* Responsif untuk mobile */
+@media (max-width: 768px) {
+  .company-tagline-text {
+    font-size: 1.5rem;
+  }
+  .company-tagline-section {
+    padding: 2rem 0;
+    margin-top: 2rem;
+  }
+}

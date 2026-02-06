@@ -125,10 +125,10 @@ if (!empty($hero_img) && file_exists('uploads/services/' . $hero_img)) {
 
         <div class="text-center mt-5">
             <a href="/" class="btn btn-outline-secondary rounded-pill px-4">
-                <i class="fas fa-arrow-left me-2"></i> Kembali ke Beranda
+                <i class="fas fa-arrow-left me-2"></i> <?= lang('Frontend.global.back_to_home'); ?>
             </a>
-            <a href="https://wa.me/62812345678" class="btn btn-pab-primary rounded-pill px-4 ms-2">
-                Hubungi Marketing <i class="fab fa-whatsapp ms-2"></i>
+            <a href="https://wa.me/<?= $whatsapp; ?>" class="btn btn-pab-primary rounded-pill px-4 ms-2">
+                <?= lang('Frontend.service.marketing_contact'); ?> <i class="fab fa-whatsapp ms-2"></i>
             </a>
         </div>
     </div>

@@ -38,12 +38,23 @@ abstract class BaseController extends Controller
 
         // Caution: Do not edit this line.
         parent::initController($request, $response, $logger);
-        
+
         $session = \Config\Services::session();
         $locale = $session->get('lang');
         if ($locale) {
             $request->setLocale($locale);
         }
+
+        // [ANTIGRAVITY] Global Data for Views
+        // Load SiteSettingModel manually since we can't use model() helper in strict BaseController without loading helper
+        $settingModel = new \App\Models\SiteSettingModel();
+
+        // Share data globally to all Views
+        $globalData = [
+            'whatsapp' => $settingModel->getVal('company_whatsapp') ?? '62812345678' // Fallback if DB empty
+        ];
+
+        \Config\Services::renderer()->setData($globalData, 'raw');
 
         // Preload any models, libraries, etc, here.
         // $this->session = service('session');

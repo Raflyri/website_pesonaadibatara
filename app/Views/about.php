@@ -26,7 +26,7 @@
         </span>
 
         <h1 class="display-4 fw-bold mb-3 animate__animated animate__fadeInDown animate__delay-1s">
-            Tentang Kami
+            <?= lang('Frontend.about.title'); ?>
         </h1>
 
         <div class="row justify-content-center">
@@ -51,7 +51,7 @@
                 <img src="<?= $img; ?>" class="img-fluid rounded-4 shadow-lg" alt="Sejarah PAB">
             </div>
             <div class="col-lg-6 ps-lg-5" data-aos="fade-left">
-                <h6 class="text-primary fw-bold text-uppercase mb-2">Sejarah Kami</h6>
+                <h6 class="text-primary fw-bold text-uppercase mb-2"><?= lang('Frontend.about.history_title'); ?></h6>
                 <h2 class="fw-bold mb-4"><?= $history['title_id']; ?></h2>
                 <div class="text-muted">
                     <?= nl2br($history['content_id']); ?>
@@ -59,7 +59,7 @@
 
                 <?php
                 $downloadUrl = '#';
-                $labelButton = 'Download Company Profile';
+                $labelButton = lang('Frontend.about.download_profile');
                 $isDisabled  = false;
 
                 if (!empty($compro_link)) {
@@ -98,7 +98,7 @@
                         <div class="icon-circle bg-blue-light mb-4 mx-auto text-primary">
                             <i class="fas fa-eye fa-2x"></i>
                         </div>
-                        <h3 class="fw-bold mb-3">Visi</h3>
+                        <h3 class="fw-bold mb-3"><?= lang('Frontend.about.vision_title'); ?></h3>
                         <p class="lead text-muted fst-italic">
                             "<?= $vision['content_id']; ?>"
                         </p>
@@ -114,7 +114,7 @@
                             <div class="icon-circle bg-green-light mb-4 mx-auto text-success">
                                 <i class="fas fa-bullseye fa-2x"></i>
                             </div>
-                            <h3 class="fw-bold">Misi</h3>
+                            <h3 class="fw-bold"><?= lang('Frontend.about.mission_title'); ?></h3>
                         </div>
                         <ul class="list-unstyled">
                             <?php

@@ -22,8 +22,18 @@
                 </button>
             </li>
             <li class="nav-item">
+                <button class="nav-link fw-bold" id="kontak-tab" data-bs-toggle="tab" data-bs-target="#kontak" type="button">
+                    <i class="fas fa-phone me-2"></i> Kontak
+                </button>
+            </li>
+            <li class="nav-item">
                 <button class="nav-link fw-bold" id="sosmed-tab" data-bs-toggle="tab" data-bs-target="#sosmed" type="button">
                     <i class="fas fa-share-alt me-2"></i> Social Media
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link fw-bold" id="maps-tab" data-bs-toggle="tab" data-bs-target="#maps" type="button">
+                    <i class="fas fa-map-marker-alt me-2"></i> Google Maps
                 </button>
             </li>
         </ul>
@@ -85,20 +95,50 @@
                                 <textarea name="content_id" class="form-control" rows="4"><?= $intro['content_id']; ?></textarea>
                             </div>
                         </div>
-
-                        <div class="col-md-6 mb-4">
-                            <h5 class="text-primary fw-bold mb-3">Google Maps</h5>
-                            <div class="mb-3">
-                                <label class="fw-bold">Link Embed (Iframe src)</label>
-                                <textarea name="company_maps" class="form-control" rows="4"><?= $maps['setting_value']; ?></textarea>
-                                <small class="text-muted d-block mt-1">
-                                    Cara ambil: Buka Google Maps -> Share -> Embed a map -> Copy isi atribut <code>src="..."</code> saja.
-                                </small>
-                            </div>
-                        </div>
                     </div>
 
                     <div class="text-end">
+                        <button type="submit" class="btn btn-primary rounded-pill px-5 shadow">Simpan Perubahan</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="tab-pane fade" id="kontak">
+                <form action="/panel-pab/contact-editor/update" method="post">
+                    <?= csrf_field(); ?>
+                    <input type="hidden" name="title_id" value="<?= $intro['title_id']; ?>">
+
+                    <h5 class="text-primary fw-bold mb-3 mt-4">Kontak Utama</h5>
+                    <div class="mb-3">
+                        <label class="fw-bold">WhatsApp Company (tanpa + atau 0, cth: 628123...)</label>
+                        <input type="text" name="company_whatsapp" class="form-control" value="<?= $contact['company_whatsapp']; ?>" placeholder="628123456789">
+                    </div>
+                    <div class="mb-3">
+                        <label class="fw-bold">Telepon Kantor</label>
+                        <input type="text" name="company_phone" class="form-control" value="<?= $contact['company_phone']; ?>" placeholder="021-12345678">
+                    </div>
+
+                    <div class="text-end mt-4">
+                        <button type="submit" class="btn btn-primary rounded-pill px-5 shadow">Simpan Perubahan</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="tab-pane fade" id="maps">
+                <form action="/panel-pab/contact-editor/update" method="post">
+                    <?= csrf_field(); ?>
+                    <input type="hidden" name="title_id" value="<?= $intro['title_id']; ?>">
+
+                    <h5 class="text-primary fw-bold mb-3 mt-4">Google Maps</h5>
+                    <div class="mb-3">
+                        <label class="fw-bold">Link Embed (Iframe src)</label>
+                        <textarea name="company_maps" class="form-control" rows="4"><?= $maps['setting_value']; ?></textarea>
+                        <small class="text-muted d-block mt-1">
+                            Cara ambil: Buka Google Maps -> Share -> Embed a map -> Copy isi atribut <code>src="..."</code> saja.
+                        </small>
+                    </div>
+
+                    <div class="text-end mt-4">
                         <button type="submit" class="btn btn-primary rounded-pill px-5 shadow">Simpan Perubahan</button>
                     </div>
                 </form>
