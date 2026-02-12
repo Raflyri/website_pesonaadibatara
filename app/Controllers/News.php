@@ -64,9 +64,20 @@ class News extends BaseController
             'meta_keywords' => 'logistik, ' . $news['category'] . ', ' . $news['title_id'],
 
             'news'  => $news,
-            'recent_news' => $this->newsModel->where('is_active', 1)
+            'related_news' => $this->newsModel
+                ->where('is_active', 1)
+                ->where('category', 'news')
+                ->where('id !=', $news['id'])
+                ->where('date_published <=', date('Y-m-d'))
                 ->orderBy('date_published', 'DESC')
-                ->findAll(3)
+                ->findAll(3),
+            'related_articles' => $this->newsModel
+                ->where('is_active', 1)
+                ->where('category', 'artikel')
+                ->where('id !=', $news['id'])
+                ->where('date_published <=', date('Y-m-d'))
+                ->orderBy('date_published', 'DESC')
+                ->findAll(3),
         ];
 
         return view('news/detail', $data);

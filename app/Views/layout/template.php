@@ -77,7 +77,7 @@
 
                     </a>
 
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
@@ -158,6 +158,27 @@
                                 <a class="nav-link <?= (uri_string() == 'contact') ? 'active' : ''; ?>" href="/contact"><?= lang('Layout.navbar.contact'); ?></a>
                             </li>
                         </ul>
+
+                        <!-- Mobile-only: Language Switcher & Contact Buttons -->
+                        <div class="d-lg-none mobile-menu-extras border-top mt-3 pt-3">
+                            <div class="d-flex align-items-center gap-2 mb-3">
+                                <span class="small fw-bold text-muted text-uppercase">Language:</span>
+                                <a href="<?= base_url('language/id'); ?>" class="btn btn-sm <?= ($currentLang ?? 'id') == 'id' ? 'btn-primary' : 'btn-outline-secondary'; ?> rounded-pill px-3 d-flex align-items-center gap-1">
+                                    <img src="https://flagcdn.com/w20/id.png" alt="ID" style="width: 16px;"> ID
+                                </a>
+                                <a href="<?= base_url('language/en'); ?>" class="btn btn-sm <?= ($currentLang ?? 'id') == 'en' ? 'btn-primary' : 'btn-outline-secondary'; ?> rounded-pill px-3 d-flex align-items-center gap-1">
+                                    <img src="https://flagcdn.com/w20/gb.png" alt="EN" style="width: 16px;"> EN
+                                </a>
+                            </div>
+                            <div class="d-flex flex-column gap-2">
+                                <a href="tel:+622112345678" class="btn btn-outline-primary rounded-pill d-flex align-items-center gap-2 py-2">
+                                    <i class="fas fa-phone"></i> Telepon Kami
+                                </a>
+                                <a href="https://wa.me/<?= $whatsapp ?? ''; ?>" target="_blank" class="btn btn-success rounded-pill d-flex align-items-center gap-2 py-2">
+                                    <i class="fab fa-whatsapp"></i> WhatsApp Kami
+                                </a>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="d-none d-lg-flex align-items-center ms-auto gap-3 btn-login-wrapper">
