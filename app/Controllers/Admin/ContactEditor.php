@@ -84,4 +84,11 @@ class ContactEditor extends BaseController
 
         return redirect()->to('/panel-pab/contact-editor')->with('success', 'Informasi Kontak & Sosmed diperbarui!');
     }
+
+    public function deleteMessage($id)
+    {
+        $this->db->table('messages')->where('id', $id)->delete();
+
+        return redirect()->to('/panel-pab/contact-editor')->with('success', 'Pesan berhasil dihapus.');
+    }
 }

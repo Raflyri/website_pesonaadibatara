@@ -2,249 +2,355 @@
 
 /* --- Wrapper Utama (Floating & Sticky Logic) --- */
 .header-floating-wrapper {
-    z-index: 1030;
-    transition: all 0.3s ease;
+  z-index: 1030;
+  transition: all 0.3s ease;
 }
 
 /* Kotak Kapsul Putih */
 .navbar-rounded-box {
-    background-color: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-radius: 50px;
-    padding: 0.5rem 1rem; 
-    border: 1px solid rgba(0,0,0,0.05);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    transition: all 0.4s ease-in-out;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 50px;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s ease-in-out;
 }
 
 /* Link Navigasi */
 .navbar-rounded-box .nav-link {
-    color: var(--pab-dark) !important;
-    font-weight: 500;
-    margin-left: 5px;
-    padding: 0.5rem 1rem !important;
-    border-radius: 20px;
-    transition: all 0.3s;
+  color: var(--pab-dark) !important;
+  font-weight: 500;
+  margin-left: 5px;
+  padding: 0.5rem 1rem !important;
+  border-radius: 20px;
+  transition: all 0.3s;
 }
 
 .navbar-rounded-box .nav-link:hover,
 .navbar-rounded-box .nav-link.active {
-    color: var(--pab-blue-primary) !important;
-    background-color: rgba(19, 94, 249, 0.05);
-    transform: translateY(0);
+  color: var(--pab-blue-primary) !important;
+  background-color: rgba(19, 94, 249, 0.05);
+  transform: translateY(0);
 }
 
 /* --- Logo & Tagline --- */
 .navbar-brand .logo-transition {
-    height: 95px;        /* Sesuaikan tinggi agar tidak terlalu raksasa */
-    width: auto;         /* Biarkan lebar mengikuti proporsi aslinya */
-    object-fit: contain; /* PENTING: Mencegah gambar gepeng/stretch */
-    margin-bottom: -10px; /* Trik menarik tagline ke atas (mendekat ke logo) */
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  height: 95px; /* Sesuaikan tinggi agar tidak terlalu raksasa */
+  width: auto; /* Biarkan lebar mengikuti proporsi aslinya */
+  object-fit: contain; /* PENTING: Mencegah gambar gepeng/stretch */
+  margin-bottom: -10px; /* Trik menarik tagline ke atas (mendekat ke logo) */
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .navbar-brand:hover img {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 .company-tagline {
-    font-size: 0.7rem;   /* Ukuran dikecilkan sedikit (sebelumnya 0.85rem) biar elegan */
-    font-weight: 700;    /* Bold */
-    color: var(--pab-blue-primary);
-    letter-spacing: 0.5px; /* Renggang huruf sedikit saja */
-    text-transform: uppercase;
-    line-height: 1;      /* Jarak antar baris rapat */
-    margin-top: 0;       /* Hapus jarak atas */
-    padding-top: 0;
-    transition: all 0.3s ease;
-    opacity: 1;
-    display: block;      /* Pastikan block agar margin-top berfungsi */
+  font-size: 0.7rem; /* Ukuran dikecilkan sedikit (sebelumnya 0.85rem) biar elegan */
+  font-weight: 700; /* Bold */
+  color: var(--pab-blue-primary);
+  letter-spacing: 0.5px; /* Renggang huruf sedikit saja */
+  text-transform: uppercase;
+  line-height: 1; /* Jarak antar baris rapat */
+  margin-top: 0; /* Hapus jarak atas */
+  padding-top: 0;
+  transition: all 0.3s ease;
+  opacity: 1;
+  display: block; /* Pastikan block agar margin-top berfungsi */
 }
 
 /* --- Dropdown Menu Styling --- */
 @media (min-width: 992px) {
-    .nav-item.dropdown:hover .dropdown-menu {
-        display: block;
-        margin-top: 0;
-        animation: fadeIn 0.3s ease;
-    }
+  .nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+    animation: fadeIn 0.3s ease;
+  }
 }
 
 .dropdown-menu {
-    min-width: 260px;
-    margin-top: 10px;
+  min-width: 260px;
+  margin-top: 10px;
 }
 
 .dropdown-item {
-    transition: all 0.2s;
-    color: var(--pab-dark);
+  transition: all 0.2s;
+  color: var(--pab-dark);
 }
 
 .dropdown-item:hover {
-    background-color: var(--pab-gray);
-    transform: translateX(5px);
+  background-color: var(--pab-gray);
+  transform: translateX(5px);
 }
 
-.dropdown-item.active, 
+.dropdown-item.active,
 .dropdown-item:active {
-    color: var(--pab-blue-primary) !important;
-    background-color: transparent !important;
-    font-weight: 600;
+  color: var(--pab-blue-primary) !important;
+  background-color: transparent !important;
+  font-weight: 600;
 }
 
 .icon-small {
-    width: 35px;
-    height: 35px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
+  width: 35px;
+  height: 35px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
 }
 
 /* --- Language Switcher --- */
 .lang-switcher {
-    transition: all 0.3s ease;
-    opacity: 1;
-    visibility: visible;
-    width: auto;
+  transition: all 0.3s ease;
+  opacity: 1;
+  visibility: visible;
+  width: auto;
 }
 
 .lang-switcher .dropdown-toggle::after {
-    display: none; 
+  display: none;
 }
 
 /* --- Contact Popup Hover --- */
 .contact-hover-wrapper {
-    padding-bottom: 0;
+  padding-bottom: 0;
 }
 
 .contact-popup-menu {
-    position: absolute;
-    top: 120%;
-    right: 0;
-    width: 220px;
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 20px;
-    padding: 15px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(10px);
-    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    z-index: 1000;
+  position: absolute;
+  top: 120%;
+  right: 0;
+  width: 220px;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  padding: 15px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  z-index: 1000;
 }
 
 .contact-hover-wrapper:hover .contact-popup-menu {
-    opacity: 1;
-    visibility: visible;
-    top: 110%;
-    transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+  top: 110%;
+  transform: translateY(0);
 }
 
 .contact-popup-menu::before {
-    content: "";
-    position: absolute;
-    top: -8px;
-    right: 30px;
-    width: 15px;
-    height: 15px;
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(15px);
-    transform: rotate(45deg);
-    border-top: 1px solid rgba(255, 255, 255, 0.5);
-    border-left: 1px solid rgba(255, 255, 255, 0.5);
+  content: "";
+  position: absolute;
+  top: -8px;
+  right: 30px;
+  width: 15px;
+  height: 15px;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(15px);
+  transform: rotate(45deg);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 /* --- STICKY STATE (Saat Scroll Down) --- */
 .sticky-active {
-    margin-top: 0 !important;
+  margin-top: 0 !important;
 }
 
 .sticky-active .navbar-rounded-box {
-    border-radius: 0 0 20px 20px;
-    background-color: rgba(255, 255, 255, 1);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    padding-top: 0.5rem !important;
-    padding-bottom: 0.5rem !important;
+  border-radius: 0 0 20px 20px;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
 }
 
 .sticky-active .navbar-brand .logo-transition {
-    height: 45px; 
-    margin-bottom: 0; /* Reset margin saat sticky */
+  height: 45px;
+  margin-bottom: 0; /* Reset margin saat sticky */
 }
 
 /* Sembunyikan Tagline & Lang Switcher saat sticky */
 .sticky-active .company-tagline,
 .sticky-active .lang-switcher {
-    opacity: 0;
-    height: 0;
-    width: 0;
-    overflow: hidden;
-    margin: 0 !important;
-    padding: 0 !important;
-    visibility: hidden;
+  opacity: 0;
+  height: 0;
+  width: 0;
+  overflow: hidden;
+  margin: 0 !important;
+  padding: 0 !important;
+  visibility: hidden;
 }
 
 .sticky-active .header-actions .btn-morph {
-    padding: 8px 12px !important;
-    border-radius: 50% !important;
-    width: 42px;
-    height: 42px;
-    justify-content: center;
+  padding: 8px 12px !important;
+  border-radius: 50% !important;
+  width: 42px;
+  height: 42px;
+  justify-content: center;
 }
 
 /* --- FIX NAVBAR BRAND VERTICAL COMPACT --- */
 
 .navbar-brand {
-    /* Pastikan tidak ada padding bawaan yang mengganggu */
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    margin-right: 1.5rem;
-    
-    /* Trik agar simetris dengan Menu: Gunakan flex center */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    
-    /* Kunci tinggi total area logo agar sama dengan tinggi menu (misal 45px) */
-    height: 45px; 
+  /* Pastikan tidak ada padding bawaan yang mengganggu */
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-right: 1.5rem;
+
+  /* Trik agar simetris dengan Menu: Gunakan flex center */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  /* Kunci tinggi total area logo agar sama dengan tinggi menu (misal 45px) */
+  height: 45px;
 }
 
 /* 1. Atur Logo jadi lebih Compact */
 .logo-transition {
-    height: 26px; /* Ukuran dikecilkan agar muat dengan teks */
-    width: auto;
-    object-fit: contain;
-    transition: all 0.3s ease;
-    display: block;
+  height: 26px; /* Ukuran dikecilkan agar muat dengan teks */
+  width: auto;
+  object-fit: contain;
+  transition: all 0.3s ease;
+  display: block;
 }
 
 /* 2. Atur Tagline jadi Micro-Text */
 .company-tagline {
-    font-size: 10px; /* Ukuran kecil tapi terbaca */
-    color: var(--pab-dark);
-    font-weight: 600; /* Ditebalkan agar tetap jelas meski kecil */
-    text-transform: uppercase; /* Agar terlihat rapi/kotak */
-    letter-spacing: 1px; /* Memberi kesan elegan */
-    line-height: 1; /* Jarak baris sangat rapat */
-    text-align: center;
-    max-width: 150px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  font-size: 10px; /* Ukuran kecil tapi terbaca */
+  color: var(--pab-dark);
+  font-weight: 600; /* Ditebalkan agar tetap jelas meski kecil */
+  text-transform: uppercase; /* Agar terlihat rapi/kotak */
+  letter-spacing: 1px; /* Memberi kesan elegan */
+  line-height: 1; /* Jarak baris sangat rapat */
+  text-align: center;
+  max-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* --- STICKY STATE (Saat Scroll) --- */
 /* Saat scroll, kita kecilkan sedikit lagi agar makin manis */
 .sticky-active .logo-transition {
-    height: 22px; 
+  height: 22px;
 }
 
 .sticky-active .company-tagline {
-    font-size: 9px;
+  font-size: 9px;
+}
+
+/* ========================================
+   MOBILE RESPONSIVE (max-width: 991.98px)
+   ======================================== */
+@media (max-width: 991.98px) {
+  /* Navbar wrapper: remove top margin on mobile */
+  .header-floating-wrapper {
+    margin-top: 0 !important;
+  }
+
+  /* Full-width navbar with square top corners */
+  .navbar-rounded-box {
+    border-radius: 0 0 20px 20px;
+    padding: 0.5rem 0.75rem;
+  }
+
+  /* Sticky on mobile: fully flat */
+  .sticky-active .navbar-rounded-box {
+    border-radius: 0;
+  }
+
+  /* Logo smaller on mobile */
+  .navbar-brand {
+    height: auto;
+    margin-right: 0;
+  }
+
+  .navbar-brand .logo-transition,
+  .logo-transition {
+    height: 28px;
+  }
+
+  /* Tagline smaller on mobile */
+  .company-tagline {
+    font-size: 8px;
+    max-width: 120px;
+  }
+
+  /* Collapse menu styling */
+  .navbar-collapse {
+    background: #fff;
+    border-radius: 16px;
+    margin-top: 10px;
+    padding: 1rem;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  /* Nav links stack vertically */
+  .navbar-nav {
+    gap: 0 !important;
+  }
+
+  .navbar-rounded-box .nav-link {
+    margin-left: 0;
+    padding: 0.75rem 1rem !important;
+    border-radius: 12px;
+    font-size: 0.95rem;
+  }
+
+  .navbar-rounded-box .nav-link:hover,
+  .navbar-rounded-box .nav-link.active {
+    background-color: rgba(19, 94, 249, 0.08);
+  }
+
+  /* Dropdown menu: inline on mobile */
+  .dropdown-menu {
+    position: static !important;
+    float: none;
+    width: 100%;
+    box-shadow: none !important;
+    border: none;
+    padding: 0 0 0 1rem;
+    margin-top: 0;
+    background: transparent;
+    animation: none !important;
+  }
+
+  .dropdown-item {
+    border-radius: 10px;
+    padding: 0.6rem 0.75rem;
+  }
+
+  /* Mobile menu extras (language & contact) */
+  .mobile-menu-extras {
+    border-color: rgba(0, 0, 0, 0.08) !important;
+    padding-bottom: 0.5rem;
+  }
+
+  /* Navbar toggler styling */
+  .navbar-toggler {
+    border: none;
+    padding: 0.25rem 0.5rem;
+    box-shadow: none !important;
+  }
+
+  .navbar-toggler:focus {
+    box-shadow: none !important;
+  }
+
+  .navbar-toggler-icon {
+    width: 1.25em;
+    height: 1.25em;
+  }
 }
