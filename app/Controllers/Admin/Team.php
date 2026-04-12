@@ -20,7 +20,7 @@ class Team extends BaseController
             'title' => 'Kelola Direksi & Tim',
             'teams' => $this->teamModel->orderBy('urutan', 'ASC')->findAll()
         ];
-        return view('admin/team/index', $data);
+        return view('panel-pab/team/index', $data);
     }
 
     public function create()
@@ -30,7 +30,7 @@ class Team extends BaseController
             // Kirim data karyawan lain untuk jadi pilihan atasan
             'parents' => $this->teamModel->orderBy('name', 'ASC')->findAll() 
         ];
-        return view('admin/team/form', $data);
+        return view('panel-pab/team/form', $data);
     }
 
     public function save($id = null)
@@ -84,13 +84,13 @@ class Team extends BaseController
             $this->teamModel->insert($data);
         }
 
-        return redirect()->to('/admin/team')->with('success', 'Data Direksi berhasil disimpan.');
+        return redirect()->to('/panel-pab/team')->with('success', 'Data Direksi berhasil disimpan.');
     }
 
     public function edit($id)
     {
         $team = $this->teamModel->find($id);
-        if (!$team) return redirect()->to('/admin/team');
+        if (!$team) return redirect()->to('/panel-pab/team');
 
         $data = [
             'title' => 'Edit Direksi',
@@ -98,7 +98,7 @@ class Team extends BaseController
             // Kirim data karyawan lain (kecuali dirinya sendiri biar ga error loop)
             'parents' => $this->teamModel->where('id !=', $id)->orderBy('name', 'ASC')->findAll()
         ];
-        return view('admin/team/form', $data);
+        return view('panel-pab/team/form', $data);
     }
 
     public function delete($id)
@@ -108,6 +108,6 @@ class Team extends BaseController
             unlink('uploads/teams/' . $team['image']);
         }
         $this->teamModel->delete($id);
-        return redirect()->to('/admin/team')->with('success', 'Data berhasil dihapus.');
+        return redirect()->to('/panel-pab/team')->with('success', 'Data berhasil dihapus.');
     }
 }

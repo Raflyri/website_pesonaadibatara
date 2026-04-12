@@ -1,0 +1,530 @@
+/* ==============================================
+   about.css - Styles specific to the About Page
+   PT. Pesona Adi Batara
+   ============================================== */
+
+/* --- ABOUT PAGE HERO SECTION --- */
+.about-hero {
+  padding-top: 160px;
+  padding-bottom: 100px;
+}
+
+.about-hero .hero-bg {
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+}
+
+.about-hero .hero-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 50, 100, 0.9)
+  );
+  z-index: 2;
+}
+
+.about-hero .hero-content {
+  z-index: 3;
+}
+
+/* --- HISTORY SECTION --- */
+.about-history-section {
+  background-color: #fff;
+}
+
+.about-history-section .history-image {
+  border-radius: 1.5rem;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.about-history-section .history-image:hover {
+  transform: scale(1.02);
+}
+
+/* --- VISION & MISSION CARDS --- */
+.vision-mission-section {
+  background-color: var(--pab-gray, #f1f5f9);
+}
+
+.vision-card,
+.mission-card {
+  height: 100%;
+  border: none;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.vision-card:hover,
+.mission-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.vision-card .card-body,
+.mission-card .card-body {
+  padding: 2.5rem;
+}
+
+.vision-card .icon-circle,
+.mission-card .icon-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.vision-card:hover .icon-circle,
+.mission-card:hover .icon-circle {
+  transform: scale(1.1);
+}
+
+/* Bottom accent bar */
+.vision-card .accent-bar {
+  height: 4px;
+  width: 100%;
+  background-color: var(--pab-blue-primary, #135ef9);
+}
+
+.mission-card .accent-bar {
+  height: 4px;
+  width: 100%;
+  background-color: #198754; /* Bootstrap success green */
+}
+
+/* Mission list styling */
+.mission-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mission-list li {
+  display: flex;
+  margin-bottom: 0.75rem;
+  color: #6c757d;
+}
+
+.mission-list li i {
+  margin-top: 0.25rem;
+  margin-right: 0.75rem;
+  color: #198754;
+}
+
+/* --- ORGANIZATIONAL CHART TREE --- */
+.org-section {
+  background: linear-gradient(
+    180deg,
+    rgba(241, 245, 249, 1) 0%,
+    rgba(19, 94, 249, 0.35) 15%,
+    rgba(63, 131, 254, 0.4) 40%,
+    rgba(107, 159, 255, 0.35) 60%,
+    rgba(241, 245, 249, 0.5) 85%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  position: relative;
+  overflow: visible;
+  margin-top: -1px;
+  margin-bottom: -1px;
+}
+
+/* Smooth top edge transition from previous section (bg-light) */
+.org-section::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(
+    to bottom,
+    rgba(248, 249, 250, 1) 0%,
+    rgba(248, 249, 250, 0.8) 30%,
+    rgba(248, 249, 250, 0) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Smooth bottom edge transition to next section (white) */
+.org-section::after {
+  content: "";
+  position: absolute;
+  bottom: -40px;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0.8) 30%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Ensure content stays above the overlay */
+.org-section > .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Section Title - Eye-catching Badge */
+.org-section-badge {
+  display: inline-block;
+  padding: 10px 24px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.org-section-badge:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.org-section-badge i {
+  color: #ffd700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Section Title - Main Heading */
+.org-section-title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #ffffff;
+  text-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.2),
+    0 4px 20px rgba(19, 94, 249, 0.3);
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+
+/* Section Title - Decorative Divider */
+.org-section-divider {
+  width: 120px;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #ffd700 20%,
+    #ffffff 50%,
+    #ffd700 80%,
+    transparent 100%
+  );
+  border-radius: 2px;
+  margin-top: 0.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.org-section-divider::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.8),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.org-tree-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.org-tree ul {
+  padding-top: 20px;
+  position: relative;
+  transition: all 0.5s;
+  display: flex;
+  justify-content: center;
+  padding-left: 0 !important;
+}
+
+.org-tree li {
+  float: left;
+  text-align: center;
+  list-style-type: none;
+  position: relative;
+  padding: 20px 10px 0 10px;
+  transition: all 0.5s;
+}
+
+/* Connector Lines (Vertical & Horizontal) */
+.org-tree li::before,
+.org-tree li::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 50%;
+  border-top: 2px solid #ccc;
+  width: 50%;
+  height: 20px;
+}
+
+.org-tree li::after {
+  right: auto;
+  left: 50%;
+  border-left: 2px solid #ccc;
+}
+
+.org-tree li:only-child::after,
+.org-tree li:only-child::before {
+  display: none;
+}
+
+.org-tree li:only-child {
+  padding-top: 0;
+}
+
+.org-tree li:first-child::before,
+.org-tree li:last-child::after {
+  border: 0 none;
+}
+
+.org-tree li:last-child::before {
+  border-right: 2px solid #ccc;
+  border-radius: 0 5px 0 0;
+}
+
+.org-tree li:first-child::after {
+  border-radius: 5px 0 0 0;
+}
+
+.org-tree ul ul::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  border-left: 2px solid #ccc;
+  width: 0;
+  height: 20px;
+}
+
+/* Member Card */
+.member-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  padding: 20px;
+  border-radius: 16px;
+  width: 220px;
+  min-height: 200px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  display: inline-block;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+}
+
+/* Image box container */
+.member-card .img-box {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  transition: all 0.4s ease;
+}
+
+.member-card .img-box img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #f8f9fa;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Info box (name & position) */
+.member-card .info-box {
+  transition: all 0.4s ease;
+  position: relative;
+  z-index: 5;
+}
+
+.member-card h5 {
+  font-size: 1.15rem;
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #1e293b;
+  transition: all 0.3s ease;
+}
+
+.member-card span {
+  font-size: 0.85rem;
+  color: var(--pab-blue-primary, #135ef9);
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+/* === HOVER EFFECT: Image fills the box === */
+.member-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(19, 94, 249, 0.25);
+  border-color: var(--pab-blue-primary, #135ef9);
+}
+
+/* On hover - Image expands to fill the card */
+.member-card:hover .img-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.member-card:hover .img-box img {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  border: none;
+  margin: 0;
+  box-shadow: none;
+}
+
+/* On hover - Info box becomes overlay at bottom */
+.member-card:hover .info-box {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 15px;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.85) 0%,
+    rgba(0, 0, 0, 0.6) 60%,
+    transparent 100%
+  );
+  border-radius: 0 0 16px 16px;
+  z-index: 10;
+}
+
+.member-card:hover h5 {
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  margin-bottom: 2px;
+}
+
+.member-card:hover span {
+  color: #60a5fa;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Smaller card for lower levels (Manager/Staff) */
+.small-card {
+  width: 180px;
+  padding: 15px;
+  min-height: 170px;
+}
+
+.small-card .img-box img {
+  width: 70px;
+  height: 70px;
+}
+
+.small-card h5 {
+  font-size: 0.9rem;
+}
+
+.small-card span {
+  font-size: 0.65rem;
+}
+
+/* --- RESPONSIVE ADJUSTMENTS --- */
+@media (max-width: 991.98px) {
+  .about-hero {
+    padding-top: 120px;
+    padding-bottom: 60px;
+  }
+
+  .org-tree-wrapper {
+    overflow-x: auto;
+    padding-bottom: 20px;
+  }
+
+  .org-tree {
+    min-width: 800px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .about-hero h1 {
+    font-size: 2rem;
+  }
+
+  .member-card {
+    width: 180px;
+    padding: 15px;
+  }
+
+  .member-card .img-box img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .small-card {
+    width: 150px;
+    padding: 12px;
+  }
+
+  .small-card .img-box img {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+/* --- COMPANY PROFILE DOWNLOAD BUTTON --- */
+.btn-download-profile {
+  transition: all 0.3s ease;
+}
+
+.btn-download-profile:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(19, 94, 249, 0.3);
+}
+
+.btn-download-profile.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

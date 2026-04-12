@@ -43,11 +43,16 @@ class ContactEditor extends BaseController
             'title'    => 'Kelola Kontak & Sosmed',
             'intro'    => $intro,
             'maps'     => $maps,
-            'sosmed'   => $sosmed, // [BARU] Kirim ke view
+            'sosmed'   => $sosmed,
+            // [BARU] Kontak
+            'contact'  => [
+                'company_whatsapp' => $this->db->table('site_settings')->where('setting_key', 'company_whatsapp')->get()->getRow()->setting_value ?? '',
+                'company_phone'    => $this->db->table('site_settings')->where('setting_key', 'company_phone')->get()->getRow()->setting_value ?? ''
+            ],
             'messages' => $messages ?? []
         ];
 
-        return view('admin/contact/index', $data);
+        return view('panel-pab/contact/index', $data);
     }
 
     public function updateContent()
@@ -63,6 +68,27 @@ class ContactEditor extends BaseController
             $this->db->table('site_settings')->where('setting_key', $key)->update(['setting_value' => $val]);
         }
 
-        return redirect()->to('/admin/contact-editor')->with('success', 'Informasi Kontak & Sosmed diperbarui!');
+        // [BARU] Update Kontak (WhatsApp & Phone)
+        $contactKeys = ['company_whatsapp', 'company_phone'];
+        foreach ($contactKeys as $key) {
+            $val = $this->request->getPost($key);
+            // Cek ada tidak, kalau tidak ada insert, kalau ada update
+            $exists = $this->db->table('site_settings')->where('setting_key', $key)->countAllResults() > 0;
+
+            if ($exists) {
+                $this->db->table('site_settings')->where('setting_key', $key)->update(['setting_value' => $val]);
+            } else {
+                $this->db->table('site_settings')->insert(['setting_key' => $key, 'setting_value' => $val]);
+            }
+        }
+
+        return redirect()->to('/panel-pab/contact-editor')->with('success', 'Informasi Kontak & Sosmed diperbarui!');
+    }
+
+    public function deleteMessage($id)
+    {
+        $this->db->table('messages')->where('id', $id)->delete();
+
+        return redirect()->to('/panel-pab/contact-editor')->with('success', 'Pesan berhasil dihapus.');
     }
 }

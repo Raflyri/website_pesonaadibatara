@@ -1,0 +1,130 @@
+/* public/assets/css/dashboard.css */
+
+/* --- HERO SECTION (BANNER ATAS) --- */
+.dashboard-hero {
+    background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop'); /* Gambar Gedung sama dengan Login */
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+    padding: 3rem 2.5rem;
+    position: relative;
+    color: white;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 30px rgba(19, 94, 249, 0.15);
+    overflow: hidden;
+}
+
+/* Overlay Biru Gelap Transparan */
+.dashboard-hero::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to right, rgba(11, 40, 100, 0.95), rgba(19, 94, 249, 0.6));
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+/* --- STATS CARDS (4 PILAR STYLE) --- */
+.stat-card-modern {
+    background: white;
+    border: none;
+    border-radius: 16px;
+    padding: 1.5rem;
+    height: 100%;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+}
+
+.stat-card-modern:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+}
+
+/* Garis Indikator Warna di Kiri */
+.stat-border-primary { border-left: 5px solid #135ef9; } /* Transport/News */
+.stat-border-success { border-left: 5px solid #10b981; } /* Health/Services */
+.stat-border-warning { border-left: 5px solid #f59e0b; } /* Visitor */
+.stat-border-info    { border-left: 5px solid #6366f1; } /* Users */
+
+.icon-box-modern {
+    width: 50px; height: 50px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.bg-light-primary { background: #e0e7ff; color: #135ef9; }
+.bg-light-success { background: #d1fae5; color: #10b981; }
+.bg-light-warning { background: #fef3c7; color: #f59e0b; }
+.bg-light-info    { background: #e0e7ff; color: #6366f1; }
+
+/* --- ACTIVITY TIMELINE --- */
+.timeline-item {
+    padding-left: 2rem;
+    padding-bottom: 2rem;
+    position: relative;
+    border-left: 2px solid #e2e8f0;
+}
+
+.timeline-item:last-child {
+    border-left: 2px solid transparent;
+}
+
+.timeline-dot {
+    width: 12px; height: 12px;
+    background: #135ef9;
+    border-radius: 50%;
+    position: absolute;
+    left: -7px;
+    top: 5px;
+    box-shadow: 0 0 0 4px rgba(19, 94, 249, 0.2);
+}
+
+/* --- SERVER MONITOR WIDGET --- */
+.server-card {
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    color: white;
+    border-radius: 16px;
+}
+
+.progress-thin {
+    height: 6px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar-glow {
+    box-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+/* --- QUICK ACTION BUTTONS --- */
+.btn-quick {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+    background: white;
+    border: 1px solid #f1f5f9;
+    border-radius: 12px;
+    padding: 1.5rem;
+    color: #64748b;
+    transition: all 0.2s;
+    height: 100%;
+    text-decoration: none;
+}
+
+.btn-quick:hover {
+    border-color: #135ef9;
+    color: #135ef9;
+    background: #f8fafc;
+    transform: translateY(-2px);
+}

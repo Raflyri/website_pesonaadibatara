@@ -1,0 +1,18 @@
+/* Styling khusus Footer */
+.main-footer {
+    /* Tambahkan background agar konten yang discroll tidak tembus pandang */
+    background-color: var(--bg-body); 
+    
+    /* Berikan garis batas atas agar tegas */
+    border-top: 1px solid var(--border-color); 
+    
+    /* Posisi & Padding */
+    padding: 1rem 2rem;
+    flex-shrink: 0; /* Mencegah footer gepeng jika layar pendek */
+    z-index: 10;
+}
+
+/* Dark Mode Footer */
+[data-theme="dark"] .main-footer {
+    border-top-color: rgba(255,255,255,0.05);
+}

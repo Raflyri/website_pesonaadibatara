@@ -26,7 +26,7 @@ class Profile extends BaseController
             'user'  => $user
         ];
 
-        return view('admin/profile/index', $data);
+        return view('panel-pab/profile/index', $data);
     }
 
     public function update()
@@ -72,7 +72,7 @@ class Profile extends BaseController
             session()->set('admin_avatar', $dataUpdate['avatar']);
         }
 
-        return redirect()->to('/admin/profile')->with('success', 'Profil berhasil diperbarui!');
+        return redirect()->to('/panel-pab/profile')->with('success', 'Profil berhasil diperbarui!');
     }
 
     public function password()
@@ -103,6 +103,6 @@ class Profile extends BaseController
             'password' => $newPassHash
         ]);
 
-        return redirect()->to('/admin/profile')->with('success', 'Password berhasil diubah!');
+        return redirect()->to('/panel-pab/profile')->with('success', 'Password berhasil diubah!');
     }
 }

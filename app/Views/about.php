@@ -1,12 +1,45 @@
 <?= $this->extend('layout/template'); ?>
 
+<?= $this->section('styles'); ?>
+<link rel="stylesheet" href="<?= base_url('assets/css/about.css'); ?>">
+<?= $this->endSection(); ?>
+
 <?= $this->section('content'); ?>
 
-<section class="py-5 bg-primary text-white position-relative overflow-hidden">
-    <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200') center/cover;"></div>
-    <div class="container position-relative z-2 py-5 text-center">
-        <h1 class="display-4 fw-bold animate__animated animate__fadeInDown">Tentang Kami</h1>
-        <p class="lead animate__animated animate__fadeInUp">Mengenal lebih dekat PT. Pesona Adi Batara</p>
+<section class="position-relative text-white text-center overflow-hidden" style="padding-top: 160px; padding-bottom: 100px;">
+
+    <div class="position-absolute top-0 start-0 w-100 h-100"
+        style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200'); 
+                background-size: cover; 
+                background-position: center; 
+                z-index: 1;">
+    </div>
+
+    <div class="position-absolute top-0 start-0 w-100 h-100"
+        style="background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,50,100,0.9)); 
+                z-index: 2;">
+    </div>
+
+    <div class="container position-relative" style="z-index: 3;">
+        <span class="badge rounded-pill bg-info text-dark mb-3 px-3 py-2 animate__animated animate__fadeInDown">
+            <i class="fas fa-building me-2"></i>PROFIL PERUSAHAAN
+        </span>
+
+        <h1 class="display-4 fw-bold mb-3 animate__animated animate__fadeInDown animate__delay-1s">
+            <?= lang('Frontend.about.title'); ?>
+        </h1>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <p class="lead opacity-75 mb-4 animate__animated animate__fadeInUp animate__delay-1s">
+                    Mengenal lebih dekat PT. Pesona Adi Batara sebagai mitra transportasi terpercaya.
+                </p>
+            </div>
+        </div>
+
+        <div class="animate__animated animate__fadeInUp animate__delay-2s mt-2">
+            <i class="fas fa-chevron-down fa-2x opacity-50"></i>
+        </div>
     </div>
 </section>
 
@@ -18,17 +51,38 @@
                 <img src="<?= $img; ?>" class="img-fluid rounded-4 shadow-lg" alt="Sejarah PAB">
             </div>
             <div class="col-lg-6 ps-lg-5" data-aos="fade-left">
-                <h6 class="text-primary fw-bold text-uppercase mb-2">Sejarah Kami</h6>
+                <h6 class="text-primary fw-bold text-uppercase mb-2"><?= lang('Frontend.about.history_title'); ?></h6>
                 <h2 class="fw-bold mb-4"><?= $history['title_id']; ?></h2>
                 <div class="text-muted">
                     <?= nl2br($history['content_id']); ?>
                 </div>
 
-                <div class="mt-4 p-3 bg-light rounded border-start border-4 border-primary">
-                    <p class="mb-0 small fw-bold text-dark">
-                        <i class="fas fa-certificate me-2 text-primary"></i>
-                        Disahkan Kemenkumham: C2-4.195 HT.01.01 TH 97
-                    </p>
+                <?php
+                $downloadUrl = '#';
+                $labelButton = lang('Frontend.about.download_profile');
+                $isDisabled  = false;
+
+                if (!empty($compro_link)) {
+                    $downloadUrl = $compro_link;
+                } elseif (!empty($compro_file) && file_exists('uploads/doc/' . $compro_file)) {
+                    $downloadUrl = base_url('uploads/doc/' . $compro_file);
+                } else {
+                    $isDisabled = true;
+                    $labelButton = 'Company Profile (Belum Tersedia)';
+                }
+                ?>
+
+                <div class="mt-4">
+                    <a href="<?= $downloadUrl; ?>"
+                        target="_blank"
+                        class="btn btn-primary shadow-sm py-2 px-4 rounded-pill <?= $isDisabled ? 'disabled' : ''; ?>">
+                        <i class="fas fa-file-pdf me-2"></i> <?= $labelButton; ?>
+                    </a>
+
+                    <div class="mt-2 text-muted small">
+                        <i class="fas fa-info-circle me-1"></i> Format PDF
+                        <?php if (!empty($compro_link)) : ?> (Via Google Drive) <?php endif; ?>
+                    </div>
                 </div>
             </div>
         </div>
@@ -44,7 +98,7 @@
                         <div class="icon-circle bg-blue-light mb-4 mx-auto text-primary">
                             <i class="fas fa-eye fa-2x"></i>
                         </div>
-                        <h3 class="fw-bold mb-3">Visi</h3>
+                        <h3 class="fw-bold mb-3"><?= lang('Frontend.about.vision_title'); ?></h3>
                         <p class="lead text-muted fst-italic">
                             "<?= $vision['content_id']; ?>"
                         </p>
@@ -60,7 +114,7 @@
                             <div class="icon-circle bg-green-light mb-4 mx-auto text-success">
                                 <i class="fas fa-bullseye fa-2x"></i>
                             </div>
-                            <h3 class="fw-bold">Misi</h3>
+                            <h3 class="fw-bold"><?= lang('Frontend.about.mission_title'); ?></h3>
                         </div>
                         <ul class="list-unstyled">
                             <?php
@@ -82,11 +136,14 @@
     </div>
 </section>
 
-<section class="py-5 bg-white">
+<section class="py-5 org-section">
     <div class="container py-4">
         <div class="text-center mb-5" data-aos="fade-up">
-            <h6 class="text-primary fw-bold text-uppercase">Organisasi</h6>
-            <h2 class="fw-bold">Struktur Dewan Direksi</h2>
+            <span class="org-section-badge">
+                <i class="fas fa-sitemap me-2"></i>Organisasi
+            </span>
+            <h2 class="org-section-title mt-3">Struktur Dewan Direksi</h2>
+            <div class="org-section-divider mx-auto"></div>
         </div>
 
         <div class="org-tree-wrapper overflow-auto pb-5" data-aos="zoom-in">
@@ -103,8 +160,8 @@
                         // Gambar Kotak Member
                         $foto = $item['image'] ? base_url('uploads/teams/' . $item['image']) : 'https://ui-avatars.com/api/?name=' . urlencode($item['name']);
 
-                        // Cek Level untuk styling (Level 1 & 2 besar, sisanya kecil)
-                        $cardClass = ($item['level'] > 2) ? 'member-card small-card' : 'member-card';
+                        // Cek Level untuk styling (Semua level menggunakan style yang sama)
+                        $cardClass = 'member-card';
 
                         echo '
                         <div class="' . $cardClass . '">

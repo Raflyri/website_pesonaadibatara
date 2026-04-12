@@ -53,22 +53,47 @@ class ContentSecurityPolicy extends BaseConfig
      * Lists allowed scripts' URLs.
      *
      * @var list<string>|string
+     * public $scriptSrc = 'self';
      */
-    public $scriptSrc = 'self';
+    // 1. Izinkan script dari domain sendiri (self) dan CDN
+    public array $scriptSrc = [
+        'self',
+        'cdn.jsdelivr.net',
+        'unpkg.com',
+        'cdnjs.cloudflare.com',
+        'unsafe-inline',
+        'unsafe-eval',
+    ];
 
     /**
      * Lists allowed stylesheets' URLs.
      *
      * @var list<string>|string
+     * public $styleSrc = 'self';
      */
-    public $styleSrc = 'self';
+    // 2. Izinkan CSS dari domain sendiri, Google Fonts, dan CDN
+    public array $styleSrc = [
+        'self',
+        'fonts.googleapis.com',
+        'cdn.jsdelivr.net',
+        'unpkg.com',
+        'cdnjs.cloudflare.com',
+        'unsafe-inline'
+    ];
 
     /**
      * Defines the origins from which images can be loaded.
      *
      * @var list<string>|string
+     * public $imageSrc = 'self';
      */
-    public $imageSrc = 'self';
+    // 3. Izinkan Gambar dari domain sendiri dan FlagCDN
+    public array $imageSrc = [
+        'self',
+        'flagcdn.com',
+        'images.unsplash.com',
+        'data:', // Penting! Mengizinkan gambar format base64
+    ];
 
     /**
      * Restricts the URLs that can appear in a page's `<base>` element.
@@ -91,15 +116,31 @@ class ContentSecurityPolicy extends BaseConfig
      * WebSockets, and EventSource).
      *
      * @var list<string>|string
+     * public $connectSrc = 'self';
      */
-    public $connectSrc = 'self';
+    // 5. Izinkan koneksi data (AJAX/WebSocket) - biasanya 'self' cukup
+    public array $connectSrc = [
+        'self',
+        'cdn.jsdelivr.net',
+        'unpkg.com',
+        'cdnjs.cloudflare.com',
+        'fonts.googleapis.com',
+        'fonts.gstatic.com',
+    ];
 
     /**
      * Specifies the origins that can serve web fonts.
      *
      * @var list<string>|string
+     * public $fontSrc;
      */
-    public $fontSrc;
+    // 4. Izinkan Font dari Google Fonts dan FontAwesome
+    public array $fontSrc = [
+        'self',
+        'fonts.gstatic.com',
+        'cdnjs.cloudflare.com',
+        'data:',
+    ];
 
     /**
      * Lists valid endpoints for submission from `<form>` tags.
@@ -124,7 +165,12 @@ class ContentSecurityPolicy extends BaseConfig
      *
      * @var list<string>|string|null
      */
-    public $frameSrc;
+    public $frameSrc = [
+        'self',
+        'google.com',
+        'www.google.com',
+        'maps.google.com',
+    ];
 
     /**
      * Restricts the origins allowed to deliver video and audio.
@@ -172,5 +218,5 @@ class ContentSecurityPolicy extends BaseConfig
     /**
      * Replace nonce tag automatically
      */
-    public bool $autoNonce = true;
+    public bool $autoNonce = false;
 }

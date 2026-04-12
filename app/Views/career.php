@@ -2,10 +2,40 @@
 
 <?= $this->section('content'); ?>
 
-<section class="py-5 bg-light text-center">
-    <div class="container py-5">
-        <h1 class="fw-bold display-5 animate__animated animate__fadeInDown">Karir Bersama Kami</h1>
-        <p class="lead text-muted mb-0 animate__animated animate__fadeInUp">Bergabunglah menjadi bagian dari pertumbuhan PT. Pesona Adi Batara</p>
+<section class="position-relative text-white text-center overflow-hidden" style="padding-top: 160px; padding-bottom: 100px;">
+    
+    <div class="position-absolute top-0 start-0 w-100 h-100" 
+         style="background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1470&auto=format&fit=crop'); 
+                background-size: cover; 
+                background-position: center; 
+                z-index: 1;">
+    </div>
+
+    <div class="position-absolute top-0 start-0 w-100 h-100" 
+         style="background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,50,100,0.8)); 
+                z-index: 2;">
+    </div>
+
+    <div class="container position-relative" style="z-index: 3;">
+        <!--<span class="badge rounded-pill bg-warning text-dark mb-3 px-3 py-2 animate__animated animate__fadeInDown">
+            <i class="fas fa-briefcase me-2"></i>WE ARE HIRING
+        </span>-->
+        
+        <h1 class="fw-bold display-4 mb-3 animate__animated animate__fadeInDown animate__delay-1s">
+            Wujudkan Potensi Terbaikmu
+        </h1>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <p class="lead opacity-75 mb-4 animate__animated animate__fadeInUp animate__delay-1s">
+                    Bergabunglah bersama PT. Pesona Adi Batara. Kami mencari talenta berbakat untuk tumbuh dan berinovasi bersama.
+                </p>
+            </div>
+        </div>
+
+        <!--<a href="#lowongan" class="btn btn-outline-light rounded-pill px-4 py-2 animate__animated animate__fadeInUp animate__delay-2s">
+            Lihat Lowongan <i class="fas fa-arrow-down ms-2"></i>
+        </a>-->
     </div>
 </section>
 

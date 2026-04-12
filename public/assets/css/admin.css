@@ -4,7 +4,7 @@
 :root {
     /* Dimensi Layout */
     --sidebar-width: 280px;
-    --sidebar-collapsed-width: 80px; /* Lebar saat diam (ikon doang) */
+    --sidebar-collapsed-width: 80px;
     --topbar-height: 70px;
 
     /* Warna Utama (Default: Light Mode) */
@@ -32,155 +32,27 @@
     --stripe-color: #2d3748;  
 }
 
-/* Reset Dasar */
+/* =========================================
+   2. GLOBAL RESET & TYPOGRAPHY
+   ========================================= */
 body {
     background-color: var(--bg-body);
     color: var(--text-main);
     font-family: 'Roboto', sans-serif;
-    overflow-x: hidden;
+    /* PENTING: Layout scroll dihandle oleh admin_layout.css, 
+       jadi di sini kita matikan scroll default browser */
+    height: 100vh;
+    overflow: hidden; 
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 a { text-decoration: none; }
 
 /* =========================================
-   2. SIDEBAR AUTO-HOVER LOGIC (INTI PERUBAHAN)
+   3. GLOBAL COMPONENTS (Card, Table, Buttons)
    ========================================= */
-.sidebar {
-    width: var(--sidebar-collapsed-width); /* Default: Kecil (80px) */
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background: var(--bg-card);
-    border-right: 1px solid var(--border-color);
-    z-index: 1050; /* Pastikan di atas konten lain */
-    
-    /* Animasi Halus */
-    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    
-    overflow-x: hidden; /* Sembunyikan teks yang kepotong */
-    overflow-y: auto;
-    scrollbar-width: none; /* Sembunyikan scrollbar biar rapi */
-}
-.sidebar::-webkit-scrollbar { display: none; }
 
-/* SAAT MOUSE HOVER: Sidebar Melebar */
-.sidebar:hover {
-    width: var(--sidebar-width); /* Jadi Lebar (280px) */
-    box-shadow: 5px 0 25px rgba(0,0,0,0.1); /* Efek bayangan timbul */
-}
-
-/* --- LOGIKA TEXT & JUDUL --- */
-/* Default (Diam): Sembunyikan Teks */
-.sidebar .sidebar-text,
-.sidebar .section-title,
-.sidebar .dropdown-toggle::after,
-.sidebar small {
-    display: none;
-    opacity: 0;
-}
-
-/* Hover (Disentuh): Munculkan Teks */
-.sidebar:hover .sidebar-text,
-.sidebar:hover .dropdown-toggle::after,
-.sidebar:hover small {
-    display: inline-block;
-    animation: fadeIn 0.4s forwards; /* Efek muncul pelan */
-}
-
-.sidebar:hover .section-title {
-    display: block;
-    animation: fadeIn 0.4s forwards;
-    padding-left: 0.5rem;
-    margin-bottom: 0.5rem;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateX(-10px); }
-    to { opacity: 1; transform: translateX(0); }
-}
-
-/* --- LOGIKA TOMBOL MENU (NAV LINK) --- */
-/* Default: Ikon di Tengah */
-.sidebar .nav-link {
-    justify-content: center;
-    padding: 15px 0;
-    color: var(--text-muted);
-    border-radius: 8px;
-    margin-bottom: 5px;
-    transition: all 0.2s;
-}
-.sidebar .nav-link i {
-    margin-right: 0;
-    font-size: 1.4rem; /* Ikon agak besar */
-}
-
-/* Hover: Ikon Geser ke Kiri + Teks Muncul */
-.sidebar:hover .nav-link {
-    justify-content: flex-start;
-    padding: 0.8rem 1rem;
-}
-.sidebar:hover .nav-link i {
-    margin-right: 12px;
-    font-size: 1.1rem; /* Ikon mengecil dikit biar proporsional */
-}
-
-/* Hover Effect Warna */
-.sidebar .nav-link:hover, .sidebar .nav-link.active {
-    background-color: var(--hover-bg);
-    color: var(--primary-color);
-}
-.sidebar .nav-link.active {
-    background-color: rgba(13, 110, 253, 0.1);
-}
-
-/* Header Sidebar (Logo) */
-.sidebar-header {
-    height: var(--topbar-height);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-bottom: 1px solid var(--border-color);
-    padding: 0; /* Padding 0 biar logo pas di tengah saat kecil */
-    white-space: nowrap;
-}
-
-/* =========================================
-   3. CONTENT LAYOUT (FIXED TO 80px)
-   ========================================= */
-/* Konten utama & Topbar selalu "mengalah" selebar 80px 
-   Jadi saat sidebar melebar, dia akan menimpa konten (Overlay),
-   bukan mendorongnya. Ini lebih enak di mata (tidak goyang). */
-
-.topbar {
-    height: var(--topbar-height);
-    background: var(--bg-card);
-    border-bottom: 1px solid var(--border-color);
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: var(--sidebar-collapsed-width); /* Fixed 80px */
-    width: calc(100% - var(--sidebar-collapsed-width));
-    z-index: 999;
-    padding: 0 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    transition: none; /* Matikan animasi layout shift */
-}
-
-.main-content {
-    margin-left: var(--sidebar-collapsed-width); /* Fixed 80px */
-    padding: 2rem;
-    padding-top: calc(var(--topbar-height) + 2rem);
-    min-height: 100vh;
-    transition: none;
-}
-
-/* =========================================
-   4. FORCE COLORS (Dark Mode Fixes dari sebelumnya)
-   ========================================= */
+/* Dark Mode Color Force */
 [data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3, 
 [data-theme="dark"] h4, [data-theme="dark"] h5, [data-theme="dark"] h6,
 [data-theme="dark"] .text-dark, [data-theme="dark"] .card-body {
@@ -198,7 +70,7 @@ a { text-decoration: none; }
     background-color: var(--stripe-color); color: var(--text-main);
 }
 
-/* Kartu & Icon Box */
+/* Styling Card & Widget */
 .card, .stat-card {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
@@ -212,6 +84,8 @@ a { text-decoration: none; }
     box-shadow: 0 10px 15px rgba(0,0,0,0.05);
     border-color: var(--primary-color);
 }
+
+/* Icon Box Helpers */
 .icon-box {
     width: 48px; height: 48px; border-radius: 10px;
     display: flex; align-items: center; justify-content: center; font-size: 1.4rem;
@@ -228,3 +102,7 @@ a { text-decoration: none; }
     padding: 8px; transition: 0.2s;
 }
 .btn-ghost:hover { background-color: var(--hover-bg); color: var(--primary-color); }
+
+/* --- SELESAI --- */
+/* Tidak ada kode layout .sidebar, .topbar, atau .main-content disini.
+   Semuanya sudah dipindah ke file CSS masing-masing. */

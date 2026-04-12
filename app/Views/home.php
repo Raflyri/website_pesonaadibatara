@@ -46,9 +46,9 @@
 <section class="py-5" style="background-color: #f8f9fa;">
     <div class="container">
         <div class="text-center mb-5" data-aos="fade-up">
-            <h6 class="text-primary fw-bold text-uppercase ls-2">Layanan Kami</h6>
-            <h2 class="fw-bold">4 Pilar Bisnis Utama</h2>
-            <p class="text-muted col-lg-6 mx-auto">Solusi terintegrasi untuk mendukung pertumbuhan bisnis Anda secara berkelanjutan.</p>
+            <h6 class="text-primary fw-bold text-uppercase ls-2"><?= lang('Home.s2.service_heading'); ?></h6>
+            <h2 class="fw-bold"><?= lang('Home.s2.service_subheading'); ?></h2>
+            <p class="text-muted col-lg-6 mx-auto"><?= lang('Home.s2.service_desc'); ?></p>
         </div>
 
         <div class="row g-4">
@@ -59,11 +59,11 @@
                             <div class="icon-circle bg-blue-light mb-4 mx-auto">
                                 <i class="fas fa-car-side fa-2x text-primary"></i>
                             </div>
-                            <h5 class="fw-bold text-dark mb-3">Transportasi</h5>
-                            <p class="text-muted small mb-0">Solusi armada lengkap mulai dari Luxury Car, EV, hingga logistik operasional.</p>
+                            <h5 class="fw-bold text-dark mb-3"><?= lang('Home.s2.transportation_sec.pillar_transport_title'); ?></h5>
+                            <p class="text-muted small mb-0"><?= lang('Home.s2.transportation_sec.pillar_transport_desc'); ?></p>
                         </div>
                         <div class="card-footer bg-white border-0 pb-4 text-center">
-                            <span class="text-primary fw-bold small">Lihat Detail <i class="fas fa-arrow-right ms-1"></i></span>
+                            <span class="text-primary fw-bold small"><?= lang('Home.s2.btn_view_detail'); ?> <i class="fas fa-arrow-right ms-1"></i></span>
                         </div>
                     </div>
                 </a>
@@ -76,11 +76,11 @@
                             <div class="icon-circle bg-green-light mb-4 mx-auto">
                                 <i class="fas fa-heartbeat fa-2x text-success"></i>
                             </div>
-                            <h5 class="fw-bold text-dark mb-3">Kesehatan</h5>
-                            <p class="text-muted small mb-0">Layanan medis terpadu melalui Batara Health Care, MCU, dan Apotek.</p>
+                            <h5 class="fw-bold text-dark mb-3"><?= lang('Home.s2.health_sec.pillar_health_title'); ?></h5>
+                            <p class="text-muted small mb-0"><?= lang('Home.s2.health_sec.pillar_health_desc'); ?></p>
                         </div>
                         <div class="card-footer bg-white border-0 pb-4 text-center">
-                            <span class="text-primary fw-bold small">Lihat Detail <i class="fas fa-arrow-right ms-1"></i></span>
+                            <span class="text-primary fw-bold small"><?= lang('Home.s2.btn_view_detail'); ?> <i class="fas fa-arrow-right ms-1"></i></span>
                         </div>
                     </div>
                 </a>
@@ -93,11 +93,11 @@
                             <div class="icon-circle bg-orange-light mb-4 mx-auto">
                                 <i class="fas fa-concierge-bell fa-2x text-warning"></i>
                             </div>
-                            <h5 class="fw-bold text-dark mb-3">Jasa</h5>
-                            <p class="text-muted small mb-0">Pembersihan Fasade gedung, Event Organizer, dan Pengadaan barang.</p>
+                            <h5 class="fw-bold text-dark mb-3"><?= lang('Home.s2.service_sec.pillar_service_title'); ?></h5>
+                            <p class="text-muted small mb-0"><?= lang('Home.s2.service_sec.pillar_service_desc'); ?></p>
                         </div>
                         <div class="card-footer bg-white border-0 pb-4 text-center">
-                            <span class="text-primary fw-bold small">Lihat Detail <i class="fas fa-arrow-right ms-1"></i></span>
+                            <span class="text-primary fw-bold small"><?= lang('Home.s2.btn_view_detail'); ?> <i class="fas fa-arrow-right ms-1"></i></span>
                         </div>
                     </div>
                 </a>
@@ -110,11 +110,11 @@
                             <div class="icon-circle bg-purple-light mb-4 mx-auto">
                                 <i class="fas fa-chart-line fa-2x text-info"></i>
                             </div>
-                            <h5 class="fw-bold text-dark mb-3">Investasi</h5>
-                            <p class="text-muted small mb-0">Pengembangan bisnis KSO, Food & Beverages, Laundry, dan Sport Center.</p>
+                            <h5 class="fw-bold text-dark mb-3"><?= lang('Home.s2.invest_sec.pillar_invest_title'); ?></h5>
+                            <p class="text-muted small mb-0"><?= lang('Home.s2.invest_sec.pillar_invest_desc'); ?></p>
                         </div>
                         <div class="card-footer bg-white border-0 pb-4 text-center">
-                            <span class="text-primary fw-bold small">Lihat Detail <i class="fas fa-arrow-right ms-1"></i></span>
+                            <span class="text-primary fw-bold small"><?= lang('Home.s2.btn_view_detail'); ?> <i class="fas fa-arrow-right ms-1"></i></span>
                         </div>
                     </div>
                 </a>
@@ -156,7 +156,7 @@
                     <?php else: ?>
                         <video id="whyUsVideo" class="img-fluid rounded-4 shadow-lg position-relative z-2 w-100 h-100" style="object-fit: cover;" muted loop playsinline poster="">
                             <source src="<?= $src; ?>" type="video/mp4">
-                            Browser Anda tidak mendukung tag video.
+                            <?= lang('Home.video_fallback'); ?>
                         </video>
                     <?php endif; ?>
 
@@ -165,14 +165,32 @@
             </div>
 
             <div class="col-lg-6 ps-lg-5" data-aos="fade-left">
-                <h6 class="text-primary fw-bold text-uppercase mb-2">Kenapa Memilih Kami?</h6>
+                <?php
+                // Ambil bahasa saat ini (id atau en)
+                $currentLang = service('request')->getLocale();
+                ?>
+                <h6 class="text-primary fw-bold text-uppercase mb-2"><?= lang('Home.s2.why_us_label'); ?></h6>
 
                 <h2 class="fw-bold mb-4">
-                    <?= !empty($why_choose_us['title_id']) ? $why_choose_us['title_id'] : 'Mitra Strategis Pendukung Operasional Bisnis Anda'; ?>
+                    <?php
+                    // Logika: Cek database sesuai bahasa -> Jika kosong, pakai default bahasa
+                    $dbTitle = ($currentLang == 'en' && !empty($why_choose_us['title_en']))
+                        ? $why_choose_us['title_en']
+                        : ($why_choose_us['title_id'] ?? '');
+
+                    echo !empty($dbTitle) ? $dbTitle : lang('Home.s2.why_us_fallback_title');
+                    ?>
                 </h2>
 
                 <p class="text-muted mb-4">
-                    <?= !empty($why_choose_us['content_id']) ? $why_choose_us['content_id'] : 'PT. Pesona Adi Batara hadir dengan standar layanan prima...'; ?>
+                    <?php
+                    // Logika Content
+                    $dbContent = ($currentLang == 'en' && !empty($why_choose_us['content_en']))
+                        ? $why_choose_us['content_en']
+                        : ($why_choose_us['content_id'] ?? '');
+
+                    echo !empty($dbContent) ? $dbContent : lang('Home.s2.why_us_fallback_desc');
+                    ?>
                 </p>
 
                 <div class="d-flex mb-4" data-aos="fade-up" data-aos-delay="100">
@@ -182,11 +200,11 @@
                         </div>
                     </div>
                     <div class="ms-3">
-                        <h5 class="fw-bold">Jaminan Kualitas Layanan</h5>
-                        <p class="text-muted mb-0">Standar operasional prosedur (SOP) ketat.</p>
+                        <h5 class="fw-bold"><?= lang('Home.s2.why_us_feature_title'); ?></h5>
+                        <p class="text-muted mb-0"><?= lang('Home.s2.why_us_feature_desc'); ?></p>
                     </div>
                 </div>
-                <a href="/about" class="btn btn-pab-primary rounded-pill px-4 mt-2">Pelajari Profil Kami</a>
+                <a href="/about" class="btn btn-pab-primary rounded-pill px-4 mt-2"><?= lang('Home.s2.btn_learn_profile'); ?></a>
             </div>
         </div>
     </div>
@@ -195,31 +213,31 @@
 <section class="py-4 bg-white border-bottom">
     <div class="container">
         <div class="text-center mb-4" data-aos="fade-up">
-            <h6 class="text-primary fw-bold text-uppercase ls-2">Klien & Partner</h6>
-            <h4 class="fw-bold">Dipercaya Oleh Perusahaan Terkemuka</h4>
+            <h6 class="text-primary fw-bold text-uppercase ls-2"><?= lang('Home.clients_heading'); ?></h6>
+            <h4 class="fw-bold"><?= lang('Home.clients_subheading'); ?></h4>
         </div>
 
         <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-4 justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="100">
-            <?php if(!empty($partners)): ?>
-                <?php foreach($partners as $p): ?>
+            <?php if (!empty($partners)): ?>
+                <?php foreach ($partners as $p): ?>
                     <div class="col">
                         <div class="partner-box p-3">
-                            <?php if(!empty($p['partner_url'])): ?>
+                            <?php if (!empty($p['partner_url'])): ?>
                                 <a href="<?= $p['partner_url']; ?>" target="_blank" title="<?= $p['partner_name']; ?>">
-                                    <img src="<?= base_url('uploads/partners/' . $p['partner_logo']); ?>" 
-                                         class="img-fluid partner-logo" 
-                                         alt="<?= $p['partner_name']; ?>">
+                                    <img src="<?= base_url('uploads/partners/' . $p['partner_logo']); ?>"
+                                        class="img-fluid partner-logo"
+                                        alt="<?= $p['partner_name']; ?>">
                                 </a>
                             <?php else: ?>
-                                <img src="<?= base_url('uploads/partners/' . $p['partner_logo']); ?>" 
-                                     class="img-fluid partner-logo" 
-                                     alt="<?= $p['partner_name']; ?>">
+                                <img src="<?= base_url('uploads/partners/' . $p['partner_logo']); ?>"
+                                    class="img-fluid partner-logo"
+                                    alt="<?= $p['partner_name']; ?>">
                             <?php endif; ?>
                         </div>
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
-                <div class="col text-center text-muted small">Belum ada partner yang ditambahkan.</div>
+                <div class="col text-center text-muted small"><?= lang('Home.no_partners_found'); ?></div>
             <?php endif; ?>
         </div>
     </div>
@@ -228,19 +246,21 @@
 <section class="py-5 bg-light">
     <div class="container">
 
+        <?php $currentLang = service('request')->getLocale(); ?>
+
         <div class="text-center mb-5" data-aos="fade-up">
-            <h2 class="fw-bold text-dark">Wawasan & Informasi</h2>
-            <p class="text-muted mb-4">Kabar terbaru seputar korporasi dan artikel edukatif untuk Anda.</p>
+            <h2 class="fw-bold text-dark"><?= lang('Home.news_sec.news_heading'); ?></h2>
+            <p class="text-muted mb-4"><?= lang('Home.news_sec.news_subheading'); ?></p>
 
             <ul class="nav nav-pills justify-content-center d-inline-flex bg-white rounded-pill p-1 shadow-sm" id="newsTab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active rounded-pill px-4" id="pills-news-tab" data-bs-toggle="pill" data-bs-target="#pills-news" type="button" role="tab" aria-controls="pills-news" aria-selected="true">
-                        <i class="far fa-newspaper me-2"></i> Berita Korporat
+                        <i class="far fa-newspaper me-2"></i> <?= lang('Home.news_sec.tab_news'); ?>
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link rounded-pill px-4" id="pills-article-tab" data-bs-toggle="pill" data-bs-target="#pills-article" type="button" role="tab" aria-controls="pills-article" aria-selected="false">
-                        <i class="fas fa-pen-nib me-2"></i> Artikel & Tips
+                        <i class="fas fa-pen-nib me-2"></i> <?= lang('Home.news_sec.tab_articles'); ?>
                     </button>
                 </li>
             </ul>
@@ -252,27 +272,30 @@
                 <div class="row g-4">
                     <?php if (!empty($latest_news)) : ?>
                         <?php foreach ($latest_news as $news) : ?>
+                            <?php
+                            $newsTitle = ($currentLang == 'en' && !empty($news['title_en'])) ? $news['title_en'] : $news['title_id'];
+                            $newsContent = ($currentLang == 'en' && !empty($news['content_en'])) ? $news['content_en'] : $news['content_id'];
+                            ?>
                             <div class="col-md-4" data-aos="fade-up">
                                 <div class="card h-100 border-0 shadow-sm overflow-hidden group-hover">
                                     <div class="overflow-hidden position-relative" style="height: 220px;">
                                         <?php
-                                        // FIX 1: Ganti 'thumbnail' jadi 'image'
                                         $thumb = !empty($news['image']) ? '/uploads/news/' . $news['image'] : 'https://source.unsplash.com/random/800x600?business';
                                         ?>
-                                        <img src="<?= $thumb; ?>" class="card-img-top w-100 h-100 object-fit-cover transition-transform" alt="<?= esc($news['title_id']); ?>">
-                                        <div class="badge bg-primary position-absolute top-0 start-0 m-3 py-2 px-3">NEWS</div>
+                                        <img src="<?= $thumb; ?>" class="card-img-top w-100 h-100 object-fit-cover transition-transform" alt="<?= esc($newsTitle); ?>">
+                                        <div class="badge bg-primary position-absolute top-0 start-0 m-3 py-2 px-3"><?= lang('Home.news_sec.label_news'); ?></div>
                                     </div>
                                     <div class="card-body p-4">
                                         <div class="mb-2 text-muted small">
-                                            <i class="far fa-calendar-alt me-2"></i> <?= date('d M Y', strtotime($news['created_at'])); ?>
+                                            <i class="far fa-calendar-alt me-2"></i> <?= date('d M Y', strtotime($news['date_published'])); ?>
                                         </div>
                                         <h5 class="card-title fw-bold mb-3">
                                             <a href="/news/<?= $news['slug']; ?>" class="text-dark text-decoration-none stretched-link">
-                                                <?= esc($news['title_id']); ?>
+                                                <?= esc($newsTitle); ?>
                                             </a>
                                         </h5>
                                         <p class="card-text text-muted small">
-                                            <?= substr(strip_tags($news['content_id']), 0, 100); ?>...
+                                            <?= substr(strip_tags($newsContent), 0, 100); ?>...
                                         </p>
                                     </div>
                                 </div>
@@ -281,7 +304,7 @@
 
                         <div class="col-12 text-center mt-4">
                             <a href="/news/category/berita" class="btn btn-outline-primary rounded-pill px-4">
-                                Lihat Berita Lainnya <i class="fas fa-arrow-right ms-2"></i>
+                                <?= lang('Home.news_sec.btn_more_news'); ?> <i class="fas fa-arrow-right ms-2"></i>
                             </a>
                         </div>
 
@@ -289,8 +312,8 @@
                         <div class="col-12 text-center py-5">
                             <div class="bg-white rounded-4 p-5 shadow-sm d-inline-block">
                                 <img src="https://cdn-icons-png.flaticon.com/512/7486/7486754.png" width="80" class="mb-3 opacity-50" alt="Empty">
-                                <h5 class="fw-bold text-muted">Belum ada berita terbaru</h5>
-                                <p class="text-muted small mb-0">Tim kami sedang menyusun informasi menarik untuk Anda.</p>
+                                <h5 class="fw-bold text-muted"><?= lang('Home.news_sec.empty_news_title'); ?></h5>
+                                <p class="text-muted small mb-0"><?= lang('Home.news_sec.empty_news_desc'); ?></p>
                             </div>
                         </div>
                     <?php endif; ?>
@@ -301,6 +324,11 @@
                 <div class="row g-4">
                     <?php if (!empty($latest_articles)) : ?>
                         <?php foreach ($latest_articles as $article) : ?>
+                            <?php
+                            // Logika Bahasa untuk Judul & Konten Artikel
+                            $articleTitle = ($currentLang == 'en' && !empty($article['title_en'])) ? $article['title_en'] : $article['title_id'];
+                            $articleContent = ($currentLang == 'en' && !empty($article['content_en'])) ? $article['content_en'] : $article['content_id'];
+                            ?>
                             <div class="col-md-4" data-aos="fade-up">
                                 <div class="card h-100 border-0 shadow-sm overflow-hidden group-hover">
                                     <div class="overflow-hidden position-relative" style="height: 220px;">
@@ -308,21 +336,21 @@
                                         // FIX 1: image
                                         $thumb = !empty($article['image']) ? '/uploads/news/' . $article['image'] : 'https://source.unsplash.com/random/800x600?learning';
                                         ?>
-                                        <img src="<?= $thumb; ?>" class="card-img-top w-100 h-100 object-fit-cover transition-transform" alt="<?= esc($article['title_id']); ?>">
-                                        <div class="badge bg-success position-absolute top-0 start-0 m-3 py-2 px-3">ARTIKEL</div>
+                                        <img src="<?= $thumb; ?>" class="card-img-top w-100 h-100 object-fit-cover transition-transform" alt="<?= esc($articleTitle); ?>">
+                                        <div class="badge bg-success position-absolute top-0 start-0 m-3 py-2 px-3"><?= lang('Home.news_sec.label_article'); ?></div>
                                     </div>
                                     <div class="card-body p-4">
                                         <div class="mb-2 text-muted small">
                                             <i class="far fa-user me-2"></i> Admin PAB &bull;
-                                            <?= date('d M Y', strtotime($article['created_at'])); ?>
+                                            <?= date('d M Y', strtotime($article['date_published'])); ?>
                                         </div>
                                         <h5 class="card-title fw-bold mb-3">
                                             <a href="/news/<?= $article['slug']; ?>" class="text-dark text-decoration-none stretched-link">
-                                                <?= esc($article['title_id']); ?>
+                                                <?= esc($articleTitle); ?>
                                             </a>
                                         </h5>
                                         <p class="card-text text-muted small">
-                                            <?= substr(strip_tags($article['content_id']), 0, 100); ?>...
+                                            <?= substr(strip_tags($articleContent), 0, 100); ?>...
                                         </p>
                                     </div>
                                 </div>
@@ -331,7 +359,7 @@
 
                         <div class="col-12 text-center mt-4">
                             <a href="/news/category/artikel" class="btn btn-outline-success rounded-pill px-4">
-                                Baca Artikel Lainnya <i class="fas fa-arrow-right ms-2"></i>
+                                <?= lang('Home.news_sec.btn_more_articles'); ?> <i class="fas fa-arrow-right ms-2"></i>
                             </a>
                         </div>
 
@@ -339,8 +367,8 @@
                         <div class="col-12 text-center py-5">
                             <div class="bg-white rounded-4 p-5 shadow-sm d-inline-block">
                                 <img src="https://cdn-icons-png.flaticon.com/512/6195/6195678.png" width="80" class="mb-3 opacity-50" alt="Empty">
-                                <h5 class="fw-bold text-muted">Belum ada artikel edukasi</h5>
-                                <p class="text-muted small mb-0">Nantikan tips dan wawasan menarik segera!</p>
+                                <h5 class="fw-bold text-muted"><?= lang('Home.news_sec.empty_articles_title'); ?></h5>
+                                <p class="text-muted small mb-0"><?= lang('Home.news_sec.empty_articles_desc'); ?></p>
                             </div>
                         </div>
                     <?php endif; ?>
@@ -353,16 +381,16 @@
 
 <section class="py-5 bg-white border-top" data-aos="fade-up">
     <div class="container text-center py-4">
-        <h2 class="fw-bold mb-3">Siap Meningkatkan Efisiensi Operasional Anda?</h2>
+        <h2 class="fw-bold mb-3"><?= lang('Home.cta.bottom_cta_title'); ?></h2>
         <p class="lead text-muted mb-4 col-lg-7 mx-auto">
-            Diskusikan kebutuhan manajemen aset, transportasi, dan tenaga alih daya perusahaan Anda bersama konsultan ahli kami.
+           <?= lang('Home.cta.bottom_cta_desc'); ?>
         </p>
         <div class="d-flex justify-content-center gap-3">
             <a href="#" class="btn btn-pab-primary btn-lg rounded-pill px-5 shadow-sm">
-                Hubungi Kami
+               <?= lang('Home.cta.btn_contact_us'); ?>
             </a>
-            <a href="https://wa.me/6281234567890" target="_blank" class="btn btn-success btn-lg rounded-pill px-4 shadow-sm">
-                <i class="fab fa-whatsapp me-2"></i> WhatsApp
+            <a href="https://wa.me/<?= $whatsapp; ?>" target="_blank" class="btn btn-success btn-lg rounded-pill px-4 shadow-sm">
+                <i class="fab fa-whatsapp me-2"></i> <?= lang('Home.cta.btn_whatsapp'); ?>
             </a>
         </div>
     </div>

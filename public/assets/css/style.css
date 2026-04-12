@@ -1,148 +1,148 @@
 /* public/assets/css/style.css */
 :root {
-    /* Brand Colors PT Pesona Adi Batara */
-    --pab-blue-primary: #135ef9; /* Biru Tua */
-    --pab-blue-light:   #3f83fe; /* Biru Muda */
-    --pab-red-accent:   #fd0102; /* Merah */
-    
-    /* Neutral Colors */
-    --pab-white:        #ffffff;
-    --pab-dark:         #1e293b;
-    --pab-gray:         #f1f5f9;
+  /* Brand Colors PT Pesona Adi Batara */
+  --pab-blue-primary: #135ef9; /* Biru Tua */
+  --pab-blue-light: #3f83fe; /* Biru Muda */
+  --pab-red-accent: #fd0102; /* Merah */
+
+  /* Neutral Colors */
+  --pab-white: #ffffff;
+  --pab-dark: #1e293b;
+  --pab-gray: #f1f5f9;
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
-    background-color: var(--pab-gray);
-    color: var(--pab-dark);
+  font-family: "Roboto", sans-serif;
+  background-color: var(--pab-gray);
+  color: var(--pab-dark);
 }
 
 /* --- Navbar Floating Style (Ala BTN) --- */
 
 /* Wrapper luar untuk mengatur posisi melayang */
 .header-floating-wrapper {
-    z-index: 1030; /* Pastikan di atas slider */
-    transition: all 0.3s ease;
+  z-index: 1030; /* Pastikan di atas slider */
+  transition: all 0.3s ease;
 }
 
 /* Kotak Kapsul Putih */
 .navbar-rounded-box {
-    background-color: rgba(255, 255, 255, 0.95); /* Putih transparan */
-    backdrop-filter: blur(10px); /* Efek blur modern */
-    border-radius: 50px; /* Sudut membulat (Kapsul) */
-    padding: 0.5rem 1rem; 
-    border: 1px solid rgba(0,0,0,0.05);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Bayangan halus */
+  background-color: rgba(255, 255, 255, 0.95); /* Putih transparan */
+  backdrop-filter: blur(10px); /* Efek blur modern */
+  border-radius: 50px; /* Sudut membulat (Kapsul) */
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Bayangan halus */
 }
 
 /* Link Navigasi (Teks Gelap karena background putih) */
 .navbar-rounded-box .nav-link {
-    color: var(--pab-dark) !important;
-    font-weight: 500;
-    margin-left: 5px;
-    padding: 0.5rem 1rem !important;
-    border-radius: 20px;
-    transition: all 0.3s;
+  color: var(--pab-dark) !important;
+  font-weight: 500;
+  margin-left: 5px;
+  padding: 0.5rem 1rem !important;
+  border-radius: 20px;
+  transition: all 0.3s;
 }
 
 /* Efek saat mouse sorot menu */
 .navbar-rounded-box .nav-link:hover,
 .navbar-rounded-box .nav-link.active {
-    color: var(--pab-blue-primary) !important; /* Jadi Biru PAB */
-    background-color: rgba(19, 94, 249, 0.05); /* Background biru pudar */
-    transform: translateY(0);
+  color: var(--pab-blue-primary) !important; /* Jadi Biru PAB */
+  background-color: rgba(19, 94, 249, 0.05); /* Background biru pudar */
+  transform: translateY(0);
 }
 
 /* --- Logo Adjustment --- */
 .navbar-brand img {
-    height: 40px; /* Tinggi fix header BTN */
-    width: auto;
-    transition: transform 0.3s;
+  height: 40px; /* Tinggi fix header BTN */
+  width: auto;
+  transition: transform 0.3s;
 }
 
 .navbar-brand:hover img {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 /* --- Buttons --- */
 .btn-pab-primary {
-    background-color: var(--pab-blue-primary);
-    color: white;
-    border: none; /* Hilangkan border default */
+  background-color: var(--pab-blue-primary);
+  color: white;
+  border: none; /* Hilangkan border default */
 }
 
 /* Khusus tombol login bulat di header */
 .btn-pab-primary.rounded-pill {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 .btn-pab-primary:hover {
-    background-color: var(--pab-blue-light);
-    color: white;
+  background-color: var(--pab-blue-light);
+  color: white;
 }
 
 .btn-pab-cta {
-    background-color: var(--pab-red-accent);
-    color: white;
-    font-weight: bold;
-    border-radius: 50px;
-    padding: 8px 25px;
+  background-color: var(--pab-red-accent);
+  color: white;
+  font-weight: bold;
+  border-radius: 50px;
+  padding: 8px 25px;
 }
 
 .btn-pab-cta:hover {
-    background-color: #d00000;
-    color: white;
+  background-color: #d00000;
+  color: white;
 }
 
 /* --- [UPDATE] Hero Slider Styles (Full Screen Fix) --- */
 .hero-slider {
-    width: 100%;
-    height: 100vh !important; /* REVISI: Full Layar 1 Halaman */
-    position: relative;
-    margin-top: 0 !important; /* Paksa nempel atas */
+  width: 100%;
+  height: 100vh !important; /* REVISI: Full Layar 1 Halaman */
+  position: relative;
+  margin-top: 0 !important; /* Paksa nempel atas */
 }
 
 .swiper-slide {
-    background-color: #000;
-    overflow: hidden;
+  background-color: #000;
+  overflow: hidden;
 }
 
 /* Background Image dengan Zoom Effect */
 .slide-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    transform: scale(1);
-    transition: transform 5s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1);
+  transition: transform 5s ease;
 }
 
 .swiper-slide-active .slide-bg {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 /* Gradient Overlay BTN Style */
 .overlay-gradient {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        90deg, 
-        rgba(19, 94, 249, 0.9) 0%, 
-        rgba(19, 94, 249, 0.6) 50%, 
-        rgba(0, 0, 0, 0.2) 100% 
-    );
-    z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(19, 94, 249, 0.9) 0%,
+    rgba(19, 94, 249, 0.6) 50%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+  z-index: 1;
 }
 
 .container {
-    position: relative;
-    z-index: 2;
+  position: relative;
+  z-index: 2;
 }
 
 /* --- [BARU] Navigation & Pagination Fixes --- */
@@ -150,503 +150,393 @@ body {
 /* Memperbaiki Tombol Next/Prev yang tidak bisa diklik */
 .swiper-button-next,
 .swiper-button-prev {
-    color: var(--pab-white) !important;
-    z-index: 50 !important; /* Lapisan paling atas supaya bisa diklik */
-    width: 50px;
-    height: 50px;
-    background-color: rgba(255, 255, 255, 0.1); /* Sedikit background */
-    border-radius: 50%;
-    backdrop-filter: blur(5px);
-    transition: all 0.3s;
+  color: var(--pab-white) !important;
+  z-index: 50 !important; /* Lapisan paling atas supaya bisa diklik */
+  width: 50px;
+  height: 50px;
+  background-color: rgba(255, 255, 255, 0.1); /* Sedikit background */
+  border-radius: 50%;
+  backdrop-filter: blur(5px);
+  transition: all 0.3s;
 }
 
 .swiper-button-next:after,
 .swiper-button-prev:after {
-    font-size: 1.2rem;
-    font-weight: bold;
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 
 .swiper-button-next:hover,
 .swiper-button-prev:hover {
-    background-color: var(--pab-blue-primary);
-    transform: scale(1.1);
+  background-color: var(--pab-blue-primary);
+  transform: scale(1.1);
 }
 
 /* Pagination Auto-Hide */
 .swiper-pagination {
-    opacity: 0; /* Default: Tersembunyi */
-    transition: opacity 0.4s ease, bottom 0.3s ease;
-    z-index: 50 !important;
-    bottom: 20px !important;
+  opacity: 0; /* Default: Tersembunyi */
+  transition:
+    opacity 0.4s ease,
+    bottom 0.3s ease;
+  z-index: 50 !important;
+  bottom: 20px !important;
 }
 
 /* Muncul HANYA saat mouse masuk ke area slider */
 .hero-slider:hover .swiper-pagination {
-    opacity: 1;
-    bottom: 40px !important;
+  opacity: 1;
+  bottom: 40px !important;
 }
 
 /* Styling Titik Pagination */
 .swiper-pagination-bullet {
-    width: 12px;
-    height: 12px;
-    background: white;
-    opacity: 0.5;
-    margin: 0 6px !important;
-    transition: all 0.3s;
+  width: 12px;
+  height: 12px;
+  background: white;
+  opacity: 0.5;
+  margin: 0 6px !important;
+  transition: all 0.3s;
 }
 
 .swiper-pagination-bullet-active {
-    background: var(--pab-red-accent);
-    opacity: 1;
-    width: 30px; /* Titik aktif memanjang */
-    border-radius: 10px;
+  background: var(--pab-red-accent);
+  opacity: 1;
+  width: 30px; /* Titik aktif memanjang */
+  border-radius: 10px;
 }
 
 /* --- News Card Hover Effects --- */
 .group-hover:hover .card-img-top {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .transition-transform {
-    transition: transform 0.5s ease;
+  transition: transform 0.5s ease;
 }
 
 .object-fit-cover {
-    object-fit: cover;
+  object-fit: cover;
 }
 
 .grayscale-hover {
-    transition: all 0.3s;
+  transition: all 0.3s;
 }
 .grayscale-hover:hover {
-    opacity: 1 !important;
+  opacity: 1 !important;
 }
 
 /* Transisi halus untuk semua perubahan */
-.transition-all, .navbar-rounded-box {
-    transition: all 0.4s ease-in-out;
+.transition-all,
+.navbar-rounded-box {
+  transition: all 0.4s ease-in-out;
 }
 
 /* Saat Sticky Active (Scroll Down) */
 .sticky-active {
-    margin-top: 0 !important;
+  margin-top: 0 !important;
 }
 
 .sticky-active .navbar-rounded-box {
-    border-radius: 0 0 20px 20px;
-    background-color: rgba(255, 255, 255, 1);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
-
-/* --- ANIMASI HEADER & LOGO --- */
-
-/* 1. Logo Animation */
-.navbar-brand .logo-transition {
-    height: 60px; /* Default: Besar */
-    width: auto;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Saat Sticky Aktif: Logo Mengecil */
-.sticky-active .navbar-brand .logo-transition {
-    height: 40px; /* Sticky: Kecil */
-}
-
-/* 2. Button Morphing Animation */
-.header-actions .btn-morph {
-    transition: all 0.4s ease;
-    padding: 8px 20px;
-    overflow: hidden;
-}
-
-.header-actions .btn-morph .btn-text {
-    max-width: 150px;
-    opacity: 1;
-    transition: all 0.4s ease;
-    white-space: nowrap;
+  border-radius: 0 0 20px 20px;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 /* SAAT STICKY AKTIF: Tombol jadi Bulat (Icon Only) */
 .sticky-active .header-actions .btn-morph {
-    padding: 8px 12px !important;
-    border-radius: 50% !important;
-    width: 42px; /* Lebar fix */
-    height: 42px; /* Tinggi fix */
-    justify-content: center;
+  padding: 8px 12px !important;
+  border-radius: 50% !important;
+  width: 42px; /* Lebar fix */
+  height: 42px; /* Tinggi fix */
+  justify-content: center;
 }
 
 .sticky-active .header-actions .btn-morph i {
-    font-size: 1.1rem;
+  font-size: 1.1rem;
 }
 
 .sticky-active .header-actions .btn-morph .btn-text {
-    max-width: 0;
-    opacity: 0;
-    margin-left: 0 !important;
+  max-width: 0;
+  opacity: 0;
+  margin-left: 0 !important;
 }
 
 /* Penyesuaian Sticky Wrapper */
 .sticky-active .navbar-rounded-box {
-    border-radius: 0 0 25px 25px;
-    padding: 0.5rem 1rem;
+  border-radius: 0 0 25px 25px;
+  padding: 0.5rem 1rem;
 }
 
 /* SERVICE CARDS */
 .hover-top {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .hover-top:hover {
-    transform: translateY(-10px); /* Kartu naik ke atas saat di-hover */
-    box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+  transform: translateY(-10px); /* Kartu naik ke atas saat di-hover */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
 }
 
 .icon-circle {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
 }
 
 /* Warna-warni background icon */
-.bg-blue-light   { background-color: #e3f2fd; }
-.bg-green-light  { background-color: #e8f5e9; }
-.bg-orange-light { background-color: #fff3e0; }
-.bg-purple-light { background-color: #f3e5f5; }
+.bg-blue-light {
+  background-color: #e3f2fd;
+}
+.bg-green-light {
+  background-color: #e8f5e9;
+}
+.bg-orange-light {
+  background-color: #fff3e0;
+}
+.bg-purple-light {
+  background-color: #f3e5f5;
+}
 
 /* Saat hover kartu, icon ikut membesar dikit */
 .hover-top:hover .icon-circle {
-    transform: scale(1.1);
-}
-
-/* --- NAVBAR DROPDOWN STYLING --- */
-
-/* 1. Logic Hover (Hanya di Desktop > 992px) */
-@media (min-width: 992px) {
-    .nav-item.dropdown:hover .dropdown-menu {
-        display: block;
-        margin-top: 0; /* Supaya nempel dengan navbar */
-        animation: fadeIn 0.3s ease; /* Efek muncul halus */
-    }
-}
-
-/* 2. Styling Dropdown Box */
-.dropdown-menu {
-    min-width: 260px; /* Lebar minimum biar teks gak kepotong */
-    margin-top: 10px; /* Jarak dikit dari navbar (Mobile) */
-}
-
-/* 3. Styling Item Menu */
-.dropdown-item {
-    transition: all 0.2s;
-    color: var(--pab-dark);
-}
-
-.dropdown-item:hover {
-    background-color: var(--pab-gray); /* Background abu muda saat hover */
-    transform: translateX(5px); /* Efek geser kanan dikit */
-}
-
-.dropdown-item:active {
-    background-color: var(--pab-blue-light);
-    color: white;
-}
-
-/* 4. Icon Kecil di dalam Menu */
-.icon-small {
-    width: 35px;
-    height: 35px;
-    border-radius: 8px; /* Kotak rounded */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
+  transform: scale(1.1);
 }
 
 /* Helper Colors (Sama seperti di Homepage) */
-.bg-blue-light   { background-color: #e3f2fd; }
-.bg-green-light  { background-color: #e8f5e9; }
-.bg-orange-light { background-color: #fff3e0; }
-.bg-purple-light { background-color: #f3e5f5; }
+.bg-blue-light {
+  background-color: #e3f2fd;
+}
+.bg-green-light {
+  background-color: #e8f5e9;
+}
+.bg-orange-light {
+  background-color: #fff3e0;
+}
+.bg-purple-light {
+  background-color: #f3e5f5;
+}
 
 /* --- FOOTER MODERN STYLES --- */
 
 /* Link di Footer */
 .footer-links li {
-    margin-bottom: 12px;
+  margin-bottom: 12px;
 }
 
 .footer-links a {
-    text-decoration: none;
-    color: rgba(255, 255, 255, 0.7); /* Putih agak transparan */
-    transition: all 0.3s ease;
-    font-size: 0.95rem;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.7); /* Putih agak transparan */
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
 }
 
 .footer-links a:hover {
-    color: var(--pab-white);
-    padding-left: 5px; /* Efek geser kanan dikit saat hover */
+  color: var(--pab-white);
+  padding-left: 5px; /* Efek geser kanan dikit saat hover */
 }
 
 /* Social Media Icons (Bulat) */
 .social-icon {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s;
-    text-decoration: none !important;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  text-decoration: none !important;
 }
 
 .social-icon:hover {
-    background-color: var(--pab-blue-primary) !important; /* Jadi biru saat hover */
-    color: white !important;
-    transform: translateY(-3px); /* Naik dikit */
+  background-color: var(
+    --pab-blue-primary
+  ) !important; /* Jadi biru saat hover */
+  color: white !important;
+  transform: translateY(-3px); /* Naik dikit */
 }
 
 /* Spacing Text */
 .ls-1 {
-    letter-spacing: 1px;
+  letter-spacing: 1px;
 }
 
-/* --- LANGUAGE SWITCHER FIX --- */
-
-.lang-switcher {
-    transition: all 0.3s ease;
-    opacity: 1;
-    visibility: visible;
-    width: auto; /* Biarkan lebar otomatis */
-    /* PENTING: Jangan pakai overflow: hidden di sini supaya dropdown bisa muncul */
+/* Footer tagline badge (logo + tagline) */
+.footer-tagline-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: radial-gradient(circle at top left, #ffffff, #f3f4ff);
+  box-shadow:
+    0 10px 25px rgba(15, 23, 42, 0.35),
+    0 0 0 1px rgba(148, 163, 184, 0.4);
+  position: relative;
+  overflow: hidden;
+  animation: footerTaglineFloat 4s ease-in-out infinite;
 }
 
-/* Saat Header Sticky (Scroll Down), Bahasa Hilang */
-.sticky-active .lang-switcher {
-    opacity: 0;
-    visibility: hidden;
-    width: 0; 
-    overflow: hidden; /* Baru kita kunci saat dia harus hilang */
-    margin: 0 !important; 
-    padding: 0 !important;
-    position: absolute; /* Pastikan dia keluar dari layout biar gak makan tempat */
+.footer-tagline-badge::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.1)
+  );
+  transform: translateX(-120%);
+  animation: footerTaglineShine 5s ease-in-out infinite;
 }
 
-/* Styling Dropdown Item */
-.lang-switcher .dropdown-item:hover {
-    background-color: var(--pab-gray);
-    transform: translateX(3px);
-    transition: all 0.2s;
+.footer-tagline-logo {
+  height: 55px;
+  width: auto;
+  flex-shrink: 0;
+  filter: drop-shadow(0 4px 8px rgba(15, 23, 42, 0.35));
 }
 
-/* Hilangkan panah bawaan bootstrap */
-.lang-switcher .dropdown-toggle::after {
-    display: none; 
+.footer-tagline-text {
+  position: relative;
+  z-index: 1;
+  color: #0f172a;
+  font-weight: 600;
+  font-size: 1.02rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
-/* Styling Dropdown Item */
-.lang-switcher .dropdown-item:hover {
-    background-color: var(--pab-gray);
-    transform: translateX(3px);
-    transition: all 0.2s;
+@keyframes footerTaglineFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
 }
 
-.lang-switcher .dropdown-toggle::after {
-    display: none; /* Hilangkan panah bawaan bootstrap yg jelek */
+@keyframes footerTaglineShine {
+  0% {
+    transform: translateX(-120%);
+  }
+  60% {
+    transform: translateX(120%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
 }
 
 /* --- CONTACT POPUP HOVER EFFECT --- */
 
 .contact-hover-wrapper {
-    padding-bottom: 0; /* Area aman */
+  padding-bottom: 0; /* Area aman */
 }
 
 /* Kotak Popup-nya */
 .contact-popup-menu {
-    position: absolute;
-    top: 120%; /* Muncul sedikit di bawah tombol */
-    right: 0;
-    width: 220px;
-    background: rgba(255, 255, 255, 0.6); /* Transparan (Glass Effect) */
-    backdrop-filter: blur(15px); /* Efek Blur Kaca yang Mewah */
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 20px;
-    padding: 15px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-    
-    /* Animasi Awal (Tersembunyi) */
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(10px);
-    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    z-index: 1000;
+  position: absolute;
+  top: 120%; /* Muncul sedikit di bawah tombol */
+  right: 0;
+  width: 220px;
+  background: rgba(255, 255, 255, 0.6); /* Transparan (Glass Effect) */
+  backdrop-filter: blur(15px); /* Efek Blur Kaca yang Mewah */
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  padding: 15px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+
+  /* Animasi Awal (Tersembunyi) */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  z-index: 1000;
 }
 
 /* Saat Wrapper di-Hover, Popup Muncul */
 .contact-hover-wrapper:hover .contact-popup-menu {
-    opacity: 1;
-    visibility: visible;
-    top: 110%; /* Naik sedikit ke posisi ideal */
-    transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+  top: 110%; /* Naik sedikit ke posisi ideal */
+  transform: translateY(0);
 }
 
 /* Efek Tombol di dalam Popup */
 .hover-scale {
-    transition: transform 0.2s;
-    background: rgba(255, 255, 255, 0.8) !important; /* Putih agak transparan */
+  transition: transform 0.2s;
+  background: rgba(255, 255, 255, 0.8) !important; /* Putih agak transparan */
 }
 
 .hover-scale:hover {
-    transform: scale(1.05); /* Membesar dikit pas dipilih */
-    background: #fff !important;
+  transform: scale(1.05); /* Membesar dikit pas dipilih */
+  background: #fff !important;
 }
 
 /* Panah kecil di background popup (biar seolah nyambung) */
 .contact-popup-menu::before {
-    content: "";
-    position: absolute;
-    top: -8px;
-    right: 30px;
-    width: 15px;
-    height: 15px;
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(15px);
-    transform: rotate(45deg);
-    border-top: 1px solid rgba(255, 255, 255, 0.5);
-    border-left: 1px solid rgba(255, 255, 255, 0.5);
+  content: "";
+  position: absolute;
+  top: -8px;
+  right: 30px;
+  width: 15px;
+  height: 15px;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(15px);
+  transform: rotate(45deg);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
 }
 
-/* --- ORGANIZATIONAL CHART TREE --- */
-
-.org-tree-wrapper {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
-.org-tree ul {
-    padding-top: 20px; 
-    position: relative;
-    transition: all 0.5s;
-    display: flex;
-    justify-content: center;
-    padding-left: 0 !important;
-}
-
-.org-tree li {
-    float: left; text-align: center;
-    list-style-type: none;
-    position: relative;
-    padding: 20px 10px 0 10px;
-    transition: all 0.5s;
-}
-
-/* Garis Konektor (Vertical & Horizontal) */
-.org-tree li::before, .org-tree li::after {
-    content: '';
-    position: absolute; top: 0; right: 50%;
-    border-top: 2px solid #ccc;
-    width: 50%; height: 20px;
-}
-.org-tree li::after {
-    right: auto; left: 50%;
-    border-left: 2px solid #ccc;
-}
-.org-tree li:only-child::after, .org-tree li:only-child::before {
-    display: none;
-}
-.org-tree li:only-child { padding-top: 0; }
-.org-tree li:first-child::before, .org-tree li:last-child::after {
-    border: 0 none;
-}
-.org-tree li:last-child::before{
-    border-right: 2px solid #ccc;
-    border-radius: 0 5px 0 0;
-}
-.org-tree li:first-child::after{
-    border-radius: 5px 0 0 0;
-}
-.org-tree ul ul::before{
-    content: '';
-    position: absolute; top: 0; left: 50%;
-    border-left: 2px solid #ccc;
-    width: 0; height: 20px;
-}
-
-/* Kartu Member */
-.member-card {
-    background: #fff;
-    border: 1px solid #e2e8f0;
-    padding: 15px;
-    border-radius: 12px;
-    width: 180px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    display: inline-block;
-    transition: all 0.3s;
-    position: relative;
-    z-index: 2;
-}
-
-.member-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(19, 94, 249, 0.15);
-    border-color: var(--pab-blue-primary);
-}
-
-.member-card .img-box img {
-    width: 60px; height: 60px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #f8f9fa;
-    margin-bottom: 10px;
-}
-
-.member-card h5 {
-    font-size: 0.9rem;
-    font-weight: bold;
-    margin-bottom: 2px;
-    color: #1e293b;
-}
-
-.member-card span {
-    font-size: 0.7rem;
-    color: var(--pab-blue-primary);
-    font-weight: 600;
-    text-transform: uppercase;
-}
-
-/* Kartu lebih kecil untuk level bawah (Manager/Staff) */
-.small-card {
-    width: 150px;
-    padding: 10px;
-}
-.small-card .img-box img { width: 45px; height: 45px; }
+/* --- ORGANIZATIONAL CHART STYLES ---
+   NOTE: These styles have been moved to about.css for better organization.
+   See: public/assets/css/about.css
+*/
 
 /* --- PARTNER LOGO SECTION --- */
 .partner-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100px; /* Tinggi kotak area logo */
-    transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  transition: all 0.3s ease;
 }
 
 .partner-logo {
-    max-height: 60px; /* Batasi tinggi logo agar seragam */
-    width: auto;
-    filter: grayscale(100%); /* Hitam putih default */
-    opacity: 0.6; /* Agak transparan */
-    transition: all 0.4s ease;
+  max-height: 60px;
+  width: auto;
+  filter: grayscale(0%);
+  opacity: 0.6;
+  transition: all 0.4s ease;
 }
 
 /* Efek Hover */
 .partner-box:hover .partner-logo {
-    filter: grayscale(0%); /* Warna asli muncul */
-    opacity: 1; /* Opacity penuh */
-    transform: scale(1.1); /* Zoom in dikit */
+  filter: grayscale(0%);
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* FIX: Dropdown Item Active State */
+.dropdown-item.active,
+.dropdown-item:active {
+  color: var(--pab-blue-primary) !important; /* Pakai warna biru utama */
+  background-color: transparent !important; /* Hapus background biru bawaan */
+  font-weight: 600; /* Opsional: Tebalkan biar beda */
+}
+
+/* Pastikan saat di-hover juga aman (biasanya abu-abu muda) */
+.dropdown-item:hover,
+.dropdown-item:focus {
+  color: var(--pab-blue-primary);
+  background-color: var(--pab-gray);
 }

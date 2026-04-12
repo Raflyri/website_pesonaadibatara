@@ -1,2 +1,5 @@
 User-agent: *
-Disallow: 
+Allow: /
+Disallow: /panel-pab/
+
+Sitemap: https://pesonaadibatara.com/sitemap.xml

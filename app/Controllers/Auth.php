@@ -6,12 +6,10 @@ use App\Controllers\BaseController;
 
 class Auth extends BaseController
 {
-    // UBAH NAMA DARI index() JADI login()
     public function login()
     {
-        // Kalau sudah login, lempar ke dashboard admin yang benar
         if (session()->get('isLoggedIn')) {
-            return redirect()->to('/admin/dashboard');
+            return redirect()->to('/panel-pab/dashboard');
         }
         return view('auth/login');
     }
@@ -27,19 +25,17 @@ class Auth extends BaseController
         if ($user) {
             if (password_verify($password, $user['password'])) {
 
-                // --- PERBAIKAN DISINI ---
                 $sessData = [
                     'id'         => $user['id'],
                     'username'   => $user['username'],
-                    'name'       => $user['fullname'], // Pastikan nama kolom di DB 'name' atau 'fullname'
-                    'role'       => $user['role'], // <--- WAJIB DITAMBAHKAN
-                    'avatar'     => $user['avatar'], // Tambahkan juga ini biar fotonya muncul
+                    'name'       => $user['fullname'],
+                    'role'       => $user['role'],
+                    'avatar'     => $user['avatar'],
                     'isLoggedIn' => true
                 ];
-                // ------------------------
 
                 session()->set($sessData);
-                return redirect()->to('/admin/dashboard');
+                return redirect()->to('/panel-pab/dashboard');
             }
         }
 

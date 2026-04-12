@@ -20,13 +20,13 @@ class Banner extends BaseController
             'title' => 'Kelola Banner Slider',
             'banners' => $this->bannerModel->orderBy('urutan', 'ASC')->findAll()
         ];
-        return view('admin/banner/index', $data);
+        return view('panel-pab/banner/index', $data);
     }
 
     public function create()
     {
         $data = ['title' => 'Tambah Banner Baru'];
-        return view('admin/banner/form', $data);
+        return view('panel-pab/banner/form', $data);
     }
 
     public function save($id = null)
@@ -87,19 +87,19 @@ class Banner extends BaseController
             $this->bannerModel->insert($data);
         }
 
-        return redirect()->to('/admin/banner')->with('success', 'Data Banner berhasil disimpan.');
+        return redirect()->to('/panel-pab/banner')->with('success', 'Data Banner berhasil disimpan.');
     }
 
     public function edit($id)
     {
         $banner = $this->bannerModel->find($id);
-        if (!$banner) return redirect()->to('/admin/banner');
+        if (!$banner) return redirect()->to('/panel-pab/banner');
 
         $data = [
             'title' => 'Edit Banner',
             'banner' => $banner
         ];
-        return view('admin/banner/form', $data);
+        return view('panel-pab/banner/form', $data);
     }
 
     public function delete($id)
@@ -109,6 +109,6 @@ class Banner extends BaseController
             unlink('uploads/banners/' . $banner['image']);
         }
         $this->bannerModel->delete($id);
-        return redirect()->to('/admin/banner')->with('success', 'Banner berhasil dihapus.');
+        return redirect()->to('/panel-pab/banner')->with('success', 'Banner berhasil dihapus.');
     }
 }

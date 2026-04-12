@@ -21,13 +21,13 @@ class Partners extends BaseController
             // Urutkan berdasarkan display_order biar sesuai keinginan user
             'partners' => $this->partnersModel->orderBy('display_order', 'ASC')->findAll()
         ];
-        return view('admin/partners/index', $data);
+        return view('panel-pab/partners/index', $data);
     }
 
     public function create()
     {
         $data = ['title' => 'Tambah Partner Baru'];
-        return view('admin/partners/form', $data);
+        return view('panel-pab/partners/form', $data);
     }
 
     public function save($id = null)
@@ -86,14 +86,15 @@ class Partners extends BaseController
             $fileLogo->move('uploads/partners', $newName);
 
             // C. Resize Image (Service CI4) - Biar ringan
-            try {
+            /*try {
                 $imageService = \Config\Services::image();
                 $imageService->withFile('uploads/partners/' . $newName)
                              ->resize(300, 150, true, 'width') // Max lebar 300px, tinggi menyesuaikan
                              ->save('uploads/partners/' . $newName);
             } catch (\Exception $e) {
                 // Jika resize gagal, biarkan file asli (silent fail)
-            }
+            }*/
+            //--------------------------------------------------------
 
             $data['partner_logo'] = $newName;
         }
@@ -105,25 +106,25 @@ class Partners extends BaseController
             $this->partnersModel->insert($data);
         }
 
-        return redirect()->to('/admin/partners')->with('success', 'Data Partner berhasil disimpan.');
+        return redirect()->to('/panel-pab/partners')->with('success', 'Data Partner berhasil disimpan.');
     }
 
     public function edit($id)
     {
         $partner = $this->partnersModel->find($id);
-        if (!$partner) return redirect()->to('/admin/partners');
+        if (!$partner) return redirect()->to('/panel-pab/partners');
 
         $data = [
             'title'   => 'Edit Partner',
             'partner' => $partner
         ];
-        return view('admin/partners/form', $data);
+        return view('panel-pab/partners/form', $data);
     }
 
     public function delete($id)
     {
         $partner = $this->partnersModel->find($id);
-        if (!$partner) return redirect()->to('/admin/partners');
+        if (!$partner) return redirect()->to('/panel-pab/partners');
 
         // Hapus file fisik
         if ($partner['partner_logo'] && file_exists('uploads/partners/' . $partner['partner_logo'])) {
@@ -131,6 +132,6 @@ class Partners extends BaseController
         }
 
         $this->partnersModel->delete($id);
-        return redirect()->to('/admin/partners')->with('success', 'Partner dihapus.');
+        return redirect()->to('/panel-pab/partners')->with('success', 'Partner dihapus.');
     }
 }
