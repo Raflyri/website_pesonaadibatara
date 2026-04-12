@@ -47,7 +47,7 @@ $cover = !empty($news['image']) ? '/uploads/news/' . $news['image'] : 'https://s
                     <div>
                         <a href="#" class="btn btn-sm btn-outline-primary rounded-circle"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="btn btn-sm btn-outline-info rounded-circle"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="btn btn-sm btn-outline-success rounded-circle"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://wa.me/?text=<?= urlencode($news['title_id'] . ' - ' . current_url()); ?>" target="_blank" class="btn btn-sm btn-outline-success rounded-circle"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
 

@@ -51,7 +51,7 @@ abstract class BaseController extends Controller
 
         // Share data globally to all Views
         $globalData = [
-            'whatsapp' => $settingModel->getVal('company_whatsapp') ?? '62812345678' // Fallback if DB empty
+            'whatsapp' => $settingModel->getVal('company_whatsapp') ?? '' // Empty fallback if not set in DB
         ];
 
         \Config\Services::renderer()->setData($globalData, 'raw');

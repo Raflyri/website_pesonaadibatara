@@ -5,7 +5,7 @@
 <section class="position-relative text-white text-center overflow-hidden" style="padding-top: 160px; padding-bottom: 100px;">
 
     <div class="position-absolute top-0 start-0 w-100 h-100"
-        style="background-image: url('https://images.unsplash.com/photo-1423666639041-f140481eb936?auto=format&fit=crop&w=1200'); 
+        style="background-image: url('<?= !empty($intro['media_url']) ? base_url('uploads/pages/' . $intro['media_url']) : 'https://images.unsplash.com/photo-1423666639041-f140481eb936?auto=format&fit=crop&w=1200' ?>'); 
                 background-size: cover; 
                 background-position: center; 
                 z-index: 1;">

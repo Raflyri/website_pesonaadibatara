@@ -60,8 +60,11 @@
                         $settingModel = new \App\Models\SiteSettingModel();
                         $tagline      = $settingModel->getVal('company_tagline');
                         $fontName     = $settingModel->getVal('company_tagline_font');
-                        $iconName     = $settingModel->getVal('company_icon');
-
+                        $iconName        = $settingModel->getVal('company_icon');
+                        $companyWhatsapp = $settingModel->getVal('company_whatsapp');
+                        $companyPhone    = $settingModel->getVal('company_phone');
+                        $companyEmail    = $settingModel->getVal('company_email');
+                        $companyAddress  = $settingModel->getVal('company_address');
                         // Default icon
                         $logoSrc = !empty($iconName) ? base_url('assets/img/' . $iconName) : base_url('assets/img/logo-pab.png');
                         ?>
@@ -171,10 +174,10 @@
                                 </a>
                             </div>
                             <div class="d-flex flex-column gap-2">
-                                <a href="tel:+622112345678" class="btn btn-outline-primary rounded-pill d-flex align-items-center gap-2 py-2">
+                                <a href="tel:<?= preg_replace('/[^0-9+]/', '', $companyPhone ?? ''); ?>" class="btn btn-outline-primary rounded-pill d-flex align-items-center gap-2 py-2">
                                     <i class="fas fa-phone"></i> Telepon Kami
                                 </a>
-                                <a href="https://wa.me/<?= $whatsapp ?? ''; ?>" target="_blank" class="btn btn-success rounded-pill d-flex align-items-center gap-2 py-2">
+                                <a href="https://wa.me/<?= $companyWhatsapp ?? ''; ?>" target="_blank" class="btn btn-success rounded-pill d-flex align-items-center gap-2 py-2">
                                     <i class="fab fa-whatsapp"></i> WhatsApp Kami
                                 </a>
                             </div>
@@ -235,14 +238,14 @@
                             <div class="contact-popup-menu">
                                 <div class="d-flex flex-column gap-2">
 
-                                    <a href="tel:+622112345678" class="btn btn-light rounded-pill d-flex align-items-center p-2 pe-3 border-0 shadow-sm hover-scale">
+                                    <a href="tel:<?= preg_replace('/[^0-9+]/', '', $companyPhone ?? ''); ?>" class="btn btn-light rounded-pill d-flex align-items-center p-2 pe-3 border-0 shadow-sm hover-scale">
                                         <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;">
                                             <i class="fas fa-phone"></i>
                                         </div>
                                         <span class="ms-3 fw-bold text-dark small">Telepon Kami</span>
                                     </a>
 
-                                    <a href="https://wa.me/<?= $whatsapp; ?>" target="_blank" class="btn btn-light rounded-pill d-flex align-items-center p-2 pe-3 border-0 shadow-sm hover-scale">
+                                    <a href="https://wa.me/<?= $companyWhatsapp ?? ''; ?>" target="_blank" class="btn btn-light rounded-pill d-flex align-items-center p-2 pe-3 border-0 shadow-sm hover-scale">
                                         <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;">
                                             <i class="fab fa-whatsapp"></i>
                                         </div>
@@ -337,20 +340,15 @@
                     <ul class="list-unstyled text-white-50 small">
                         <li class="mb-3 d-flex">
                             <i class="fas fa-map-marker-alt text-primary mt-1 me-3"></i>
-                            <span>
-                                The Archies Sudirman (D/H T Plaza),<br>
-                                Tower B, Ruko B No.B4.<br>
-                                Jl. Penjernihan I No.1 Kav.1,<br>
-                                Jakarta Pusat 10210
-                            </span>
+                            <span><?= nl2br($companyAddress ?? ''); ?></span>
                         </li>
                         <li class="mb-3 d-flex">
                             <i class="fas fa-phone-alt text-primary mt-1 me-3"></i>
-                            <span>021-39705142</span>
+                            <span><?= $companyPhone ?? ''; ?></span>
                         </li>
                         <li class="mb-3 d-flex">
                             <i class="fas fa-envelope text-primary mt-1 me-3"></i>
-                            <span>administrasi_div@pesonaadibatara.com</span>
+                            <span><?= $companyEmail ?? ''; ?></span>
                         </li>
                     </ul>
                 </div>

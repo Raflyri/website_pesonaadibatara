@@ -37,6 +37,7 @@ class Home extends BaseController
             'phone'    => $settingModel->getVal('company_phone'),
             'address'  => $settingModel->getVal('company_address'),
             'email'    => $settingModel->getVal('company_email'),
+            'whatsapp' => $settingModel->getVal('company_whatsapp'),
             'partners' => $partnersModel->where('is_active', 1)
                 ->orderBy('display_order', 'ASC')
                 ->findAll(),

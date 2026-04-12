@@ -11,6 +11,7 @@ class Services extends BaseController
     {
         $serviceModel = new ServiceModel();
         $pageModel    = new ServicePageModel();
+        $settingModel = new \App\Models\SiteSettingModel();
 
         // 1. Cek Kategori Valid (Manual array atau cek DB)
         $validCategories = ['transportasi', 'kesehatan', 'jasa', 'investasi'];
@@ -38,7 +39,8 @@ class Services extends BaseController
             'desc'     => $pageData['page_description'],
             'hero_img' => $pageData['hero_image'],
             'items'    => $items,
-            'category' => $category
+            'category' => $category,
+            'whatsapp' => $settingModel->getVal('company_whatsapp')
         ];
 
         return view('services/detail', $data);
