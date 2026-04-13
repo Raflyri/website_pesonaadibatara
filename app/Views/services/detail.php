@@ -33,7 +33,7 @@ if (!empty($hero_img) && file_exists('uploads/services/' . $hero_img)) {
     <div class="container position-relative" style="z-index: 3;">
 
         <span class="badge rounded-pill bg-info text-dark mb-3 px-3 py-2 animate__animated animate__fadeInDown">
-            <i class="fas fa-layer-group me-2"></i>LAYANAN KAMI
+            <i class="fas fa-layer-group me-2"></i><?= lang('Frontend.service.our_services') ?>
         </span>
 
         <h1 class="display-4 fw-bold mb-3 animate__animated animate__fadeInDown animate__delay-1s">
@@ -43,7 +43,7 @@ if (!empty($hero_img) && file_exists('uploads/services/' . $hero_img)) {
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <p class="lead opacity-75 mb-4 animate__animated animate__fadeInUp animate__delay-1s">
-                    Solusi profesional dari PT. Pesona Adi Batara untuk mendukung kebutuhan bisnis Anda.
+                    <?= lang('Frontend.service.hero_desc') ?>
                 </p>
             </div>
         </div>
@@ -118,7 +118,7 @@ if (!empty($hero_img) && file_exists('uploads/services/' . $hero_img)) {
             <?php else: ?>
                 <div class="col-12 text-center py-5">
                     <img src="<?= base_url('assets/img/logo-pab.png'); ?>" height="60" class="grayscale opacity-50 mb-3">
-                    <h4 class="text-muted">Data layanan segera tersedia.</h4>
+                    <h4 class="text-muted"><?= lang('Frontend.service.coming_soon') ?></h4>
                 </div>
             <?php endif; ?>
         </div>

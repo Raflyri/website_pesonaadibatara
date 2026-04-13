@@ -3,10 +3,10 @@
 <?= $this->section('content'); ?>
 
 <div class="swiper mySwiper hero-slider">
+
     <div class="swiper-wrapper">
         <?php foreach ($banners as $banner): ?>
             <div class="swiper-slide">
-
                 <div class="slide-bg" style="background-image: url('<?= base_url('uploads/banners/' . $banner['image']); ?>');"></div>
 
                 <div class="overlay-gradient"></div>
@@ -15,9 +15,9 @@
                     <div class="row h-100 align-items-center">
                         <div class="col-md-8 col-lg-7">
                             <div class="hero-content text-white">
-                                <h5 class="text-warning fw-bold mb-3 animate__animated animate__fadeInDown" style="animation-delay: 0.3s;">
-                                    PT. PESONA ADI BATARA
-                                </h5>
+                                <!--h5 class="text-warning fw-bold mb-3 animate__animated animate__fadeInDown" style="animation-delay: 0.3s;">
+                                    Your Ultimate Solution
+                                </h5-->
                                 <h1 class="display-4 fw-bold mb-4 animate__animated animate__fadeInUp" style="animation-delay: 0.5s;">
                                     <?= $banner['title']; ?>
                                 </h1>

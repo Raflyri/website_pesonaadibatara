@@ -1,25 +1,33 @@
 <?php
 // app/Language/id/Layout.php
 return [
+    'meta' => [
+        'default_description' => 'Solusi logistik dan transportasi terpercaya di Indonesia.',
+        'default_og_description' => 'Solusi logistik dan transportasi terpercaya.',
+    ],
     'navbar' => [
-        'home'     => 'Beranda',
-        'about'    => 'Tentang Kami',
-        'services' => 'Layanan',
-        'fleet'    => 'Armada',
-        'news'     => 'Berita',
-        'contact'  => 'Kontak',
+        'home'           => 'Beranda',
+        'about'          => 'Tentang Kami',
+        'services'       => 'Layanan',
+        'fleet'          => 'Armada',
+        'news'           => 'Berita',
+        'contact'        => 'Kontak',
         'transportation' => 'Transportasi',
-        'contact_us' => 'Hubungi Kami',
-        'call_us' => 'Telepon Kami',
-        'wa_us' => 'WhatsApp Kami',
+        'transport_desc' => 'Luxury Car & Operasional',
+        'health'         => 'Kesehatan',
+        'services_general' => 'Jasa',
+        'investment'     => 'Investasi',
+        'contact_us'     => 'Hubungi Kami',
+        'call_us'        => 'Telepon Kami',
+        'wa_us'          => 'WhatsApp Kami',
     ],
     'footer' => [
-        'about_us'    => 'Tentang Kami',
-        'career'   => 'Karir',
-        'quick_links' => 'Tautan Cepat',
-        'contact_us'  => 'Kontak Kami',
-        'copyright'   => 'Hak Cipta © ' . date('Y') . ' PT. Pesona Adi Batara. Dilindungi Undang-Undang.',
-        'footer_info' => 'Memberikan nilai tambah bagi perusahaan dan stakeholder melalui layanan terintegrasi yang profesional dan terpercaya.',
+        'about_us'            => 'Tentang Kami',
+        'career'              => 'Karir',
+        'quick_links'         => 'Tautan Cepat',
+        'contact_us'          => 'Kontak Kami',
+        'copyright'           => '&copy; ' . date('Y') . ' <strong>PT. Pesona Adi Batara</strong>. Hak Cipta Dilindungi.',
+        'footer_info'         => 'Memberikan nilai tambah bagi perusahaan dan stakeholder melalui layanan terintegrasi yang profesional dan terpercaya.',
         'footer_sec_services' => 'Layanan Kami',
         'footer_sec_company'  => 'Perusahaan',
         'footer_office'       => 'Kantor Pusat',
@@ -31,14 +39,12 @@ return [
         'link_news_article'   => 'Berita & Artikel',
         'link_career'         => 'Karir',
         'link_contact'        => 'Hubungi Kami',
-
-
     ],
     'home' => [
-    'hero_company_label' => 'PT. PESONA ADI BATARA',
-    'service_heading'    => 'Layanan Kami',
-    'service_subheading' => '4 Pilar Bisnis Utama',
-    'service_desc'       => 'Solusi terintegrasi untuk mendukung pertumbuhan bisnis Anda secara berkelanjutan.',
+        'hero_company_label' => 'PT. PESONA ADI BATARA',
+        'service_heading'    => 'Layanan Kami',
+        'service_subheading' => '4 Pilar Bisnis Utama',
+        'service_desc'       => 'Solusi terintegrasi untuk mendukung pertumbuhan bisnis Anda secara berkelanjutan.',
     ],
-    'btn_lang' => 'Bahasa'
+    'btn_lang' => 'Bahasa',
 ];

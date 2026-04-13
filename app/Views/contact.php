@@ -18,17 +18,23 @@
 
     <div class="container position-relative" style="z-index: 3;">
         <span class="badge rounded-pill bg-danger text-white mb-3 px-3 py-2 animate__animated animate__fadeInDown">
-            <i class="fas fa-headset me-2"></i>LAYANAN PELANGGAN
+            <i class="fas fa-headset me-2"></i><?= lang('Frontend.contact.badge_support') ?>
         </span>
 
+        <?php
+        $currentLang = service('request')->getLocale();
+        $introTitle = ($currentLang == 'en' && !empty($intro['title_en'])) ? $intro['title_en'] : ($intro['title_id'] ?? lang('Frontend.contact.title'));
+        $introContent = ($currentLang == 'en' && !empty($intro['content_en'])) ? $intro['content_en'] : ($intro['content_id'] ?? lang('Frontend.contact.subtitle'));
+        ?>
+
         <h1 class="display-4 fw-bold mb-3 animate__animated animate__fadeInDown animate__delay-1s">
-            <?= $intro['title_id'] ?? 'Hubungi Kami'; ?>
+            <?= $introTitle; ?>
         </h1>
 
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <p class="lead opacity-75 mb-4 animate__animated animate__fadeInUp animate__delay-1s">
-                    <?= $intro['content_id'] ?? 'Kami siap mendengar kebutuhan transportasi Anda. Segera hubungi kami untuk penawaran terbaik.'; ?>
+                    <?= $introContent; ?>
                 </p>
             </div>
         </div>
@@ -93,10 +99,10 @@
 
                 <div class="card bg-primary text-white border-0 rounded-4 mt-5 overflow-hidden">
                     <div class="card-body p-4 position-relative">
-                        <h5 class="fw-bold position-relative z-2">Butuh Respon Cepat?</h5>
-                        <p class="position-relative z-2 mb-3">Klik tombol di bawah untuk terhubung langsung via WhatsApp.</p>
+                        <h5 class="fw-bold position-relative z-2"><?= lang('Frontend.contact.quick_response') ?></h5>
+                        <p class="position-relative z-2 mb-3"><?= lang('Frontend.contact.quick_response_desc') ?></p>
                         <a href="https://wa.me/<?= $whatsapp; ?>" target="_blank" class="btn btn-light text-primary fw-bold rounded-pill px-4 position-relative z-2">
-                            <i class="fab fa-whatsapp me-2"></i> Chat WhatsApp
+                            <i class="fab fa-whatsapp me-2"></i> <?= lang('Frontend.contact.chat_whatsapp') ?>
                         </a>
                         <i class="fab fa-whatsapp position-absolute text-white" style="font-size: 10rem; opacity: 0.1; right: -20px; bottom: -30px;"></i>
                     </div>
@@ -125,10 +131,10 @@
                                 <div class="col-12">
                                     <label class="form-label fw-bold"><?= lang('Frontend.contact.subject'); ?></label>
                                     <select name="subject" class="form-select bg-light border-0 py-3">
-                                        <option value="General Inquiry">Pertanyaan Umum</option>
-                                        <option value="Partnership">Kerjasama Bisnis (KSO)</option>
-                                        <option value="Service Request">Permintaan Layanan</option>
-                                        <option value="Recruitment">Karir / Lowongan</option>
+                                        <option value="General Inquiry"><?= lang('Frontend.contact.opt_general') ?></option>
+                                        <option value="Partnership"><?= lang('Frontend.contact.opt_partnership') ?></option>
+                                        <option value="Service Request"><?= lang('Frontend.contact.opt_service') ?></option>
+                                        <option value="Recruitment"><?= lang('Frontend.contact.opt_career') ?></option>
                                     </select>
                                 </div>
                                 <div class="col-12">

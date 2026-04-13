@@ -22,7 +22,7 @@
 
     <div class="container position-relative" style="z-index: 3;">
         <span class="badge rounded-pill bg-info text-dark mb-3 px-3 py-2 animate__animated animate__fadeInDown">
-            <i class="fas fa-building me-2"></i>PROFIL PERUSAHAAN
+            <i class="fas fa-building me-2"></i><?= lang('Frontend.about.badge_profile') ?>
         </span>
 
         <h1 class="display-4 fw-bold mb-3 animate__animated animate__fadeInDown animate__delay-1s">
@@ -32,7 +32,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <p class="lead opacity-75 mb-4 animate__animated animate__fadeInUp animate__delay-1s">
-                    Mengenal lebih dekat PT. Pesona Adi Batara sebagai mitra transportasi terpercaya.
+                    <?= lang('Frontend.about.subtitle') ?>
                 </p>
             </div>
         </div>
@@ -51,10 +51,15 @@
                 <img src="<?= $img; ?>" class="img-fluid rounded-4 shadow-lg" alt="Sejarah PAB">
             </div>
             <div class="col-lg-6 ps-lg-5" data-aos="fade-left">
+                <?php
+                $currentLang = service('request')->getLocale();
+                $historyTitle = ($currentLang == 'en' && !empty($history['title_en'])) ? $history['title_en'] : $history['title_id'];
+                $historyContent = ($currentLang == 'en' && !empty($history['content_en'])) ? $history['content_en'] : $history['content_id'];
+                ?>
                 <h6 class="text-primary fw-bold text-uppercase mb-2"><?= lang('Frontend.about.history_title'); ?></h6>
-                <h2 class="fw-bold mb-4"><?= $history['title_id']; ?></h2>
+                <h2 class="fw-bold mb-4"><?= $historyTitle; ?></h2>
                 <div class="text-muted">
-                    <?= nl2br($history['content_id']); ?>
+                    <?= nl2br($historyContent); ?>
                 </div>
 
                 <?php
@@ -68,7 +73,7 @@
                     $downloadUrl = base_url('uploads/doc/' . $compro_file);
                 } else {
                     $isDisabled = true;
-                    $labelButton = 'Company Profile (Belum Tersedia)';
+                    $labelButton = lang('Frontend.about.compro_unavailable');
                 }
                 ?>
 
@@ -80,7 +85,7 @@
                     </a>
 
                     <div class="mt-2 text-muted small">
-                        <i class="fas fa-info-circle me-1"></i> Format PDF
+                        <i class="fas fa-info-circle me-1"></i> <?= lang('Frontend.about.format_pdf') ?>
                         <?php if (!empty($compro_link)) : ?> (Via Google Drive) <?php endif; ?>
                     </div>
                 </div>
@@ -98,9 +103,12 @@
                         <div class="icon-circle bg-blue-light mb-4 mx-auto text-primary">
                             <i class="fas fa-eye fa-2x"></i>
                         </div>
+                        <?php
+                        $visionContent = ($currentLang == 'en' && !empty($vision['content_en'])) ? $vision['content_en'] : $vision['content_id'];
+                        ?>
                         <h3 class="fw-bold mb-3"><?= lang('Frontend.about.vision_title'); ?></h3>
                         <p class="lead text-muted fst-italic">
-                            "<?= $vision['content_id']; ?>"
+                            "<?= $visionContent; ?>"
                         </p>
                     </div>
                     <div class="bg-primary h-1 w-100"></div>
@@ -118,7 +126,8 @@
                         </div>
                         <ul class="list-unstyled">
                             <?php
-                            $misiList = explode("\n", $mission['content_id']);
+                            $missionContent = ($currentLang == 'en' && !empty($mission['content_en'])) ? $mission['content_en'] : $mission['content_id'];
+                            $misiList = explode("\n", $missionContent);
                             foreach ($misiList as $m):
                                 if (trim($m) == "") continue;
                             ?>
@@ -140,9 +149,9 @@
     <div class="container py-4">
         <div class="text-center mb-5" data-aos="fade-up">
             <span class="org-section-badge">
-                <i class="fas fa-sitemap me-2"></i>Organisasi
+                <i class="fas fa-sitemap me-2"></i><?= lang('Frontend.about.organization') ?>
             </span>
-            <h2 class="org-section-title mt-3">Struktur Dewan Direksi</h2>
+            <h2 class="org-section-title mt-3"><?= lang('Frontend.about.board_structure') ?></h2>
             <div class="org-section-divider mx-auto"></div>
         </div>
 
@@ -151,7 +160,8 @@
 
                 <?php
                 // Fungsi Rekursif untuk Menggambar HTML (UL > LI)
-                function renderTreeHTML($items)
+                $currentLangTree = service('request')->getLocale();
+                function renderTreeHTML($items, $locale = 'id')
                 {
                     echo "<ul>";
                     foreach ($items as $item) {
@@ -163,18 +173,22 @@
                         // Cek Level untuk styling (Semua level menggunakan style yang sama)
                         $cardClass = 'member-card';
 
+                        // Locale-aware position
+                        $positionKey = 'position_' . $locale;
+                        $position = !empty($item[$positionKey]) ? $item[$positionKey] : $item['position_id'];
+
                         echo '
                         <div class="' . $cardClass . '">
                             <div class="img-box"><img src="' . $foto . '"></div>
                             <div class="info-box">
                                 <h5>' . $item['name'] . '</h5>
-                                <span>' . $item['position_id'] . '</span>
+                                <span>' . $position . '</span>
                             </div>
                         </div>';
 
                         // Jika punya anak buah, panggil fungsi ini lagi (Looping ke dalam)
                         if (!empty($item['children'])) {
-                            renderTreeHTML($item['children']);
+                            renderTreeHTML($item['children'], $locale);
                         }
 
                         echo "</li>";
@@ -184,7 +198,7 @@
 
                 // PANGGIL FUNGSI PERTAMA KALI
                 if (!empty($teams)) {
-                    renderTreeHTML($teams);
+                    renderTreeHTML($teams, $currentLangTree);
                 }
                 ?>
 

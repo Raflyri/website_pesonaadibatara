@@ -7,14 +7,14 @@
 
     <title><?= $title ?? 'PT. Pesona Adi Batara'; ?></title>
 
-    <meta name="description" content="<?= $meta_desc ?? 'Solusi logistik dan transportasi terpercaya di Indonesia.'; ?>">
+    <meta name="description" content="<?= $meta_desc ?? lang('Layout.meta.default_description'); ?>">
 
     <meta name="keywords" content="<?= $meta_keywords ?? 'logistik, transportasi, ev, eo, outsourcing'; ?>">
 
     <meta name="author" content="PT. Pesona Adi Batara">
 
     <meta property="og:title" content="<?= $title ?? 'PT. Pesona Adi Batara'; ?>">
-    <meta property="og:description" content="<?= $meta_desc ?? 'Solusi logistik dan transportasi terpercaya.'; ?>">
+    <meta property="og:description" content="<?= $meta_desc ?? lang('Layout.meta.default_og_description'); ?>">
     <meta property="og:image" content="<?= $meta_image ?? base_url('assets/img/logo-pab.png'); ?>">
     <meta property="og:url" content="<?= current_url(); ?>">
 
@@ -54,12 +54,14 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-rounded-box shadow-sm transition-all">
                 <div class="container-fluid px-4">
-                    <a class="navbar-brand d-flex flex-column justify-content-center align-items-center p-0" href="/">
+                    <a class="navbar-brand d-flex flex-row align-items-center gap-2 gap-md-3 p-0" href="/">
 
                         <?php
                         $settingModel = new \App\Models\SiteSettingModel();
-                        $tagline      = $settingModel->getVal('company_tagline');
+                        $tagline      = $settingModel->getLocalizedVal('company_tagline');
                         $fontName     = $settingModel->getVal('company_tagline_font');
+                        $taglineSize  = $settingModel->getVal('company_tagline_size');
+                        $taglineColor = $settingModel->getVal('company_tagline_color');
                         $iconName        = $settingModel->getVal('company_icon');
                         $companyWhatsapp = $settingModel->getVal('company_whatsapp');
                         $companyPhone    = $settingModel->getVal('company_phone');
@@ -72,10 +74,12 @@
                         <img src="<?= $logoSrc; ?>" alt="Logo Perusahaan" class="logo-transition">
 
                         <?php if ($tagline): ?>
-                            <span class="company-tagline mt-1"
-                                style="<?= !empty($fontName) ? "font-family: '$fontName', sans-serif;" : '' ?>">
-                                <?= $tagline; ?>
-                            </span>
+                            <div class="company-tagline-wrapper d-flex align-items-center">
+                                <span class="company-tagline m-0 lh-sm"
+                                    style="<?= !empty($fontName) ? "font-family: '$fontName', sans-serif; " : '' ?><?= !empty($taglineSize) ? "font-size: {$taglineSize}px; " : '' ?><?= !empty($taglineColor) ? "color: {$taglineColor}; " : '' ?>">
+                                    <?= $tagline; ?>
+                                </span>
+                            </div>
                         <?php endif; ?>
 
                     </a>
@@ -108,7 +112,7 @@
                                             <div class="icon-small bg-blue-light me-3 text-primary"><i class="fas fa-car-side"></i></div>
                                             <div>
                                                 <span class="fw-bold d-block"><?= lang('Layout.navbar.transportation'); ?></span>
-                                                <small class="text-muted" style="font-size: 0.7rem;">Luxury Car & Operasional</small>
+                                                <small class="text-muted" style="font-size: 0.7rem;"><?= lang('Layout.navbar.transport_desc') ?></small>
                                             </div>
                                         </a>
                                     </li>
@@ -121,7 +125,7 @@
                                         <a class="dropdown-item py-2 rounded-3 d-flex align-items-center <?= (uri_string() == 'layanan/kesehatan') ? 'active bg-light' : ''; ?>" href="/layanan/kesehatan">
                                             <div class="icon-small bg-green-light me-3 text-success"><i class="fas fa-heartbeat"></i></div>
                                             <div>
-                                                <span class="fw-bold d-block">Kesehatan</span>
+                                                <span class="fw-bold d-block"><?= lang('Layout.navbar.health') ?></span>
                                                 <small class="text-muted" style="font-size: 0.7rem;">Batara Health Care</small>
                                             </div>
                                         </a>
@@ -135,7 +139,7 @@
                                         <a class="dropdown-item py-2 rounded-3 d-flex align-items-center <?= (uri_string() == 'layanan/jasa') ? 'active bg-light' : ''; ?>" href="/layanan/jasa">
                                             <div class="icon-small bg-orange-light me-3 text-warning"><i class="fas fa-concierge-bell"></i></div>
                                             <div>
-                                                <span class="fw-bold d-block">Jasa</span>
+                                                <span class="fw-bold d-block"><?= lang('Layout.navbar.services_general') ?></span>
                                                 <small class="text-muted" style="font-size: 0.7rem;">Fasade & EO</small>
                                             </div>
                                         </a>
@@ -149,7 +153,7 @@
                                         <a class="dropdown-item py-2 rounded-3 d-flex align-items-center <?= (uri_string() == 'layanan/investasi') ? 'active bg-light' : ''; ?>" href="/layanan/investasi">
                                             <div class="icon-small bg-purple-light me-3 text-info"><i class="fas fa-chart-line"></i></div>
                                             <div>
-                                                <span class="fw-bold d-block">Investasi</span>
+                                                <span class="fw-bold d-block"><?= lang('Layout.navbar.investment') ?></span>
                                                 <small class="text-muted" style="font-size: 0.7rem;">KSO & F&B</small>
                                             </div>
                                         </a>
@@ -175,10 +179,10 @@
                             </div>
                             <div class="d-flex flex-column gap-2">
                                 <a href="tel:<?= preg_replace('/[^0-9+]/', '', $companyPhone ?? ''); ?>" class="btn btn-outline-primary rounded-pill d-flex align-items-center gap-2 py-2">
-                                    <i class="fas fa-phone"></i> Telepon Kami
+                                    <i class="fas fa-phone"></i> <?= lang('Layout.navbar.call_us') ?>
                                 </a>
                                 <a href="https://wa.me/<?= $companyWhatsapp ?? ''; ?>" target="_blank" class="btn btn-success rounded-pill d-flex align-items-center gap-2 py-2">
-                                    <i class="fab fa-whatsapp"></i> WhatsApp Kami
+                                    <i class="fab fa-whatsapp"></i> <?= lang('Layout.navbar.wa_us') ?>
                                 </a>
                             </div>
                         </div>
@@ -242,14 +246,14 @@
                                         <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;">
                                             <i class="fas fa-phone"></i>
                                         </div>
-                                        <span class="ms-3 fw-bold text-dark small">Telepon Kami</span>
+                                        <span class="ms-3 fw-bold text-dark small"><?= lang('Layout.navbar.call_us') ?></span>
                                     </a>
 
                                     <a href="https://wa.me/<?= $companyWhatsapp ?? ''; ?>" target="_blank" class="btn btn-light rounded-pill d-flex align-items-center p-2 pe-3 border-0 shadow-sm hover-scale">
                                         <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;">
                                             <i class="fab fa-whatsapp"></i>
                                         </div>
-                                        <span class="ms-3 fw-bold text-dark small">WhatsApp Kami</span>
+                                        <span class="ms-3 fw-bold text-dark small"><?= lang('Layout.navbar.wa_us') ?></span>
                                     </a>
 
                                 </div>
@@ -268,17 +272,17 @@
         <?= $this->renderSection('content'); ?>
     </main>
 
-    <div class="company-tagline-section">
-        <div class="container">
+    <div class="company-tagline-section position-relative overflow-hidden">
+        <div class="container position-relative z-2">
             <?php
             $settingModel = new \App\Models\SiteSettingModel();
-            $footerTaglineMain = $settingModel->getVal('company_tagline');
+            $footerTaglineMain = $settingModel->getLocalizedVal('company_tagline');
             $footerFontMain = $settingModel->getVal('company_tagline_font');
             $footerSizeMain = $settingModel->getVal('company_tagline_size') ?? '36';
             $footerColorMain = $settingModel->getVal('company_tagline_color') ?? '#ffffff';
             ?>
             <?php if ($footerTaglineMain): ?>
-                <h2 class="company-tagline-text" style="<?= $footerFontMain ? "font-family: '$footerFontMain', sans-serif;" : ''; ?> font-size: <?= $footerSizeMain; ?>px; color: <?= $footerColorMain; ?>;">
+                <h2 class="company-tagline-text" style="<?= $footerFontMain ? "font-family: '$footerFontMain', sans-serif;" : ''; ?> font-size: min(<?= $footerSizeMain; ?>px, 8vw); color: <?= $footerColorMain; ?>;">
                     <?= $footerTaglineMain; ?>
                 </h2>
             <?php endif; ?>
@@ -360,7 +364,7 @@
 
             <div class="row align-items-center">
                 <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    <small class="text-white-50">&copy; <?= date('Y'); ?> <strong>PT. Pesona Adi Batara</strong>. All Rights Reserved.</small>
+                    <small class="text-white-50"><?= lang('Layout.footer.copyright') ?></small>
                 </div>
                 <!--div class="col-md-6 text-center text-md-end">
                     <span class="text-white-50 small me-2">Member of:</span>

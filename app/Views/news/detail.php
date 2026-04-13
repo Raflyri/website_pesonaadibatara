@@ -4,12 +4,15 @@
 
 <?php
 $cover = !empty($news['image']) ? '/uploads/news/' . $news['image'] : 'https://source.unsplash.com/random/1200x600?business';
+$currentLang = service('request')->getLocale();
+$newsTitle = ($currentLang == 'en' && !empty($news['title_en'])) ? $news['title_en'] : $news['title_id'];
+$newsContent = ($currentLang == 'en' && !empty($news['content_en'])) ? $news['content_en'] : $news['content_id'];
 ?>
 <div class="position-relative" style="height: 450px; background-color: #333;">
-    <img src="<?= $cover; ?>" class="w-100 h-100 object-fit-cover opacity-50" alt="<?= esc($news['title_id']); ?>">
+    <img src="<?= $cover; ?>" class="w-100 h-100 object-fit-cover opacity-50" alt="<?= esc($newsTitle); ?>">
     <div class="position-absolute top-50 start-50 translate-middle text-center w-75">
         <span class="badge bg-primary text-uppercase mb-3 px-3 py-2"><?= $news['category']; ?></span>
-        <h1 class="text-white fw-bold display-5 shadow-sm"><?= esc($news['title_id']); ?></h1>
+        <h1 class="text-white fw-bold display-5 shadow-sm"><?= esc($newsTitle); ?></h1>
         <div class="text-white-50 mt-3">
             <i class="far fa-user me-2"></i> Admin PAB &nbsp;&bull;&nbsp;
             <i class="far fa-calendar-alt me-2"></i> <?= date('d F Y', strtotime($news['date_published'])); ?>
@@ -24,7 +27,7 @@ $cover = !empty($news['image']) ? '/uploads/news/' . $news['image'] : 'https://s
             <div class="col-lg-8 mx-auto">
                 <article class="blog-post">
                     <div class="lead text-dark lh-lg mb-5 content-body">
-                        <?= $news['content_id']; ?>
+                        <?= $newsContent; ?>
                     </div>
 
                     <style>
@@ -43,11 +46,11 @@ $cover = !empty($news['image']) ? '/uploads/news/' . $news['image'] : 'https://s
                 </article>
 
                 <div class="border-top border-bottom py-4 my-5 d-flex justify-content-between align-items-center">
-                    <span class="fw-bold">Bagikan tulisan ini:</span>
+                    <span class="fw-bold"><?= lang('Frontend.news.share_post') ?></span>
                     <div>
                         <a href="#" class="btn btn-sm btn-outline-primary rounded-circle"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="btn btn-sm btn-outline-info rounded-circle"><i class="fab fa-twitter"></i></a>
-                        <a href="https://wa.me/?text=<?= urlencode($news['title_id'] . ' - ' . current_url()); ?>" target="_blank" class="btn btn-sm btn-outline-success rounded-circle"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://wa.me/?text=<?= urlencode($newsTitle . ' - ' . current_url()); ?>" target="_blank" class="btn btn-sm btn-outline-success rounded-circle"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
 
@@ -64,8 +67,8 @@ $cover = !empty($news['image']) ? '/uploads/news/' . $news['image'] : 'https://s
     <div class="container">
 
         <div class="text-center mb-5">
-            <h3 class="fw-bold text-dark">Eksplorasi Lebih Lanjut</h3>
-            <p class="text-muted">Temukan informasi menarik lainnya.</p>
+            <h3 class="fw-bold text-dark"><?= lang('Frontend.news.explore_more') ?></h3>
+            <p class="text-muted"><?= lang('Frontend.news.explore_more_desc') ?></p>
 
             <ul class="nav nav-pills justify-content-center d-inline-flex bg-white rounded-pill p-1 shadow-sm mt-3" id="relatedTab" role="tablist">
                 <li class="nav-item" role="presentation">
@@ -87,28 +90,32 @@ $cover = !empty($news['image']) ? '/uploads/news/' . $news['image'] : 'https://s
                 <div class="row g-4 justify-content-center">
                     <?php if (!empty($related_news)) : ?>
                         <?php foreach ($related_news as $item) : ?>
+                            <?php
+                            $relNewsTitle = ($currentLang == 'en' && !empty($item['title_en'])) ? $item['title_en'] : $item['title_id'];
+                            ?>
                             <div class="col-md-4">
                                 <div class="card h-100 border-0 shadow-sm hover-top overflow-hidden">
                                     <div class="overflow-hidden position-relative" style="height: 200px;">
                                         <?php $thumb = !empty($item['image']) ? '/uploads/news/' . $item['image'] : 'https://source.unsplash.com/random/800x600?office'; ?>
-                                        <img src="<?= $thumb; ?>" class="card-img-top w-100 h-100 object-fit-cover transition-transform" alt="<?= esc($item['title_id']); ?>">
-                                        <div class="badge bg-primary position-absolute top-0 start-0 m-3 py-1 px-2 small">NEWS</div>
+                                        <img src="<?= $thumb; ?>" class="card-img-top w-100 h-100 object-fit-cover transition-transform" alt="<?= esc($relNewsTitle); ?>">
+                                        <div class="badge bg-primary position-absolute top-0 start-0 m-3 py-1 px-2 small"><?= lang('Home.news_sec.label_news') ?></div>
                                     </div>
                                     <div class="card-body">
                                         <div class="small text-muted mb-2"><i class="far fa-calendar-alt me-1"></i> <?= date('d M Y', strtotime($item['date_published'])); ?></div>
                                         <h6 class="fw-bold mb-0">
                                             <a href="/news/<?= $item['slug']; ?>" class="text-dark text-decoration-none stretched-link">
-                                                <?= esc($item['title_id']); ?>
+                                                <?= esc($relNewsTitle); ?>
                                             </a>
                                         </h6>
                                     </div>
                                 </div>
                             </div>
+
                         <?php endforeach; ?>
                     <?php else : ?>
                         <div class="col-12 text-center text-muted py-4">
                             <i class="far fa-folder-open fa-2x mb-2"></i>
-                            <p>Tidak ada berita terkait lainnya saat ini.</p>
+                            <p><?= lang('Frontend.news.no_related_news') ?></p>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -118,18 +125,22 @@ $cover = !empty($news['image']) ? '/uploads/news/' . $news['image'] : 'https://s
                 <div class="row g-4 justify-content-center">
                     <?php if (!empty($related_articles)) : ?>
                         <?php foreach ($related_articles as $item) : ?>
+                            <?php
+                            $relArticleTitle = ($currentLang == 'en' && !empty($item['title_en'])) ? $item['title_en'] : $item['title_id'];
+                            ?>
                             <div class="col-md-4">
                                 <div class="card h-100 border-0 shadow-sm hover-top overflow-hidden">
                                     <div class="overflow-hidden position-relative" style="height: 200px;">
                                         <?php $thumb = !empty($item['image']) ? '/uploads/news/' . $item['image'] : 'https://source.unsplash.com/random/800x600?book'; ?>
-                                        <img src="<?= $thumb; ?>" class="card-img-top w-100 h-100 object-fit-cover transition-transform" alt="<?= esc($item['title_id']); ?>">
-                                        <div class="badge bg-success position-absolute top-0 start-0 m-3 py-1 px-2 small">ARTIKEL</div>
+                                        <img src="<?= $thumb; ?>" class="card-img-top w-100 h-100 object-fit-cover transition-transform" alt="<?= esc($relArticleTitle); ?>">
+                                        <div class="badge bg-success position-absolute top-0 start-0 m-3 py-1 px-2 small"><?= lang('Home.news_sec.label_article') ?></div>
                                     </div>
                                     <div class="card-body">
                                         <div class="small text-muted mb-2"><i class="far fa-user me-1"></i> Admin PAB &bull; <?= date('d M Y', strtotime($item['date_published'])); ?></div>
                                         <h6 class="fw-bold mb-0">
                                             <a href="/news/<?= $item['slug']; ?>" class="text-dark text-decoration-none stretched-link">
-                                                <?= esc($item['title_id']); ?>
+                                                <?= esc($relArticleTitle); ?>
+
                                             </a>
                                         </h6>
                                     </div>
@@ -139,7 +150,7 @@ $cover = !empty($news['image']) ? '/uploads/news/' . $news['image'] : 'https://s
                     <?php else : ?>
                         <div class="col-12 text-center text-muted py-4">
                             <i class="far fa-folder-open fa-2x mb-2"></i>
-                            <p>Tidak ada artikel edukasi lainnya saat ini.</p>
+                            <p><?= lang('Frontend.news.no_related_articles') ?></p>
                         </div>
                     <?php endif; ?>
                 </div>

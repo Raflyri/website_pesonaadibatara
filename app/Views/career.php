@@ -22,13 +22,13 @@
         </span>-->
         
         <h1 class="fw-bold display-4 mb-3 animate__animated animate__fadeInDown animate__delay-1s">
-            Wujudkan Potensi Terbaikmu
+            <?= lang('Frontend.career.hero_title') ?>
         </h1>
         
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <p class="lead opacity-75 mb-4 animate__animated animate__fadeInUp animate__delay-1s">
-                    Bergabunglah bersama PT. Pesona Adi Batara. Kami mencari talenta berbakat untuk tumbuh dan berinovasi bersama.
+                    <?= lang('Frontend.career.hero_desc') ?>
                 </p>
             </div>
         </div>
@@ -49,23 +49,22 @@
             <div class="col-md-6 text-center text-md-start">
                 <div class="p-4 border rounded-4 shadow-sm bg-light position-relative overflow-hidden">
                     <div class="badge bg-warning text-dark mb-3 px-3 py-2 rounded-pill">Information</div>
-                    <h3 class="fw-bold mb-3">Belum Ada Lowongan Tersedia</h3>
+                    <h3 class="fw-bold mb-3"><?= lang('Frontend.career.no_vacancy_title') ?></h3>
                     <p class="text-muted mb-4">
-                        Terima kasih atas antusiasme Anda untuk bergabung dengan PT. Pesona Adi Batara. 
-                        Saat ini kami belum membuka posisi lowongan pekerjaan baru.
+                        <?= lang('Frontend.career.no_vacancy_desc') ?>
                     </p>
                     <p class="text-muted">
-                        Silakan cek halaman ini secara berkala atau ikuti media sosial kami untuk mendapatkan informasi terbaru mengenai peluang karir di masa depan.
+                        <?= lang('Frontend.career.check_back') ?>
                     </p>
                     
                     <hr>
                     
                     <div class="d-flex align-items-center gap-3 mt-3">
                         <a href="/" class="btn btn-outline-primary rounded-pill px-4">
-                            <i class="fas fa-home me-2"></i> Kembali ke Beranda
+                            <i class="fas fa-home me-2"></i> <?= lang('Frontend.global.back_to_home') ?>
                         </a>
                         <a href="https://linkedin.com" target="_blank" class="btn btn-primary rounded-pill px-4">
-                            <i class="fab fa-linkedin me-2"></i> Ikuti LinkedIn Kami
+                            <i class="fab fa-linkedin me-2"></i> <?= lang('Frontend.career.follow_linkedin') ?>
                         </a>
                     </div>
                 </div>
