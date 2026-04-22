@@ -1,0 +1,19 @@
+{
+  "status": "commited",
+  "type": "frontend",
+  "scope": "codebase",
+  "localEndpoint": "http://localhost:8080",
+  "loginUser": "raflyadmin",
+  "loginPassword": "admin123",
+  "executionArgs": {
+    "projectName": "staging.web.pesonaadibatara.com",
+    "projectPath": "c:\\Work\\PT.PAB\\staging.web.pesonaadibatara.com\\staging.web.pesonaadibatara.com",
+    "testIds": [],
+    "additionalInstruction": "",
+    "serverMode": "development",
+    "envs": {
+      "API_KEY": "sk-user-Ah7GEEOsWhobaLZ3T_KnOgUo3zO0iAxZYmVF07YYQ7N0rCXT1EluXrNBKPLaxgGc7nUuC6T9nUt137rFjTnLnQCKP15st-Eq3kO6dFyQPkRHUUxYkp7BZ6_BazxrLabJjPU"
+    }
+  },
+  "serverPort": 59828
+}

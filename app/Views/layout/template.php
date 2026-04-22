@@ -73,14 +73,14 @@
 
                         <img src="<?= $logoSrc; ?>" alt="Logo Perusahaan" class="logo-transition">
 
-                        <?php if ($tagline): ?>
+                        <!-- <?php if ($tagline): ?>
                             <div class="company-tagline-wrapper d-flex align-items-center">
                                 <span class="company-tagline m-0 lh-sm"
                                     style="<?= !empty($fontName) ? "font-family: '$fontName', sans-serif; " : '' ?><?= !empty($taglineSize) ? "font-size: {$taglineSize}px; " : '' ?><?= !empty($taglineColor) ? "color: {$taglineColor}; " : '' ?>">
                                     <?= $tagline; ?>
                                 </span>
                             </div>
-                        <?php endif; ?>
+                        <?php endif; ?> -->
 
                     </a>
 
@@ -102,10 +102,10 @@
                             </li>
 
                             <li class="nav-item dropdown">
-                                <!--<a class="nav-link dropdown-toggle <?= (strpos(uri_string(), 'layanan') === 0) ? 'active' : ''; ?>" href="#" id="navbarDropdown" role="button" aria-expanded="false">
+                                <!--<a class="nav-link dropdown-toggle <?= (strpos(uri_string(), 'layanan') === 0) ? 'active' : ''; ?>" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Layanan
                                 </a>-->
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-expanded="false"><?= lang('Layout.navbar.services'); ?></a>
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?= lang('Layout.navbar.services'); ?></a>
                                 <ul class="dropdown-menu border-0 shadow-lg rounded-4 p-3 animate__animated animate__fadeIn" aria-labelledby="navbarDropdown">
                                     <li>
                                         <a class="dropdown-item py-2 rounded-3 d-flex align-items-center <?= (uri_string() == 'layanan/transportasi') ? 'active bg-light' : ''; ?>" href="/layanan/transportasi">

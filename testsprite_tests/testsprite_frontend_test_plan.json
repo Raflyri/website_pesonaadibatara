@@ -1,0 +1,417 @@
+[
+  {
+    "id": "TC001",
+    "title": "Discover company info across core home sections and reach About then Contact",
+    "description": "Verifies a visitor can browse the home sections, navigate to the About page, and then reach Contact to find contact channels successfully.",
+    "category": "Public Website Browsing",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the hero section"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the services section"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the recent news section"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the partners section"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to view the About page"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to view the Contact page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify contact information and a WhatsApp contact number are displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC002",
+    "title": "Administrator can log in and reach the dashboard",
+    "description": "Verifies an administrator can authenticate from the login page and is redirected to the admin dashboard.",
+    "category": "Administrator Login",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_USER}} into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_PASSWORD}} into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the user lands on the admin dashboard"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC003",
+    "title": "Admin login required to access the dashboard",
+    "description": "Verifies that a public visitor attempting to access the admin dashboard is redirected to the login page.",
+    "category": "Public Website Browsing",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /panel-pab/dashboard"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the user lands on the login page"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC004",
+    "title": "Direct access to dashboard is gated by authentication",
+    "description": "Verifies that an unauthenticated user navigating directly to the admin dashboard is redirected to the login page.",
+    "category": "Administrator Login",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /panel-pab/dashboard"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the user is redirected to the login page"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC005",
+    "title": "Admin can edit content and see it reflected on the public site",
+    "description": "Verifies an admin can open a content editor, save changes successfully, and see the updated content appear on the home page.",
+    "category": "Admin Dashboard (Content Management)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_USER}} into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_PASSWORD}} into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Click a content area to open its editor"
+      },
+      {
+        "type": "action",
+        "description": "Fill Updated content {{RUN_ID}} into a primary editable text field"
+      },
+      {
+        "type": "action",
+        "description": "Save changes"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to return to the public site home page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the updated content Updated content {{RUN_ID}} is visible on the home page"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC006",
+    "title": "Browse to News from home and see an archive list",
+    "description": "Verifies a visitor can navigate from the home page to the News page and see a list of news items with category and publication date information.",
+    "category": "Public Website Browsing",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to view the News page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a list of news items is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify news items show category and publication date information"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC007",
+    "title": "Submit a contact message successfully",
+    "description": "Verifies a visitor can submit the contact form with valid details and see a success confirmation.",
+    "category": "Contact Form",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /contact"
+      },
+      {
+        "type": "action",
+        "description": "Fill Test User into the name field"
+      },
+      {
+        "type": "action",
+        "description": "Fill test.user@example.com into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Fill This is an automated test message to the company. into the message field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the contact form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a submission success confirmation is visible"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC008",
+    "title": "Admin dashboard summary is visible after login",
+    "description": "Verifies that after logging in, the dashboard displays its summary/analytics content to the administrator.",
+    "category": "Admin Dashboard (Content Management)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_USER}} into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_PASSWORD}} into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify dashboard summary information is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC009",
+    "title": "Browse news archive list with metadata",
+    "description": "Verifies a visitor can open the News page and see an archive list where items include category and publication date information.",
+    "category": "News Listing",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /news"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a list of news items is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify news items show category and publication date information"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC010",
+    "title": "Contact page displays stored contact channels including WhatsApp",
+    "description": "Verifies the Contact page shows the company’s contact details and also displays a WhatsApp contact number.",
+    "category": "Contact Form",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /contact"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify phone, email, and address contact details are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a WhatsApp contact number is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC011",
+    "title": "Browse to Career and see job information",
+    "description": "Verifies a job seeker can open the Career page and view career listings or job information content.",
+    "category": "Public Website Browsing",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to view the Career page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify career listings or job information content is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC012",
+    "title": "Admin can see available content areas to edit",
+    "description": "Verifies that the dashboard exposes navigable content areas/editors that an admin can choose for updates.",
+    "category": "Admin Dashboard (Content Management)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_USER}} into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_PASSWORD}} into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a list of content areas or editors is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC013",
+    "title": "View company profile details on About page",
+    "description": "Verifies a visitor can open the About page and see core company profile information sections.",
+    "category": "Public Website Browsing",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to view the About page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify company history, vision, mission, and team profile information are displayed"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC014",
+    "title": "Invalid administrator credentials are rejected",
+    "description": "Verifies that submitting invalid admin credentials shows an error and does not grant access to the dashboard.",
+    "category": "Administrator Login",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill invalid-user@example.com into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Fill wrong-password into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify an authentication error is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the user remains on the login page"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC015",
+    "title": "Contact form required-field validation prevents submission",
+    "description": "Verifies that submitting the contact form with a required field missing shows a validation error and does not complete submission.",
+    "category": "Contact Form",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /contact"
+      },
+      {
+        "type": "action",
+        "description": "Fill Test User into the name field"
+      },
+      {
+        "type": "action",
+        "description": "Fill test.user@example.com into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Fill an empty value into the message field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the contact form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a required-field validation error is visible"
+      }
+    ],
+    "priority": "Medium"
+  }
+]

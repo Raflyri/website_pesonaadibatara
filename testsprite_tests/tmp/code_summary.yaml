@@ -1,0 +1,63 @@
+version: "2"
+type: frontend
+tech_stack:
+  - PHP
+  - CodeIgniter 4
+  - HTML/CSS/JS
+  - MySQL
+routes:
+  - path: /
+    file: app/Controllers/Home.php
+    auth_required: false
+    description: Home page
+  - path: /login
+    file: app/Controllers/Auth.php
+    auth_required: false
+    description: Admin login page
+  - path: /about
+    file: app/Controllers/About.php
+    auth_required: false
+    description: About page
+  - path: /contact
+    file: app/Controllers/Contact.php
+    auth_required: false
+    description: Contact page
+  - path: /career
+    file: app/Controllers/Career.php
+    auth_required: false
+    description: Career page
+  - path: /news
+    file: app/Controllers/News.php
+    auth_required: false
+    description: News list page
+  - path: /panel-pab/dashboard
+    file: app/Controllers/Admin/Dashboard.php
+    auth_required: true
+    description: Admin dashboard
+features:
+  - name: User Login
+    description: Admin login functionality
+    files:
+      - app/Controllers/Auth.php
+    entry_route: /login
+    user_interactions:
+      - Fill email input field
+      - Fill password input field
+      - Click Login button to submit
+      - See error message on invalid credentials
+    api_calls:
+      - method: POST
+        endpoint: /auth/process
+    auth_required: false
+  - name: Public Pages
+    description: View public company profile pages
+    files:
+      - app/Controllers/Home.php
+      - app/Controllers/About.php
+      - app/Controllers/Contact.php
+    entry_route: /
+    user_interactions:
+      - Navigate through home, about, and contact pages
+      - View company information
+    auth_required: false
+known_limitations: []
