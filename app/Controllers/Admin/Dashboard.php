@@ -113,4 +113,20 @@ class Dashboard extends BaseController
 
         return $this->response->setJSON(['count' => $count]);
     }
+
+    public function migrateDb()
+    {
+        // Pastikan hanya admin yang bisa akses
+        if (!session()->get('isLoggedIn')) return redirect()->to('/panel-pab/login');
+
+        try {
+            $migrate = \Config\Services::migrations();
+            $migrate->latest();
+            session()->setFlashdata('success', 'Migrasi database berhasil dijalankan.');
+        } catch (\Throwable $e) {
+            session()->setFlashdata('error', 'Gagal melakukan migrasi: ' . $e->getMessage());
+        }
+
+        return redirect()->to('/panel-pab/dashboard');
+    }
 }

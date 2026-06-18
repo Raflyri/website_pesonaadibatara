@@ -101,6 +101,8 @@ $routes->group('panel-pab', ['filter' => 'authGuard'], function ($routes) {
 
     $routes->get('api/visitor-count', 'Admin\Dashboard::get_visitor_count');
 
+    $routes->get('migrate-db', 'Admin\Dashboard::migrateDb');
+
     $routes->get('media', 'Admin\Media::index');
     $routes->post('media/upload', 'Admin\Media::upload');
     $routes->post('media/delete', 'Admin\Media::delete');

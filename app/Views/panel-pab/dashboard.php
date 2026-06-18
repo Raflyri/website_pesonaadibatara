@@ -8,6 +8,24 @@
 
 <div class="row g-4 pb-4">
 
+    <?php if (session()->getFlashdata('success')): ?>
+        <div class="col-12">
+            <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
+                <i class="fas fa-check-circle me-2"></i> <?= session()->getFlashdata('success') ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <?php if (session()->getFlashdata('error')): ?>
+        <div class="col-12">
+            <div class="alert alert-danger alert-dismissible fade show shadow-sm" role="alert">
+                <i class="fas fa-exclamation-circle me-2"></i> <?= session()->getFlashdata('error') ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    <?php endif; ?>
+
     <div class="col-md-3">
         <div class="stat-card-modern stat-border-primary">
             <div class="d-flex justify-content-between align-items-start">
@@ -190,6 +208,12 @@
                             <span class="fw-bold">v<?= $system_info['ci_version']; ?></span>
                         </div>
                     </div>
+                </div>
+
+                <div class="mt-4">
+                    <a href="/panel-pab/migrate-db" class="btn btn-warning w-100 btn-sm shadow-sm" onclick="return confirm('Apakah Anda yakin ingin menjalankan migrasi database? Pastikan Anda sudah membackup database sebelumnya jika ini di server production.')">
+                        <i class="fas fa-database me-2"></i> Jalankan Migrasi Database
+                    </a>
                 </div>
 
             </div>
