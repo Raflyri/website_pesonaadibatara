@@ -24,6 +24,8 @@ class Auth extends BaseController
 
         if ($user) {
             if (password_verify($password, $user['password'])) {
+                // Regenerate session ID to prevent session fixation attacks
+                session()->regenerate();
 
                 $sessData = [
                     'id'         => $user['id'],
