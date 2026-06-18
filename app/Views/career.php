@@ -17,11 +17,7 @@
     </div>
 
     <div class="container position-relative" style="z-index: 3;">
-        <!--<span class="badge rounded-pill bg-warning text-dark mb-3 px-3 py-2 animate__animated animate__fadeInDown">
-            <i class="fas fa-briefcase me-2"></i>WE ARE HIRING
-        </span>-->
-        
-        <h1 class="fw-bold display-4 mb-3 animate__animated animate__fadeInDown animate__delay-1s">
+        <h1 class="fw-bold display-4 mb-3 animate__animated animate__fadeInDown">
             <?= lang('Frontend.career.hero_title') ?>
         </h1>
         
@@ -32,44 +28,114 @@
                 </p>
             </div>
         </div>
-
-        <!--<a href="#lowongan" class="btn btn-outline-light rounded-pill px-4 py-2 animate__animated animate__fadeInUp animate__delay-2s">
-            Lihat Lowongan <i class="fas fa-arrow-down ms-2"></i>
-        </a>-->
     </div>
 </section>
 
-<section class="py-5 bg-white">
+<section class="py-5 bg-light">
     <div class="container">
-        <div class="row justify-content-center align-items-center">
-            <div class="col-md-6 text-center mb-4 mb-md-0">
-                <img src="https://cdni.iconscout.com/illustration/premium/thumb/hiring-staff-illustration-download-in-svg-png-gif-file-formats--recruitment-job-vacancy-business-join-our-team-pack-illustrations-4438787.png" 
-                     class="img-fluid" style="max-height: 300px;" alt="Career Illustration">
-            </div>
-            <div class="col-md-6 text-center text-md-start">
-                <div class="p-4 border rounded-4 shadow-sm bg-light position-relative overflow-hidden">
-                    <div class="badge bg-warning text-dark mb-3 px-3 py-2 rounded-pill">Information</div>
-                    <h3 class="fw-bold mb-3"><?= lang('Frontend.career.no_vacancy_title') ?></h3>
-                    <p class="text-muted mb-4">
-                        <?= lang('Frontend.career.no_vacancy_desc') ?>
-                    </p>
-                    <p class="text-muted">
-                        <?= lang('Frontend.career.check_back') ?>
-                    </p>
-                    
-                    <hr>
-                    
-                    <div class="d-flex align-items-center gap-3 mt-3">
-                        <a href="/" class="btn btn-outline-primary rounded-pill px-4">
-                            <i class="fas fa-home me-2"></i> <?= lang('Frontend.global.back_to_home') ?>
-                        </a>
-                        <a href="https://linkedin.com" target="_blank" class="btn btn-primary rounded-pill px-4">
-                            <i class="fab fa-linkedin me-2"></i> <?= lang('Frontend.career.follow_linkedin') ?>
+        <!-- Filter Section -->
+        <div class="card shadow-sm border-0 rounded-4 mb-5 p-3 animate__animated animate__fadeIn">
+            <form action="/career" method="GET" class="row g-3 align-items-end">
+                <div class="col-md-3">
+                    <label class="form-label small fw-bold text-muted text-uppercase">Department</label>
+                    <select name="department" class="form-select border-0 bg-light rounded-3">
+                        <option value="">Semua Departemen</option>
+                        <?php foreach($departments as $dept): ?>
+                            <?php if($dept['department']): ?>
+                                <option value="<?= $dept['department'] ?>" <?= $filters['department'] == $dept['department'] ? 'selected' : '' ?>><?= $dept['department'] ?></option>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label small fw-bold text-muted text-uppercase">Tipe Kerja</label>
+                    <select name="employment_type" class="form-select border-0 bg-light rounded-3">
+                        <option value="">Semua Tipe</option>
+                        <?php foreach($employment_types as $type): ?>
+                            <?php if($type['employment_type']): ?>
+                                <option value="<?= $type['employment_type'] ?>" <?= $filters['employment_type'] == $type['employment_type'] ? 'selected' : '' ?>><?= $type['employment_type'] ?></option>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label small fw-bold text-muted text-uppercase">Model Kerja</label>
+                    <select name="location_type" class="form-select border-0 bg-light rounded-3">
+                        <option value="">Semua Lokasi</option>
+                        <?php foreach($location_types as $loc): ?>
+                            <?php if($loc['work_location_type']): ?>
+                                <option value="<?= $loc['work_location_type'] ?>" <?= $filters['location_type'] == $loc['work_location_type'] ? 'selected' : '' ?>><?= $loc['work_location_type'] ?></option>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <div class="d-grid gap-2 d-md-flex">
+                        <button type="submit" class="btn btn-primary rounded-3 px-4 w-100">
+                            <i class="fas fa-search me-2"></i> Cari
+                        </button>
+                        <a href="/career" class="btn btn-outline-secondary rounded-3 px-3">
+                            <i class="fas fa-undo"></i>
                         </a>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
+
+        <?php if (!empty($vacancies)) : ?>
+            <div class="row g-4">
+                <?php foreach ($vacancies as $job) : ?>
+                    <div class="col-md-6 col-lg-4 animate__animated animate__fadeInUp">
+                        <div class="card h-100 border-0 shadow-sm rounded-4 hover-lift transition-all">
+                            <div class="card-body p-4">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <span class="badge bg-blue-light text-primary rounded-pill px-3 py-2 small fw-bold">
+                                        <?= $job['department']; ?>
+                                    </span>
+                                    <span class="text-muted small">
+                                        <i class="far fa-calendar-alt me-1"></i>
+                                        <?= $job['application_deadline'] ? date('d M Y', strtotime($job['application_deadline'])) : 'Always Open'; ?>
+                                    </span>
+                                </div>
+                                <h4 class="fw-bold mb-3 h5"><?= $job['job_title']; ?></h4>
+                                <div class="d-flex flex-wrap gap-2 mb-4">
+                                    <span class="small text-muted me-3"><i class="fas fa-briefcase me-1"></i> <?= $job['employment_type']; ?></span>
+                                    <span class="small text-muted"><i class="fas fa-map-marker-alt me-1"></i> <?= $job['work_location_type']; ?></span>
+                                </div>
+                                <hr class="opacity-10 mb-4">
+                                <div class="d-flex justify-content-between align-items-center mt-auto">
+                                    <div class="text-primary fw-bold">
+                                        <?php if ($job['hide_salary']): ?>
+                                            <span class="small text-muted fw-normal">Gaji:</span> Disclose on Interview
+                                        <?php else: ?>
+                                            <span class="small text-muted fw-normal">Gaji up to:</span>
+                                            <?= number_format($job['max_salary'], 0, ',', '.'); ?>
+                                        <?php endif; ?>
+                                    </div>
+                                    <a href="/career/<?= $job['slug']; ?>" class="btn btn-outline-primary rounded-pill px-4 btn-sm">
+                                        Detail <i class="fas fa-arrow-right ms-1 small"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php else : ?>
+            <div class="row justify-content-center align-items-center py-5">
+                <div class="col-md-6 text-center">
+                    <img src="https://cdni.iconscout.com/illustration/premium/thumb/hiring-staff-illustration-download-in-svg-png-gif-file-formats--recruitment-job-vacancy-business-join-our-team-pack-illustrations-4438787.png"
+                         class="img-fluid mb-4" style="max-height: 250px;" alt="No Vacancy">
+                    <h3 class="fw-bold"><?= lang('Frontend.career.no_vacancy_title') ?></h3>
+                    <p class="text-muted mb-4">
+                        <?= lang('Frontend.career.no_vacancy_desc') ?>
+                    </p>
+                    <a href="https://linkedin.com" target="_blank" class="btn btn-primary rounded-pill px-4">
+                        <i class="fab fa-linkedin me-2"></i> <?= lang('Frontend.career.follow_linkedin') ?>
+                    </a>
+                </div>
+            </div>
+        <?php endif; ?>
     </div>
 </section>
 
