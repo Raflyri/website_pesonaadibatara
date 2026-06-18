@@ -25,11 +25,19 @@ $routes->get('contact', 'Contact::index');
 $routes->post('contact/send', 'Contact::send');
 
 $routes->get('career', 'Career::index'); 
+$routes->get('career/(:segment)', 'Career::detail/$1');
 $routes->get('news', 'News::index');   
 
 $routes->group('panel-pab', ['filter' => 'authGuard'], function ($routes) {
 
     $routes->get('dashboard', 'Admin\Dashboard::index');
+
+    $routes->get('job-vacancies', 'Admin\JobVacancy::index');
+    $routes->get('job-vacancies/create', 'Admin\JobVacancy::create');
+    $routes->post('job-vacancies/save', 'Admin\JobVacancy::save');
+    $routes->get('job-vacancies/edit/(:num)', 'Admin\JobVacancy::edit/$1');
+    $routes->post('job-vacancies/update/(:num)', 'Admin\JobVacancy::update/$1');
+    $routes->get('job-vacancies/delete/(:num)', 'Admin\JobVacancy::delete/$1');
 
     $routes->get('news', 'Admin\News::index');
     $routes->get('news/create', 'Admin\News::create');

@@ -63,6 +63,10 @@
                 <i class="fas fa-envelope-open-text"></i> <span class="sidebar-text">Kontak & Pesan</span>
             </a>
 
+            <a href="/panel-pab/job-vacancies" class="nav-link <?= (current_url(true)->getSegment(2) == 'job-vacancies') ? 'active' : ''; ?>" title="Lowongan Kerja">
+                <i class="fas fa-briefcase"></i> <span class="sidebar-text">Lowongan Kerja</span>
+            </a>
+
             <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#menuLayanan" role="button" aria-expanded="<?= (current_url(true)->getSegment(2) == 'services') ? 'true' : 'false'; ?>" title="Layanan Bisnis">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-concierge-bell"></i> <span class="sidebar-text">Layanan Bisnis</span>
