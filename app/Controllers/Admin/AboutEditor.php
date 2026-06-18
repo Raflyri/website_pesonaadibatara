@@ -27,6 +27,7 @@ class AboutEditor extends BaseController
         $taglineFont = $this->settingModel->getVal('company_tagline_font');
         $taglineSize = $this->settingModel->getVal('company_tagline_size');
         $taglineColor = $this->settingModel->getVal('company_tagline_color');
+        $showTagline = $this->settingModel->getVal('show_company_tagline');
         $companyIcon = $this->settingModel->getVal('company_icon');
         $companyName = $this->settingModel->getVal('company_name');
 
@@ -41,6 +42,7 @@ class AboutEditor extends BaseController
             'company_tagline_font' => $taglineFont,
             'company_tagline_size' => $taglineSize,
             'company_tagline_color' => $taglineColor,
+            'show_company_tagline' => $showTagline ?? '1',
             'company_icon' => $companyIcon,
             'company_name'    => $companyName
         ];
@@ -194,6 +196,16 @@ class AboutEditor extends BaseController
             if ($oldColor) $dataColor['id'] = $oldColor['id'];
             $this->settingModel->save($dataColor);
         }
+
+        // Update Show Tagline Toggle
+        $showTaglineInput = $this->request->getPost('show_company_tagline') ? '1' : '0';
+        $oldShowTagline = $this->settingModel->where('setting_key', 'show_company_tagline')->first();
+        $dataShowTagline = [
+            'setting_key'   => 'show_company_tagline',
+            'setting_value' => $showTaglineInput
+        ];
+        if ($oldShowTagline) $dataShowTagline['id'] = $oldShowTagline['id'];
+        $this->settingModel->save($dataShowTagline);
 
         // 8. Handle Upload Company Icon (Logo)
         $fileIcon = $this->request->getFile('company_icon');

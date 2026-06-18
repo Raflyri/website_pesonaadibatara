@@ -43,7 +43,11 @@ if (!empty($hero_img) && file_exists('uploads/services/' . $hero_img)) {
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <p class="lead opacity-75 mb-4 animate__animated animate__fadeInUp animate__delay-1s">
-                    <?= lang('Frontend.service.hero_desc') ?>
+                    <?php if (empty($desc)): ?>
+                        <?= lang('Frontend.service.hero_desc') ?>
+                    <?php else: ?>
+                        <?= strip_tags(substr($desc, 0, 150)) . '...'; ?>
+                    <?php endif; ?>
                 </p>
             </div>
         </div>
@@ -93,7 +97,7 @@ if (!empty($hero_img) && file_exists('uploads/services/' . $hero_img)) {
 
                                 <?php if (!empty($item['image'])): ?>
                                     <div class="mt-3 mb-2">
-                                        <img src="/uploads/services/<?= $item['image']; ?>" class="img-fluid rounded-3 w-100 shadow-sm" style="object-fit: cover; max-height: 250px;">
+                                        <img src="<?= base_url('uploads/services/' . $item['image']); ?>" class="img-fluid rounded-3 w-100 shadow-sm" style="object-fit: cover; max-height: 250px;">
                                     </div>
                                 <?php endif; ?>
 
@@ -103,8 +107,8 @@ if (!empty($hero_img) && file_exists('uploads/services/' . $hero_img)) {
                                 ?>
                                     <div class="row g-2 mt-2">
                                         <?php foreach ($gallery as $gImg): ?>
-                                            <div class="col-4"> <a href="/uploads/services/<?= $gImg; ?>" target="_blank">
-                                                    <img src="/uploads/services/<?= $gImg; ?>" class="img-fluid rounded border" style="height: 60px; object-fit: cover; width: 100%;">
+                                            <div class="col-4"> <a href="<?= base_url('uploads/services/' . $gImg); ?>" target="_blank">
+                                                    <img src="<?= base_url('uploads/services/' . $gImg); ?>" class="img-fluid rounded border" style="height: 60px; object-fit: cover; width: 100%;">
                                                 </a>
                                             </div>
                                         <?php endforeach; ?>

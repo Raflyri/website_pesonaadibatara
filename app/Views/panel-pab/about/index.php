@@ -115,7 +115,13 @@
 
                                 <div class="row mb-4">
                                     <div class="col-md-12">
-                                        <label class="form-label fw-bold text-muted small text-uppercase">Tagline Utama</label>
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <label class="form-label fw-bold text-muted small text-uppercase mb-0">Tagline Utama</label>
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" role="switch" id="showTaglineSwitch" name="show_company_tagline" value="1" <?= (isset($show_company_tagline) && $show_company_tagline == '0') ? '' : 'checked'; ?>>
+                                                <label class="form-check-label small text-muted" for="showTaglineSwitch">Tampilkan di Website</label>
+                                            </div>
+                                        </div>
                                         <textarea class="form-control input-modern" name="company_tagline" rows="2"
                                             placeholder="Slogan perusahaan..."><?= $company_tagline ?? ''; ?></textarea>
                                     </div>

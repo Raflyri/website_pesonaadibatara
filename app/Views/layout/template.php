@@ -272,15 +272,17 @@
         <?= $this->renderSection('content'); ?>
     </main>
 
+    <?php
+    $settingModel = new \App\Models\SiteSettingModel();
+    $showCompanyTagline = $settingModel->getVal('show_company_tagline') ?? '1';
+    if ($showCompanyTagline != '0'):
+        $footerTaglineMain = $settingModel->getLocalizedVal('company_tagline');
+        $footerFontMain = $settingModel->getVal('company_tagline_font');
+        $footerSizeMain = $settingModel->getVal('company_tagline_size') ?? '36';
+        $footerColorMain = $settingModel->getVal('company_tagline_color') ?? '#ffffff';
+    ?>
     <div class="company-tagline-section position-relative overflow-hidden">
         <div class="container position-relative z-2">
-            <?php
-            $settingModel = new \App\Models\SiteSettingModel();
-            $footerTaglineMain = $settingModel->getLocalizedVal('company_tagline');
-            $footerFontMain = $settingModel->getVal('company_tagline_font');
-            $footerSizeMain = $settingModel->getVal('company_tagline_size') ?? '36';
-            $footerColorMain = $settingModel->getVal('company_tagline_color') ?? '#ffffff';
-            ?>
             <?php if ($footerTaglineMain): ?>
                 <h2 class="company-tagline-text" style="<?= $footerFontMain ? "font-family: '$footerFontMain', sans-serif;" : ''; ?> font-size: min(<?= $footerSizeMain; ?>px, 8vw); color: <?= $footerColorMain; ?>;">
                     <?= $footerTaglineMain; ?>
@@ -288,6 +290,7 @@
             <?php endif; ?>
         </div>
     </div>
+    <?php endif; ?>
 
     <footer class="bg-dark text-white pt-5 pb-3 mt-0 border-top border-primary border-5">
         <div class="container">

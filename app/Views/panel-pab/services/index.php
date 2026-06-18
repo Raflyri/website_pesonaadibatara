@@ -35,8 +35,8 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Deskripsi Singkat (Intro)</label>
-                            <textarea class="form-control" name="page_description" rows="3"><?= $page['page_description']; ?></textarea>
-                            <small class="text-muted">Teks ini akan muncul di bawah judul besar.</small>
+                            <textarea class="form-control summernote" name="page_description" rows="3"><?= $page['page_description']; ?></textarea>
+                            <small class="text-muted">Teks ini akan muncul pada blok deskripsi utama layanan.</small>
                         </div>
                     </div>
                     <div class="col-md-4">
