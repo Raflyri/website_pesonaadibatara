@@ -88,7 +88,7 @@
         </div>
 
         <div class="mt-5 d-flex justify-content-center">
-            <?= $pager->links('news', 'default_full') ?>
+            <?= $pager->links('news', 'custom_pagination') ?>
         </div>
 
     </div>

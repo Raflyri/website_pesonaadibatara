@@ -233,6 +233,10 @@
 
                         </div>
 
+                        <a href="<?= base_url('career'); ?>" class="btn btn-outline-primary rounded-pill px-4 shadow-sm fw-medium me-2">
+                            Karir
+                        </a>
+
                         <div class="position-relative contact-hover-wrapper">
 
                             <button class="btn btn-pab-primary rounded-pill px-4 shadow-sm position-relative z-2">

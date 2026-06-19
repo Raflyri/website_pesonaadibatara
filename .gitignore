@@ -64,6 +64,8 @@ writable/debugbar/*
 !writable/debugbar/index.html
 
 php_errors.log
+public/error_log
+error_log
 
 #-------------------------
 # User Guide Temp Files
@@ -74,12 +76,13 @@ user_guide_src/cilexer/dist/*
 user_guide_src/cilexer/pycilexer.egg-info/*
 
 #-------------------------
-# Test Files
+# Test & Internal Tools
 #-------------------------
-tests/coverage*
-
-# Don't save phpunit under version control.
-phpunit
+tests/
+testsprite_tests/
+phpunit*
+builds
+PRD.md
 
 #-------------------------
 # Composer
@@ -123,16 +126,25 @@ _modules/*
 .vscode/
 
 /results/
-/phpunit*.xml
+
+#-------------------------
+# cPanel Specific
+#-------------------------
+cgi-bin/
+.well-known/
 
 #-------------------------
 # Public Media / Uploads
 #-------------------------
-# Ignore semua isi folder uploads
-public/uploads/*
-public/assets/images/cars/* # TAPI, tetap track file kosong agar foldernya tetap ada di server
+# Ignore semua isi folder uploads dan subfoldernya
+public/uploads/**
+public/assets/images/cars/**
+
+# TAPI, tetap track file index.html atau .gitkeep agar foldernya tetap ada di server
+!public/uploads/**/index.html
 !public/uploads/.gitkeep
 !public/assets/images/cars/.gitkeep
+!public/assets/images/cars/index.html
 
 # KECUALI, jika ada file spesifik yang WAJIB ikut (misal Logo)
 !public/assets/images/logo.png
