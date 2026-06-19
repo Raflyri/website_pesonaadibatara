@@ -47,7 +47,7 @@ class Dashboard extends BaseController
         $dbName = $db->database;
         $query  = $db->query("SELECT sum(data_length + index_length) / 1024 / 1024 AS 'size_mb' 
                               FROM information_schema.TABLES 
-                              WHERE table_schema = '$dbName'");
+                              WHERE table_schema = ?", [$dbName]);
         $dbSize = $query->getRow()->size_mb ?? 0;
         $dbQuota = 500; // Asumsi Quota 500MB
         $dbPercentage = ($dbQuota > 0) ? ($dbSize / $dbQuota) * 100 : 0;
@@ -118,6 +118,11 @@ class Dashboard extends BaseController
     {
         // Pastikan hanya admin yang bisa akses
         if (!session()->get('isLoggedIn')) return redirect()->to('/panel-pab/login');
+
+        // SECURITY: Hanya Super Admin yang boleh menjalankan migrasi
+        if (session()->get('role') !== 'superadmin') {
+            return redirect()->to('/panel-pab/dashboard')->with('error', 'Akses ditolak! Anda bukan Super Admin.');
+        }
 
         try {
             $migrate = \Config\Services::migrations();

@@ -57,22 +57,22 @@
                 <div class="card h-100 shadow-sm file-card position-relative group-action">
                     
                     <span class="position-absolute top-0 start-0 badge bg-dark opacity-75 m-2 rounded-1 small">
-                        <?= $f['folder']; ?>
+                        <?= esc($f['folder']); ?>
                     </span>
 
                     <div class="card-img-top overflow-hidden d-flex align-items-center justify-content-center bg-white border-bottom" style="height: 140px;">
                         <?php if($f['type'] == 'image'): ?>
-                            <img src="<?= $f['url']; ?>" alt="<?= $f['name']; ?>" class="img-fluid" style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                            <img src="<?= esc($f['url'], 'attr'); ?>" alt="<?= esc($f['name'], 'attr'); ?>" class="img-fluid" style="max-height: 100%; max-width: 100%; object-fit: contain;">
                         <?php elseif($f['type'] == 'video'): ?>
-                            <video src="<?= $f['url']; ?>" style="max-height: 100%; max-width: 100%;" muted playsinline onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;"></video>
+                            <video src="<?= esc($f['url'], 'attr'); ?>" style="max-height: 100%; max-width: 100%;" muted playsinline onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;"></video>
                         <?php else: ?>
                             <i class="fas fa-file-alt fa-3x text-secondary"></i>
                         <?php endif; ?>
                     </div>
                     
                     <div class="card-body p-2 bg-white">
-                        <p class="card-text small text-truncate mb-1 fw-bold text-dark" title="<?= $f['name']; ?>">
-                            <?= $f['name']; ?>
+                        <p class="card-text small text-truncate mb-1 fw-bold text-dark" title="<?= esc($f['name'], 'attr'); ?>">
+                            <?= esc($f['name']); ?>
                         </p>
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <span class="badge bg-light text-secondary border"><?= $f['size']; ?></span>
@@ -84,14 +84,14 @@
                         </div>
                         
                         <div class="d-grid gap-1">
-                            <button type="button" class="btn btn-sm btn-outline-primary" onclick="copyLink('<?= $f['url']; ?>')">
+                            <button type="button" class="btn btn-sm btn-outline-primary" onclick="copyLink('<?= esc($f['url'], 'js'); ?>')">
                                 <i class="fas fa-link"></i> Copy URL
                             </button>
                             
                             <?php if($f['is_deletable']): ?>
                                 <form action="/panel-pab/media/delete" method="post" onsubmit="return confirm('Yakin hapus file ini?');">
                                     <?= csrf_field(); ?>
-                                    <input type="hidden" name="relative_path" value="<?= $f['relative_path']; ?>">
+                                    <input type="hidden" name="relative_path" value="<?= esc($f['relative_path'], 'attr'); ?>">
                                     <button type="submit" class="btn btn-sm btn-outline-danger w-100">
                                         <i class="fas fa-trash"></i> Hapus
                                     </button>
