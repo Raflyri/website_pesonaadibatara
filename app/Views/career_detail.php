@@ -17,7 +17,6 @@
     <div class="container position-relative" style="z-index: 3;">
         <nav aria-label="breadcrumb" class="mb-4 animate__animated animate__fadeInDown">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/" class="text-white-50 text-decoration-none">Home</a></li>
                 <li class="breadcrumb-item"><a href="/career" class="text-white-50 text-decoration-none">Karir</a></li>
                 <li class="breadcrumb-item active text-white" aria-current="page"><?= $vacancy['job_title']; ?></li>
             </ol>
