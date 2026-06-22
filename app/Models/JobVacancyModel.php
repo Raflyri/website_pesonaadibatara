@@ -26,6 +26,7 @@ class JobVacancyModel extends Model
         'hide_salary',
         'benefits',
         'application_deadline',
+        'posted_at',
         'status',
         'application_link',
         'seo_meta_title',

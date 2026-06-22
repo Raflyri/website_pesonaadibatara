@@ -124,8 +124,44 @@
         <?php else : ?>
             <div class="row justify-content-center align-items-center py-5">
                 <div class="col-md-6 text-center">
-                    <img src="https://cdni.iconscout.com/illustration/premium/thumb/hiring-staff-illustration-download-in-svg-png-gif-file-formats--recruitment-job-vacancy-business-join-our-team-pack-illustrations-4438787.png"
-                         class="img-fluid mb-4" style="max-height: 250px;" alt="No Vacancy">
+                    <svg class="mb-4" style="max-height: 220px; width: 100%;" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Belum ada lowongan">
+                        <!-- Background shape -->
+                        <ellipse cx="200" cy="260" rx="140" ry="18" fill="#E8EEF6"/>
+                        <!-- Desk -->
+                        <rect x="60" y="195" width="280" height="14" rx="7" fill="#CBD5E1"/>
+                        <rect x="90" y="209" width="12" height="50" rx="6" fill="#94A3B8"/>
+                        <rect x="298" y="209" width="12" height="50" rx="6" fill="#94A3B8"/>
+                        <!-- Monitor -->
+                        <rect x="130" y="115" width="140" height="82" rx="8" fill="#1E3A5F"/>
+                        <rect x="136" y="121" width="128" height="64" rx="5" fill="#EFF6FF"/>
+                        <!-- Screen content: magnifier -->
+                        <circle cx="195" cy="148" r="18" stroke="#3B82F6" stroke-width="4" fill="none"/>
+                        <line x1="208" y1="161" x2="220" y2="173" stroke="#3B82F6" stroke-width="4" stroke-linecap="round"/>
+                        <!-- Question mark inside magnifier -->
+                        <text x="191" y="154" font-family="Arial" font-size="16" font-weight="bold" fill="#3B82F6">?</text>
+                        <!-- Monitor stand -->
+                        <rect x="193" y="197" width="14" height="14" rx="2" fill="#94A3B8"/>
+                        <rect x="175" y="208" width="50" height="8" rx="4" fill="#94A3B8"/>
+                        <!-- Paper stack left -->
+                        <rect x="70" y="170" width="50" height="8" rx="3" fill="#BFDBFE"/>
+                        <rect x="72" y="163" width="46" height="8" rx="3" fill="#DBEAFE"/>
+                        <rect x="74" y="156" width="42" height="8" rx="3" fill="#EFF6FF"/>
+                        <!-- Small X marks on papers -->
+                        <line x1="82" y1="161" x2="86" y2="165" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="86" y1="161" x2="82" y2="165" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"/>
+                        <!-- Paper stack right -->
+                        <rect x="280" y="170" width="50" height="8" rx="3" fill="#BFDBFE"/>
+                        <rect x="282" y="163" width="46" height="8" rx="3" fill="#DBEAFE"/>
+                        <rect x="284" y="156" width="42" height="8" rx="3" fill="#EFF6FF"/>
+                        <!-- Small person silhouette (crossed out) -->
+                        <circle cx="300" cy="95" r="14" fill="#DBEAFE" stroke="#93C5FD" stroke-width="2"/>
+                        <line x1="290" y1="85" x2="310" y2="105" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round"/>
+                        <line x1="310" y1="85" x2="290" y2="105" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round"/>
+                        <!-- Stars / sparkles -->
+                        <circle cx="100" cy="90" r="4" fill="#BFDBFE"/>
+                        <circle cx="310" cy="140" r="3" fill="#DBEAFE"/>
+                        <circle cx="85" cy="130" r="2.5" fill="#93C5FD"/>
+                    </svg>
                     <h3 class="fw-bold"><?= lang('Frontend.career.no_vacancy_title') ?></h3>
                     <p class="text-muted mb-4">
                         <?= lang('Frontend.career.no_vacancy_desc') ?>

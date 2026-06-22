@@ -47,7 +47,8 @@ class ContactEditor extends BaseController
             // [BARU] Kontak
             'contact'  => [
                 'company_whatsapp' => $this->db->table('site_settings')->where('setting_key', 'company_whatsapp')->get()->getRow()->setting_value ?? '',
-                'company_phone'    => $this->db->table('site_settings')->where('setting_key', 'company_phone')->get()->getRow()->setting_value ?? ''
+                'company_phone'    => $this->db->table('site_settings')->where('setting_key', 'company_phone')->get()->getRow()->setting_value ?? '',
+                'company_email'    => $this->db->table('site_settings')->where('setting_key', 'company_email')->get()->getRow()->setting_value ?? '',
             ],
             'messages' => $messages ?? []
         ];
@@ -68,8 +69,8 @@ class ContactEditor extends BaseController
             $this->db->table('site_settings')->where('setting_key', $key)->update(['setting_value' => $val]);
         }
 
-        // [BARU] Update Kontak (WhatsApp & Phone)
-        $contactKeys = ['company_whatsapp', 'company_phone'];
+        // [BARU] Update Kontak (WhatsApp, Phone & Email)
+        $contactKeys = ['company_whatsapp', 'company_phone', 'company_email'];
         foreach ($contactKeys as $key) {
             $val = $this->request->getPost($key);
             // Cek ada tidak, kalau tidak ada insert, kalau ada update

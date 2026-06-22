@@ -117,6 +117,11 @@
                         <label class="fw-bold">Telepon Kantor</label>
                         <input type="text" name="company_phone" class="form-control" value="<?= $contact['company_phone']; ?>" placeholder="021-12345678">
                     </div>
+                    <div class="mb-3">
+                        <label class="fw-bold">Email Perusahaan</label>
+                        <input type="email" name="company_email" class="form-control" value="<?= $contact['company_email']; ?>" placeholder="info@pesonaadibatara.co.id">
+                        <small class="text-muted">Email global perusahaan — ditampilkan di footer, halaman kontak, dan digunakan sebagai default pada tombol lamaran kerja.</small>
+                    </div>
 
                     <div class="text-end mt-4">
                         <button type="submit" class="btn btn-primary rounded-pill px-5 shadow">Simpan Perubahan</button>

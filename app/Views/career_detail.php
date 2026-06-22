@@ -89,26 +89,36 @@
                             Klik tombol di bawah ini untuk memulai proses pendaftaran Anda. Pastikan dokumen Anda sudah siap.
                         </p>
 
+                        <?php
+                            $sidebarSettings = new \App\Models\SiteSettingModel();
+                            $hrEmail    = $sidebarSettings->getVal('company_email');
+                            $companyWa  = $sidebarSettings->getVal('company_whatsapp');
+                            $sosmedLi   = $sidebarSettings->getVal('sosmed_linkedin');
+                            $sosmedIg   = $sidebarSettings->getVal('sosmed_instagram');
+                        ?>
+
                         <?php if ($vacancy['application_link']): ?>
                             <a href="<?= $vacancy['application_link']; ?>" target="_blank" class="btn btn-primary btn-lg rounded-pill w-100 mb-3">
                                 Lamar Sekarang <i class="fas fa-external-link-alt ms-2 small"></i>
                             </a>
                         <?php else: ?>
-                            <?php
-                                $settingModel = new \App\Models\SiteSettingModel();
-                                $hrEmail = $settingModel->getVal('company_email') ?? 'hrd@pesonaadibatara.co.id';
-                            ?>
                             <a href="mailto:<?= $hrEmail; ?>?subject=Lamaran Kerja: <?= $vacancy['job_title']; ?>" class="btn btn-primary btn-lg rounded-pill w-100 mb-3">
                                 Lamar via Email <i class="fas fa-envelope ms-2 small"></i>
                             </a>
                         <?php endif; ?>
 
                         <div class="text-center">
-                            <p class="small text-muted mb-0">Atau bagikan info ini:</p>
+                            <p class="small text-muted mb-0">Hubungi & ikuti kami:</p>
                             <div class="d-flex justify-content-center gap-3 mt-2">
-                                <a href="https://wa.me/?text=Lowongan%20Kerja:%20<?= urlencode($vacancy['job_title']); ?>%20di%20PT.%20Pesona%20Adi%20Batara.%20Cek%20di:%20<?= current_url(); ?>" target="_blank" class="text-success"><i class="fab fa-whatsapp fa-lg"></i></a>
-                                <a href="https://www.linkedin.com/sharing/share-offsite/?url=<?= current_url(); ?>" target="_blank" class="text-primary"><i class="fab fa-linkedin fa-lg"></i></a>
-                                <a href="https://twitter.com/intent/tweet?text=Lowongan%20Kerja:%20<?= urlencode($vacancy['job_title']); ?>&url=<?= current_url(); ?>" target="_blank" class="text-info"><i class="fab fa-twitter fa-lg"></i></a>
+                                <?php if ($companyWa): ?>
+                                    <a href="https://wa.me/<?= $companyWa; ?>" target="_blank" class="text-success" title="WhatsApp"><i class="fab fa-whatsapp fa-lg"></i></a>
+                                <?php endif; ?>
+                                <?php if ($sosmedLi): ?>
+                                    <a href="<?= $sosmedLi; ?>" target="_blank" class="text-primary" title="LinkedIn"><i class="fab fa-linkedin fa-lg"></i></a>
+                                <?php endif; ?>
+                                <?php if ($sosmedIg): ?>
+                                    <a href="<?= $sosmedIg; ?>" target="_blank" class="text-danger" title="Instagram"><i class="fab fa-instagram fa-lg"></i></a>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -122,7 +132,7 @@
                             </li>
                             <li class="mb-2 d-flex justify-content-between">
                                 <span class="text-muted">Diposting:</span>
-                                <span><?= date('d M Y', strtotime($vacancy['created_at'])); ?></span>
+                                <span><?= date('d M Y', strtotime($vacancy['posted_at'] ?? $vacancy['created_at'])); ?></span>
                             </li>
                             <li class="d-flex justify-content-between">
                                 <span class="text-muted">Kategori:</span>

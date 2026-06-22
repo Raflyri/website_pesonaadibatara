@@ -128,6 +128,12 @@
                                 </div>
 
                                 <div class="mb-3">
+                                    <label for="posted_at" class="form-label">Tanggal Posting <small class="text-muted">(opsional)</small></label>
+                                    <input type="date" class="form-control" id="posted_at" name="posted_at" value="<?= old('posted_at'); ?>">
+                                    <small class="text-muted">Kosongkan untuk menggunakan tanggal saat ini.</small>
+                                </div>
+
+                                <div class="mb-3">
                                     <label for="status" class="form-label">Status Lowongan <span class="text-danger">*</span></label>
                                     <select class="form-select" id="status" name="status" required>
                                         <option value="Draft" <?= old('status') == 'Draft' ? 'selected' : ''; ?>>Draft</option>
