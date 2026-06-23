@@ -16,11 +16,17 @@ class Auth extends BaseController
 
     public function process()
     {
-        $username = $this->request->getPost('username');
+        $login    = $this->request->getPost('username'); // bisa username atau email
         $password = $this->request->getPost('password');
 
         $db = \Config\Database::connect();
-        $user = $db->table('users')->where('username', $username)->get()->getRowArray();
+
+        // Cek apakah input berupa email atau username
+        if (filter_var($login, FILTER_VALIDATE_EMAIL)) {
+            $user = $db->table('users')->where('email', $login)->get()->getRowArray();
+        } else {
+            $user = $db->table('users')->where('username', $login)->get()->getRowArray();
+        }
 
         if ($user) {
             if (password_verify($password, $user['password'])) {
@@ -37,6 +43,14 @@ class Auth extends BaseController
                 ];
 
                 session()->set($sessData);
+
+                // Catat aktivitas login
+                log_activity(
+                    'Login System',
+                    'IP: ' . $this->request->getIPAddress(),
+                    'warning'
+                );
+
                 return redirect()->to('/panel-pab/dashboard');
             }
         }

@@ -10,10 +10,16 @@
         ?>
         <form action="<?= $url; ?>" method="post">
             <?= csrf_field(); ?>
-            
+
             <div class="mb-3">
                 <label class="fw-bold form-label">Nama Lengkap</label>
                 <input type="text" name="name" class="form-control" value="<?= isset($user) ? $user['fullname'] : ''; ?>" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="fw-bold form-label">Username <span class="text-muted fw-normal">(untuk login)</span></label>
+                <input type="text" name="username" class="form-control" value="<?= isset($user) ? esc($user['username']) : ''; ?>" required <?= isset($user) ? '' : 'placeholder="Contoh: pab_admin"'; ?>>
+                <div class="form-text">Username digunakan untuk login ke sistem.</div>
             </div>
 
             <div class="mb-3">

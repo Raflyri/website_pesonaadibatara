@@ -18,7 +18,6 @@ class UserEditor extends BaseController
 
     public function index()
     {
-        // Cek Role: Hanya Super Admin yang boleh masuk sini
         if (session()->get('role') !== 'superadmin') {
             return redirect()->to('/panel-pab/dashboard')->with('error', 'Akses ditolak! Anda bukan Super Admin.');
         }
@@ -33,7 +32,7 @@ class UserEditor extends BaseController
     public function create()
     {
         if (session()->get('role') !== 'superadmin') return redirect()->back();
-        
+
         return view('panel-pab/users/form', ['title' => 'Tambah Admin Baru']);
     }
 
@@ -41,24 +40,30 @@ class UserEditor extends BaseController
     {
         if (session()->get('role') !== 'superadmin') return redirect()->back();
 
-        // Validasi
         if (!$this->validate([
             'name'     => 'required',
+            'username' => 'required|is_unique[users.username]',
             'email'    => 'required|valid_email|is_unique[users.email]',
             'password' => 'required|min_length[6]',
             'role'     => 'required'
         ])) {
-            return redirect()->back()->withInput()->with('error', 'Cek kembali data Anda. Email harus unik & Password min 6 karakter.');
+            return redirect()->back()->withInput()->with('error', 'Cek kembali data Anda. Username & Email harus unik, Password min 6 karakter.');
         }
 
-        // Simpan Data
-        $this->userModel->save([
-            'name'      => $this->request->getPost('name'),
+        $result = $this->userModel->insert([
+            'username'  => $this->request->getPost('username'),
+            'fullname'  => $this->request->getPost('name'),
             'email'     => $this->request->getPost('email'),
-            'password'  => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT), // Hash Password
+            'password'  => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
             'role'      => $this->request->getPost('role'),
             'is_active' => $this->request->getPost('is_active') ? 1 : 0
         ]);
+
+        if ($result === false) {
+            return redirect()->back()->withInput()->with('error', 'Gagal menyimpan user. Coba lagi.');
+        }
+
+        log_activity('Tambah User', $this->request->getPost('name'), 'success');
 
         return redirect()->to('/panel-pab/users')->with('success', 'User berhasil ditambahkan.');
     }
@@ -78,34 +83,52 @@ class UserEditor extends BaseController
     {
         if (session()->get('role') !== 'superadmin') return redirect()->back();
 
-        // Logic Update Password (Hanya update jika diisi)
+        // Validasi username & email unique, kecuali milik user yang sedang diedit
+        if (!$this->validate([
+            'username' => "required|is_unique[users.username,id,{$id}]",
+            'email'    => "required|valid_email|is_unique[users.email,id,{$id}]",
+        ])) {
+            return redirect()->back()->withInput()->with('error', 'Username atau Email sudah digunakan oleh user lain.');
+        }
+
         $dataUpdate = [
-            'id'        => $id,
-            'name'      => $this->request->getPost('name'),
+            'username'  => $this->request->getPost('username'),
+            'fullname'  => $this->request->getPost('name'),
             'email'     => $this->request->getPost('email'),
             'role'      => $this->request->getPost('role'),
             'is_active' => $this->request->getPost('is_active') ? 1 : 0
         ];
 
+        // Hanya update password jika diisi
         $newPassword = $this->request->getPost('password');
         if (!empty($newPassword)) {
             $dataUpdate['password'] = password_hash($newPassword, PASSWORD_DEFAULT);
         }
 
-        $this->userModel->save($dataUpdate);
-        return redirect()->to('/panel-pab/users')->with('success', 'Data user diperbarui.');
+        $result = $this->userModel->update($id, $dataUpdate);
+
+        if ($result === false) {
+            return redirect()->back()->withInput()->with('error', 'Gagal memperbarui data user. Coba lagi.');
+        }
+
+        log_activity('Edit User', $this->request->getPost('name'), 'info');
+
+        return redirect()->to('/panel-pab/users')->with('success', 'Data user berhasil diperbarui.');
     }
 
     public function delete($id)
     {
         if (session()->get('role') !== 'superadmin') return redirect()->back();
 
-        // Cegah Hapus Diri Sendiri
         if ($id == session()->get('id')) {
             return redirect()->back()->with('error', 'Anda tidak bisa menghapus akun sendiri saat sedang login.');
         }
 
+        $deletedUser = $this->userModel->find($id);
         $this->userModel->delete($id);
+
+        log_activity('Hapus User', $deletedUser['fullname'] ?? 'ID: ' . $id, 'danger');
+
         return redirect()->to('/panel-pab/users')->with('success', 'User dihapus.');
     }
 
@@ -125,42 +148,44 @@ class UserEditor extends BaseController
     public function updateProfile()
     {
         $myId = session()->get('id');
-        
-        // Validasi Avatar
+
+        // Validasi Avatar (opsional, hanya jika file dikirim)
         $rules = [
-            'name' => 'required',
+            'name'   => 'required',
             'avatar' => 'is_image[avatar]|max_size[avatar,2048]|mime_in[avatar,image/jpg,image/jpeg,image/png]'
         ];
 
         if (!$this->validate($rules)) {
-            return redirect()->back()->withInput()->with('error', 'Gagal update. Pastikan format gambar benar.');
+            return redirect()->back()->withInput()->with('error', 'Gagal update. Pastikan format gambar benar (JPG/PNG, maks 2MB).');
         }
 
         $dataUpdate = [
-            'id'   => $myId,
             'fullname' => $this->request->getPost('name'),
         ];
 
-        // Cek Ganti Password
+        // Hanya update password jika diisi
         $pass = $this->request->getPost('password');
-        if(!empty($pass)){
+        if (!empty($pass)) {
             $dataUpdate['password'] = password_hash($pass, PASSWORD_DEFAULT);
         }
 
-        // Upload Avatar
+        // Upload Avatar jika ada file baru
         $file = $this->request->getFile('avatar');
-        if($file && $file->isValid() && !$file->hasMoved()){
+        if ($file && $file->isValid() && !$file->hasMoved()) {
             $newName = $file->getRandomName();
             $file->move('uploads/avatars', $newName);
             $dataUpdate['avatar'] = $newName;
-            
-            // Update session avatar biar langsung berubah di header
-            session()->set('avatar', $newName); 
+            session()->set('avatar', $newName);
         }
 
-        $this->userModel->save($dataUpdate);
-        
-        // Update session nama
+        // Gunakan update($id, $data) langsung - tanpa 'id' di dalam array data
+        $result = $this->userModel->update($myId, $dataUpdate);
+
+        if ($result === false) {
+            return redirect()->back()->with('error', 'Gagal menyimpan perubahan. Coba lagi.');
+        }
+
+        // Sinkronisasi nama di session
         session()->set('name', $dataUpdate['fullname']);
 
         return redirect()->to('/panel-pab/profile')->with('success', 'Profil berhasil diperbarui!');

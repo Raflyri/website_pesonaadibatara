@@ -4,9 +4,10 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\NewsModel;
-use App\Models\ServiceModel; 
+use App\Models\ServiceModel;
 use App\Models\BannerModel;
 use App\Models\UserModel;
+use App\Models\ActivityLogModel;
 //use App\Models\PartnersModel;
 use App\Models\VisitorModel;
 
@@ -16,11 +17,12 @@ class Dashboard extends BaseController
     {
         // 1. Inisialisasi Database & Model
         $db           = \Config\Database::connect();
-        $visitorModel = new VisitorModel();
-        $newsModel    = new NewsModel();
-        $serviceModel = new ServiceModel();
-        $bannerModel  = new BannerModel();
-        $userModel    = new UserModel();
+        $visitorModel  = new VisitorModel();
+        $newsModel     = new NewsModel();
+        $serviceModel  = new ServiceModel();
+        $bannerModel   = new BannerModel();
+        $userModel     = new UserModel();
+        $activityModel = new ActivityLogModel();
 
         // 2. LOGIC HITUNG STATISTIK CMS
         try {
@@ -96,7 +98,11 @@ class Dashboard extends BaseController
                 'environment' => getenv('CI_ENVIRONMENT') ?: 'production',
             ],
 
-            'user_name' => session()->get('name') ?? 'Admin'
+            'user_name'     => session()->get('name') ?? 'Admin',
+            'activity_logs' => (function() use ($activityModel) {
+                try { return $activityModel->getRecent(10); }
+                catch (\Throwable $e) { return []; } // Tabel belum ada, abaikan
+            })(),
         ];
 
         return view('panel-pab/dashboard', $data);
@@ -116,8 +122,10 @@ class Dashboard extends BaseController
 
     public function migrateDb()
     {
-        // Pastikan hanya admin yang bisa akses
-        if (!session()->get('isLoggedIn')) return redirect()->to('/panel-pab/login');
+        // Hanya Super Admin yang boleh menjalankan migrasi
+        if (session()->get('role') !== 'superadmin') {
+            return redirect()->to('/panel-pab/dashboard')->with('error', 'Akses ditolak! Hanya Super Admin yang dapat menjalankan migrasi database.');
+        }
 
         try {
             $migrate = \Config\Services::migrations();

@@ -64,6 +64,8 @@ class News extends BaseController
             'views'          => 0
         ]);
 
+        log_activity('Tambah Berita', $title, 'success');
+
         return redirect()->to('/panel-pab/news')->with('success', 'Berita berhasil ditayangkan!');
     }
 
@@ -82,6 +84,8 @@ class News extends BaseController
         if ($data['image'] && file_exists('uploads/news/' . $data['image'])) {
             unlink('uploads/news/' . $data['image']);
         }
+
+        log_activity('Hapus Berita', $data['title_id'] ?? '', 'danger');
 
         return redirect()->to('/panel-pab/news')->with('success', 'Berita berhasil dihapus.');
     }
@@ -142,6 +146,8 @@ class News extends BaseController
             'image'      => $imageName,
             'date_published' => $this->request->getPost('date_published'),
         ]);
+
+        log_activity('Edit Berita', $title, 'info');
 
         return redirect()->to('/panel-pab/news')->with('success', 'Data berhasil diperbarui!');
     }

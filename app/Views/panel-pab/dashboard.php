@@ -129,27 +129,37 @@
                 <h6 class="fw-bold m-0"><i class="fas fa-history me-2 text-primary"></i>Aktivitas Terakhir</h6>
             </div>
             <div class="card-body p-4">
+                <?php
+                // Warna dot per type
+                $dotColors = [
+                    'info'    => ['color' => '#3b82f6', 'shadow' => 'rgba(59,130,246,0.2)'],
+                    'success' => ['color' => '#10b981', 'shadow' => 'rgba(16,185,129,0.2)'],
+                    'warning' => ['color' => '#f59e0b', 'shadow' => 'rgba(245,158,11,0.2)'],
+                    'danger'  => ['color' => '#ef4444', 'shadow' => 'rgba(239,68,68,0.2)'],
+                ];
+                ?>
                 <div class="timeline-activity">
 
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <p class="fw-bold mb-1 text-dark">Update Berita Corporate</p>
-                        <p class="text-muted small mb-2">User: Admin Utama &bull; <i class="far fa-clock ms-1"></i> 2 menit lalu</p>
-                        <span class="badge bg-success bg-opacity-10 text-success">Published</span>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-dot" style="background-color: #f59e0b; box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.2);"></div>
-                        <p class="fw-bold mb-1 text-dark">Login System</p>
-                        <p class="text-muted small mb-2">User: Rafly Rizky &bull; <i class="far fa-clock ms-1"></i> 1 jam lalu</p>
-                        <span class="badge bg-light text-dark border">IP: 192.168.1.10</span>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-dot" style="background-color: #10b981; box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);"></div>
-                        <p class="fw-bold mb-1 text-dark">Backup Database Otomatis</p>
-                        <p class="text-muted small mb-0">System &bull; <i class="far fa-clock ms-1"></i> 5 jam lalu</p>
-                    </div>
+                    <?php if (empty($activity_logs)): ?>
+                        <p class="text-muted small text-center py-3">Belum ada aktivitas tercatat.</p>
+                    <?php else: ?>
+                        <?php foreach ($activity_logs as $log):
+                            $dot = $dotColors[$log['type']] ?? $dotColors['info'];
+                        ?>
+                        <div class="timeline-item">
+                            <div class="timeline-dot" style="background-color: <?= $dot['color'] ?>; box-shadow: 0 0 0 4px <?= $dot['shadow'] ?>;"></div>
+                            <p class="fw-bold mb-1 text-dark"><?= esc($log['action']) ?></p>
+                            <p class="text-muted small mb-1">
+                                User: <?= esc($log['user_name']) ?> &bull;
+                                <i class="far fa-clock ms-1"></i>
+                                <?= \App\Models\ActivityLogModel::timeAgo($log['created_at']) ?>
+                            </p>
+                            <?php if (!empty($log['description'])): ?>
+                                <span class="badge bg-light text-dark border"><?= esc($log['description']) ?></span>
+                            <?php endif; ?>
+                        </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
 
                 </div>
             </div>
@@ -210,11 +220,13 @@
                     </div>
                 </div>
 
+                <?php if (session()->get('role') === 'superadmin'): ?>
                 <div class="mt-4">
                     <a href="/panel-pab/migrate-db" class="btn btn-warning w-100 btn-sm shadow-sm" onclick="return confirm('Apakah Anda yakin ingin menjalankan migrasi database? Pastikan Anda sudah membackup database sebelumnya jika ini di server production.')">
                         <i class="fas fa-database me-2"></i> Jalankan Migrasi Database
                     </a>
                 </div>
+                <?php endif; ?>
 
             </div>
         </div>

@@ -68,8 +68,8 @@
                     <?= csrf_field(); ?>
                     
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Username" required autofocus>
-                        <label for="username"><i class="fas fa-user me-2"></i>Username</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Username atau Email" required autofocus>
+                        <label for="username"><i class="fas fa-user me-2"></i>Username atau Email</label>
                     </div>
 
                     <div class="form-floating mb-4">
