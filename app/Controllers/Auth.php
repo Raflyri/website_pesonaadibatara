@@ -30,6 +30,11 @@ class Auth extends BaseController
 
         if ($user) {
             if (password_verify($password, $user['password'])) {
+                // Check if account is active
+                if (!$user['is_active']) {
+                    return redirect()->to('/login')->with('error', 'Akun Anda telah dinonaktifkan. Silakan hubungi Super Admin.');
+                }
+
                 // Regenerate session ID to prevent session fixation attacks
                 session()->regenerate();
 
