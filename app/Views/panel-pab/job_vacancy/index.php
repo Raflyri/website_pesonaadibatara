@@ -33,9 +33,9 @@
                     <tbody>
                         <?php foreach ($vacancies as $job) : ?>
                             <tr>
-                                <td><?= $job['job_title']; ?></td>
-                                <td><?= $job['department']; ?></td>
-                                <td><?= $job['employment_type']; ?></td>
+                                <td><?= esc($job['job_title']); ?></td>
+                                <td><?= esc($job['department']); ?></td>
+                                <td><?= esc($job['employment_type']); ?></td>
                                 <td><?= $job['application_deadline'] ? date('d M Y', strtotime($job['application_deadline'])) : '-'; ?></td>
                                 <td>
                                     <?php if ($job['status'] == 'Published') : ?>
