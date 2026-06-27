@@ -35,10 +35,11 @@ class Banner extends BaseController
         if (!$this->validate([
             'title' => 'required',
             'image' => [
-                'rules' => 'is_image[image]|mime_in[image,image/jpg,image/jpeg,image/png,image/webp]|max_size[image,2048]',
+                'rules' => 'is_image[image]|mime_in[image,image/jpg,image/jpeg,image/png,image/webp]|ext_in[image,jpg,jpeg,png,webp]|max_size[image,2048]',
                 'errors' => [
                     'max_size' => 'Ukuran gambar maksimal 2MB',
-                    'mime_in' => 'Format gambar harus JPG, PNG, atau WEBP'
+                    'mime_in' => 'Format gambar harus JPG, PNG, atau WEBP',
+                    'ext_in'  => 'Format gambar harus JPG, PNG, atau WEBP'
                 ]
             ]
         ])) {

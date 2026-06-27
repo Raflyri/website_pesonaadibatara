@@ -124,6 +124,7 @@ class Media extends BaseController
                 'label' => 'File Media',
                 'rules' => 'uploaded[file_upload]'
                     . '|mime_in[file_upload,image/jpg,image/jpeg,image/png,image/gif,image/webp,video/mp4]'
+                    . '|ext_in[file_upload,jpg,jpeg,png,gif,webp,mp4]'
                     . '|max_size[file_upload,10240]', // Naikkan ke 10MB buat video pendek
             ],
         ];

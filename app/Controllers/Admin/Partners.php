@@ -41,17 +41,18 @@ class Partners extends BaseController
         // Validasi Gambar: Wajib jika Create (id null), Opsional jika Edit
         if (!$id) {
             $rules['partner_logo'] = [
-                'rules' => 'uploaded[partner_logo]|is_image[partner_logo]|mime_in[partner_logo,image/jpg,image/jpeg,image/png,image/webp]|max_size[partner_logo,2048]',
+                'rules' => 'uploaded[partner_logo]|is_image[partner_logo]|mime_in[partner_logo,image/jpg,image/jpeg,image/png,image/webp]|ext_in[partner_logo,jpg,jpeg,png,webp]|max_size[partner_logo,2048]',
                 'errors' => [
                     'uploaded' => 'Logo partner wajib diupload.',
                     'max_size' => 'Ukuran maksimal 2MB.',
-                    'mime_in'  => 'Format harus PNG, JPG, atau WEBP (Transparan lebih baik).'
+                    'mime_in'  => 'Format harus PNG, JPG, atau WEBP (Transparan lebih baik).',
+                    'ext_in'   => 'Format harus PNG, JPG, atau WEBP (Transparan lebih baik).'
                 ]
             ];
         } else {
             // Kalau edit, cek cuma validasi kalau ada file masuk
             $rules['partner_logo'] = [
-                'rules' => 'is_image[partner_logo]|mime_in[partner_logo,image/jpg,image/jpeg,image/png,image/webp]|max_size[partner_logo,2048]',
+                'rules' => 'is_image[partner_logo]|mime_in[partner_logo,image/jpg,image/jpeg,image/png,image/webp]|ext_in[partner_logo,jpg,jpeg,png,webp]|max_size[partner_logo,2048]',
             ];
         }
 

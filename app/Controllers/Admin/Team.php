@@ -40,10 +40,11 @@ class Team extends BaseController
             'name' => 'required',
             'position_id' => 'required',
             'image' => [
-                'rules' => 'is_image[image]|mime_in[image,image/jpg,image/jpeg,image/png]|max_size[image,2048]',
+                'rules' => 'is_image[image]|mime_in[image,image/jpg,image/jpeg,image/png]|ext_in[image,jpg,jpeg,png]|max_size[image,2048]',
                 'errors' => [
                     'max_size' => 'Maksimal ukuran gambar 2MB',
-                    'mime_in' => 'Format harus JPG atau PNG'
+                    'mime_in' => 'Format harus JPG atau PNG',
+                    'ext_in' => 'Format harus JPG atau PNG'
                 ]
             ]
         ])) {
