@@ -1,7 +1,7 @@
 <nav class="topbar">
     <div class="d-flex flex-column">
         <div class="d-flex align-items-center gap-2">
-            <h6 class="fw-bold m-0 text-dark">Halo, <?= explode(' ', session()->get('name') ?? 'Admin')[0]; ?>! 👋</h6>
+            <h6 class="fw-bold m-0 text-dark">Halo, <?= esc(explode(' ', session()->get('name') ?? 'Admin')[0]); ?>! 👋</h6>
             <span class="badge bg-primary bg-opacity-10 text-primary border border-primary border-opacity-10 rounded-pill d-none d-lg-inline-block" style="font-size: 0.65rem; padding: 4px 8px;">
                 Corporate Dashboard
             </span>
@@ -25,7 +25,7 @@
             <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle text-dark p-2 rounded hover-bg-light" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                 <div class="text-end me-2 d-none d-md-block">
                     <strong class="d-block small"><?= esc(session()->get('name')); ?></strong>
-                    <span class="text-muted small" style="font-size: 0.7rem;"><?= ucfirst(session()->get('role')); ?></span>
+                    <span class="text-muted small" style="font-size: 0.7rem;"><?= esc(ucfirst(session()->get('role'))); ?></span>
                 </div>
                 <?php $avatar = session()->get('avatar') ? '/uploads/avatars/' . session()->get('avatar') : 'https://ui-avatars.com/api/?name=' . urlencode(session()->get('name')) . '&background=random'; ?>
                 <img src="<?= $avatar; ?>" alt="user" width="35" height="35" class="rounded-circle border object-fit-cover">
