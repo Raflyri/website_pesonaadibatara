@@ -33,9 +33,9 @@
                     <tbody>
                         <?php foreach ($vacancies as $job) : ?>
                             <tr>
-                                <td><?= $job['job_title']; ?></td>
-                                <td><?= $job['department']; ?></td>
-                                <td><?= $job['employment_type']; ?></td>
+                                <td><?= esc($job['job_title']); ?></td>
+                                <td><?= esc($job['department']); ?></td>
+                                <td><?= esc($job['employment_type']); ?></td>
                                 <td><?= $job['application_deadline'] ? date('d M Y', strtotime($job['application_deadline'])) : '-'; ?></td>
                                 <td>
                                     <?php if ($job['status'] == 'Published') : ?>
@@ -50,9 +50,13 @@
                                     <a href="/panel-pab/job-vacancies/edit/<?= $job['id']; ?>" class="btn btn-sm btn-info text-white">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a href="/panel-pab/job-vacancies/delete/<?= $job['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus lowongan ini?')">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
+                                    <form action="/panel-pab/job-vacancies/delete/<?= $job['id']; ?>" method="post" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus lowongan ini?')">
+                                        <?= csrf_field(); ?>
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <button type="submit" class="btn btn-sm btn-danger">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
