@@ -33,6 +33,17 @@
                         </div>
                     </div>
 
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Profil Singkat (Indonesia)</label>
+                            <textarea name="bio_id" class="form-control" rows="4" placeholder="Deskripsi singkat yang tampil di popup profil. Kosongkan bila tidak perlu."><?= old('bio_id', $team['bio_id'] ?? ''); ?></textarea>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold text-muted">Profil Singkat (English)</label>
+                            <textarea name="bio_en" class="form-control bg-light" rows="4" placeholder="Short description shown in the profile popup. Leave empty if not needed."><?= old('bio_en', $team['bio_en'] ?? ''); ?></textarea>
+                        </div>
+                    </div>
+
                     <div class="mb-3">
                         <label class="form-label fw-bold">Level Posisi (Hierarki)</label>
                         <select name="level" class="form-select bg-light border-primary">

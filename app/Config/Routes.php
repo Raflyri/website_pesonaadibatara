@@ -47,6 +47,15 @@ $routes->group('panel-pab', ['filter' => 'authGuard'], function ($routes) {
     $routes->delete('news/(:num)', 'Admin\News::delete/$1');
     $routes->get('news/delete/(:num)', 'Admin\News::delete/$1');
 
+    // Kelola kategori/bidang layanan bisnis (menu tidak lagi hardcode).
+    // Didaftarkan sebelum route services/(:segment) agar tidak tertangkap wildcard.
+    $routes->get('service-categories', 'Admin\ServiceCategories::index');
+    $routes->get('service-categories/create', 'Admin\ServiceCategories::create');
+    $routes->post('service-categories/store', 'Admin\ServiceCategories::store');
+    $routes->get('service-categories/edit/(:segment)', 'Admin\ServiceCategories::edit/$1');
+    $routes->post('service-categories/update/(:segment)', 'Admin\ServiceCategories::update/$1');
+    $routes->get('service-categories/delete/(:segment)', 'Admin\ServiceCategories::delete/$1');
+
     $routes->get('services/(:segment)', 'Admin\Services::index/$1');
     $routes->post('services/update-page/(:segment)', 'Admin\Services::updatePage/$1');
 

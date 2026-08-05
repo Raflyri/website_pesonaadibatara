@@ -52,73 +52,30 @@
         </div>
 
         <div class="row g-4">
-            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
-                <a href="/layanan/transportasi" class="card-service text-decoration-none h-100 d-block">
-                    <div class="card h-100 border-0 shadow-sm hover-top overflow-hidden">
-                        <div class="card-body p-4 text-center">
-                            <div class="icon-circle bg-blue-light mb-4 mx-auto">
-                                <i class="fas fa-car-side fa-2x text-primary"></i>
+            <?php
+            // Pilar bisnis mengikuti kategori layanan yang dikelola dari CMS,
+            // jadi bidang bisnis baru otomatis ikut tampil di sini.
+            $homeLocale = service('request')->getLocale();
+            ?>
+            <?php foreach (($serviceMenu ?? []) as $homeIndex => $pillar) : ?>
+                <?php $pillarColor = \App\Models\ServicePageModel::colorClasses($pillar['color']); ?>
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="<?= 100 + (($homeIndex % 4) * 100); ?>">
+                    <a href="<?= base_url('layanan/' . $pillar['category']); ?>" class="card-service text-decoration-none h-100 d-block">
+                        <div class="card h-100 border-0 shadow-sm hover-top overflow-hidden">
+                            <div class="card-body p-4 text-center">
+                                <div class="icon-circle <?= esc($pillarColor['bg'], 'attr'); ?> mb-4 mx-auto">
+                                    <i class="<?= esc($pillar['icon'] ?: 'fas fa-concierge-bell', 'attr'); ?> fa-2x <?= esc($pillarColor['text'], 'attr'); ?>"></i>
+                                </div>
+                                <h5 class="fw-bold text-dark mb-3"><?= esc(\App\Models\ServicePageModel::label($pillar, $homeLocale)); ?></h5>
+                                <p class="text-muted small mb-0"><?= esc(\App\Models\ServicePageModel::homeDesc($pillar, $homeLocale)); ?></p>
                             </div>
-                            <h5 class="fw-bold text-dark mb-3"><?= lang('Home.s2.transportation_sec.pillar_transport_title'); ?></h5>
-                            <p class="text-muted small mb-0"><?= lang('Home.s2.transportation_sec.pillar_transport_desc'); ?></p>
-                        </div>
-                        <div class="card-footer bg-white border-0 pb-4 text-center">
-                            <span class="text-primary fw-bold small"><?= lang('Home.s2.btn_view_detail'); ?> <i class="fas fa-arrow-right ms-1"></i></span>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
-                <a href="/layanan/kesehatan" class="card-service text-decoration-none h-100 d-block">
-                    <div class="card h-100 border-0 shadow-sm hover-top overflow-hidden">
-                        <div class="card-body p-4 text-center">
-                            <div class="icon-circle bg-green-light mb-4 mx-auto">
-                                <i class="fas fa-heartbeat fa-2x text-success"></i>
+                            <div class="card-footer bg-white border-0 pb-4 text-center">
+                                <span class="text-primary fw-bold small"><?= lang('Home.s2.btn_view_detail'); ?> <i class="fas fa-arrow-right ms-1"></i></span>
                             </div>
-                            <h5 class="fw-bold text-dark mb-3"><?= lang('Home.s2.health_sec.pillar_health_title'); ?></h5>
-                            <p class="text-muted small mb-0"><?= lang('Home.s2.health_sec.pillar_health_desc'); ?></p>
                         </div>
-                        <div class="card-footer bg-white border-0 pb-4 text-center">
-                            <span class="text-primary fw-bold small"><?= lang('Home.s2.btn_view_detail'); ?> <i class="fas fa-arrow-right ms-1"></i></span>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
-                <a href="/layanan/jasa" class="card-service text-decoration-none h-100 d-block">
-                    <div class="card h-100 border-0 shadow-sm hover-top overflow-hidden">
-                        <div class="card-body p-4 text-center">
-                            <div class="icon-circle bg-orange-light mb-4 mx-auto">
-                                <i class="fas fa-concierge-bell fa-2x text-warning"></i>
-                            </div>
-                            <h5 class="fw-bold text-dark mb-3"><?= lang('Home.s2.service_sec.pillar_service_title'); ?></h5>
-                            <p class="text-muted small mb-0"><?= lang('Home.s2.service_sec.pillar_service_desc'); ?></p>
-                        </div>
-                        <div class="card-footer bg-white border-0 pb-4 text-center">
-                            <span class="text-primary fw-bold small"><?= lang('Home.s2.btn_view_detail'); ?> <i class="fas fa-arrow-right ms-1"></i></span>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
-                <a href="/layanan/investasi" class="card-service text-decoration-none h-100 d-block">
-                    <div class="card h-100 border-0 shadow-sm hover-top overflow-hidden">
-                        <div class="card-body p-4 text-center">
-                            <div class="icon-circle bg-purple-light mb-4 mx-auto">
-                                <i class="fas fa-chart-line fa-2x text-info"></i>
-                            </div>
-                            <h5 class="fw-bold text-dark mb-3"><?= lang('Home.s2.invest_sec.pillar_invest_title'); ?></h5>
-                            <p class="text-muted small mb-0"><?= lang('Home.s2.invest_sec.pillar_invest_desc'); ?></p>
-                        </div>
-                        <div class="card-footer bg-white border-0 pb-4 text-center">
-                            <span class="text-primary fw-bold small"><?= lang('Home.s2.btn_view_detail'); ?> <i class="fas fa-arrow-right ms-1"></i></span>
-                        </div>
-                    </div>
-                </a>
-            </div>
+                    </a>
+                </div>
+            <?php endforeach; ?>
         </div>
     </div>
 </section>

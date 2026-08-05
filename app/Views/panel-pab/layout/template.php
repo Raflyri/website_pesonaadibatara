@@ -67,25 +67,28 @@
                 <i class="fas fa-briefcase"></i> <span class="sidebar-text">Lowongan Kerja</span>
             </a>
 
-            <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#menuLayanan" role="button" aria-expanded="<?= (current_url(true)->getSegment(2) == 'services') ? 'true' : 'false'; ?>" title="Layanan Bisnis">
+            <?php $layananOpen = in_array(current_url(true)->getSegment(2), ['services', 'service-categories'], true); ?>
+            <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#menuLayanan" role="button" aria-expanded="<?= $layananOpen ? 'true' : 'false'; ?>" title="Layanan Bisnis">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-concierge-bell"></i> <span class="sidebar-text">Layanan Bisnis</span>
                 </div>
                 <i class="fas fa-chevron-down small sidebar-text" style="font-size: 0.7rem;"></i>
             </a>
-            <div class="collapse <?= (current_url(true)->getSegment(2) == 'services') ? 'show' : ''; ?>" id="menuLayanan">
+            <div class="collapse <?= $layananOpen ? 'show' : ''; ?>" id="menuLayanan">
                 <div class="ms-3 border-start ps-2 my-1">
-                    <a href="/panel-pab/services/transportasi" class="nav-link py-1 small <?= (current_url(true)->getSegment(3) == 'transportasi') ? 'text-primary fw-bold bg-light' : ''; ?>">
-                        <span class="sidebar-text">Transportasi</span>
-                    </a>
-                    <a href="/panel-pab/services/kesehatan" class="nav-link py-1 small <?= (current_url(true)->getSegment(3) == 'kesehatan') ? 'text-primary fw-bold bg-light' : ''; ?>">
-                        <span class="sidebar-text">Kesehatan</span>
-                    </a>
-                    <a href="/panel-pab/services/jasa" class="nav-link py-1 small <?= (current_url(true)->getSegment(3) == 'jasa') ? 'text-primary fw-bold bg-light' : ''; ?>">
-                        <span class="sidebar-text">Jasa & Pengadaan</span>
-                    </a>
-                    <a href="/panel-pab/services/investasi" class="nav-link py-1 small <?= (current_url(true)->getSegment(3) == 'investasi') ? 'text-primary fw-bold bg-light' : ''; ?>">
-                        <span class="sidebar-text">Investasi</span>
+                    <?php foreach (($serviceMenuAll ?? []) as $sideItem) : ?>
+                        <a href="<?= base_url('panel-pab/services/' . $sideItem['category']); ?>" class="nav-link py-1 small <?= (current_url(true)->getSegment(3) == $sideItem['category']) ? 'text-primary fw-bold bg-light' : ''; ?>">
+                            <span class="sidebar-text">
+                                <?= esc($sideItem['nav_label'] ?: ucfirst($sideItem['category'])); ?>
+                                <?php if ((int) ($sideItem['is_active'] ?? 1) !== 1) : ?>
+                                    <span class="badge bg-secondary ms-1" style="font-size: 0.6rem;">nonaktif</span>
+                                <?php endif; ?>
+                            </span>
+                        </a>
+                    <?php endforeach; ?>
+
+                    <a href="<?= base_url('panel-pab/service-categories'); ?>" class="nav-link py-1 small border-top mt-1 pt-2 <?= (current_url(true)->getSegment(2) == 'service-categories') ? 'text-primary fw-bold bg-light' : ''; ?>">
+                        <span class="sidebar-text"><i class="fas fa-cog me-1"></i> Kelola Kategori</span>
                     </a>
                 </div>
             </div>

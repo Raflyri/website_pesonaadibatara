@@ -13,8 +13,8 @@ class About extends BaseController
         $vision  = $db->table('page_sections')->where('section_key', 'about_vision')->get()->getRowArray();
         $mission = $db->table('page_sections')->where('section_key', 'about_mission')->get()->getRowArray();
 
-        $allTeams = $db->table('teams')->orderBy('level', 'ASC')->orderBy('urutan', 'ASC')->get()->getResultArray();
-        $tree = $this->buildTree($allTeams);
+        // Sudah terurut level 1 -> 5, lalu urutan manual per level.
+        $teams = $db->table('teams')->orderBy('level', 'ASC')->orderBy('urutan', 'ASC')->get()->getResultArray();
 
         $fileRow = $settingModel->where('setting_key', 'company_profile')->first();
         $linkRow = $settingModel->where('setting_key', 'company_profile_link')->first();
@@ -24,26 +24,11 @@ class About extends BaseController
             'history' => $history,
             'vision'  => $vision,
             'mission' => $mission,
-            'teams'   => $tree,
+            'teams'   => $teams,
             'compro_file' => $fileRow['setting_value'] ?? null,
             'compro_link' => $linkRow['setting_value'] ?? null,
         ];
 
         return view('about', $data);
-    }
-
-    private function buildTree(array $elements, $parentId = 0)
-    {
-        $branch = array();
-        foreach ($elements as $element) {
-            if ($element['parent_id'] == $parentId) {
-                $children = $this->buildTree($elements, $element['id']);
-                if ($children) {
-                    $element['children'] = $children;
-                }
-                $branch[] = $element;
-            }
-        }
-        return $branch;
     }
 }

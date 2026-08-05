@@ -155,56 +155,120 @@
             <div class="org-section-divider mx-auto"></div>
         </div>
 
-        <div class="org-tree-wrapper overflow-auto pb-5" data-aos="zoom-in">
-            <div class="org-tree">
+        <?php $currentLangTeam = service('request')->getLocale(); ?>
 
-                <?php
-                // Fungsi Rekursif untuk Menggambar HTML (UL > LI)
-                $currentLangTree = service('request')->getLocale();
-                function renderTreeHTML($items, $locale = 'id')
-                {
-                    echo "<ul>";
-                    foreach ($items as $item) {
-                        echo "<li>";
+        <?php if (!empty($teams)) : ?>
+            <div class="team-grid" data-aos="fade-up">
+                <?php foreach ($teams as $member) : ?>
+                    <?php
+                    // Cek file fisiknya, bukan cuma kolom DB — kalau file hilang
+                    // (mis. DB di-dump dari server tapi folder uploads belum ikut)
+                    // jatuhkan ke avatar inisial supaya tidak jadi broken image.
+                    $hasPhoto = !empty($member['image']) && is_file(FCPATH . 'uploads/teams/' . $member['image']);
+                    $foto = $hasPhoto
+                        ? base_url('uploads/teams/' . $member['image'])
+                        : 'https://ui-avatars.com/api/?size=256&background=135ef9&color=ffffff&bold=true&name=' . urlencode($member['name']);
 
-                        // Gambar Kotak Member
-                        $foto = $item['image'] ? base_url('uploads/teams/' . $item['image']) : 'https://ui-avatars.com/api/?name=' . urlencode($item['name']);
+                    $positionKey = 'position_' . $currentLangTeam;
+                    $position = !empty($member[$positionKey]) ? $member[$positionKey] : $member['position_id'];
 
-                        // Cek Level untuk styling (Semua level menggunakan style yang sama)
-                        $cardClass = 'member-card';
-
-                        // Locale-aware position
-                        $positionKey = 'position_' . $locale;
-                        $position = !empty($item[$positionKey]) ? $item[$positionKey] : $item['position_id'];
-
-                        echo '
-                        <div class="' . $cardClass . '">
-                            <div class="img-box"><img src="' . $foto . '"></div>
-                            <div class="info-box">
-                                <h5>' . $item['name'] . '</h5>
-                                <span>' . $position . '</span>
+                    $bioKey = 'bio_' . $currentLangTeam;
+                    $bio = !empty($member[$bioKey]) ? $member[$bioKey] : ($member['bio_id'] ?? '');
+                    ?>
+                    <div class="team-card">
+                        <div class="team-card-circle">
+                            <div class="team-card-circle-inner">
+                                <img src="<?= esc($foto, 'attr'); ?>" alt="<?= esc($member['name']); ?>">
                             </div>
-                        </div>';
+                            <button type="button" class="team-card-arrow"
+                                data-bs-toggle="modal" data-bs-target="#teamProfileModal"
+                                data-name="<?= esc($member['name'], 'attr'); ?>"
+                                data-position="<?= esc($position, 'attr'); ?>"
+                                data-photo="<?= esc($foto, 'attr'); ?>"
+                                data-placeholder="<?= $hasPhoto ? '0' : '1'; ?>"
+                                data-bio="<?= esc($bio, 'attr'); ?>"
+                                aria-label="<?= esc(lang('Frontend.about.profile_detail') . ': ' . $member['name'], 'attr'); ?>">
+                                <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <div class="team-card-info">
+                            <span class="team-card-dot"></span>
+                            <div class="team-card-text">
+                                <h5><?= esc($member['name']); ?></h5>
+                                <span><?= esc($position); ?></span>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+    </div>
+</section>
 
-                        // Jika punya anak buah, panggil fungsi ini lagi (Looping ke dalam)
-                        if (!empty($item['children'])) {
-                            renderTreeHTML($item['children'], $locale);
-                        }
+<!-- Popup detail profil anggota tim (satu modal, diisi ulang via data-* tombol panah) -->
+<div class="modal fade" id="teamProfileModal" tabindex="-1" aria-labelledby="teamProfileModalName" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered team-modal-dialog">
+        <div class="modal-content team-modal-content">
+            <button type="button" class="team-modal-close" data-bs-dismiss="modal" aria-label="<?= esc(lang('Frontend.about.close'), 'attr'); ?>">
+                <i class="fas fa-times" aria-hidden="true"></i>
+            </button>
 
-                        echo "</li>";
-                    }
-                    echo "</ul>";
-                }
+            <div class="team-modal-photo" id="teamProfileModalPhotoBox">
+                <img src="" alt="" id="teamProfileModalPhoto">
+            </div>
 
-                // PANGGIL FUNGSI PERTAMA KALI
-                if (!empty($teams)) {
-                    renderTreeHTML($teams, $currentLangTree);
-                }
-                ?>
-
+            <div class="team-modal-body">
+                <span class="team-modal-dot"></span>
+                <h4 id="teamProfileModalName"></h4>
+                <p class="team-modal-position" id="teamProfileModalPosition"></p>
+                <div class="team-modal-bio" id="teamProfileModalBio"></div>
             </div>
         </div>
     </div>
-</section>
+</div>
+
+<script>
+    (function() {
+        var modal = document.getElementById('teamProfileModal');
+        if (!modal) return;
+
+        var photo = document.getElementById('teamProfileModalPhoto');
+        var photoBox = document.getElementById('teamProfileModalPhotoBox');
+        var name = document.getElementById('teamProfileModalName');
+        var position = document.getElementById('teamProfileModalPosition');
+        var bioBox = document.getElementById('teamProfileModalBio');
+
+        modal.addEventListener('show.bs.modal', function(event) {
+            var trigger = event.relatedTarget;
+            if (!trigger) return;
+
+            var memberName = trigger.getAttribute('data-name') || '';
+
+            photo.src = trigger.getAttribute('data-photo') || '';
+            photo.alt = memberName;
+
+            // Avatar inisial di-'contain' agar tidak ter-zoom di kolom portrait.
+            photoBox.classList.toggle('is-placeholder', trigger.getAttribute('data-placeholder') === '1');
+
+            name.textContent = memberName;
+            position.textContent = trigger.getAttribute('data-position') || '';
+
+            // Isi bio sebagai teks (bukan HTML) supaya input admin tidak bisa
+            // menyuntikkan markup; baris kosong dipecah jadi paragraf terpisah.
+            bioBox.textContent = '';
+            var bio = (trigger.getAttribute('data-bio') || '').trim();
+
+            bioBox.hidden = bio === '';
+            if (bio === '') return;
+
+            bio.split(/\n\s*\n/).forEach(function(paragraph) {
+                if (paragraph.trim() === '') return;
+                var p = document.createElement('p');
+                p.textContent = paragraph.trim();
+                bioBox.appendChild(p);
+            });
+        });
+    })();
+</script>
 
 <?= $this->endSection(); ?>

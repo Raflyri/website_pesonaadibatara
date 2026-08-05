@@ -55,6 +55,8 @@ class Team extends BaseController
             'name' => $this->request->getPost('name'),
             'position_id' => $this->request->getPost('position_id'),
             'position_en' => $this->request->getPost('position_en'),
+            'bio_id' => $this->request->getPost('bio_id'),
+            'bio_en' => $this->request->getPost('bio_en'),
             'level' => $this->request->getPost('level'),
             'urutan' => $this->request->getPost('urutan'),
             'parent_id' => $this->request->getPost('parent_id'), // <--- TAMBAHAN INI

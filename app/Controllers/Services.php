@@ -13,22 +13,20 @@ class Services extends BaseController
         $pageModel    = new ServicePageModel();
         $settingModel = new \App\Models\SiteSettingModel();
 
-        // 1. Cek Kategori Valid (Manual array atau cek DB)
-        $validCategories = ['transportasi', 'kesehatan', 'jasa', 'investasi'];
-        if (!in_array($category, $validCategories)) {
+        // 1. Kategori valid = yang terdaftar & aktif di CMS (bukan lagi hardcode),
+        //    supaya kategori baru langsung bisa diakses tanpa ubah kode.
+        $pageData = $pageModel->find($category);
+
+        if (!$pageData || (int) ($pageData['is_active'] ?? 1) !== 1) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
 
-        // 2. Ambil Data Header Page
-        $pageData = $pageModel->find($category);
-
-        // Fallback jika data page belum diisi admin
-        if (!$pageData) {
-            $pageData = [
-                'page_title' => ucfirst($category),
-                'page_description' => 'Solusi terbaik untuk kebutuhan bisnis Anda.',
-                'hero_image' => null
-            ];
+        // 2. Fallback judul bila header halaman belum diisi admin
+        if (empty($pageData['page_title'])) {
+            $pageData['page_title'] = $pageData['nav_label'] ?: ucfirst($category);
+        }
+        if (empty($pageData['page_description'])) {
+            $pageData['page_description'] = 'Solusi terbaik untuk kebutuhan bisnis Anda.';
         }
 
         // 3. Ambil List Items

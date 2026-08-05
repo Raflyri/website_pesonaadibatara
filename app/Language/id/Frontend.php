@@ -56,6 +56,8 @@ return [
         'format_pdf'         => 'Format PDF',
         'organization'       => 'Organisasi',
         'board_structure'    => 'Struktur Dewan Direksi',
+        'profile_detail'     => 'Detail Profil',
+        'close'              => 'Tutup',
     ],
     'career' => [
         'hero_title'       => 'Wujudkan Potensi Terbaikmu',

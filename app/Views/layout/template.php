@@ -107,57 +107,33 @@
                                 </a>-->
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?= lang('Layout.navbar.services'); ?></a>
                                 <ul class="dropdown-menu border-0 shadow-lg rounded-4 p-3 animate__animated animate__fadeIn" aria-labelledby="navbarDropdown">
-                                    <li>
-                                        <a class="dropdown-item py-2 rounded-3 d-flex align-items-center <?= (uri_string() == 'layanan/transportasi') ? 'active bg-light' : ''; ?>" href="/layanan/transportasi">
-                                            <div class="icon-small bg-blue-light me-3 text-primary"><i class="fas fa-car-side"></i></div>
-                                            <div>
-                                                <span class="fw-bold d-block"><?= lang('Layout.navbar.transportation'); ?></span>
-                                                <small class="text-muted" style="font-size: 0.7rem;"><?= lang('Layout.navbar.transport_desc') ?></small>
-                                            </div>
-                                        </a>
-                                    </li>
+                                    <?php
+                                    // Daftar kategori dikelola dari CMS (Layanan Bisnis > Kelola Kategori),
+                                    // dibagikan global lewat BaseController.
+                                    $navServices = $serviceMenu ?? [];
+                                    $navLocale   = service('request')->getLocale();
+                                    ?>
+                                    <?php foreach ($navServices as $navIndex => $navItem) : ?>
+                                        <?php $navColor = \App\Models\ServicePageModel::colorClasses($navItem['color']); ?>
+                                        <?php if ($navIndex > 0) : ?>
+                                            <li>
+                                                <hr class="dropdown-divider my-1">
+                                            </li>
+                                        <?php endif; ?>
 
-                                    <li>
-                                        <hr class="dropdown-divider my-1">
-                                    </li>
-
-                                    <li>
-                                        <a class="dropdown-item py-2 rounded-3 d-flex align-items-center <?= (uri_string() == 'layanan/kesehatan') ? 'active bg-light' : ''; ?>" href="/layanan/kesehatan">
-                                            <div class="icon-small bg-green-light me-3 text-success"><i class="fas fa-heartbeat"></i></div>
-                                            <div>
-                                                <span class="fw-bold d-block"><?= lang('Layout.navbar.health') ?></span>
-                                                <small class="text-muted" style="font-size: 0.7rem;">Batara Health Care</small>
-                                            </div>
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <hr class="dropdown-divider my-1">
-                                    </li>
-
-                                    <li>
-                                        <a class="dropdown-item py-2 rounded-3 d-flex align-items-center <?= (uri_string() == 'layanan/jasa') ? 'active bg-light' : ''; ?>" href="/layanan/jasa">
-                                            <div class="icon-small bg-orange-light me-3 text-warning"><i class="fas fa-concierge-bell"></i></div>
-                                            <div>
-                                                <span class="fw-bold d-block"><?= lang('Layout.navbar.services_general') ?></span>
-                                                <small class="text-muted" style="font-size: 0.7rem;">Fasade & EO</small>
-                                            </div>
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <hr class="dropdown-divider my-1">
-                                    </li>
-
-                                    <li>
-                                        <a class="dropdown-item py-2 rounded-3 d-flex align-items-center <?= (uri_string() == 'layanan/investasi') ? 'active bg-light' : ''; ?>" href="/layanan/investasi">
-                                            <div class="icon-small bg-purple-light me-3 text-info"><i class="fas fa-chart-line"></i></div>
-                                            <div>
-                                                <span class="fw-bold d-block"><?= lang('Layout.navbar.investment') ?></span>
-                                                <small class="text-muted" style="font-size: 0.7rem;">KSO & F&B</small>
-                                            </div>
-                                        </a>
-                                    </li>
+                                        <li>
+                                            <a class="dropdown-item py-2 rounded-3 d-flex align-items-center <?= (uri_string() == 'layanan/' . $navItem['category']) ? 'active bg-light' : ''; ?>" href="<?= base_url('layanan/' . $navItem['category']); ?>">
+                                                <div class="icon-small <?= esc($navColor['bg'], 'attr'); ?> me-3 <?= esc($navColor['text'], 'attr'); ?>"><i class="<?= esc($navItem['icon'] ?: 'fas fa-concierge-bell', 'attr'); ?>"></i></div>
+                                                <div>
+                                                    <span class="fw-bold d-block"><?= esc(\App\Models\ServicePageModel::label($navItem, $navLocale)); ?></span>
+                                                    <?php $navDesc = \App\Models\ServicePageModel::desc($navItem, $navLocale); ?>
+                                                    <?php if ($navDesc !== '') : ?>
+                                                        <small class="text-muted" style="font-size: 0.7rem;"><?= esc($navDesc); ?></small>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    <?php endforeach; ?>
                                 </ul>
                             </li>
 
@@ -329,10 +305,12 @@
                 <div class="col-lg-2 col-md-6">
                     <h6 class="text-primary fw-bold text-uppercase mb-3 ls-1"><?= lang('Layout.footer.footer_sec_services'); ?></h6>
                     <ul class="list-unstyled footer-links">
-                        <li><a href="/layanan/transportasi"><i class="fas fa-angle-right me-2 text-primary"></i><?= lang('Layout.footer.service_transport'); ?></a></li>
-                        <li><a href="/layanan/kesehatan"><i class="fas fa-angle-right me-2 text-primary"></i><?= lang('Layout.footer.service_health'); ?></a></li>
-                        <li><a href="/layanan/jasa"><i class="fas fa-angle-right me-2 text-primary"></i><?= lang('Layout.footer.service_eo'); ?></a></li>
-                        <li><a href="/layanan/investasi"><i class="fas fa-angle-right me-2 text-primary"></i><?= lang('Layout.footer.service_investment'); ?></a></li>
+                        <?php $footerLocale = service('request')->getLocale(); ?>
+                        <?php foreach (($serviceMenu ?? []) as $footerItem) : ?>
+                            <li>
+                                <a href="<?= base_url('layanan/' . $footerItem['category']); ?>"><i class="fas fa-angle-right me-2 text-primary"></i><?= esc(\App\Models\ServicePageModel::label($footerItem, $footerLocale)); ?></a>
+                            </li>
+                        <?php endforeach; ?>
                     </ul>
                 </div>
 

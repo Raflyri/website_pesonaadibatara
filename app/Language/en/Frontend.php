@@ -56,6 +56,8 @@ return [
         'format_pdf'         => 'PDF Format',
         'organization'       => 'Organization',
         'board_structure'    => 'Board of Directors Structure',
+        'profile_detail'     => 'Profile Detail',
+        'close'              => 'Close',
     ],
     'career' => [
         'hero_title'       => 'Unlock Your Best Potential',

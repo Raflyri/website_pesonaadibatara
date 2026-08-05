@@ -49,9 +49,29 @@ abstract class BaseController extends Controller
         // Load SiteSettingModel manually since we can't use model() helper in strict BaseController without loading helper
         $settingModel = new \App\Models\SiteSettingModel();
 
+        // Menu layanan bisnis dikelola dari CMS, jadi navbar & footer perlu
+        // datanya di semua halaman — bukan cuma di controller Services.
+        // Satu query saja: sidebar admin butuh semua kategori (termasuk yang
+        // non-aktif), menu publik hanya yang aktif.
+        $serviceMenuAll = [];
+        try {
+            $serviceMenuAll = (new \App\Models\ServicePageModel())->getAllOrdered();
+        } catch (\Throwable $e) {
+            // Jangan sampai seluruh situs mati kalau tabel/kolomnya belum
+            // dimigrasi; menu cukup tampil kosong.
+            log_message('error', 'Gagal memuat menu layanan: ' . $e->getMessage());
+        }
+
+        $serviceMenu = array_values(array_filter(
+            $serviceMenuAll,
+            static fn ($row) => (int) ($row['is_active'] ?? 1) === 1
+        ));
+
         // Share data globally to all Views
         $globalData = [
-            'whatsapp' => $settingModel->getVal('company_whatsapp') ?? '' // Empty fallback if not set in DB
+            'whatsapp'       => $settingModel->getVal('company_whatsapp') ?? '', // Empty fallback if not set in DB
+            'serviceMenu'    => $serviceMenu,
+            'serviceMenuAll' => $serviceMenuAll,
         ];
 
         \Config\Services::renderer()->setData($globalData, 'raw');
