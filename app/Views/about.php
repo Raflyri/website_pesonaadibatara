@@ -158,29 +158,44 @@
         <?php $currentLangTeam = service('request')->getLocale(); ?>
 
         <?php if (!empty($teams)) : ?>
-            <div class="team-grid" data-aos="fade-up">
-                <?php foreach ($teams as $member) : ?>
-                    <?php
-                    // Cek file fisiknya, bukan cuma kolom DB — kalau file hilang
-                    // (mis. DB di-dump dari server tapi folder uploads belum ikut)
-                    // jatuhkan ke avatar inisial supaya tidak jadi broken image.
-                    $hasPhoto = !empty($member['image']) && is_file(FCPATH . 'uploads/teams/' . $member['image']);
-                    $foto = $hasPhoto
-                        ? base_url('uploads/teams/' . $member['image'])
-                        : 'https://ui-avatars.com/api/?size=256&background=135ef9&color=ffffff&bold=true&name=' . urlencode($member['name']);
+            <?php
+            $teamPhotoPath = (!empty($team_photo) && is_file(FCPATH . 'uploads/about/' . $team_photo))
+                ? base_url('uploads/about/' . $team_photo)
+                : null;
+            $perPage    = 6;
+            $totalPages = (int) ceil(count($teams) / $perPage);
+            ?>
 
-                    $positionKey = 'position_' . $currentLangTeam;
-                    $position = !empty($member[$positionKey]) ? $member[$positionKey] : $member['position_id'];
+            <div class="team-showcase<?= $teamPhotoPath ? '' : ' team-showcase--nophoto'; ?>" data-aos="fade-up">
 
-                    $bioKey = 'bio_' . $currentLangTeam;
-                    $bio = !empty($member[$bioKey]) ? $member[$bioKey] : ($member['bio_id'] ?? '');
-                    ?>
-                    <div class="team-card">
-                        <div class="team-card-circle">
-                            <div class="team-card-circle-inner">
-                                <img src="<?= esc($foto, 'attr'); ?>" alt="<?= esc($member['name']); ?>">
-                            </div>
-                            <button type="button" class="team-card-arrow"
+                <?php if ($teamPhotoPath) : ?>
+                    <figure class="team-photo">
+                        <img src="<?= esc($teamPhotoPath, 'attr'); ?>" alt="<?= esc(lang('Frontend.about.board_structure') . ' PT. Pesona Adi Batara', 'attr'); ?>">
+                    </figure>
+                <?php endif; ?>
+
+                <div class="team-list">
+                    <div class="team-list-rows" id="teamListRows" data-per-page="<?= $perPage; ?>">
+                        <?php foreach ($teams as $i => $member) : ?>
+                            <?php
+                            // Cek file fisiknya, bukan cuma kolom DB — kalau file hilang
+                            // (mis. DB di-dump dari server tapi folder uploads belum ikut)
+                            // jatuhkan ke avatar inisial supaya tidak jadi broken image.
+                            $hasPhoto = !empty($member['image']) && is_file(FCPATH . 'uploads/teams/' . $member['image']);
+                            $foto = $hasPhoto
+                                ? base_url('uploads/teams/' . $member['image'])
+                                : 'https://ui-avatars.com/api/?size=256&background=135ef9&color=ffffff&bold=true&name=' . urlencode($member['name']);
+
+                            $positionKey = 'position_' . $currentLangTeam;
+                            $position = !empty($member[$positionKey]) ? $member[$positionKey] : $member['position_id'];
+
+                            $bioKey = 'bio_' . $currentLangTeam;
+                            $bio = !empty($member[$bioKey]) ? $member[$bioKey] : ($member['bio_id'] ?? '');
+                            ?>
+                            <button type="button"
+                                class="team-row"
+                                data-page="<?= (int) floor($i / $perPage) + 1; ?>"
+                                <?= $i >= $perPage ? 'hidden' : ''; ?>
                                 data-bs-toggle="modal" data-bs-target="#teamProfileModal"
                                 data-name="<?= esc($member['name'], 'attr'); ?>"
                                 data-position="<?= esc($position, 'attr'); ?>"
@@ -188,18 +203,36 @@
                                 data-placeholder="<?= $hasPhoto ? '0' : '1'; ?>"
                                 data-bio="<?= esc($bio, 'attr'); ?>"
                                 aria-label="<?= esc(lang('Frontend.about.profile_detail') . ': ' . $member['name'], 'attr'); ?>">
+                                <span class="team-row-photo">
+                                    <img src="<?= esc($foto, 'attr'); ?>" alt="">
+                                </span>
+                                <span class="team-row-text">
+                                    <span class="team-row-name"><?= esc($member['name']); ?></span>
+                                    <span class="team-row-position"><?= esc($position); ?></span>
+                                </span>
+                            </button>
+                        <?php endforeach; ?>
+                    </div>
+
+                    <?php if ($totalPages > 1) : ?>
+                        <nav class="team-pager" id="teamPager" aria-label="<?= esc(lang('Frontend.about.board_structure'), 'attr'); ?>">
+                            <button type="button" class="team-pager-btn" data-nav="prev" aria-label="<?= esc(lang('Frontend.about.prev_page'), 'attr'); ?>">
+                                <i class="fas fa-arrow-left" aria-hidden="true"></i>
+                            </button>
+                            <div class="team-pager-dots">
+                                <?php for ($p = 1; $p <= $totalPages; $p++) : ?>
+                                    <button type="button" class="team-pager-dot<?= $p === 1 ? ' is-active' : ''; ?>"
+                                        data-page="<?= $p; ?>"
+                                        aria-label="<?= esc(lang('Frontend.about.page') . ' ' . $p, 'attr'); ?>"
+                                        <?= $p === 1 ? 'aria-current="true"' : ''; ?>><?= $p; ?></button>
+                                <?php endfor; ?>
+                            </div>
+                            <button type="button" class="team-pager-btn" data-nav="next" aria-label="<?= esc(lang('Frontend.about.next_page'), 'attr'); ?>">
                                 <i class="fas fa-arrow-right" aria-hidden="true"></i>
                             </button>
-                        </div>
-                        <div class="team-card-info">
-                            <span class="team-card-dot"></span>
-                            <div class="team-card-text">
-                                <h5><?= esc($member['name']); ?></h5>
-                                <span><?= esc($position); ?></span>
-                            </div>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
+                        </nav>
+                    <?php endif; ?>
+                </div>
             </div>
         <?php endif; ?>
     </div>
@@ -268,6 +301,79 @@
                 bioBox.appendChild(p);
             });
         });
+    })();
+
+    // Pagination anggota tim (6 per halaman).
+    // Dikerjakan di sisi klien supaya foto grup tidak ikut ter-reload.
+    (function() {
+        var rowsBox = document.getElementById('teamListRows');
+        var pager = document.getElementById('teamPager');
+        if (!rowsBox || !pager) return;
+
+        var rows = Array.prototype.slice.call(rowsBox.querySelectorAll('.team-row'));
+        var dots = Array.prototype.slice.call(pager.querySelectorAll('.team-pager-dot'));
+        var prevBtn = pager.querySelector('[data-nav="prev"]');
+        var nextBtn = pager.querySelector('[data-nav="next"]');
+        var totalPages = dots.length;
+        var current = 1;
+
+        var perPage = parseInt(rowsBox.getAttribute('data-per-page'), 10) || 6;
+
+        // Kunci tinggi kontainer setinggi satu halaman penuh, supaya layout
+        // tidak melompat saat halaman terakhir berisi kurang dari 6 orang.
+        // Dihitung dari tinggi satu baris (bukan mengukur tinggi kontainer saat
+        // itu) agar hasilnya sama berapa pun halaman yang sedang aktif.
+        function lockHeight() {
+            rowsBox.style.minHeight = '';
+            if (!window.matchMedia('(min-width: 992px)').matches) return;
+
+            var sample = rows.filter(function(r) {
+                return !r.hidden;
+            })[0];
+            if (!sample) return;
+
+            var gap = parseFloat(getComputedStyle(rowsBox).rowGap) || 0;
+            var full = sample.offsetHeight * perPage + gap * (perPage - 1);
+            rowsBox.style.minHeight = full + 'px';
+        }
+
+        function show(page) {
+            current = Math.min(Math.max(page, 1), totalPages);
+
+            rows.forEach(function(row) {
+                row.hidden = parseInt(row.getAttribute('data-page'), 10) !== current;
+            });
+
+            dots.forEach(function(dot) {
+                var isActive = parseInt(dot.getAttribute('data-page'), 10) === current;
+                dot.classList.toggle('is-active', isActive);
+                if (isActive) {
+                    dot.setAttribute('aria-current', 'true');
+                } else {
+                    dot.removeAttribute('aria-current');
+                }
+            });
+
+            prevBtn.disabled = current === 1;
+            nextBtn.disabled = current === totalPages;
+        }
+
+        dots.forEach(function(dot) {
+            dot.addEventListener('click', function() {
+                show(parseInt(dot.getAttribute('data-page'), 10));
+            });
+        });
+
+        prevBtn.addEventListener('click', function() {
+            show(current - 1);
+        });
+        nextBtn.addEventListener('click', function() {
+            show(current + 1);
+        });
+
+        show(1);
+        lockHeight();
+        window.addEventListener('resize', lockHeight);
     })();
 </script>
 

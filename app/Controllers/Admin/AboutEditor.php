@@ -21,6 +21,7 @@ class AboutEditor extends BaseController
         $history = $this->db->table('page_sections')->where('section_key', 'about_history')->get()->getRowArray();
         $vision  = $this->db->table('page_sections')->where('section_key', 'about_vision')->get()->getRowArray();
         $mission = $this->db->table('page_sections')->where('section_key', 'about_mission')->get()->getRowArray();
+        $team    = $this->db->table('page_sections')->where('section_key', 'about_team')->get()->getRowArray();
         $linkSetting = $this->db->table('site_settings')->where('setting_key', 'company_profile_link')->get()->getRowArray();
         $fileSetting = $this->db->table('site_settings')->where('setting_key', 'company_profile')->get()->getRowArray();
         $tagline = $this->settingModel->getVal('company_tagline');
@@ -36,6 +37,7 @@ class AboutEditor extends BaseController
             'history' => $history,
             'vision'  => $vision,
             'mission' => $mission,
+            'team'    => $team,
             'compro_link' => $linkSetting['setting_value'] ?? '',
             'compro_file' => $fileSetting['setting_value'] ?? '',
             'company_tagline' => $tagline,
@@ -96,6 +98,28 @@ class AboutEditor extends BaseController
             'content_en' => $this->request->getPost('mission_en'),
         ];
         $this->db->table('page_sections')->where('section_key', 'about_mission')->update($missionData);
+
+        // 3b. Foto grup tim (tampil di samping daftar anggota pada halaman About)
+        $fileTeam = $this->request->getFile('team_photo');
+        if ($fileTeam && $fileTeam->isValid() && !$fileTeam->hasMoved()) {
+            if (strpos((string) $fileTeam->getMimeType(), 'image') !== false) {
+                $oldTeam = $this->db->table('page_sections')
+                    ->where('section_key', 'about_team')->get()->getRowArray();
+
+                $newTeamName = $fileTeam->getRandomName();
+                $fileTeam->move('uploads/about', $newTeamName);
+
+                // Buang file lama supaya folder uploads tidak menumpuk.
+                $oldTeamFile = $oldTeam['media_url'] ?? null;
+                if ($oldTeamFile && is_file(FCPATH . 'uploads/about/' . $oldTeamFile)) {
+                    unlink(FCPATH . 'uploads/about/' . $oldTeamFile);
+                }
+
+                $this->db->table('page_sections')
+                    ->where('section_key', 'about_team')
+                    ->update(['media_url' => $newTeamName]);
+            }
+        }
 
         // 4. Update Link Company Profile 
         $linkInput = $this->request->getPost('compro_link');

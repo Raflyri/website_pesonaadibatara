@@ -55,9 +55,12 @@ return [
         'compro_unavailable' => 'Company Profile (Not Available Yet)',
         'format_pdf'         => 'PDF Format',
         'organization'       => 'Organization',
-        'board_structure'    => 'Board of Directors Structure',
+        'board_structure'    => 'Our Team',
         'profile_detail'     => 'Profile Detail',
         'close'              => 'Close',
+        'prev_page'          => 'Previous page',
+        'next_page'          => 'Next page',
+        'page'               => 'Page',
     ],
     'career' => [
         'hero_title'       => 'Unlock Your Best Potential',

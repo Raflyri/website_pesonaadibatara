@@ -55,9 +55,12 @@ return [
         'compro_unavailable' => 'Company Profile (Belum Tersedia)',
         'format_pdf'         => 'Format PDF',
         'organization'       => 'Organisasi',
-        'board_structure'    => 'Struktur Dewan Direksi',
+        'board_structure'    => 'Tim Kami',
         'profile_detail'     => 'Detail Profil',
         'close'              => 'Tutup',
+        'prev_page'          => 'Halaman sebelumnya',
+        'next_page'          => 'Halaman berikutnya',
+        'page'               => 'Halaman',
     ],
     'career' => [
         'hero_title'       => 'Wujudkan Potensi Terbaikmu',

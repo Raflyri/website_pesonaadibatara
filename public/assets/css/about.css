@@ -260,141 +260,222 @@
   }
 }
 
-/* --- TEAM GRID --- */
-/* Satu grid kontinu untuk semua anggota (urut level 1 -> 5). Tanpa sub-header
-   per level, karena jabatan sudah tercantum di masing-masing kartu. */
-.team-grid {
+/* --- TEAM SHOWCASE: foto grup (kiri) + daftar anggota zigzag (kanan) --- */
+.team-showcase {
   display: grid;
-  /* auto-fill (bukan auto-fit) supaya baris terakhir yang tidak penuh tetap
-     selebar 1 kolom, tidak melar memenuhi container. */
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 8px;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 44px;
+  align-items: stretch;
   max-width: 1100px;
   margin: 0 auto;
 }
 
-.team-card {
-  padding: 20px 16px 24px;
-  border-radius: 20px;
-  background: transparent;
-  transition: background-color 0.35s ease;
+/* Bila foto grup belum diunggah, daftar anggota tampil sendiri di tengah
+   supaya tidak ada kolom kosong. */
+.team-showcase--nophoto {
+  grid-template-columns: minmax(0, 640px);
+  justify-content: center;
 }
 
-.team-card:hover,
-.team-card:focus-within {
-  background-color: #0b2540;
-}
-
-.team-card-circle {
+.team-photo {
   position: relative;
-  width: 135px;
-  height: 135px;
-  margin: 0 auto 20px;
-}
-
-.team-card-circle-inner {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
+  margin: 0;
+  min-height: 420px;
+  border-radius: 24px;
   overflow: hidden;
-  background: #e2e8f0;
-  /* Redam teks alt bila file foto hilang, agar tetap tampil sebagai
-     lingkaran placeholder rapi (alt tetap terbaca screen reader). */
-  font-size: 0;
+  background: #dbe6fb;
 }
 
-/* Foto tampil apa adanya (berwarna) — tanpa filter grayscale. */
-.team-card-circle img {
+.team-photo img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.team-card-arrow {
+/* Gradasi biru brand: pekat di sudut atas & dasar, bening di tengah supaya
+   wajah tetap terbaca. Fungsinya mendorong foto grup jadi latar sehingga
+   fokus utama tetap pada foto anggota di sebelah kanan. */
+.team-photo::after {
+  content: "";
   position: absolute;
-  right: -6px;
-  bottom: -6px;
-  width: 36px;
-  height: 36px;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: #fff;
+  inset: 0;
+  background: linear-gradient(
+    165deg,
+    rgba(19, 94, 249, 0.34) 0%,
+    rgba(19, 94, 249, 0.06) 34%,
+    rgba(11, 37, 64, 0.08) 60%,
+    rgba(11, 37, 64, 0.58) 100%
+  );
+  pointer-events: none;
+}
+
+/* Garis tepi tipis di dalam, biar foto tidak "mengambang" di atas gradien section. */
+.team-photo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.team-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.team-list-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* --- BARIS ANGGOTA (zigzag) --- */
+.team-row {
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 0.8rem;
-  line-height: 1;
-  color: var(--pab-blue-primary, #135ef9);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  gap: 18px;
+  width: 100%;
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 18px;
+  background: transparent;
+  text-align: left;
   cursor: pointer;
-  transition: background-color 0.35s ease, color 0.35s ease, transform 0.35s ease;
+  transition: background-color 0.35s ease;
 }
 
-.team-card-arrow:hover {
-  transform: scale(1.12);
+/* Baris genap dibalik: avatar pindah ke kanan, teks rata kanan. */
+.team-row:nth-child(even) {
+  flex-direction: row-reverse;
+  text-align: right;
 }
 
-.team-card-arrow:focus-visible {
+.team-row:hover,
+.team-row:focus-visible {
+  background-color: #0b2540;
+}
+
+.team-row:focus-visible {
   outline: 3px solid var(--pab-blue-primary, #135ef9);
-  outline-offset: 3px;
+  outline-offset: 2px;
 }
 
-.team-card:hover .team-card-arrow,
-.team-card:focus-within .team-card-arrow {
-  background: var(--pab-blue-primary, #135ef9);
-  color: #fff;
-}
-
-.team-card-info {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-}
-
-.team-card-dot {
+.team-row-photo {
   flex-shrink: 0;
-  width: 8px;
-  height: 8px;
-  margin-top: 6px;
-  border: 1.5px solid #94a3b8;
+  width: 112px;
+  height: 112px;
   border-radius: 50%;
-  transition: border-color 0.35s ease;
+  overflow: hidden;
+  background: #e2e8f0;
+  /* Redam teks alt bila file foto hilang, agar tetap tampil sebagai
+     lingkaran placeholder rapi (alt tetap terbaca screen reader). */
+  font-size: 0;
+  transition: box-shadow 0.35s ease;
 }
 
-.team-card:hover .team-card-dot,
-.team-card:focus-within .team-card-dot {
-  border-color: #ffffff;
+.team-row:hover .team-row-photo,
+.team-row:focus-visible .team-row-photo {
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.85);
 }
 
-.team-card-text h5 {
+.team-row-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.team-row-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.team-row-name {
   font-size: 1rem;
   font-weight: 700;
   color: #1e293b;
-  margin-bottom: 2px;
   transition: color 0.35s ease;
 }
 
-/* Di-scope ke .team-card-text — kalau pakai `.team-card span`, selector itu
-   menang specificity atas .team-card-arrow / .team-card-dot (yang juga <span>)
-   dan menimpa display:flex-nya sehingga ikon panah jadi tidak center. */
-.team-card-text span {
-  display: inline-block;
+.team-row-position {
   font-size: 0.8rem;
   font-weight: 500;
   color: #64748b;
   transition: color 0.35s ease;
 }
 
-.team-card:hover .team-card-text h5,
-.team-card:focus-within .team-card-text h5 {
+.team-row:hover .team-row-name,
+.team-row:focus-visible .team-row-name {
   color: #ffffff;
 }
 
-.team-card:hover .team-card-text span,
-.team-card:focus-within .team-card-text span {
+.team-row:hover .team-row-position,
+.team-row:focus-visible .team-row-position {
   color: #cbd5f5;
+}
+
+/* --- PAGINATION --- */
+.team-pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.team-pager-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.team-pager-btn,
+.team-pager-dot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  height: 34px;
+  padding: 0 8px;
+  border: 1px solid rgba(30, 41, 59, 0.15);
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.75);
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1;
+  color: #1e293b;
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.team-pager-btn:hover:not(:disabled),
+.team-pager-dot:hover:not(.is-active) {
+  background: #ffffff;
+  border-color: var(--pab-blue-primary, #135ef9);
+  color: var(--pab-blue-primary, #135ef9);
+}
+
+.team-pager-dot.is-active {
+  background: var(--pab-blue-primary, #135ef9);
+  border-color: var(--pab-blue-primary, #135ef9);
+  color: #ffffff;
+  cursor: default;
+}
+
+.team-pager-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.team-pager-btn:focus-visible,
+.team-pager-dot:focus-visible {
+  outline: 3px solid var(--pab-blue-primary, #135ef9);
+  outline-offset: 2px;
 }
 
 /* --- RESPONSIVE ADJUSTMENTS --- */
@@ -404,8 +485,29 @@
     padding-bottom: 60px;
   }
 
-  .team-grid {
-    grid-template-columns: repeat(3, 1fr);
+  /* Foto grup pindah ke atas; daftar anggota menyusul di bawahnya. */
+  .team-showcase {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+
+  .team-photo {
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+  }
+
+  /* Zigzag dimatikan di layar sempit — bolak-balik kiri-kanan pada lebar
+     kecil justru terbaca berantakan. */
+  .team-row:nth-child(even) {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  /* Lepas penguncian tinggi dari JS. Pakai !important supaya menang atas
+     inline style, sehingga tidak bergantung pada event resize yang belum
+     tentu terpicu (mis. saat halaman langsung dibuka di lebar mobile). */
+  .team-list-rows {
+    min-height: 0 !important;
   }
 }
 
@@ -414,22 +516,27 @@
     font-size: 2rem;
   }
 
-  .team-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 4px;
+  .team-photo {
+    aspect-ratio: 1 / 1;
+    border-radius: 18px;
   }
 
-  .team-card-circle {
-    width: 90px;
-    height: 90px;
+  .team-row {
+    gap: 14px;
+    padding: 8px 12px;
   }
 
-  .team-card-text h5 {
-    font-size: 0.85rem;
+  .team-row-photo {
+    width: 84px;
+    height: 84px;
   }
 
-  .team-card-text span {
-    font-size: 0.7rem;
+  .team-row-name {
+    font-size: 0.9rem;
+  }
+
+  .team-row-position {
+    font-size: 0.72rem;
   }
 }
 

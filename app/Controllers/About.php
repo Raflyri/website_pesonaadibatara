@@ -12,6 +12,7 @@ class About extends BaseController
         $history = $db->table('page_sections')->where('section_key', 'about_history')->get()->getRowArray();
         $vision  = $db->table('page_sections')->where('section_key', 'about_vision')->get()->getRowArray();
         $mission = $db->table('page_sections')->where('section_key', 'about_mission')->get()->getRowArray();
+        $teamSec = $db->table('page_sections')->where('section_key', 'about_team')->get()->getRowArray();
 
         // Sudah terurut level 1 -> 5, lalu urutan manual per level.
         $teams = $db->table('teams')->orderBy('level', 'ASC')->orderBy('urutan', 'ASC')->get()->getResultArray();
@@ -25,6 +26,7 @@ class About extends BaseController
             'vision'  => $vision,
             'mission' => $mission,
             'teams'   => $teams,
+            'team_photo' => $teamSec['media_url'] ?? null,
             'compro_file' => $fileRow['setting_value'] ?? null,
             'compro_link' => $linkRow['setting_value'] ?? null,
         ];

@@ -66,6 +66,11 @@
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="team-tab" data-bs-toggle="pill" data-bs-target="#team" type="button">
+                            <i class="fas fa-users"></i> Foto Tim
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
                         <button class="nav-link" id="compro-tab" data-bs-toggle="pill" data-bs-target="#compro" type="button">
                             <i class="fas fa-file-pdf"></i> Company Profile
                         </button>
@@ -261,6 +266,46 @@
                                     <textarea class="form-control summernote" name="mission_en"><?= $mission['content_en'] ?? ''; ?></textarea>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="team" role="tabpanel">
+                    <div class="row g-4 p-4">
+                        <div class="col-md-7">
+                            <h5 class="form-section-title text-primary"><i class="fas fa-users me-2"></i>Foto Grup Tim</h5>
+                            <p class="text-muted small">
+                                Tampil di samping daftar anggota pada section <strong>Tim Kami</strong> di halaman Tentang Kami.
+                            </p>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-muted small">Unggah Foto Grup</label>
+                                <input type="file" class="form-control input-modern" name="team_photo" accept="image/*">
+                                <small class="text-muted d-block mt-2">
+                                    Disarankan foto potret (rasio sekitar 3:4) dengan resolusi minimal 900&times;1200 px. Maksimal 5MB.
+                                </small>
+                            </div>
+
+                            <div class="alert alert-info small mb-0">
+                                <i class="fas fa-info-circle me-1"></i>
+                                Bila foto belum diunggah, daftar anggota otomatis tampil sendiri di tengah tanpa kolom kosong.
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <label class="form-label fw-bold text-muted small">Foto Saat Ini</label>
+                            <?php if (!empty($team['media_url'])) : ?>
+                                <img src="<?= base_url('uploads/about/' . $team['media_url']); ?>"
+                                    alt="Foto grup tim" class="img-fluid rounded-3 border">
+                                <small class="text-success d-block mt-2">
+                                    <i class="fas fa-check"></i> <?= esc($team['media_url']); ?>
+                                </small>
+                            <?php else : ?>
+                                <div class="d-flex flex-column align-items-center justify-content-center p-4 bg-light rounded-3 border text-center">
+                                    <i class="fas fa-image fa-3x text-muted opacity-50 mb-2"></i>
+                                    <span class="text-muted small">Belum ada foto grup.</span>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
