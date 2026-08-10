@@ -45,7 +45,6 @@ $routes->group('panel-pab', ['filter' => 'authGuard'], function ($routes) {
     $routes->get('news/edit/(:num)', 'Admin\News::edit/$1');
     $routes->post('news/update/(:num)', 'Admin\News::update/$1');
     $routes->delete('news/(:num)', 'Admin\News::delete/$1');
-    $routes->get('news/delete/(:num)', 'Admin\News::delete/$1');
 
     // Kelola kategori/bidang layanan bisnis (menu tidak lagi hardcode).
     // Didaftarkan sebelum route services/(:segment) agar tidak tertangkap wildcard.
@@ -110,7 +109,7 @@ $routes->group('panel-pab', ['filter' => 'authGuard'], function ($routes) {
 
     $routes->get('api/visitor-count', 'Admin\Dashboard::get_visitor_count');
 
-    $routes->get('migrate-db', 'Admin\Dashboard::migrateDb');
+    $routes->post('migrate-db', 'Admin\Dashboard::migrateDb');
 
     $routes->get('media', 'Admin\Media::index');
     $routes->post('media/upload', 'Admin\Media::upload');
