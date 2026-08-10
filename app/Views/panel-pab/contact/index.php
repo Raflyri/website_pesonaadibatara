@@ -58,11 +58,11 @@
                                 <tr>
                                     <td class="small text-muted" style="width: 15%;"><?= date('d M Y H:i', strtotime($msg['created_at'])); ?></td>
                                     <td style="width: 20%;">
-                                        <div class="fw-bold"><?= $msg['name']; ?></div>
-                                        <div class="small text-muted"><?= $msg['email']; ?></div>
-                                        <div class="small text-muted"><?= $msg['phone']; ?></div>
+                                        <div class="fw-bold"><?= esc($msg['name']); ?></div>
+                                        <div class="small text-muted"><?= esc($msg['email']); ?></div>
+                                        <div class="small text-muted"><?= esc($msg['phone']); ?></div>
                                     </td>
-                                    <td style="width: 20%;" class="fw-bold text-primary"><?= $msg['subject']; ?></td>
+                                    <td style="width: 20%;" class="fw-bold text-primary"><?= esc($msg['subject']); ?></td>
                                     <td><?= nl2br(esc((string) $msg['message'])); ?></td>
                                     <td class="text-end">
                                         <a href="/panel-pab/contact-editor/delete/<?= $msg['id']; ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Hapus pesan ini?')"><i class="fas fa-trash"></i></a>
@@ -88,11 +88,11 @@
                             <h5 class="text-primary fw-bold mb-3">Teks Intro</h5>
                             <div class="mb-3">
                                 <label class="fw-bold">Judul (ID)</label>
-                                <input type="text" name="title_id" class="form-control" value="<?= $intro['title_id']; ?>">
+                                <input type="text" name="title_id" class="form-control" value="<?= esc($intro['title_id'], 'attr'); ?>">
                             </div>
                             <div class="mb-3">
                                 <label class="fw-bold">Deskripsi (ID)</label>
-                                <textarea name="content_id" class="form-control" rows="4"><?= $intro['content_id']; ?></textarea>
+                                <textarea name="content_id" class="form-control" rows="4"><?= esc($intro['content_id']); ?></textarea>
                             </div>
                         </div>
                     </div>
@@ -106,20 +106,20 @@
             <div class="tab-pane fade" id="kontak">
                 <form action="/panel-pab/contact-editor/update" method="post">
                     <?= csrf_field(); ?>
-                    <input type="hidden" name="title_id" value="<?= $intro['title_id']; ?>">
+                    <input type="hidden" name="title_id" value="<?= esc($intro['title_id'], 'attr'); ?>">
 
                     <h5 class="text-primary fw-bold mb-3 mt-4">Kontak Utama</h5>
                     <div class="mb-3">
                         <label class="fw-bold">WhatsApp Company (tanpa + atau 0, cth: 628123...)</label>
-                        <input type="text" name="company_whatsapp" class="form-control" value="<?= $contact['company_whatsapp']; ?>" placeholder="628123456789">
+                        <input type="text" name="company_whatsapp" class="form-control" value="<?= esc($contact['company_whatsapp'], 'attr'); ?>" placeholder="628123456789">
                     </div>
                     <div class="mb-3">
                         <label class="fw-bold">Telepon Kantor</label>
-                        <input type="text" name="company_phone" class="form-control" value="<?= $contact['company_phone']; ?>" placeholder="021-12345678">
+                        <input type="text" name="company_phone" class="form-control" value="<?= esc($contact['company_phone'], 'attr'); ?>" placeholder="021-12345678">
                     </div>
                     <div class="mb-3">
                         <label class="fw-bold">Email Perusahaan</label>
-                        <input type="email" name="company_email" class="form-control" value="<?= $contact['company_email']; ?>" placeholder="info@pesonaadibatara.co.id">
+                        <input type="email" name="company_email" class="form-control" value="<?= esc($contact['company_email'], 'attr'); ?>" placeholder="info@pesonaadibatara.co.id">
                         <small class="text-muted">Email global perusahaan — ditampilkan di footer, halaman kontak, dan digunakan sebagai default pada tombol lamaran kerja.</small>
                     </div>
 
@@ -132,12 +132,12 @@
             <div class="tab-pane fade" id="maps">
                 <form action="/panel-pab/contact-editor/update" method="post">
                     <?= csrf_field(); ?>
-                    <input type="hidden" name="title_id" value="<?= $intro['title_id']; ?>">
+                    <input type="hidden" name="title_id" value="<?= esc($intro['title_id'], 'attr'); ?>">
 
                     <h5 class="text-primary fw-bold mb-3 mt-4">Google Maps</h5>
                     <div class="mb-3">
                         <label class="fw-bold">Link Embed (Iframe src)</label>
-                        <textarea name="company_maps" class="form-control" rows="4"><?= $maps['setting_value']; ?></textarea>
+                        <textarea name="company_maps" class="form-control" rows="4"><?= esc($maps['setting_value']); ?></textarea>
                         <small class="text-muted d-block mt-1">
                             Cara ambil: Buka Google Maps -> Share -> Embed a map -> Copy isi atribut <code>src="..."</code> saja.
                         </small>
@@ -152,24 +152,24 @@
             <div class="tab-pane fade" id="sosmed">
                 <form action="/panel-pab/contact-editor/update" method="post">
                     <?= csrf_field(); ?>
-                    <input type="hidden" name="title_id" value="<?= $intro['title_id']; ?>">
+                    <input type="hidden" name="title_id" value="<?= esc($intro['title_id'], 'attr'); ?>">
 
                     <div class="row g-4 p-3">
                         <div class="col-md-6">
                             <label class="form-label fw-bold"><i class="fab fa-instagram text-danger me-2"></i> Instagram URL</label>
-                            <input type="text" name="sosmed_instagram" class="form-control" value="<?= $sosmed['sosmed_instagram']; ?>">
+                            <input type="text" name="sosmed_instagram" class="form-control" value="<?= esc($sosmed['sosmed_instagram'], 'attr'); ?>">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label fw-bold"><i class="fab fa-facebook text-primary me-2"></i> Facebook URL</label>
-                            <input type="text" name="sosmed_facebook" class="form-control" value="<?= $sosmed['sosmed_facebook']; ?>">
+                            <input type="text" name="sosmed_facebook" class="form-control" value="<?= esc($sosmed['sosmed_facebook'], 'attr'); ?>">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label fw-bold"><i class="fab fa-linkedin text-info me-2"></i> LinkedIn URL</label>
-                            <input type="text" name="sosmed_linkedin" class="form-control" value="<?= $sosmed['sosmed_linkedin']; ?>">
+                            <input type="text" name="sosmed_linkedin" class="form-control" value="<?= esc($sosmed['sosmed_linkedin'], 'attr'); ?>">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label fw-bold"><i class="fab fa-youtube text-danger me-2"></i> YouTube URL</label>
-                            <input type="text" name="sosmed_youtube" class="form-control" value="<?= $sosmed['sosmed_youtube']; ?>">
+                            <input type="text" name="sosmed_youtube" class="form-control" value="<?= esc($sosmed['sosmed_youtube'], 'attr'); ?>">
                         </div>
 
                         <div class="col-12 mt-4 text-end">
