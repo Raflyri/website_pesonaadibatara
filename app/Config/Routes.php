@@ -37,7 +37,7 @@ $routes->group('panel-pab', ['filter' => 'authGuard'], function ($routes) {
     $routes->post('job-vacancies/save', 'Admin\JobVacancy::save');
     $routes->get('job-vacancies/edit/(:num)', 'Admin\JobVacancy::edit/$1');
     $routes->post('job-vacancies/update/(:num)', 'Admin\JobVacancy::update/$1');
-    $routes->get('job-vacancies/delete/(:num)', 'Admin\JobVacancy::delete/$1');
+    $routes->delete('job-vacancies/delete/(:num)', 'Admin\JobVacancy::delete/$1');
 
     $routes->get('news', 'Admin\News::index');
     $routes->get('news/create', 'Admin\News::create');
@@ -45,7 +45,6 @@ $routes->group('panel-pab', ['filter' => 'authGuard'], function ($routes) {
     $routes->get('news/edit/(:num)', 'Admin\News::edit/$1');
     $routes->post('news/update/(:num)', 'Admin\News::update/$1');
     $routes->delete('news/(:num)', 'Admin\News::delete/$1');
-    $routes->get('news/delete/(:num)', 'Admin\News::delete/$1');
 
     // Kelola kategori/bidang layanan bisnis (menu tidak lagi hardcode).
     // Didaftarkan sebelum route services/(:segment) agar tidak tertangkap wildcard.
