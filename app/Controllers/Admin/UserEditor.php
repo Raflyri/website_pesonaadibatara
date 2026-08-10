@@ -152,7 +152,7 @@ class UserEditor extends BaseController
         // Validasi Avatar (opsional, hanya jika file dikirim)
         $rules = [
             'name'   => 'required',
-            'avatar' => 'is_image[avatar]|max_size[avatar,2048]|mime_in[avatar,image/jpg,image/jpeg,image/png]'
+            'avatar' => 'is_image[avatar]|max_size[avatar,2048]|mime_in[avatar,image/jpg,image/jpeg,image/png]|ext_in[avatar,jpg,jpeg,png]'
         ];
 
         if (!$this->validate($rules)) {

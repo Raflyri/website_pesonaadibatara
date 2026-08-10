@@ -37,7 +37,7 @@ class Profile extends BaseController
         if (!$this->validate([
             'name'   => 'required|min_length(3)',
             'email'  => 'required|valid_email',
-            'avatar' => 'is_image[avatar]|mime_in[avatar,image/jpg,image/jpeg,image/png]|max_size[avatar,2048]'
+            'avatar' => 'is_image[avatar]|mime_in[avatar,image/jpg,image/jpeg,image/png]|ext_in[avatar,jpg,jpeg,png]|max_size[avatar,2048]'
         ])) {
             return redirect()->back()->withInput()->with('error', 'Cek kembali inputan Anda. (Gambar max 2MB)');
         }

@@ -34,7 +34,7 @@ class News extends BaseController
         if (!$this->validate([
             'title'     => 'required',
             'category'  => 'required',
-            'thumbnail' => 'is_image[thumbnail]|mime_in[thumbnail,image/jpg,image/jpeg,image/png]|max_size[thumbnail,2048]',
+            'thumbnail' => 'is_image[thumbnail]|mime_in[thumbnail,image/jpg,image/jpeg,image/png]|ext_in[thumbnail,jpg,jpeg,png]|max_size[thumbnail,2048]',
         ])) {
             return redirect()->back()->withInput()->with('error', 'Pastikan data terisi benar & gambar max 2MB.');
         }
@@ -117,7 +117,7 @@ class News extends BaseController
         if (!$this->validate([
             'title'     => 'required',
             'category'  => 'required',
-            'thumbnail' => 'is_image[thumbnail]|mime_in[thumbnail,image/jpg,image/jpeg,image/png]|max_size[thumbnail,2048]',
+            'thumbnail' => 'is_image[thumbnail]|mime_in[thumbnail,image/jpg,image/jpeg,image/png]|ext_in[thumbnail,jpg,jpeg,png]|max_size[thumbnail,2048]',
         ])) {
             return redirect()->back()->withInput()->with('error', 'Periksa kembali inputan Anda.');
         }

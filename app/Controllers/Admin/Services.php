@@ -44,7 +44,7 @@ class Services extends BaseController
     {
         if (!$this->validate([
             'page_title' => 'required',
-            'hero_image' => 'is_image[hero_image]|mime_in[hero_image,image/jpg,image/jpeg,image/png]|max_size[hero_image,2048]',
+            'hero_image' => 'is_image[hero_image]|mime_in[hero_image,image/jpg,image/jpeg,image/png]|ext_in[hero_image,jpg,jpeg,png]|max_size[hero_image,2048]',
         ])) {
             return redirect()->back()->withInput()->with('error', 'Judul wajib diisi & cek format gambar.');
         }
@@ -81,6 +81,14 @@ class Services extends BaseController
     public function save()
     {
         $category = $this->request->getPost('category');
+
+        if (!$this->validate([
+            'title' => 'required',
+            'image' => 'is_image[image]|mime_in[image,image/jpg,image/jpeg,image/png]|ext_in[image,jpg,jpeg,png]|max_size[image,2048]',
+            'gallery.*' => 'is_image[gallery]|mime_in[gallery,image/jpg,image/jpeg,image/png]|ext_in[gallery,jpg,jpeg,png]|max_size[gallery,2048]',
+        ])) {
+            return redirect()->back()->withInput()->with('error', 'Cek format & ukuran gambar.');
+        }
 
         $galleryFiles = $this->request->getFileMultiple('gallery');
         $validCount = 0;
@@ -144,6 +152,14 @@ class Services extends BaseController
     {
         $serviceLama = $this->serviceModel->find($id);
         $category    = $this->request->getPost('category');
+
+        if (!$this->validate([
+            'title' => 'required',
+            'image' => 'is_image[image]|mime_in[image,image/jpg,image/jpeg,image/png]|ext_in[image,jpg,jpeg,png]|max_size[image,2048]',
+            'gallery.*' => 'is_image[gallery]|mime_in[gallery,image/jpg,image/jpeg,image/png]|ext_in[gallery,jpg,jpeg,png]|max_size[gallery,2048]',
+        ])) {
+            return redirect()->back()->withInput()->with('error', 'Cek format & ukuran gambar.');
+        }
 
         $currentGallery = json_decode($serviceLama['gallery'] ?? '[]', true);
         if (!is_array($currentGallery)) $currentGallery = [];
