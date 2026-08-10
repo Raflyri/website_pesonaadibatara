@@ -37,7 +37,7 @@ $routes->group('panel-pab', ['filter' => 'authGuard'], function ($routes) {
     $routes->post('job-vacancies/save', 'Admin\JobVacancy::save');
     $routes->get('job-vacancies/edit/(:num)', 'Admin\JobVacancy::edit/$1');
     $routes->post('job-vacancies/update/(:num)', 'Admin\JobVacancy::update/$1');
-    $routes->get('job-vacancies/delete/(:num)', 'Admin\JobVacancy::delete/$1');
+    $routes->delete('job-vacancies/delete/(:num)', 'Admin\JobVacancy::delete/$1');
 
     $routes->get('news', 'Admin\News::index');
     $routes->get('news/create', 'Admin\News::create');
