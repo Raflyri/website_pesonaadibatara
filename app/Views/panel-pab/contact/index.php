@@ -58,11 +58,11 @@
                                 <tr>
                                     <td class="small text-muted" style="width: 15%;"><?= date('d M Y H:i', strtotime($msg['created_at'])); ?></td>
                                     <td style="width: 20%;">
-                                        <div class="fw-bold"><?= $msg['name']; ?></div>
-                                        <div class="small text-muted"><?= $msg['email']; ?></div>
-                                        <div class="small text-muted"><?= $msg['phone']; ?></div>
+                                        <div class="fw-bold"><?= esc($msg['name']); ?></div>
+                                        <div class="small text-muted"><?= esc($msg['email']); ?></div>
+                                        <div class="small text-muted"><?= esc($msg['phone']); ?></div>
                                     </td>
-                                    <td style="width: 20%;" class="fw-bold text-primary"><?= $msg['subject']; ?></td>
+                                    <td style="width: 20%;" class="fw-bold text-primary"><?= esc($msg['subject']); ?></td>
                                     <td><?= nl2br(esc((string) $msg['message'])); ?></td>
                                     <td class="text-end">
                                         <a href="/panel-pab/contact-editor/delete/<?= $msg['id']; ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Hapus pesan ini?')"><i class="fas fa-trash"></i></a>
