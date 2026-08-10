@@ -94,7 +94,7 @@ $routes->group('panel-pab', ['filter' => 'authGuard'], function ($routes) {
     $routes->post('users/save', 'Admin\UserEditor::save');
     $routes->get('users/edit/(:num)', 'Admin\UserEditor::edit/$1');
     $routes->post('users/update/(:num)', 'Admin\UserEditor::update/$1');
-    $routes->get('users/delete/(:num)', 'Admin\UserEditor::delete/$1');
+    $routes->post('users/delete/(:num)', 'Admin\UserEditor::delete/$1');
 
     $routes->get('profile', 'Admin\UserEditor::profile');
     $routes->post('profile/update', 'Admin\UserEditor::updateProfile');

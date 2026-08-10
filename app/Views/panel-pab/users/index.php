@@ -63,7 +63,12 @@
                         <td class="text-end">
                             <a href="/panel-pab/users/edit/<?= $u['id']; ?>" class="btn btn-sm btn-light text-primary"><i class="fas fa-edit"></i></a>
                             <?php if(session()->get('id') != $u['id']): ?>
-                                <a href="/panel-pab/users/delete/<?= $u['id']; ?>" class="btn btn-sm btn-light text-danger" onclick="return confirm('Hapus user ini?')"><i class="fas fa-trash"></i></a>
+                                <form action="/panel-pab/users/delete/<?= $u['id']; ?>" method="post" class="d-inline">
+                                    <?= csrf_field(); ?>
+                                    <button type="submit" class="btn btn-sm btn-light text-danger" onclick="return confirm('Hapus user ini?')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
                             <?php endif; ?>
                         </td>
                     </tr>
