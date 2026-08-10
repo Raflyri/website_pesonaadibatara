@@ -222,9 +222,12 @@
 
                 <?php if (session()->get('role') === 'superadmin'): ?>
                 <div class="mt-4">
-                    <a href="/panel-pab/migrate-db" class="btn btn-warning w-100 btn-sm shadow-sm" onclick="return confirm('Apakah Anda yakin ingin menjalankan migrasi database? Pastikan Anda sudah membackup database sebelumnya jika ini di server production.')">
-                        <i class="fas fa-database me-2"></i> Jalankan Migrasi Database
-                    </a>
+                    <form action="<?= base_url('panel-pab/migrate-db') ?>" method="post" onsubmit="return confirm('Apakah Anda yakin ingin menjalankan migrasi database? Pastikan Anda sudah membackup database sebelumnya jika ini di server production.')">
+                        <?= csrf_field() ?>
+                        <button type="submit" class="btn btn-warning w-100 btn-sm shadow-sm">
+                            <i class="fas fa-database me-2"></i> Jalankan Migrasi Database
+                        </button>
+                    </form>
                 </div>
                 <?php endif; ?>
 
